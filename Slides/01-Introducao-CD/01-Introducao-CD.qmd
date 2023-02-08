@@ -256,8 +256,14 @@ com os demais alunos.
 ![](Images/click6.png){fig-align="center" width="400"}
 
 
+## A Ciência dos Dados e os Novos Paradigmas
+<br><br>
 
+![](Images/openai.png){fig-align="center" width="400"}
 
+<br><br>
+
+A [OpenAI](https://openai.com/blog/chatgpt/) é a empresa que criou, no final de 2022, o **ChatGPT**. 
 
 
 ## Economia e Ciência de Dados
@@ -265,13 +271,6 @@ com os demais alunos.
 ![](Images/economics_ds.png){fig-align="center" width="400"}
 
 Link: [https://medium.com/@metjush/4-reasons-why-economists-make-great-data-scientists-and-why-no-one-tells-them-524478845ec2](https://medium.com/@metjush/4-reasons-why-economists-make-great-data-scientists-and-why-no-one-tells-them-524478845ec2)
-
-
-
-## Economia e Ciência de Dados
-
-![](Images/data_science_skills.jpg){fig-align="center" width="400"}
-
 
 
 ## De onde vêm os dados?
@@ -414,7 +413,7 @@ RStudio é um conjunto eficiente de ferramentas integradas [https://posit.co/](h
 Além do RStudio, existem outras interfaces pra utilizar o R:
 
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Tinn-r](https://tinn-r.org/pt/)
+- [Tinn-R](https://tinn-r.org/pt/)
 - [Sublime Text](https://www.sublimetext.com/)
 - [Vim](https://www.vim.org/)
 
