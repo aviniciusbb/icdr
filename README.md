@@ -10,7 +10,7 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 
 ---
 
-## Lectures
+## Notas de aula
 
 1. **Introdução à Ciência de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/01-Introducao-CD/01-Introducao-CD.html)
 
