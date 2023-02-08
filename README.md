@@ -1,4 +1,4 @@
-# Introdução à Ciência de Dados no `R` <img align="right" height="175" src="robot.png">
+# Introdução à Ciência de Dados no `R` <img align="right" height="150" src="robot.png">
 
 Bem-vindos ao curso de Introdução à Ciência de Dados no `R`
 
