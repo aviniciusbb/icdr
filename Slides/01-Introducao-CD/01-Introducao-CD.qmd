@@ -381,7 +381,7 @@ Informações sobre o tempo da corrida [https://movement.uber.com/](https://move
 
 ## RStudio
 
-![Interface do Rstudio](Images/RStudio-Logo-Flat.png){fig-align="center" width="400"}
+![](Images/RStudio-Logo-Flat.png){fig-align="center" width="400"}
 
 RStudio é um conjunto eficiente de ferramentas integradas [https://posit.co/](https://posit.co/)
 
