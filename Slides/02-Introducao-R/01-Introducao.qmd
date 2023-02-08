@@ -1,0 +1,62 @@
+---
+#title: "Introdução à Ciência de Dados no R"
+#subtitle: "Aula 01 - Introdução ao R"
+#author: "Antonio Vinícius Barbosa"
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+highlight-style: a11y
+code-link: true
+height: 1080
+width: 1600
+execute: 
+  eval: true
+  echo: true
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
+
+<h2><font color="736f72"> Lab. 01 </font> - Introdução ao `R`</h2>
+
+<hr>
+
+<h3>
+
+Antonio Vinícius Barbosa
+
+<h3>
+
+Departamento de Economia
+
+<h3>27-09-2022</h3>
+
+<br>
+
+<h3>
+
+![](https://www.r-project.org/logo/Rlogo.svg){.absolute top="580" left="1050" width="350"}
+
+# <font color="1b5299"> Utilizando o RStudio </font> {background-color="#BBDEF0"}
+
+## RStudio
+
+O Ambiente do RStudio:
+
+![](Imagens/rstudio-panels.png){fig-align="center" width="400"}
+
+# <font color="1b5299"> Como o `R` funciona? </font> {background-color="#BBDEF0"}
+
+## R Básico
+
+A forma mais simples de se utilizar o `R` é através de operações básicas:
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|1-2|3-4|5-6|7-8"
+2 + 2
+sqrt(81)
+pi
+print("Olá, mundo!")
+```
+
+Neste caso, o `R` executa a operação e retorna seu valor na tela.
+

@@ -1,0 +1,433 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 01 </font> - Ciência de Dados</h2>
+<h2><font color="FFFFFF"> Aula 01 </font> </h2>
+
+<h2>Antonio Vinícius Barbosa<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://www.r-project.org/logo/Rlogo.svg){.absolute top="580" left="1050" width="350"}
+
+
+## Sobre mim
+
+<h3><font color="1b5299"> Antonio Vinícius Barbosa </font></h3>
+
+::: {.incremental}
+
+- Doutor em Economia pelo PIMES/UFPE e Universitat Pompeu Fabra. 
+- Professor do Departamento de Economia da Universidade Federal da Paraíba (UFPB). 
+- Pesquisador do LEMA (Laboratório de Economia e Modelagem Aplicada).
+
+:::
+
+
+# <font color="1b5299"> O que é Ciência de Dados? </font> {background-color="#BBDEF0"}
+
+
+## O que é Ciência de Dados?
+
+
+> A **Ciência de Dados** é a área de estudo dos **dados** desde seu processo de 
+captura, transformação, análise e, posteriormente, da geração de *informações*  e
+*conhecimento* para empresas, para o setor público e para mundo dos negócios.
+
+
+![](Images/Data-science.png){fig-align="center" width="400"}
+
+
+## O que é Ciência de Dados?
+
+::: {.incremental}
+- O método da *Ciência de Dados* significa fazer perguntas em busca de padrões importantes em um mundo de informações dos mais diversos formatos.
+- É a combinação de ferramentas de *armazenamento*, *programação*, *modelagem estatística* e de *visualização*, com o objetivo de gerar **conhecimento** e aplicar a situações reais.
+:::
+
+
+## O fluxo da Ciência de Dados
+
+![](Images/fluxo_data_science.png){fig-align="center" width="400"}
+
+Adpatado de [Alfred Reinold Baudisch](https://medium.com/@AlfredBaudisch/o-que-é-ciência-de-dados-data-science-7af5bdac101a)
+
+
+# <font color="1b5299"> O que NÃO é Ciência de Dados? </font> {background-color="#BBDEF0"}
+
+
+## O que NÃO é Ciência de Dados?
+
+
+![](Images/ugly_graph_3.png){fig-align="center" width="400"}
+
+Informações *descontextualizadas* não configuram o campo da Ciência de Dados, pois 
+*não geram conhecimento relevante*.
+
+
+## O que NÃO é Ciência de Dados?
+
+
+![](Images/one_imply.jpg){fig-align="center" width="400"}
+
+Replicar códigos e análises de outras fontes não o faz um Cientista de Dados. É necessário
+dominar um conjunto de técnicas e ter conhecimento teórico do assunto.
+
+
+
+## O que NÃO é Ciência de Dados?
+
+![](Images/data_scientist_sexy.jpeg){fig-align="center" width="400"}
+
+É de fundamental importância a *interação* e a *comunicação* em equipe sobre os 
+métodos e resultados para o desenvovimento da Ciência de Dados. É um campo *multidisciplinar*.
+
+
+# <font color="1b5299"> Sobre o Curso </font> {background-color="#BBDEF0"}
+
+
+# <font color="1b5299"> Este não é um curso sobre o software **X** ou sobre a linguagem **Y**! </font> {background-color="#BBDEF0"}
+
+
+## O que é este curso?
+
+Este curso introduz as principais técnicas computacionais  para a leitura, manipulação, 
+visualização e reprodução de dados socioeconômicos. 
+
+
+![](Images/goals.png){fig-align="center" width="400"}
+
+Com o advento da tecnologia da informação e o rápido crescimento da quantidade de dados 
+disponíveis, é indispensável o uso de ferramentas de Ciência de Dados para uma análise 
+econômica robusta e eficiente.
+
+
+
+## Cronograma de Aulas
+
+O *cronograma estimado* de encontros está organizado da seguinte forma:
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Introdução à Ciência de Dados
+- Introdução ao R e ao RStudio
+- Estrutura de Dados no R
+- Leitura e operações básicas
+- Manipulação de dados (I)
+- Manipulação de dados (II)
+- Manipulação de dados (III)
+:::
+
+::: {.column width="50%"}
+- Estatítica dos dados
+- Visualização gráfica (I)
+- Visualização gráfica (II)
+- Relatórios dinâmicos
+- Programação básica
+:::
+
+::::
+
+Ao longo da disciplina, serão disponibilizadas **quizzes** e **listas de exercício**. Ao final do curso, os alunos deverão entregar um projeto abrangendo o conteúdo discutido
+
+
+
+
+
+## Avaliação durante o curso Curso
+
+A nota final (**NF**) na disciplina será atribuída de acordo com a seguinte função:
+
+$$
+    \text{NF} = \text{Listas de Exercício} * 0.4 + \text{Avaliação Final}*0.6 
+$$
+
+
+Nesta disciplina, o interesse e o esforço desempenhado pelo aluno serão levados 
+constantemente (e remotamente) em consideração!
+
+
+## Algumas referências...
+
+* BRAUN, W. John; MURDOCH, Duncan J. *A first course in statistical programming with R*. Cambridge
+University Press, 2016.
+* WICKHAM, Hadley; GROLEMUND, Garrett. *R for data science: import, tidy, transform, visualize,
+and model data*. O’Reilly Media, Inc., 2016.
+* TEETOR, Paul. *R cookbook: Proven recipes for data analysis, statistics, and graphics*. O’Reilly
+Media, Inc., 2011.
+* CHAMBERS, John. *Software for data analysis: programming with R*. Springer Science Business
+Media, 2008.
+* KABACOFF, R. I. *R in Action: data analysis and graphics with R*. 2011.
+  \item MATLOFF, Norman. *The art of R programming: A tour of statistical software design*. No Starch
+Press, 2011.
+* *RStudio Cheat Sheets* [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
+
+
+
+## Políticas do curso
+
+
+* Todos os alunos são responsáveis por aulas perdidas e serão considerados cientes de qualquer
+anúncio feito durante as aulas;
+* Evite utilizar os computadores, notebooks e celulares para fins distintos
+  ao dos conteúdos abordados durante as aulas;
+* Em hipótese alguma haverá adiantamento ou prorrogação das atividades. 
+* É importante reforçar que as atividades não serão aceitas fora do prazo estipulado. Por questão de justiça e respeito com os demais colegas, não serão abertas exceções.
+* Espera-se dos alunos assiduidade em relação ao andamento do curso.  
+
+
+
+## Integridade acadêmica
+
+
+* Apenas os projetos em grupo poderão ser entregues conjuntamente
+* Qualquer código utilizado de outras fontes e não citados explicitamente
+será tratado como plágio.
+* Nos exercícios individuais, os códigos não poderão ser compartilhados
+com os demais alunos.
+* Atitudes que vão de encontro com os princípios éticos desse curso serão devidamente analisados.
+
+
+
+
+# <font color="1b5299"> Introdução </font> {background-color="#BBDEF0"}
+
+
+
+
+
+## A Ciência dos Dados e os Novos Paradigmas
+
+
+![](Images/click1.png){fig-align="center" width="400"}
+
+
+
+## A Ciência dos Dados e os Novos Paradigmas
+
+
+![](Images/click2.png){fig-align="center" width="400"}
+
+## A Ciência dos Dados e os Novos Paradigmas
+
+
+![](Images/click3.png){fig-align="center" width="400"}
+
+
+
+## A Ciência dos Dados e os Novos Paradigmas
+
+
+![](Images/click4.png){fig-align="center" width="400"}
+
+
+## A Ciência dos Dados e os Novos Paradigmas
+
+
+![](Images/click5.png){fig-align="center" width="400"}
+
+
+
+## A Ciência dos Dados e os Novos Paradigmas
+
+
+![](Images/click6.png){fig-align="center" width="400"}
+
+
+
+
+
+
+## Economia e Ciência de Dados
+
+![](Images/economics_ds.png){fig-align="center" width="400"}
+
+Link: [https://medium.com/@metjush/4-reasons-why-economists-make-great-data-scientists-and-why-no-one-tells-them-524478845ec2](https://medium.com/@metjush/4-reasons-why-economists-make-great-data-scientists-and-why-no-one-tells-them-524478845ec2)
+
+
+
+## Economia e Ciência de Dados
+
+![](Images/data_science_skills.jpg){fig-align="center" width="400"}
+
+
+
+## De onde vêm os dados?
+
+![](Images/stork_bg.png){fig-align="center" width="400"}
+
+
+## De onde vêm os dados?
+
+![](Images/censo.jpg){fig-align="center" width="400"}
+
+## De onde vêm os dados?
+
+![](Images/nfe.jpg){fig-align="center" width="400"}
+
+## De onde vêm os dados?
+
+![](Images/social_network.jpg){fig-align="center" width="400"}
+
+## Observando o Airbnb
+
+
+![](Images/airbnb.png){fig-align="center" width="400"}
+
+
+Através dos dados da plataforma do  [http://insideairbnb.com](http://insideairbnb.com) é possível entender, por exemplo, o efeito sobre preço de imóveis. 
+
+
+
+## Observando o Airbnb
+
+
+![](Images/airbnb_bcn.jpg){fig-align="center" width="400"}
+
+Em *Barcelona*, por exemplo, o preço dos alugueis e de compra dos imóveis cresceram tanto em regiões mais concentradas quanto em menos concentradas.
+
+
+## Dados do Uber
+
+![](Images/uber_data.png){fig-align="center" width="400"}
+
+
+Informações sobre o tempo da corrida [https://movement.uber.com/](https://movement.uber.com/)  informam sobre o deslocamento da população nas cidades...
+
+
+
+## Efeitos sobre Saúde
+
+
+![](Images/commuting.png){fig-align="center" width="400"}
+
+... e isso afeta saúde, produtividade, salários e o PIB dos municípios.
+
+
+
+
+
+## Por que utilizar o `R`?
+
+![The R Project for Statistical Computing](Images/R_logo.png){fig-align="center" width="300"}
+
+
+## Por que utilizar o R?
+
+* Software gratuito
+* CRAN com mais de 10.000 \textit{pacotes}
+* Comunidade ativa e colaborativa
+* Versatilidade: manipulação de dados, modelagem estatística, gráficos
+* Integrabilidade
+
+
+## Principais linguagens
+
+![](Images/languages.png){fig-align="center" width="400"}
+
+## Instalando o `R`
+
+![](Images/install_R_initial.png){fig-align="center" width="400"}
+
+## Instalando o `R`
+
+![](Images/install_R.png){fig-align="center" width="400"}
+
+
+
+## Instalando o `R`
+
+![Selecione a opção para instalar o `R` pela primeira vez](Images/install_mirrors_R.png){fig-align="center" width="400"}
+
+## Instalando o `R`
+
+![Selecione o sistema operacional e aguarde o download](Images/install_final_R.png){fig-align="center" width="400"}
+
+
+
+## `R` no Windows
+
+![Interface do \texttt{R} no Windows](Images/R_windows.png){fig-align="center" width="400"}
+
+
+
+## Ambientes de desenvolvimento integrado (IDE)
+
+* A forma mais conveniente de utilizar o R é através de uma interface gráfica através de janelas.
+* É possível interagir com o sistema através do \textit{shell prompt}, embora requeira maior conhecimento do usuário.
+* O desenvolvimento de Ambientes de Desenvolvimento Integrado (IDE) tem como objetivo facilitar a interação entre o usuário e o sistema.  
+
+
+## RStudio
+
+![Interface do Rstudio](Images/RStudio-Logo-Flat.png){fig-align="center" width="400"}
+
+RStudio é um conjunto eficiente de ferramentas integradas [https://posit.co/](https://posit.co/)
+
+
+## Instalando o RStudio
+
+
+![](Images/rstudio.png){fig-align="center" width="400"}
+
+## Instalando o RStudio
+
+
+![](Images/rstudio_download.png){fig-align="center" width="400"}
+
+## Instalando o RStudio
+
+
+![](Images/rstudio_options.png){fig-align="center" width="400"}
+
+
+## Instalando o RStudio
+
+
+![Ambiente do RStudio](Images/rstudio_example.png){fig-align="center" width="400"}
+
+
+## Outras IDEs
+
+Além do RStudio, existem outras interfaces pra utilizar o R:
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Tinn-r](https://tinn-r.org/pt/)
+- [Sublime Text](https://www.sublimetext.com/)
+- [Vim](https://www.vim.org/)
+
+
+# <font color="1b5299"> Conhecendo o RStudio </font> {background-color="#BBDEF0"}
+
+
+
+## Na próxima aula
+
+Faremos um **tour** pelo RStudio e mostraremos suas funcionalidades. Introduziremos os seguintes conceitos:
+
+* Console
+* Scripts
+* Objetos
+* Funções básicas
