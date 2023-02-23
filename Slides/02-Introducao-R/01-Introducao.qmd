@@ -578,7 +578,130 @@ countdown::countdown(
 )
 ```
 
+# <font color="1b5299"> Matrizes </font> {background-color="#BBDEF0"}
 
-## 
+## Matrizes
 
-![](Images/10_lines_code.jpeg){fig-align="center" width="400"}
+Uma **matriz** é simplesmente um vetor com **dimensões**. Para entender o conceito de matrizes,
+considere um vetor único com receita e despesa de três municípios:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Contas dos municipios (receitas e despesas)
+contas_munic <- c(23.7, 19.5, 13.8, 13.4, 22.1, 21.9)
+dim(contas_munic) # dim() mostra o atributo dimensao 
+```
+
+. . .
+
+Para melhor visualizar as informações, podemos atribuir ao vetor a dimensão 2x3
+
+```{r,  echo = TRUE, collapse = TRUE}
+dim(contas_munic) <- c(2, 3)  
+contas_munic
+```
+
+Portanto, o resultado é uma **matriz** com **duas** linhas e **três** colunas.
+
+## Matrizes
+
+Podemos criar uma matriz através da função `matrix()`.
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Matriz de contas dos municipios
+contas_matriz <- matrix(data = contas_munic, nrow = 2, ncol = 3, 
+                        byrow = F)
+contas_matriz
+dim(contas_matriz)
+```
+
+## Matrizes
+
+Para **selecionar** um elemento de uma matriz, devemos informar
+os índices relativos à linha `i` e à coluna `j` através do
+operador `[i,j]`. Por exemplo:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Selecionar elementos da matriz
+contas_matriz[1,2]
+contas_matriz[2,3]
+contas_matriz[1, ]
+contas_matriz[ ,1]
+```
+
+## Matrizes
+
+Além disso, podemos atribuir nomes para as linhas e colunas de uma matriz:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Atribuir nomes as dimensões
+colnames(contas_matriz) <- c("Patos", "Conde", "Areia")
+rownames(contas_matriz) <- c("Receita", "Despesa")
+contas_matriz 
+
+```
+
+. . . 
+
+E selecionar através do seu nome:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Selecionar elementos
+contas_matriz["Receita", "Patos"] 
+contas_matriz["Despesa", "Areia"]
+contas_matriz[ , "Conde"] 
+```
+
+
+## Matrizes
+
+É possível criar matrizes através da junção de colunas (`cbind`) ou linhas (`rbind`):
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Considere dois vetores
+a <- c(1, 2, 3) 
+b <- c(5, 6, 7)
+
+# Junção por linhas
+m <- rbind(a, b)
+m
+```
+
+## Matrizes
+
+É possível criar matrizes através da junção de colunas `cbind()` ou linhas `rbind()`:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Considere dois vetores
+c <- c(1, 3, 5) 
+d <- c(2, 4, 6)
+
+# Junção por colunas
+j <- cbind(c, d)
+j
+```
+
+
+## Operações com matrizes
+
+Algumas operações usuais com matrizes são as seguintes:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Transpor uma matriz
+t(contas_matriz)
+
+# Multiplicar por um escalar
+1000000 * contas_matriz
+```
+
+## Quizz \#3 {.inverse background-color="#386FA4"}
+
+- Crie três vetores `x`, `y` e `z` com inteiros, cada um com 3 elementos. Combine os três vetores para formar uma matriz `A` (3 × 3), onde cada coluna representa um vetor. Altere os nomes das linhas para `a`, `b` e `c`.
+- Crie um vetor com 12 elementos do tipo `numeric`. Converta o vetor em uma matriz `B` (4 x 3) usando `matrix()`. Preencha os elementos por linha ajustando o argumento `byrow = TRUE`.
+- Obtenha a transposta da matriz `B` e multipique pela matriz original `B`. Qual a dimensão da matriz obtida?
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+```
+

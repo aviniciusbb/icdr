@@ -403,7 +403,7 @@
 Antonio Vinícius Barbosa
 </h2><h2>
 </h2><h3>
-15-02-2023
+23-02-2023
 </h3>
 
 
@@ -518,7 +518,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_79b248ef" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_6f5d6db6" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -933,7 +933,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_53676e24" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_85594682" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -941,9 +941,139 @@ Antonio Vinícius Barbosa
 </div>
 </div>
 </div>
-</section><section id="section" class="slide level2"><h2></h2>
+</section></section><section><section id="matrizes" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Matrizes </font></h1>
 
-<img data-src="Images/10_lines_code.jpeg" width="400" class="r-stretch quarto-figure-center"><div class="footer footer-default">
+</section><section id="matrizes-1" class="slide level2"><h2>Matrizes</h2>
+<p>Uma <strong>matriz</strong> é simplesmente um vetor com <strong>dimensões</strong>. Para entender o conceito de matrizes, considere um vetor único com receita e despesa de três municípios:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Contas dos municipios (receitas e despesas)</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>contas_munic <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">23.7</span>, <span class="fl">19.5</span>, <span class="fl">13.8</span>, <span class="fl">13.4</span>, <span class="fl">22.1</span>, <span class="fl">21.9</span>)</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">dim</span>(contas_munic) <span class="co"># dim() mostra o atributo dimensao </span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="do">## NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Para melhor visualizar as informações, podemos atribuir ao vetor a dimensão 2x3</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">dim</span>(contas_munic) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)  </span>
+<span id="cb32-2"><a href="#cb32-2"></a>contas_munic</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="do">##      [,1] [,2] [,3]</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="do">## [1,] 23.7 13.8 22.1</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="do">## [2,] 19.5 13.4 21.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Portanto, o resultado é uma <strong>matriz</strong> com <strong>duas</strong> linhas e <strong>três</strong> colunas.</p>
+</div>
+</section><section id="matrizes-2" class="slide level2"><h2>Matrizes</h2>
+<p>Podemos criar uma matriz através da função <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Matriz de contas dos municipios</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>contas_matriz <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> contas_munic, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>, </span>
+<span id="cb33-3"><a href="#cb33-3"></a>                        <span class="at">byrow =</span> F)</span>
+<span id="cb33-4"><a href="#cb33-4"></a>contas_matriz</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="do">##      [,1] [,2] [,3]</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="do">## [1,] 23.7 13.8 22.1</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="do">## [2,] 19.5 13.4 21.9</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="fu">dim</span>(contas_matriz)</span>
+<span id="cb33-9"><a href="#cb33-9"></a><span class="do">## [1] 2 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="matrizes-3" class="slide level2"><h2>Matrizes</h2>
+<p>Para <strong>selecionar</strong> um elemento de uma matriz, devemos informar os índices relativos à linha <code>i</code> e à coluna <code>j</code> através do operador <code>[i,j]</code>. Por exemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Selecionar elementos da matriz</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>contas_matriz[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="do">## [1] 13.8</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>contas_matriz[<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="do">## [1] 21.9</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>contas_matriz[<span class="dv">1</span>, ]</span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="do">## [1] 23.7 13.8 22.1</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>contas_matriz[ ,<span class="dv">1</span>]</span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="do">## [1] 23.7 19.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="matrizes-4" class="slide level2"><h2>Matrizes</h2>
+<p>Além disso, podemos atribuir nomes para as linhas e colunas de uma matriz:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Atribuir nomes as dimensões</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">colnames</span>(contas_matriz) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Patos"</span>, <span class="st">"Conde"</span>, <span class="st">"Areia"</span>)</span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">rownames</span>(contas_matriz) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Receita"</span>, <span class="st">"Despesa"</span>)</span>
+<span id="cb35-4"><a href="#cb35-4"></a>contas_matriz </span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="do">##         Patos Conde Areia</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="do">## Receita  23.7  13.8  22.1</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="do">## Despesa  19.5  13.4  21.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>E selecionar através do seu nome:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Selecionar elementos</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>contas_matriz[<span class="st">"Receita"</span>, <span class="st">"Patos"</span>] </span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="do">## [1] 23.7</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>contas_matriz[<span class="st">"Despesa"</span>, <span class="st">"Areia"</span>]</span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="do">## [1] 21.9</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>contas_matriz[ , <span class="st">"Conde"</span>] </span>
+<span id="cb36-7"><a href="#cb36-7"></a><span class="do">## Receita Despesa </span></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="do">##    13.8    13.4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section><section id="matrizes-5" class="slide level2"><h2>Matrizes</h2>
+<p>É possível criar matrizes através da junção de colunas (<code>cbind</code>) ou linhas (<code>rbind</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># Considere dois vetores</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) </span>
+<span id="cb37-3"><a href="#cb37-3"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co"># Junção por linhas</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>m <span class="ot">&lt;-</span> <span class="fu">rbind</span>(a, b)</span>
+<span id="cb37-7"><a href="#cb37-7"></a>m</span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="do">##   [,1] [,2] [,3]</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a><span class="do">## a    1    2    3</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a><span class="do">## b    5    6    7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="matrizes-6" class="slide level2"><h2>Matrizes</h2>
+<p>É possível criar matrizes através da junção de colunas <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> ou linhas <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Considere dois vetores</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>) </span>
+<span id="cb38-3"><a href="#cb38-3"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb38-4"><a href="#cb38-4"></a></span>
+<span id="cb38-5"><a href="#cb38-5"></a><span class="co"># Junção por colunas</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>j <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c, d)</span>
+<span id="cb38-7"><a href="#cb38-7"></a>j</span>
+<span id="cb38-8"><a href="#cb38-8"></a><span class="do">##      c d</span></span>
+<span id="cb38-9"><a href="#cb38-9"></a><span class="do">## [1,] 1 2</span></span>
+<span id="cb38-10"><a href="#cb38-10"></a><span class="do">## [2,] 3 4</span></span>
+<span id="cb38-11"><a href="#cb38-11"></a><span class="do">## [3,] 5 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="operações-com-matrizes" class="slide level2"><h2>Operações com matrizes</h2>
+<p>Algumas operações usuais com matrizes são as seguintes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Transpor uma matriz</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">t</span>(contas_matriz)</span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="do">##       Receita Despesa</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="do">## Patos    23.7    19.5</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="do">## Conde    13.8    13.4</span></span>
+<span id="cb39-6"><a href="#cb39-6"></a><span class="do">## Areia    22.1    21.9</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a></span>
+<span id="cb39-8"><a href="#cb39-8"></a><span class="co"># Multiplicar por um escalar</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a><span class="dv">1000000</span> <span class="sc">*</span> contas_matriz</span>
+<span id="cb39-10"><a href="#cb39-10"></a><span class="do">##            Patos    Conde    Areia</span></span>
+<span id="cb39-11"><a href="#cb39-11"></a><span class="do">## Receita 23700000 13800000 22100000</span></span>
+<span id="cb39-12"><a href="#cb39-12"></a><span class="do">## Despesa 19500000 13400000 21900000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="quizz-3" class="slide level2 inverse" data-background-color="#386FA4"><h2>Quizz #3</h2>
+<ul>
+<li>Crie três vetores <code>x</code>, <code>y</code> e <code>z</code> com inteiros, cada um com 3 elementos. Combine os três vetores para formar uma matriz <code>A</code> (3 × 3), onde cada coluna representa um vetor. Altere os nomes das linhas para <code>a</code>, <code>b</code> e <code>c</code>.</li>
+<li>Crie um vetor com 12 elementos do tipo <code>numeric</code>. Converta o vetor em uma matriz <code>B</code> (4 x 3) usando <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code>. Preencha os elementos por linha ajustando o argumento <code>byrow = TRUE</code>.</li>
+<li>Obtenha a transposta da matriz <code>B</code> e multipique pela matriz original <code>B</code>. Qual a dimensão da matriz obtida?</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_3e4de4b4" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls">
+<button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
+</div>
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+<div class="footer footer-default">
 <p>ICDR</p>
 </div>
 </section></section>
