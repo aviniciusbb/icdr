@@ -1,0 +1,541 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 03 </font> - Estruturas de Dados</h2>
+<h2><font color="FFFFFF"> Aula 03 </font> </h2>
+
+<h2>Antonio Vinícius Barbosa<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+
+![](Images/roteiro.png){.absolute top="500" left="1250" width="350"}
+
+
+# <font color="1b5299"> Estruturas de Dados </font> {background-color="#BBDEF0"}
+
+## Estruturas de Dados
+
+As estruturas de dados em `R` podem ser divididas em:
+
+![](Images/data_structures.png){fig-align="center" width="400"}
+
+# Vetores
+
+\frametitle{Vetores}
+
+Vimos que os **vetores** possuem as seguintes propriedades:
+
+::: {.incremental}
+- São homogêneos (seus elementos são de uma mesma classe)
+- São, geralmente, criados pelo operador `c()`
+- Podem ser indexados pela sua posição
+:::
+
+. . .
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Vetores
+a <- c(1, 2, 1, 6, 8, 5)
+a[4]
+a[c(2, 5)]
+```
+
+::: {.incremental}
+- O primeiro elemento em um vetor é indexado por `[1]`
+- Podemos saber a classe de vetores através das funções `class()` ou `typeof()`
+:::
+
+## Matrizes
+
+::: {.incremental}
+- Adicionando **2** dimensões a um vetor, o transformamos em uma **matriz** 
+- As dimensões correspondem ao número de **linhas** e de **colunas** 
+:::
+
+. . . 
+```{r,  echo = TRUE, collapse = TRUE}
+# Matrizes
+dim(a) <- c(2, 3)
+a
+```
+
+## Matrizes
+
+Ou através da função `matrix()`:
+```{r,  echo = TRUE, collapse = TRUE}
+# Matrizes
+m <- matrix(data = c(1, 2, 1, 6, 8, 5),
+            nrow  = 2, ncol = 3)
+m
+```
+
+. . .
+
+- Os elementos de uma matriz são indexados por `[i,j]`, com `i` representando a linha
+e `j` a coluna 
+- O argumento `byrow` permite ajustar a forma de preenchimento - se por *linha* ou *coluna*. 
+
+
+## Arrays
+
+A partir do entendimento de matrizes (elementos com *duas* dimensões), podemos entender o conceito 
+**arrays**. **Arrays** são objetos que armazenam dados em **mais de duas dimensões**.
+
+. . .
+
+- Suponha que tenhamos informações sobre as despesas com saúde, com educação e com funcionários em 3 municípios, para o ano de 2022:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Despesas 2022
+despesas_2022 <- c(12.2, 23.4, 17.3, 11.4, 22.7, 
+                   20.1, 14.9, 18.5, 32.9)
+
+# Criar matriz
+despesas_mun_2022 <- matrix(data = despesas_2022, nrow = 3, ncol = 3)
+
+# Inserir nomes 
+colnames(despesas_mun_2022) <- c("Areia", "Patos", "Picuí")
+rownames(despesas_mun_2022) <- c("Saúde", "Educação", "Funcionários")
+
+despesas_mun_2022
+```
+
+## Arrays
+
+Se dispusermos de informações  dos gastos de anos anteriores, podemos pensar numa estrutura de dados
+de matrizes *empilhadas*, como na representação abaixo:
+
+![](Images/array.png){fig-align="center" width="400"}
+
+## Arrays
+
+Além de 2022, suponha a existência de dados para os anos de  2021 e 2020:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Despesas 2021
+despesas_mun_2021 <- matrix(data = c(11.3, 19.3, 18.1, 12.2, 19.8, 
+                                     20.2, 15.8, 18.9, 26.2),
+                            nrow = 3, ncol = 3)
+
+colnames(despesas_mun_2021) <- c("Areia", "Patos", "Picuí")
+rownames(despesas_mun_2021) <- c("Saúde", "Educação", "Funcionários")
+
+# Despesas 2020
+despesas_mun_2020 <- matrix(data = c(11.8, 21.2, 19.2, 12.1, 17.3, 
+                                     21.8, 16.0, 17.1, 28.6),
+                            nrow = 3, ncol = 3)
+
+colnames(despesas_mun_2020) <- c("Areia", "Patos", "Picuí")
+rownames(despesas_mun_2020) <- c("Saúde", "Educação", "Funcionários")
+```
+
+
+## Arrays
+```{r,  echo = TRUE, collapse = TRUE}
+# Despesas 2022
+despesas_mun_2022
+
+# Despesas 2021
+despesas_mun_2021
+
+# Despesas 2020
+despesas_mun_2020
+```
+## Arrays
+
+Para criar um **array**, fazemos:
+
+```{r,  echo = TRUE, collapse = TRUE}
+hist_despesas_mun <- array(c(despesas_mun_2022, 
+                             despesas_mun_2021, 
+                             despesas_mun_2020),
+                           c(3, 3, 3))
+
+hist_despesas_mun
+```
+
+
+## Arrays
+
+Para selecionar um elemento de uma **array**, utilizamos seus indexadores de acordo com as dimensões:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Selecionar a matriz de 2022
+hist_despesas_mun[,,1]
+# Selecionar a matriz de 2020
+hist_despesas_mun[,,3]
+# Selecionar dados de Areia no ano de 2021
+hist_despesas_mun[,1,2]
+# Selecionar gastos em saúde de Picuí em 2021 
+hist_despesas_mun[1,3,2]
+```
+
+
+# <font color="1b5299"> Data frames </font> {background-color="#BBDEF0"}
+
+
+## Data frames
+
+Um **data frame** é uma das estruturas mais importantes para armazanamento de dados em `R`. Equivale,
+de certa forma, às *planilhas eletrônicas*, com informações dispostas em linhas e colunas. 
+
+
+:::{.incremental}
+- Um **data frame** é um conjunto de vetores de mesmo tamanho
+- Cada **linha** representa informações para uma única unidade de observação
+- Cada **coluna** representa uma característica observada das unidadesde observação 
+- Cada linha pode possuir elementos de diferentes tipos (números inteiros, números reais, 
+  caracteres, lógicos, fatores)
+- Elementos da mesma coluna devem ser do mesma classe
+:::
+
+
+## Data frames
+
+A estrutura básica de um **data frame** é representado pela figura abaixo:
+
+![](Images/data_frame.png){fig-align="center" width="400"}
+
+Cada **linha** apresenta informações da unidade observada (indivíduos, municípios, estabelecimentos,
+etc.). As **colunas** representam as variáveis observadas (CPF/CNPJ, renda, gastos com saúde, 
+população, faturamento).
+
+
+
+
+
+## CGU - Fiscalização de Municípios
+
+![](https://www.gov.br/cgu/pt-br/assuntos/noticias/2020/02/cgu-sorteia-60-municipios-para-fiscalizar-em-2020/3.png){fig-align="center" width="400"}
+
+- Programa da Contoladoria-Geral da União (CGU) para avaliação dos recursos públicos federais repassados a estados, municípios e ao Distrito Federal.
+- Desde 2003, mais 2,5 mil municípios brasileiros já foram fiscalizados
+- O programa possui três formas de seleção de entes: Censo, Matriz de 
+  Vulnerabilidade e Sorteios
+
+
+
+## Criando data frames
+
+
+Suponha que tenhamos uma lista de municípios sorteados para serem fiscalizados no estado da **Paraíba**. 
+A forma mais simples para se construir um **data frame** é através da função `data.frame()`
+
+. . .
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Municípios sorteados
+mun_pb <- data.frame(
+  cod_mun = c(2500601, 2504603, 2506806, 2510808, 2515302),
+  municipio = c("Alhandra", "Conde", "Ingá", "Patos", "Sapé"),
+  populacao = c(18.01, 21.41, 18.18, 100.69, 50.15),
+  pib = c(599889, 550883, 117110, 1158945, 401733),
+  fisc = c(1, 0, 0, 1, 0)
+)
+
+mun_pb
+```
+
+
+## Explorando os dados
+
+Para retornar a dimensão do banco de dados, utilizamos a função `dim()`:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Dimensao do data frame
+dim(mun_pb)
+```
+
+Ou, para saber a estrutura básica dos dados, utilizamos a função `str()`
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Estrutura dos dados
+str(mun_pb)
+```
+
+## Renomeando variáveis 
+
+Para renomear as variáveis de um data frame, fazemos:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Renomeando as variaveis (colunas)
+names(mun_pb) <- c("cod_ibge", "nome_mun", "pop_mun", 
+                   "pib_mun", "fisc_cgu")
+mun_pb
+```
+
+## Selecionando variáveis
+
+Assim como as matrizes, os elementos de um data frame podem ser acessados através da estrutura `[i,j]`
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb[1,] # Seleciona a primeira linha
+mun_pb[,4] # Seleciona a quarta coluna
+mun_pb[,"fisc_cgu"] # Seleciona a variável "fisc_cgu" 
+```
+
+. . .
+
+Uma forma mais prática para selecionar colunas (variáveis) de um data frame é através do símbolo `$`
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb$fisc_cgu
+```
+
+## Filtrando dados
+
+Para filtrar um subconjunto dos dados baseado em algum critério, utilizamos a função `subset()`:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Populacao maior que 500k 
+subset(mun_pb, pib_mun > 500000)
+
+# Municipios fiscalizados
+subset(mun_pb, fisc_cgu == 1)
+```
+
+
+## Filtrando dados
+
+Outras operações para filtrar um subconjuntos dos dados são:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Interseccao entre conjuntos
+subset(mun_pb, pop_mun < 25 & fisc_cgu == 0)
+
+# Uniao entre conjuntos
+subset(mun_pb, pib_mun > 500000 | fisc_cgu == 1)
+
+# Excecao  
+subset(mun_pb, nome_mun != "Alhandra" &  nome_mun != "Patos")
+```
+
+
+## Adicionando linhas e colunas
+
+**Variáveis** (ou **colunas**) podem ser adicionadas ao data frame fazendo:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Adicionando variaveis
+mun_pb$aprovado <- c(1, NA, NA, 0, NA)
+mun_pb
+```
+
+## Adicionando linhas e colunas
+
+Suponha que novos municípios tenham entrado na amostra. Portanto, gostaríamos de adicionar linhas na
+base da dados atual:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb_2 <- data.frame(
+  cod_ibge = c(2509404, 2512507, 2516201),
+  nome_mun = c("Mogeiro", "Queimadas", "Sousa"),
+  pop_mun = c(12.49, 41.05, 65.81),
+  pib_mun = c(90377, 365554, 807574),
+  fisc_cgu = c(1, 1, 1),
+  aprovado = c(0, 0, 1)
+)
+
+# Adicionando linhas
+mun_pb_cons <- rbind(mun_pb, mun_pb_2)
+mun_pb_cons
+```
+
+
+
+## Atualizando variáveis
+
+Suponha que agora todos os municípios tenham sido fiscalizados:
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb_cons[c(2, 3, 5), 5] <- 1 
+mun_pb_cons
+```
+
+
+## Atualizando variáveis
+
+Suponha que agora todos os municípios tenham sido fiscalizados:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb_cons$aprovado[is.na(mun_pb_cons$aprovado)] <- 1
+mun_pb_cons
+```
+
+## Removendo variáveis
+
+Para **remover** variáveis, fazemos:
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb_cons[, -3]
+```
+
+## Removendo variáveis
+
+Alternativamente, podemos fazer:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb_cons$aprovado <- NULL
+mun_pb_cons
+```
+
+
+## Remover linhas incompletas
+```{r,  echo = TRUE, collapse = TRUE}
+mun_pb_cons[complete.cases(mun_pb_cons),]
+```
+
+## Ordenação
+
+Para ordenar data frames baseado em uma variável, fazemos:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Ordenar por populacao (crescente)
+mun_pb_cons[order(mun_pb_cons$pop_mun),]
+```
+
+## Ordenação
+
+Para ordenar data frames baseado em uma variável, fazemos:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Ordenar por fiscalizacao (decrescente)
+mun_pb_cons[order(mun_pb_cons$fisc_cgu, decreasing = TRUE),]
+```
+
+
+## Quizz \#1 {.inverse background-color="#386FA4"}
+
+- Crie um data frame com informações sobre 5 colegas de turma. Colete ao menos 4
+variáveis de diferentes tipos (uma delas deve ser a idade!)
+- Observe a estrutura dos dados e mostre um sumário de todas as variáveis.
+- Adicione mais duas observações aos dados e ordene a base completa pela idade
+dos indivíduos. Em seguida, crie um vetor indicando o nome dos colegas com
+maior e menor idade. 
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+```
+
+# <font color="1b5299"> Listas </font> {background-color="#BBDEF0"}
+
+
+## Listas no R
+
+Uma **lista** é uma estrutura de dados composta por elementos de vários tipos. Um vetor que 
+possui elementos de um mesmo tipo é chamado de **vetor**. Já um vetor composto de 
+elementos diferentes (vetores, arrays, data frames, matrizes, expressões, etc.) é chamado de **lista**.
+
+
+![](Images/dataStructuresNew.png){fig-align="center" width="400"}
+
+
+## Listas
+
+Uma forma simples de **lista** é dada a seguir:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Criar lista
+cliente <- list("João", 24, c(3, 4, 3, 2, 0, 7), "M")
+cliente
+```
+
+## Listas
+
+Uma lista pode conter elementos mais complexos:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+n <- c(2, 3, 5)
+s <- c("a",  "b",  "c",  "d", "e")
+b <- matrix(1:4, nrow = 2, ncol = 2)
+
+# Criar uma lista com os elementos
+minha_lista <- list(n, s, b, cliente) 
+minha_lista
+```
+
+## Listas
+
+Para observar a estrutura de uma lista, fazemos:
+
+```{r,  echo = TRUE, collapse = TRUE}
+str(minha_lista)
+```
+
+## Listas
+
+As listas são indexadas por parênteses duplos `[[ ]]`, ao invés de parênteses simples utilizados
+para vetores e matrizes. Para selecionar elementos de uma lista:
+
+
+```{r,  echo = TRUE, collapse = TRUE}
+minha_lista[[1]] # Selecionar o primeiro elemento da lista
+minha_lista[[2]][1] # Selecionar elemento especifico de um objeto
+minha_lista[[3]][1,2] # Selecionar elemento da matriz
+minha_lista[[4]][[4]][1] # Selecionar elemento da sublista
+```
+
+## Quizz \#1 {.inverse background-color="#386FA4"}
+
+- Sejam `p <- c(2,7,8)`, `q <- c("A", "B", "C")` e `x <- list(p, q)`. Qual o resultado de `x[[2]]`? E o de `x[2]`?
+- Se `a <- list("x" = 5, "y" = 10, "z" = 15)`, qual código obtém a soma dos elementos de `a`?
+  - sum(a)
+  - sum(list(a))
+  - sum(unlist(a))
+- Seja `nova_lista <- list(a = 1:10, b = "Bom dia", c = "Olá")`. Escreva o código que adiciona 1 a cada elemento do primeiro vetor de `nova_lista`.
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+```
+
+
+## De forma geral...
+
+O `R` armazena objetos de diversas formas (estruturas). Há, portanto, cinco tipos de dados comumente utilizados na análise de dados:
+
+|      | Homogêneo | Heterogêneo |
+|------|-----------|-------------|
+| 1-D  | Vetor     | Lista       |
+| 2-D  | Matriz    | Data frame  |
+| n-D  | Array     |             |
+
+
+
+
+
