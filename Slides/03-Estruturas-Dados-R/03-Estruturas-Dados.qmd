@@ -496,6 +496,20 @@ Para observar a estrutura de uma lista, fazemos:
 str(minha_lista)
 ```
 
+
+Como podemos observar, o quarto elemento da lista é uma lista! Este é um exemplo de 
+uma **lista aninhada** (*nested list*)
+
+## Listas
+
+Para adicionar novos elementos na lista, podemos usar a função `append()`
+
+```{r,  echo = TRUE, collapse = TRUE}
+minha_lista <- append(minha_lista, list(c(1, 2, 3)))
+str(minha_lista)
+```
+
+
 ## Listas
 
 As listas são indexadas por parênteses duplos `[[ ]]`, ao invés de parênteses simples utilizados
