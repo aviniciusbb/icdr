@@ -443,6 +443,9 @@ variáveis de diferentes tipos (uma delas deve ser a idade!)
 - Adicione mais duas observações aos dados e ordene a base completa pela idade
 dos indivíduos. Em seguida, crie um vetor indicando o nome dos colegas com
 maior e menor idade. 
+- Alguns data frames já estão incluídos no `R` para realizarmos testes. Exemplos
+famosos são o `mtcars` e o `iris`. Explore estes data frames utilizando a função
+`data("dados")`.
 
 ```{r, echo = FALSE, collapse = TRUE}
 countdown::countdown(
