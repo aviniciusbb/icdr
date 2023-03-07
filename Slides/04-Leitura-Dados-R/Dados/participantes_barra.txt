@@ -1,0 +1,8 @@
+Nome|Idade|Sexo|Cidade
+Maria|45|F|João Pessoa
+João|32|M|Campina Grande
+Francisco|18|M|Sapé
+Alice|17|F|Mariz
+Martin|22|M|Areia
+Dora|32|F|Conde
+

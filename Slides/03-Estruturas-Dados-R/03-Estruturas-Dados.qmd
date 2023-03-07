@@ -162,6 +162,7 @@ despesas_mun_2021
 # Despesas 2020
 despesas_mun_2020
 ```
+
 ## Arrays
 
 Para criar um **array**, fazemos:

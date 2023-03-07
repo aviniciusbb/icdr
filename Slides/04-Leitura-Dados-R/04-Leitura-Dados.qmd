@@ -1,0 +1,660 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 04 </font> - Leitura de Dados</h2>
+<h2><font color="FFFFFF"> Aula 04 </font> </h2>
+
+<h2>Antonio Vinícius Barbosa<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+
+![](https://cdn-icons-png.flaticon.com/512/724/724831.png){.absolute top="500" left="1250" width="350"}
+
+
+# <font color="1b5299"> Manipulação de Dados </font> {background-color="#BBDEF0"}
+
+## Manipulação de Dados
+
+
+
+<font color="1b5299" size = 16> (…) o fato da **Ciência de Dados** existir como uma área se deve a uma falha colossal da estatística. Para mim, o que eu faço é o que é a estatística. É obter *insights* a partir dos dados utilizando modelagem e visualização. (Hadley Wickham)</font>
+
+![](Images/data_wrangling.jpg){fig-align="center" width="400"}
+
+
+
+## Manipulação de Dados
+
+- A manipulação de dados refere-se à **transformação de dados** em informação relevante.
+- Parte de uma base "crua" e a transforma até obter uma base de dados analítica.
+
+![](https://livro.curso-r.com/assets/img/environmental-data-science-r4ds-general.png){fig-align="center" width="600"}
+
+
+- O ponto de partida dessa jornada se inicia na **importação** (ou leitura) dos dados.
+
+
+## Manipulação de Dados
+
+![](https://pbs.twimg.com/media/CwVwtGzUUAAM5x0.jpg){fig-align="center" width="400"}
+
+## Manipulação de Dados
+
+O objetivo desta aula é introduzir os principais pacotes e funções para **importar dados** 
+para o `R`.
+
+. . .
+
+::: {.callout-note appearance="simple"}
+
+## Antes de começar...
+
+- É necessário ter acesso aos dados e conhecer o seu formato.
+- Os dados podem estar salvos tanto localmente, em um servidor remoto ou em uma página web.
+- Uma boa prática é evitar salvar um banco de dados com nomes separados por espaços.
+- Evite símbolos especiais no nome dos diretórios ou arquivos, tais como `?$%^&(){}[]<>/...`
+
+:::
+
+
+## Organizando o diretório de trabalho
+
+::: {.incremental}
+- O **diretório de trabalho** (ou *workspace*) nada mais é do que a pasta no qual inserimos o conteúdo de um projeto.
+- Uma boa prática é criar uma pasta para cada projeto 
+- Uma vez criado o diretório de trabalho, devemos indicar ao `R` qual o caminho até esta pasta
+:::
+
+. . .
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Conhecendo o diretório de trabalho
+getwd()
+
+# Definindo o diretório de trabalho
+setwd("C:/Users/aviniciusbb/Documentos/ICDR") # No Windows
+setwd("/home/aviniciusbb/Documentos/ICDR") # No Linux ou Mac
+
+# Listar objetos no diretório (duas opções)
+list.files()
+dir() 
+```
+
+## Preparando o Diretório de Trabalho
+
+É possível definir no `RStudio` através da sequência:
+
+`Session > Set Working Directory > Choose Directory` 
+
+![](https://www.lampada.uerj.br/arquivosdb/_book2/imagens/sessao/setDiretorioCorrente.png){fig-align="center" width="300"}
+
+
+## Quizz \#1 {.inverse background-color="#386FA4"}
+
+- Crie um diretório no seu computador para os exercícios da aula.
+- Verifique o seu diretório de trabalho.
+- Mude o diretório de trabalho para o diretório que você criou.
+- Salve todos os arquivos de dados da aula no diretório criado.
+- Verifique o conteúdo do diretório.
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 5
+)
+```
+
+
+## Caminho absoluto vs. Caminho relativo
+
+Existem duas maneiras de definir caminhos para um arquivo ou diretório - **caminhos absolutos** e **caminhos relativos**.
+
+- Um **caminho relativo** especifica um local a partir do local atual.
+
+- Um **caminho absoluto** especifica um local da raiz do sistema de arquivos.
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Caminho absoluto
+"/home/aviniciusbb/Documents/ICDR/Data/meu_arquivo.csv"
+
+# Caminho relativo
+setwd("/home/aviniciusbb/Documents/ICDR/") 
+"Data/meu_arquivo.csv"      
+```
+
+
+# <font color="1b5299"> Criando projetos no `RStudio` </font> {background-color="#BBDEF0"}
+
+## Projetos no `RStudio`
+
+- Um **projeto** corresponde simplesmente a uma pasta no qual todos os elementos 
+todos os arquivos estão associados: dados, documentos, imagens, scripts, ...
+- O `RStudio` possibilita a criação de um ambiente que permite o uso mais integrado
+desses elementos.
+- Consiste na criação de um arquivo `.Rproj` dentro de um diretório de trabalho
+- É, também, uma maneira mais simples de evitar ajustar o diretório de trabalho sempre
+que começamos uma nova tarefa
+
+![](https://ficheiros.com.br/assets/img/icons/files/128/rproj-10013.png){fig-align="center" width="600"}
+
+## Projetos no `RStudio`
+
+A estrutura básica de um projeto é apresenta na árvore abaixo:
+
+![](https://i1.wp.com/raw.githubusercontent.com/martinctc/blog/master/images/RPROJECT_2000dpi.png?w=578&ssl=1){fig-align="center" width="600"}
+
+
+## Projetos no `RStudio`
+
+Para criar um novo projeto, fazemos:
+
+`File > New Project`
+
+![](https://d33wubrfki0l68.cloudfront.net/87562c4851bf4d0b0c8415dc9d6690493572e362/a6685/screenshots/rstudio-project-1.png){fig-align="center" width="300"}
+
+## Projetos no `RStudio`
+
+Em seguida, indicamos o tipo específico de projeto. Em geral, criamos um projeto 
+em um novo diretório
+
+![](https://d33wubrfki0l68.cloudfront.net/0fa791e2621be297cb9c5cac0b2802223e3d7714/57d89/screenshots/rstudio-project-2.png){fig-align="center" width="300"}
+
+## Projetos no `RStudio`
+
+Por fim, damos um nome ao projeto (diretório) e indicamos onde estará localizado no computador:
+
+![](https://d33wubrfki0l68.cloudfront.net/dee6324df1f5c5121d1c1e9eed822ee52c87167b/1f325/screenshots/rstudio-project-3.png){fig-align="center" width="300"}
+
+## Projetos no `RStudio`
+
+- É possível navegar entre projetos através do ícone do lado direito superior
+- Os arquivos apresentados no painel referem-se aos arquivos do diretório onde o projeto foi criado
+- Todos os caminhos dentro de um projeto são **relativos**!
+- Os arquivos e scripts previamente utilizados são restaurados ao abrir um projeto 
+
+
+# <font color="1b5299"> Leitura de Dados </font> {background-color="#BBDEF0"}
+
+## O pacote `readr`
+
+O pacote `readr` oferece algumas funcionalidades que facilitam a leitura
+de dados no formato **retangular**
+
+![](Images/logo_readr.png){fig-align="center" width="400"}
+
+
+## O pacote `readr`
+
+As principais funções são:
+
+- `read_delim()`: arquivos separados por **qualquer** delimitador
+- `read_csv()`: arquivos separados por vírgula
+- `read_csv2()`: arquivos separados por ponto-e-vírgula
+- `read_tsv()`: arquivos delimitados por `Tab` 
+- `read_fwf()`: arquivos com colunas de tamanho fixo
+- `read_table()`: arquivos delimitados por espaço em branco
+
+. . . 
+
+De forma geral, todas as funções são casos especiais da função geral `read_delim()`
+
+## Alguns exemplos
+
+O arquivo abaixo apresenta delimitação por `Tabs` 
+
+
+![](Images/tsv_example.png){fig-align="center" width="400"}
+
+## Alguns exemplos
+
+O arquivo abaixo apresenta delimitação por vírgulas (*comma separated values* - CSV)
+
+![](http://www.yohz.com/blogs/wp-content/uploads/2020/05/eea_csv_dates01.png){fig-align="center" width="400"}
+
+## Alguns exemplos
+
+O arquivo abaixo apresenta delimitação por ponto e vírgula (;)
+
+![](https://ceweb.br/guias/dados-abertos/assets/img/png/image18.png){fig-align="center" width="400"}
+
+## Ler arquivos `.txt` ou `.csv`
+
+Arquivos `.txt` são arquivos padrões de texto, enquanto que arquivos `.csv` são arquivos geralmente separados por vírgula (,) ou ponto-e-vírgula (;).
+
+![](Images/read_txt_csv.png){fig-align="center" width="400"}
+
+A função a ser utilizada para ler os dados depende da forma em que as variáveis estão 
+**delimitadas**.
+
+
+## Importar arquivos `.txt`
+
+Para arquivos `.txt` simples, utilizamos a função básica `read_delim()`:
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Sintaxe da funcao 
+library(readr)
+meus_dados <- read_delim(file = "meu_arquivo.txt")
+```
+
+## Ler arquivos .txt ou .csv
+
+Alguns argumentos da função são:
+
+- `delim`: indica qual o caracter usado para separar as colunas.
+- `col_names` = `TRUE` ou `FALSE`: indica se a primeira linha contém o nome das variáveis
+- `col_types`: indica o tipo da variável. Se `col_type = NULL` (default), as variáveis são imputadas automaticamente.
+- `skip`: indica quantas linhas devem ser ignoradas no começo do arquivo
+- `trim_ws`: elimina espaços em branco desnecessários antes e depois do valor da variável
+- Ver mais opções através de `vignette("readr")` 
+
+## Importar arquivos `.txt`
+
+Neste exemplo, vamos ler os dados `participantes_tab.txt` através da função `read_delim()`:
+
+```{r, echo = FALSE, collapse = TRUE}
+# Sintaxe da funcao 
+library(readr)
+```
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Ler dados
+participantes <- readr::read_delim(
+  file = "Dados/participantes_tab.txt", 
+  delim = "\t", 
+  show_col_types = FALSE
+  )
+
+
+participantes
+```
+
+## Importar arquivos `.txt`
+
+Para este exemplo, utilizaremos um arquivo que usa `|` como separador:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Abrir dados 
+individuos_alt <- read_delim(
+  "Dados/participantes_barra.txt", 
+  delim = "|"
+  )
+
+individuos_alt
+```
+
+:::{.incremental}
+- Neste caso, o delimitador de variáveis é o caractere `|`. Na verdade, qualquer caractere utilizado
+para separar valores das variáveis deve ser indicado no argumento `delim`.
+- Uma característica interessante das funções do pacote `readr` é o fato de lerem 
+diretamente arquivos compactados (`.gz`, `.bz2`, `.xz`, `.rar` ou `.zip`)
+:::
+
+## Importar arquivos `.csv`
+
+Para ler arquivos `.csv`, podemos utilizar a mesma função `read_delim()`, com o argumento
+`delim = ","`. No entanto, a função `read_csv()` lê os dados diretamente:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Importando os dados
+turistas_br_2021 <- read_delim(
+  "Dados/chegadas_turistas_2021.csv", 
+  delim = ";"
+  )
+
+# Checar primeiras linhas
+head(turistas_br_2021, 5)
+```
+
+Como vimos, há nesse arquivos problemas de *encoding* (caracteres especiais não são lidos corretamente).
+
+
+## Importar arquivos `.csv`
+
+Para resolver problemas com caracteres especiais, fazemos
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Importando os dados
+turistas_br_2021 <- read_delim(
+  "Dados/chegadas_turistas_2021.csv", 
+  delim = ";",
+  locale = locale(encoding = "Latin1")
+  )
+
+# Checar primeiras linhas
+head(turistas_br_2021, 5)
+```
+
+## Importar arquivos `.csv`
+
+Considere agora ler um arquivo \texttt{.csv} diretamente de uma página na internet (URL). Os dados apresentam informações sobre o número de queimadas 
+
+```{r,  echo = TRUE, collapse = TRUE}
+# URL da página 
+url <- "https://queimadas.dgi.inpe.br/queimadas/portal-static/csv_estatisticas/historico_regiao_norte.csv"
+
+# Importando os dados
+queimadas_norte_br <- read_csv(url, show_col_types = FALSE)
+
+# Checar dimensões da base de dados
+dim(queimadas_norte_br)
+```
+
+- Função similar é `read_csv2()`. A diferença é que esta considera colunas separadas por ponto-e-vírgula (;), enquanto que `read_csv()` considera a separação por vírgula (,).
+
+
+
+## Quizz \#2 {.inverse background-color="#386FA4"}
+
+
+Neste exercício, iremos obter os dados históricos do Índice Bovespa (Ibovespa) disponíveis
+no site da B3 [http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm](http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm)
+
+
+![](Images/b3_logo.png){fig-align="center" width="400"}
+
+
+- Baixar os dados referentes ao primeiro semestre de 2021
+- Salvar os dados na sua pasta de trabalho
+- Ajustar o diretório de trabalho
+- Utilizar uma das funções do \texttt{readr} para abrir os dados
+- Ver a estrutura de dados
+- Eliminar linhas desnecessárias
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 15
+)
+```
+
+
+## Lendo arquivos do Microsoft Excel
+
+Um pacote útil para leitura de arquivos do Microsoft Excel (`.xls` ou `.xlsx`) 
+é o pacote `readxl`, desenvolvido por Hadley Wickham (**The 
+RStudio Team**) 
+
+![](Images/readxl_logo.png){fig-align="center" width="400"}
+
+
+Para mais informações sobre o pacote `readxl`, ver a documentação em
+[https://readxl.tidyverse.org](https://readxl.tidyverse.org).
+
+
+## Lendo arquivos Microsoft Excel
+
+A principal função para leitura é a \texttt{read\_excel()}. Tal função
+identifica se a extensão do arquivo é \texttt{.xls} ou \texttt{.xlsx}
+
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Instalar pacote
+install.packages("readxl")
+library(readxl)
+# Sintaxe da funcao
+data <- read_excel(path, sheet = NULL, 
+                   range = NULL, skip = 0)
+```
+
+
+
+Caso se conheça o formato exato do arquivo, pode-se utilizar as funcões
+`read_xls()` ou `read_xlsx()`.
+
+
+## Lendo arquivos Microsoft Excel
+
+
+
+- Utilizar os dados \texttt{garantia\_safra.xlsx} na pasta de dados.
+- Para mais informações sobre o Programa, clique \href{http://www.caixa.gov.br/poder-publico/programas-uniao/area-rural/garantia-safra/Paginas/default.aspx}{aqui!}
+
+## Lendo arquivos JSON 
+
+Um importante formato de arquivos é o JSON (**Java** **S**cript **O**bject **N**otation). 
+
+- Permite a troca de dados de forma rápida entre sistemas (*parsing*).
+- Possui um formato independente.
+- Tem o formato de texto, facilmente legível em seus atributos.
+- É a estrutura de dados mais utilizada em APIs (*Application Programming Interface*)
+
+
+![](Images/json_logo.png){fig-align="center" width="400"}
+
+
+
+
+## Lendo arquivos JSON 
+
+Alguns exemplos de arquivos JSON são:
+
+![](Images/json_sample.png){fig-align="center" width="400"}
+
+## Lendo arquivos JSON 
+
+Alguns exemplos de arquivos JSON são:
+
+
+![](Images/json_sample2.png){fig-align="center" width="400"}
+
+## Lendo arquivos JSON 
+
+
+![](Images/json_sample4.png){fig-align="center" width="400"}
+
+
+
+## Lendo arquivos JSON 
+
+Alguns exemplos de arquivos JSON são:
+
+![](Images/json_sample3.png){fig-align="center" width="400"}
+
+
+## Lendo arquivos JSON 
+
+Uma vez instalado e carregado o pacote `rjson`, podemos utilizar a função `fromJSON()`:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(rjson)
+
+# Ler arquivo JSON
+json_data <- fromJSON(file = "Dados/jobs.json")
+class(json_data)
+```
+
+
+
+## Lendo arquivos JSON 
+
+Para converter o objeto em data frame, fazemos
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Converter para data frame
+json_df <- as.data.frame(json_data)
+json_df
+```
+
+
+
+
+## O pacote `haven`
+  
+O pacote `haven` possibilita a leitura e escrita de vários formatos de dados dos principais
+pacotes estatísticos disponíveis, tais como `SPSS`, `SAS` e `Stata`.
+
+Atualmente, suporta os seguintes arquivos:
+
+- **SAS**: `read_sas()`, `read_xpt()` e `write_xpt()`
+- **SPSS**: `read_sav()` e `write_sav()` 
+- **Stata**: `read_dta()` lê arquivos `.dta` (até a versão 15), enquanto `write_dta()` cria arquivos `.dta` (versões 8-15).
+
+
+![](Images/heaven_logo.png){fig-align="center" width="400"}
+
+
+
+
+## O pacote `haven`
+
+Seguem alguns exemplos da sintaxe:
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(haven)
+
+# SAS
+read_sas("mtcars.sas7bdat")
+write_sas(mtcars, "mtcars.sas7bdat")
+
+# SPSS
+read_sav("mtcars.sav")
+write_sav(mtcars, "mtcars.sav")
+
+# Stata
+read_dta("mtcars.dta")
+write_dta(mtcars, "mtcars.dta")
+```
+
+## Web scraping
+
+O termo **web scraping** refere-se à prática de coleta de dados web, permitindo a extração de 
+dados diretamente de sites e convertendo-os em informação estruturada para posterior análise.
+
+![](Images/web_scraping.png){fig-align="center" width="400"}
+
+
+
+
+## Web scraping
+
+No `R`, existem três pacotes principais para a extração de dados da web:
+
+- `httr`: realiza requisições web para obtenção das páginas de interesse
+- `xml2`: estrutura arquivos HTML ou XML de forma eficiente
+- `rvest`: reune funcionalidade dos dois pacotes anteriores e traz funções específicas
+
+É importante ter conhecimento prévio de `HTML`
+
+
+## Web scraping
+
+Como exemplo, gostaríamos de baixar os dados da tabela do campeonato brasileiro de 2022.
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(rvest)
+
+# Definir url da página
+url <- "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A#Classifica%C3%A7%C3%A3o"
+
+# Ler arquivo 
+cod_html <- read_html(url)
+
+# Extrair tabela
+tabela_html <- html_element(
+  cod_html, 
+  xpath = '//*[@id="mw-content-text"]/div[1]/table[3]'
+  ) 
+
+# Transformar para data frame
+serie_a_2022 <- html_table(tabela_html)
+
+# Visualizar dados
+serie_a_2022
+```
+
+# <font color="1b5299"> Salvando dados no formato `R` </font> {background-color="#BBDEF0"}
+
+## Salvando dados no formato `R`
+
+Nesta parte, veremos como: 
+
+1. Salvar um objeto no formato `R`
+2. Salvar múltiplos objetos no formato `R`
+3. Salvar todo o workspace em um único arquivo
+
+![](Images/load_save_rds.png){fig-align="center" width="400"}
+
+## Salvar um objeto
+
+Para salvar uma base de dados do `R` em um único arquivo, utilizamos a função 
+`write_rds()`. O objeto pode ser lido através da função `read_rds()`.
+
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Salvar um objeto em um arquivo
+save_rds(objeto, file = "meus_dados.rds")
+
+# Restaurar o objeto
+write_rds(file = "meus_dados.rds")
+```
+
+
+Por exemplo, podemos salvar o objeto `mtcars` em um arquivo '.rds':
+
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Salvar um objeto em um arquivo
+write_rds(mtcars, file = "mtcars.rds")
+
+# Restaurar o objeto
+read_rds(file = "mtcars.rds")
+```
+
+## Salvando múltiplos objetos
+
+Para salvar múltiplos objetos em um único arquivo, utilizamos a função `save()`. O objeto será
+salvo no formato `.Rda` ou `.RData` (mesma extensão). Os objetos podem ser restaurados 
+através da função `load()`
+
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Salvar um objeto no formato .RData
+save(data1, file = "data.Rda")
+
+# Salvar multiplos objetos
+save(data1, data2, file = "data.Rda")
+
+# Carregar os dados
+load("data.Rda")
+```
+
+## Salvando todo o **workspace**
+
+Para salvar todos os dados e scripts de um projeto, utilizamos a função `save.image()`.
+Sempre ao finalizar o R/RStudio, ele pergunta se gostaríamos de salvar o **workspace**. 
+Se a resposta for afirmativa, da próxima vez que abrirmos o programa todo o workspace será carregado.
+
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Salvar o workspace
+save.image(file = "meu_workspace.Rda")
+
+# Carregar o workspace
+load("meu_workspace.Rda")
+```
+
+
