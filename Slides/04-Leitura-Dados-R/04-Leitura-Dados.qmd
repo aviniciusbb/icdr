@@ -378,7 +378,7 @@ no site da B3 [http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-
 - Baixar os dados referentes ao primeiro semestre de 2021
 - Salvar os dados na sua pasta de trabalho
 - Ajustar o diretório de trabalho
-- Utilizar uma das funções do \texttt{readr} para abrir os dados
+- Utilizar uma das funções do `readr` para abrir os dados
 - Ver a estrutura de dados
 - Eliminar linhas desnecessárias
 
@@ -412,12 +412,14 @@ identifica se a extensão do arquivo é \texttt{.xls} ou \texttt{.xlsx}
 # Instalar pacote
 install.packages("readxl")
 library(readxl)
+
 # Sintaxe da funcao
-data <- read_excel(path, sheet = NULL, 
-                   range = NULL, skip = 0)
+data <- read_excel(path, 
+                   sheet = NULL, 
+                   range = NULL, 
+                   skip = 0
+                   )
 ```
-
-
 
 Caso se conheça o formato exato do arquivo, pode-se utilizar as funcões
 `read_xls()` ou `read_xlsx()`.
@@ -425,14 +427,49 @@ Caso se conheça o formato exato do arquivo, pode-se utilizar as funcões
 
 ## Lendo arquivos Microsoft Excel
 
+Para este exemplo, utilizaremos os dados de Frotas de Veículos por municípios para
+o último trimestre de 2022. A série histórica está disponível na página do [Ministério da
+Infraestrurura](https://www.gov.br/infraestrutura/pt-br/assuntos/transito/conteudo-Senatran/frota-de-veiculos-2022)
+
+![](https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/29856_E348C4605E1B0AFE.jpg){fig-align="center" width="400"}
+
+## Lendo arquivos Microsoft Excel
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Importando os dados
+frota_2022 <- readxl::read_excel(
+  "Dados/frota_munic_modelo_2022.xls",
+  skip = 2
+)
+
+# Checar primeiras linhas
+head(frota_2022)
+```
 
 
-- Utilizar os dados \texttt{garantia\_safra.xlsx} na pasta de dados.
-- Para mais informações sobre o Programa, clique \href{http://www.caixa.gov.br/poder-publico/programas-uniao/area-rural/garantia-safra/Paginas/default.aspx}{aqui!}
+## Lendo arquivos Microsoft Excel
+
+Para selecionar uma aba específica, fazemos:
+
+```{r,  echo = TRUE, collapse = TRUE}
+# Nomes das abas
+readxl::excel_sheets("Dados/frota_munic_modelo_2022.xls")
+
+# Importando os dados
+frota_2022 <- readxl::read_excel(
+  "Dados/frota_munic_modelo_2022.xls",
+  sheet = "NOVEMBRO_2022",
+  skip = 2
+)
+readxl::excel_sheets("Dados/frota_munic_modelo_2022.xls")
+# Checar primeiras linhas
+head(frota_2022)
+```
+
 
 ## Lendo arquivos JSON 
 
-Um importante formato de arquivos é o JSON (**Java** **S**cript **O**bject **N**otation). 
+Um importante formato de arquivos é o JSON (**J**ava **S**cript **O**bject **N**otation). 
 
 - Permite a troca de dados de forma rápida entre sistemas (*parsing*).
 - Possui um formato independente.
@@ -590,13 +627,27 @@ serie_a_2022
 
 ## Salvando dados no formato `R`
 
+:::: {.columns}
+
+:::{.column width="50%"}
 Nesta parte, veremos como: 
 
 1. Salvar um objeto no formato `R`
 2. Salvar múltiplos objetos no formato `R`
 3. Salvar todo o workspace em um único arquivo
+::: 
 
-![](Images/load_save_rds.png){fig-align="center" width="400"}
+::: {.column width="50%"}
+
+![](Images/load_save_rds.png){fig-align="center" width="1000"}
+
+:::
+
+:::: 
+
+
+
+
 
 ## Salvar um objeto
 
@@ -612,6 +663,7 @@ save_rds(objeto, file = "meus_dados.rds")
 write_rds(file = "meus_dados.rds")
 ```
 
+. . .
 
 Por exemplo, podemos salvar o objeto `mtcars` em um arquivo '.rds':
 

@@ -403,7 +403,7 @@
 Antonio Vinícius Barbosa
 </h2><h2>
 </h2><h3>
-06-03-2023
+08-03-2023
 </h3>
 
 
@@ -485,7 +485,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_2948d1cf" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_09b567b2" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -730,13 +730,13 @@ Antonio Vinícius Barbosa
 <li>Baixar os dados referentes ao primeiro semestre de 2021</li>
 <li>Salvar os dados na sua pasta de trabalho</li>
 <li>Ajustar o diretório de trabalho</li>
-<li>Utilizar uma das funções do para abrir os dados</li>
+<li>Utilizar uma das funções do <code>readr</code> para abrir os dados</li>
 <li>Ver a estrutura de dados</li>
 <li>Eliminar linhas desnecessárias</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_e29dcc55" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_f00a531d" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -754,17 +754,79 @@ Antonio Vinícius Barbosa
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Instalar pacote</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="fu">install.packages</span>(<span class="st">"readxl"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Sintaxe da funcao</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(path, <span class="at">sheet =</span> <span class="cn">NULL</span>, </span>
-<span id="cb9-6"><a href="#cb9-6"></a>                   <span class="at">range =</span> <span class="cn">NULL</span>, <span class="at">skip =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># Sintaxe da funcao</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(path, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>                   <span class="at">sheet =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-8"><a href="#cb9-8"></a>                   <span class="at">range =</span> <span class="cn">NULL</span>, </span>
+<span id="cb9-9"><a href="#cb9-9"></a>                   <span class="at">skip =</span> <span class="dv">0</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>                   )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Caso se conheça o formato exato do arquivo, pode-se utilizar as funcões <code>read_xls()</code> ou <code>read_xlsx()</code>.</p>
 </section><section id="lendo-arquivos-microsoft-excel-1" class="slide level2"><h2>Lendo arquivos Microsoft Excel</h2>
-<ul>
-<li>Utilizar os dados na pasta de dados.</li>
-<li>Para mais informações sobre o Programa, clique </li>
-</ul></section><section id="lendo-arquivos-json" class="slide level2"><h2>Lendo arquivos JSON</h2>
-<p>Um importante formato de arquivos é o JSON (<strong>Java</strong> <strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation).</p>
+<p>Para este exemplo, utilizaremos os dados de Frotas de Veículos por municípios para o último trimestre de 2022. A série histórica está disponível na página do <a href="https://www.gov.br/infraestrutura/pt-br/assuntos/transito/conteudo-Senatran/frota-de-veiculos-2022">Ministério da Infraestrurura</a></p>
+
+<img data-src="https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/06/29856_E348C4605E1B0AFE.jpg" width="400" class="r-stretch quarto-figure-center"></section><section id="lendo-arquivos-microsoft-excel-2" class="slide level2"><h2>Lendo arquivos Microsoft Excel</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Importando os dados</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>frota_2022 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="st">"Dados/frota_munic_modelo_2022.xls"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="at">skip =</span> <span class="dv">2</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Checar primeiras linhas</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">head</span>(frota_2022)</span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="do">## # A tibble: 6 × 24</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="do">##   UF    MUNICIPIO    TOTAL AUTOM…¹ BONDE CAMIN…² CAMIN…³ CAMIN…⁴ CAMIO…⁵ CHASS…⁶</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="do">##   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="do">## 1 AC    ACRELANDIA    7553    1711     0     462      38     837      61       0</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="do">## 2 AC    ASSIS BRASIL  2203     398     0      30       0     192      23       0</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="do">## 3 AC    BRASILEIA    12126    2812     0     326     286    1649     130       0</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="do">## 4 AC    BUJARI        2675     749     0     134      42     329      17       0</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="do">## 5 AC    CAPIXABA      2710     758     0      95       6     301      25       0</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="do">## 6 AC    CRUZEIRO DO… 38777    8089     0     752     116    3425     399       1</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="do">## # … with 14 more variables: CICLOMOTOR &lt;dbl&gt;, `MICRO-ONIBUS` &lt;dbl&gt;,</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="do">## #   MOTOCICLETA &lt;dbl&gt;, MOTONETA &lt;dbl&gt;, ONIBUS &lt;dbl&gt;, QUADRICICLO &lt;dbl&gt;,</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="do">## #   REBOQUE &lt;dbl&gt;, `SEMI-REBOQUE` &lt;dbl&gt;, `SIDE-CAR` &lt;dbl&gt;, OUTROS &lt;dbl&gt;,</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="do">## #   `TRATOR ESTEI` &lt;dbl&gt;, `TRATOR RODAS` &lt;dbl&gt;, TRICICLO &lt;dbl&gt;,</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="do">## #   UTILITARIO &lt;dbl&gt;, and abbreviated variable names ¹​AUTOMOVEL, ²​CAMINHAO,</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="do">## #   ³​`CAMINHAO TRATOR`, ⁴​CAMINHONETE, ⁵​CAMIONETA, ⁶​`CHASSI PLATAF`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="lendo-arquivos-microsoft-excel-3" class="slide level2"><h2>Lendo arquivos Microsoft Excel</h2>
+<p>Para selecionar uma aba específica, fazemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Nomes das abas</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>readxl<span class="sc">::</span><span class="fu">excel_sheets</span>(<span class="st">"Dados/frota_munic_modelo_2022.xls"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="do">## [1] "DEZEMBRO_2022" "NOVEMBRO_2022" "OUTUBRO_2022"</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co"># Importando os dados</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>frota_2022 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(</span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="st">"Dados/frota_munic_modelo_2022.xls"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="at">sheet =</span> <span class="st">"NOVEMBRO_2022"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="at">skip =</span> <span class="dv">2</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>)</span>
+<span id="cb11-11"><a href="#cb11-11"></a>readxl<span class="sc">::</span><span class="fu">excel_sheets</span>(<span class="st">"Dados/frota_munic_modelo_2022.xls"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="do">## [1] "DEZEMBRO_2022" "NOVEMBRO_2022" "OUTUBRO_2022"</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co"># Checar primeiras linhas</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">head</span>(frota_2022)</span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="do">## # A tibble: 6 × 24</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="do">##   UF    MUNICIPIO    TOTAL AUTOM…¹ BONDE CAMIN…² CAMIN…³ CAMIN…⁴ CAMIO…⁵ CHASS…⁶</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="do">##   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="do">## 1 AC    ACRELANDIA    7526    1704     0     462      38     840      63       0</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="do">## 2 AC    ASSIS BRASIL  2186     395     0      32       0     190      22       0</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="do">## 3 AC    BRASILEIA    12055    2799     0     322     282    1639     128       0</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="do">## 4 AC    BUJARI        2656     744     0     133      41     328      15       0</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="do">## 5 AC    CAPIXABA      2695     755     0      95       6     298      28       0</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="do">## 6 AC    CRUZEIRO DO… 38517    8047     0     753     112    3392     397       1</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="do">## # … with 14 more variables: CICLOMOTOR &lt;dbl&gt;, `MICRO-ONIBUS` &lt;dbl&gt;,</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="do">## #   MOTOCICLETA &lt;dbl&gt;, MOTONETA &lt;dbl&gt;, ONIBUS &lt;dbl&gt;, QUADRICICLO &lt;dbl&gt;,</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="do">## #   REBOQUE &lt;dbl&gt;, `SEMI-REBOQUE` &lt;dbl&gt;, `SIDE-CAR` &lt;dbl&gt;, OUTROS &lt;dbl&gt;,</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="do">## #   `TRATOR ESTEI` &lt;dbl&gt;, `TRATOR RODAS` &lt;dbl&gt;, TRICICLO &lt;dbl&gt;,</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="do">## #   UTILITARIO &lt;dbl&gt;, and abbreviated variable names ¹​AUTOMOVEL, ²​CAMINHAO,</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a><span class="do">## #   ³​`CAMINHAO TRATOR`, ⁴​CAMINHONETE, ⁵​CAMIONETA, ⁶​`CHASSI PLATAF`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="lendo-arquivos-json" class="slide level2"><h2>Lendo arquivos JSON</h2>
+<p>Um importante formato de arquivos é o JSON (<strong>J</strong>ava <strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation).</p>
 <ul>
 <li>Permite a troca de dados de forma rápida entre sistemas (<em>parsing</em>).</li>
 <li>Possui um formato independente.</li>
@@ -786,29 +848,29 @@ Antonio Vinícius Barbosa
 <img data-src="Images/json_sample3.png" width="400" class="r-stretch quarto-figure-center"></section><section id="lendo-arquivos-json-5" class="slide level2"><h2>Lendo arquivos JSON</h2>
 <p>Uma vez instalado e carregado o pacote <code>rjson</code>, podemos utilizar a função <code>fromJSON()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Carregar pacote</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">library</span>(rjson)</span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># Ler arquivo JSON</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>json_data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="at">file =</span> <span class="st">"Dados/jobs.json"</span>)</span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="fu">class</span>(json_data)</span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="do">## [1] "list"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">library</span>(rjson)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Ler arquivo JSON</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>json_data <span class="ot">&lt;-</span> <span class="fu">fromJSON</span>(<span class="at">file =</span> <span class="st">"Dados/jobs.json"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">class</span>(json_data)</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="do">## [1] "list"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="lendo-arquivos-json-6" class="slide level2"><h2>Lendo arquivos JSON</h2>
 <p>Para converter o objeto em data frame, fazemos</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Converter para data frame</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>json_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(json_data)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>json_df</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="do">##   ID     Name Salary  StartDate       Dept</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="do">## 1  1     Rick 623.30   1/1/2012         IT</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="do">## 2  2      Dan 515.20  9/23/2013 Operations</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="do">## 3  3 Michelle 611.00 11/15/2014         IT</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="do">## 4  4     Ryan 729.00  5/11/2014         HR</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="do">## 5  5     Gary 843.25  3/27/2015    Finance</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="do">## 6  6     Nina 578.00  5/21/2013         IT</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="do">## 7  7    Simon 632.80  7/30/2013 Operations</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="do">## 8  8     Guru 722.50  6/17/2014    Finance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Converter para data frame</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>json_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(json_data)</span>
+<span id="cb13-3"><a href="#cb13-3"></a>json_df</span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="do">##   ID     Name Salary  StartDate       Dept</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="do">## 1  1     Rick 623.30   1/1/2012         IT</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="do">## 2  2      Dan 515.20  9/23/2013 Operations</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="do">## 3  3 Michelle 611.00 11/15/2014         IT</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="do">## 4  4     Ryan 729.00  5/11/2014         HR</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="do">## 5  5     Gary 843.25  3/27/2015    Finance</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="do">## 6  6     Nina 578.00  5/21/2013         IT</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="do">## 7  7    Simon 632.80  7/30/2013 Operations</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="do">## 8  8     Guru 722.50  6/17/2014    Finance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="o-pacote-haven" class="slide level2"><h2>O pacote <code>haven</code>
 </h2>
@@ -829,20 +891,20 @@ Antonio Vinícius Barbosa
 </h2>
 <p>Seguem alguns exemplos da sintaxe:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Carregar pacote</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">library</span>(haven)</span>
-<span id="cb12-3"><a href="#cb12-3"></a></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># SAS</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="fu">read_sas</span>(<span class="st">"mtcars.sas7bdat"</span>)</span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="fu">write_sas</span>(mtcars, <span class="st">"mtcars.sas7bdat"</span>)</span>
-<span id="cb12-7"><a href="#cb12-7"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co"># SPSS</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">read_sav</span>(<span class="st">"mtcars.sav"</span>)</span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="fu">write_sav</span>(mtcars, <span class="st">"mtcars.sav"</span>)</span>
-<span id="cb12-11"><a href="#cb12-11"></a></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="co"># Stata</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="fu">read_dta</span>(<span class="st">"mtcars.dta"</span>)</span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="fu">write_dta</span>(mtcars, <span class="st">"mtcars.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">library</span>(haven)</span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># SAS</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">read_sas</span>(<span class="st">"mtcars.sas7bdat"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="fu">write_sas</span>(mtcars, <span class="st">"mtcars.sas7bdat"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co"># SPSS</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">read_sav</span>(<span class="st">"mtcars.sav"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="fu">write_sav</span>(mtcars, <span class="st">"mtcars.sav"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11"></a></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># Stata</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="fu">read_dta</span>(<span class="st">"mtcars.dta"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="fu">write_dta</span>(mtcars, <span class="st">"mtcars.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="web-scraping" class="slide level2"><h2>Web scraping</h2>
 <p>O termo <strong>web scraping</strong> refere-se à prática de coleta de dados web, permitindo a extração de dados diretamente de sites e convertendo-os em informação estruturada para posterior análise.</p>
@@ -861,55 +923,57 @@ Antonio Vinícius Barbosa
 </section><section id="web-scraping-2" class="slide level2"><h2>Web scraping</h2>
 <p>Como exemplo, gostaríamos de baixar os dados da tabela do campeonato brasileiro de 2022.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Carregar pacote</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">library</span>(rvest)</span>
-<span id="cb13-3"><a href="#cb13-3"></a></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Definir url da página</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>url <span class="ot">&lt;-</span> <span class="st">"https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A#Classifica%C3%A7%C3%A3o"</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co"># Ler arquivo </span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>cod_html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
-<span id="cb13-9"><a href="#cb13-9"></a></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co"># Extrair tabela</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>tabela_html <span class="ot">&lt;-</span> <span class="fu">html_element</span>(</span>
-<span id="cb13-12"><a href="#cb13-12"></a>  cod_html, </span>
-<span id="cb13-13"><a href="#cb13-13"></a>  <span class="at">xpath =</span> <span class="st">'//*[@id="mw-content-text"]/div[1]/table[3]'</span></span>
-<span id="cb13-14"><a href="#cb13-14"></a>  ) </span>
-<span id="cb13-15"><a href="#cb13-15"></a></span>
-<span id="cb13-16"><a href="#cb13-16"></a><span class="co"># Transformar para data frame</span></span>
-<span id="cb13-17"><a href="#cb13-17"></a>serie_a_2022 <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tabela_html)</span>
-<span id="cb13-18"><a href="#cb13-18"></a></span>
-<span id="cb13-19"><a href="#cb13-19"></a><span class="co"># Visualizar dados</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a>serie_a_2022</span>
-<span id="cb13-21"><a href="#cb13-21"></a><span class="do">## # A tibble: 20 × 11</span></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="do">##      Pos Equipevde         Pts     J     V     E     D    GP    GC SG    Class…¹</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a><span class="do">##    &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  </span></span>
-<span id="cb13-24"><a href="#cb13-24"></a><span class="do">##  1     1 Palmeiras (C)      81    38    23    12     3    66    27 +39   "Fase …</span></span>
-<span id="cb13-25"><a href="#cb13-25"></a><span class="do">##  2     2 Internacional      73    38    20    13     5    58    31 +27   "Fase …</span></span>
-<span id="cb13-26"><a href="#cb13-26"></a><span class="do">##  3     3 Fluminense         70    38    21     7    10    63    41 +22   "Fase …</span></span>
-<span id="cb13-27"><a href="#cb13-27"></a><span class="do">##  4     4 Corinthians        65    38    18    11     9    44    36 +8    "Fase …</span></span>
-<span id="cb13-28"><a href="#cb13-28"></a><span class="do">##  5     5 Flamengo[nota …    62    38    18     8    12    60    39 +21   "Fase …</span></span>
-<span id="cb13-29"><a href="#cb13-29"></a><span class="do">##  6     6 Athletico Para…    58    38    16    10    12    48    48 0     "Fase …</span></span>
-<span id="cb13-30"><a href="#cb13-30"></a><span class="do">##  7     7 Atlético Minei…    58    38    15    13    10    45    37 +8    "Segun…</span></span>
-<span id="cb13-31"><a href="#cb13-31"></a><span class="do">##  8     8 Fortaleza          55    38    15    10    13    46    39 +7    "Segun…</span></span>
-<span id="cb13-32"><a href="#cb13-32"></a><span class="do">##  9     9 São Paulo          54    38    13    15    10    55    42 +13   "Fase …</span></span>
-<span id="cb13-33"><a href="#cb13-33"></a><span class="do">## 10    10 América Mineiro    53    38    15     8    15    40    40 0     "Fase …</span></span>
-<span id="cb13-34"><a href="#cb13-34"></a><span class="do">## 11    11 Botafogo           53    38    15     8    15    41    43 −2    "Fase …</span></span>
-<span id="cb13-35"><a href="#cb13-35"></a><span class="do">## 12    12 Santos             47    38    12    11    15    44    41 +3    "Fase …</span></span>
-<span id="cb13-36"><a href="#cb13-36"></a><span class="do">## 13    13 Goiás              46    38    11    13    14    40    53 −13   "Fase …</span></span>
-<span id="cb13-37"><a href="#cb13-37"></a><span class="do">## 14    14 Red Bull Braga…    44    38    11    11    16    49    59 −10   "Fase …</span></span>
-<span id="cb13-38"><a href="#cb13-38"></a><span class="do">## 15    15 Coritiba           42    38    12     6    20    39    60 −21   ""     </span></span>
-<span id="cb13-39"><a href="#cb13-39"></a><span class="do">## 16    16 Cuiabá             41    38    10    11    17    31    42 −11   ""     </span></span>
-<span id="cb13-40"><a href="#cb13-40"></a><span class="do">## 17    17 Ceará              37    38     7    16    15    34    41 −7    "Rebai…</span></span>
-<span id="cb13-41"><a href="#cb13-41"></a><span class="do">## 18    18 Atlético Goian…    36    38     8    12    18    39    57 −18   "Rebai…</span></span>
-<span id="cb13-42"><a href="#cb13-42"></a><span class="do">## 19    19 Avaí               35    38     9     8    21    34    60 −26   "Rebai…</span></span>
-<span id="cb13-43"><a href="#cb13-43"></a><span class="do">## 20    20 Juventude          22    38     3    13    22    29    69 −40   "Rebai…</span></span>
-<span id="cb13-44"><a href="#cb13-44"></a><span class="do">## # … with abbreviated variable name ¹​`Classificação ou descenso`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Definir url da página</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>url <span class="ot">&lt;-</span> <span class="st">"https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A#Classifica%C3%A7%C3%A3o"</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co"># Ler arquivo </span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>cod_html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co"># Extrair tabela</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>tabela_html <span class="ot">&lt;-</span> <span class="fu">html_element</span>(</span>
+<span id="cb15-12"><a href="#cb15-12"></a>  cod_html, </span>
+<span id="cb15-13"><a href="#cb15-13"></a>  <span class="at">xpath =</span> <span class="st">'//*[@id="mw-content-text"]/div[1]/table[3]'</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>  ) </span>
+<span id="cb15-15"><a href="#cb15-15"></a></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="co"># Transformar para data frame</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a>serie_a_2022 <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tabela_html)</span>
+<span id="cb15-18"><a href="#cb15-18"></a></span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="co"># Visualizar dados</span></span>
+<span id="cb15-20"><a href="#cb15-20"></a>serie_a_2022</span>
+<span id="cb15-21"><a href="#cb15-21"></a><span class="do">## # A tibble: 20 × 11</span></span>
+<span id="cb15-22"><a href="#cb15-22"></a><span class="do">##      Pos Equipevde         Pts     J     V     E     D    GP    GC SG    Class…¹</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a><span class="do">##    &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  </span></span>
+<span id="cb15-24"><a href="#cb15-24"></a><span class="do">##  1     1 Palmeiras (C)      81    38    23    12     3    66    27 +39   "Fase …</span></span>
+<span id="cb15-25"><a href="#cb15-25"></a><span class="do">##  2     2 Internacional      73    38    20    13     5    58    31 +27   "Fase …</span></span>
+<span id="cb15-26"><a href="#cb15-26"></a><span class="do">##  3     3 Fluminense         70    38    21     7    10    63    41 +22   "Fase …</span></span>
+<span id="cb15-27"><a href="#cb15-27"></a><span class="do">##  4     4 Corinthians        65    38    18    11     9    44    36 +8    "Fase …</span></span>
+<span id="cb15-28"><a href="#cb15-28"></a><span class="do">##  5     5 Flamengo[nota …    62    38    18     8    12    60    39 +21   "Fase …</span></span>
+<span id="cb15-29"><a href="#cb15-29"></a><span class="do">##  6     6 Athletico Para…    58    38    16    10    12    48    48 0     "Fase …</span></span>
+<span id="cb15-30"><a href="#cb15-30"></a><span class="do">##  7     7 Atlético Minei…    58    38    15    13    10    45    37 +8    "Segun…</span></span>
+<span id="cb15-31"><a href="#cb15-31"></a><span class="do">##  8     8 Fortaleza          55    38    15    10    13    46    39 +7    "Segun…</span></span>
+<span id="cb15-32"><a href="#cb15-32"></a><span class="do">##  9     9 São Paulo          54    38    13    15    10    55    42 +13   "Fase …</span></span>
+<span id="cb15-33"><a href="#cb15-33"></a><span class="do">## 10    10 América Mineiro    53    38    15     8    15    40    40 0     "Fase …</span></span>
+<span id="cb15-34"><a href="#cb15-34"></a><span class="do">## 11    11 Botafogo           53    38    15     8    15    41    43 −2    "Fase …</span></span>
+<span id="cb15-35"><a href="#cb15-35"></a><span class="do">## 12    12 Santos             47    38    12    11    15    44    41 +3    "Fase …</span></span>
+<span id="cb15-36"><a href="#cb15-36"></a><span class="do">## 13    13 Goiás              46    38    11    13    14    40    53 −13   "Fase …</span></span>
+<span id="cb15-37"><a href="#cb15-37"></a><span class="do">## 14    14 Red Bull Braga…    44    38    11    11    16    49    59 −10   "Fase …</span></span>
+<span id="cb15-38"><a href="#cb15-38"></a><span class="do">## 15    15 Coritiba           42    38    12     6    20    39    60 −21   ""     </span></span>
+<span id="cb15-39"><a href="#cb15-39"></a><span class="do">## 16    16 Cuiabá             41    38    10    11    17    31    42 −11   ""     </span></span>
+<span id="cb15-40"><a href="#cb15-40"></a><span class="do">## 17    17 Ceará              37    38     7    16    15    34    41 −7    "Rebai…</span></span>
+<span id="cb15-41"><a href="#cb15-41"></a><span class="do">## 18    18 Atlético Goian…    36    38     8    12    18    39    57 −18   "Rebai…</span></span>
+<span id="cb15-42"><a href="#cb15-42"></a><span class="do">## 19    19 Avaí               35    38     9     8    21    34    60 −26   "Rebai…</span></span>
+<span id="cb15-43"><a href="#cb15-43"></a><span class="do">## 20    20 Juventude          22    38     3    13    22    29    69 −40   "Rebai…</span></span>
+<span id="cb15-44"><a href="#cb15-44"></a><span class="do">## # … with abbreviated variable name ¹​`Classificação ou descenso`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section><section id="salvando-dados-no-formato-r" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Salvando dados no formato <code>R</code> </font></h1>
 
 </section><section id="salvando-dados-no-formato-r-1" class="slide level2"><h2>Salvando dados no formato <code>R</code>
 </h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>Nesta parte, veremos como:</p>
 <ol type="1">
 <li>Salvar um objeto no formato <code>R</code>
@@ -918,45 +982,53 @@ Antonio Vinícius Barbosa
 </li>
 <li>Salvar todo o workspace em um único arquivo</li>
 </ol>
-
-<img data-src="Images/load_save_rds.png" width="400" class="r-stretch quarto-figure-center"></section><section id="salvar-um-objeto" class="slide level2"><h2>Salvar um objeto</h2>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="Images/load_save_rds.png" width="1000"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="salvar-um-objeto" class="slide level2"><h2>Salvar um objeto</h2>
 <p>Para salvar uma base de dados do <code>R</code> em um único arquivo, utilizamos a função <code>write_rds()</code>. O objeto pode ser lido através da função <code>read_rds()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Salvar um objeto em um arquivo</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">save_rds</span>(objeto, <span class="at">file =</span> <span class="st">"meus_dados.rds"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3"></a></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Restaurar o objeto</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="fu">write_rds</span>(<span class="at">file =</span> <span class="st">"meus_dados.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Salvar um objeto em um arquivo</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">save_rds</span>(objeto, <span class="at">file =</span> <span class="st">"meus_dados.rds"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Restaurar o objeto</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">write_rds</span>(<span class="at">file =</span> <span class="st">"meus_dados.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="fragment">
 <p>Por exemplo, podemos salvar o objeto <code>mtcars</code> em um arquivo ‘.rds’:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Salvar um objeto em um arquivo</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">write_rds</span>(mtcars, <span class="at">file =</span> <span class="st">"mtcars.rds"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3"></a></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Restaurar o objeto</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="fu">read_rds</span>(<span class="at">file =</span> <span class="st">"mtcars.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Salvar um objeto em um arquivo</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">write_rds</span>(mtcars, <span class="at">file =</span> <span class="st">"mtcars.rds"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Restaurar o objeto</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">read_rds</span>(<span class="at">file =</span> <span class="st">"mtcars.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section><section id="salvando-múltiplos-objetos" class="slide level2"><h2>Salvando múltiplos objetos</h2>
 <p>Para salvar múltiplos objetos em um único arquivo, utilizamos a função <code><a href="https://rdrr.io/r/base/save.html">save()</a></code>. O objeto será salvo no formato <code>.Rda</code> ou <code>.RData</code> (mesma extensão). Os objetos podem ser restaurados através da função <code><a href="https://rdrr.io/r/base/load.html">load()</a></code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Salvar um objeto no formato .RData</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">save</span>(data1, <span class="at">file =</span> <span class="st">"data.Rda"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># Salvar multiplos objetos</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">save</span>(data1, data2, <span class="at">file =</span> <span class="st">"data.Rda"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6"></a></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co"># Carregar os dados</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="fu">load</span>(<span class="st">"data.Rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Salvar um objeto no formato .RData</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">save</span>(data1, <span class="at">file =</span> <span class="st">"data.Rda"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># Salvar multiplos objetos</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">save</span>(data1, data2, <span class="at">file =</span> <span class="st">"data.Rda"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6"></a></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co"># Carregar os dados</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="fu">load</span>(<span class="st">"data.Rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="salvando-todo-o-workspace" class="slide level2"><h2>Salvando todo o <strong>workspace</strong>
 </h2>
 <p>Para salvar todos os dados e scripts de um projeto, utilizamos a função <code><a href="https://rdrr.io/r/base/save.html">save.image()</a></code>. Sempre ao finalizar o R/RStudio, ele pergunta se gostaríamos de salvar o <strong>workspace</strong>. Se a resposta for afirmativa, da próxima vez que abrirmos o programa todo o workspace será carregado.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Salvar o workspace</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">"meu_workspace.Rda"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Carregar o workspace</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">load</span>(<span class="st">"meu_workspace.Rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Salvar o workspace</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">"meu_workspace.Rda"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># Carregar o workspace</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="fu">load</span>(<span class="st">"meu_workspace.Rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 <p>ICDR</p>
