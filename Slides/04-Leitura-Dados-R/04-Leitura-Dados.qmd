@@ -348,7 +348,7 @@ head(turistas_br_2021, 5)
 
 ## Importar arquivos `.csv`
 
-Considere agora ler um arquivo \texttt{.csv} diretamente de uma página na internet (URL). Os dados apresentam informações sobre o número de queimadas 
+Considere agora ler um arquivo `.csv` diretamente de uma página na internet (URL). Os dados apresentam informações sobre o número de queimadas 
 
 ```{r,  echo = TRUE, collapse = TRUE}
 # URL da página 
@@ -404,8 +404,8 @@ Para mais informações sobre o pacote `readxl`, ver a documentação em
 
 ## Lendo arquivos Microsoft Excel
 
-A principal função para leitura é a \texttt{read\_excel()}. Tal função
-identifica se a extensão do arquivo é \texttt{.xls} ou \texttt{.xlsx}
+A principal função para leitura é a `read_excel()`. Tal função
+identifica se a extensão do arquivo é `.xls` ou `.xlsx`.
 
 
 ```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}

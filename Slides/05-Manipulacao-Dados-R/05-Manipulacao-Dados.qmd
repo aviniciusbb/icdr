@@ -1,0 +1,753 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 05 </font> - Manipulação de Dados</h2>
+
+<h2><font color="FFFFFF"> Aula 05 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/20dce8ef-f4bb-49ce-b084-81d677a0b4fc_rw_1920.jpg?h=b54b00e7e53d92de2fd8674c940321f9){.absolute top="500" left="750" width="850"}
+
+# <font color="1b5299"> Manipulação de Dados </font> {background-color="#BBDEF0"}
+
+## Manipulação de Dados
+
+Seguindo o fluxo da **Ciência de Dados**, o objetivo agora é
+**organizar** e **transformar** os dados a fim de obter uma
+base pronta para análise.
+
+![](https://livro.curso-r.com/assets/img/environmental-data-science-r4ds-general.png){fig-align="center" width="600"}
+
+## Manipulação de Dados
+
+Nesta parte do curso, veremos alguns importantes pacotes de
+**manipulação de dados** no `R`:
+
+::: {.incremental}
+
+- `dplyr`: pacote para tratamento e manipulação de bases de dados.
+- `tidyr`: pacote para a formatação dos dados.
+
+:::
+
+. . .
+
+Estes e outros pacotes fazem parte de um sistema integrado de pacotes para
+ciência de dados conhecido por `tidyverse`, os quais compartilham de uma
+mesma concepção, gramática e funcionalidade.
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/ae747f50-27ee-474a-b312-09a063b38c0e_rw_1920.jpg?h=7f98f2dd734887a88105b57866266a65){fig-align="center" width="600"}
+
+## `Tidyverse`
+
+::: columns
+::: {.column width="40%"}
+![](https://www.stickersdevs.com.br/wp-content/uploads/2021/03/tidyverse-sticker-adesivo.jpg){fig-align="center" width="800"}
+:::
+
+::: {.column width="60%"}
+Para instalar os pacotes do `tidyverse`, fazemos:
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+# Instalar pacote
+install.packages("tidyverse")
+```
+:::
+:::
+
+## `Tidyverse`
+
+::: columns
+::: {.column width="30%"}
+![](Images/tidyverse.png){fig-align="center" width="600"}
+:::
+
+::: {.column width="70%"}
+![](Images/tidyverse_packages.png){fig-align="center" width="1000"}
+:::
+::::
+Para mais informações sobre os pacotes que fazem parte do `tidyverse`, ver [https://tidyverse.tidyverse.org/index.html](https://tidyverse.tidyverse.org/index.html)
+
+## Manipulação de Dados
+
+Um importante conceito para se obter uma base analítica é o **data
+tidying**, ou **organização dos dados**. Um banco de dados é considerado
+**tidy** se:
+
+::: {.incremental}
+-   Cada **observação** forma uma única **linha**.
+-   Cada **variável** forma uma única **coluna**.
+-   Cada **célula** armazena um único **valor**.
+-   O dados **tidy** podem ser utilizados diretamente para
+    modelagem ou visualização.
+:::
+
+
+![](Images/tidy_data.png){fig-align="center" width="1000"}
+
+## `Tibbles`
+
+Uma `tibble` é um tipo especial de data frame, com características
+distintas para facilitar a manipulação dos dados.
+
+```{r, echo = TRUE, collapse = TRUE}
+# Data frames
+head(mtcars)
+class(mtcars)
+```
+
+## `Tibbles`
+
+Para criar uma `tibble`, fazemos:
+```{r, echo = FALSE, collapse = TRUE}
+library(dplyr)
+```
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Tibbles
+mtcars_tb <- as_tibble(mtcars)
+head(mtcars_tb)
+class(mtcars_tb)
+```
+
+## `Tibbles`
+
+Comparando `tibble` e data frames:
+
+::: columns
+::: {.column width="50%"}
+```{r, echo = TRUE, collapse = TRUE}
+# Tibbles
+tibble(
+  id = 1:6,
+  munic = LETTERS[1:6],
+  grupo = rep(c(1, 0), 3),
+  valor = sample(1:100, 6)
+)
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo = TRUE, collapse = TRUE}
+# Data frame
+data.frame(
+  id = 1:6,
+  munic = LETTERS[1:6],
+  grupo = rep(c(1, 0), 3),
+  valor = sample(1:100, 6)
+)
+```
+:::
+:::
+
+## `Tibbles`
+
+Diferentemente de data frames, `tibbles` possuem como principais
+características:
+
+-   Otimiza o `print()` dos dados na tela;
+-   Não altera o nome e a classe das variáveis;
+-   Não permite nomear linhas através de `row.names()`.
+
+## `Pipes |>`
+
+- Os operadores `|>` são chamados de **pipes**, 
+- Foram introduzidos, pela primeira vez, através do
+    pacote `magrittr`.
+- Pipes são operadores sequenciais e podem ser lidos como e
+    *"então..."*
+- Versões anteriores do pipe: `%.%` e `%>%`
+- O novo pipe `|>` é o operador nativo do `R`, introduzido a partir da
+    versão 4.1.0
+
+![](Images/pipe.jpg){fig-align="center" width="600"}
+
+## `Pipes |>`
+
+No `RStudio`, inserimos o novo pipe como default em `Tools > Global Options`
+
+![](Images/new_pipe.png){fig-align="center" width="600"}
+
+## `Pipes |>`
+
+O pipe `|>` funciona de forma simples: utiliza o valor resultante da
+operação do lado esquerdo como argumento da função do lado direito:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Operacao usual
+sqrt(sum(9, 16))
+
+# Operacao usando pipe
+c(9, 16) |>
+  sum() |>
+  sqrt()
+```
+
+
+
+## `Pipes |>`
+
+Outro exemplo da utilização do **pipe**:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Operacao usual
+mean(mtcars[mtcars$vs == 1, "carb"])
+
+# Operacao com pipe
+mtcars[mtcars$vs == 1, "carb"] |>
+  mean()
+```
+
+. . . 
+
+- No `RStudio`, a tecla de atalho do pipe é o `Ctrl + Shift + M`
+- Se a versão `R` instalada é anterior a 4.1.0, o pipe padrão será o `%>%`
+
+## O pacote `dplyr`
+
+-   O `dplyr` é um pacote bastante útil para manipular dados.
+-   Os códigos são escritos de uma maneira intuitiva e elegante.
+-   Se utilizam dos **pipes** para realizar operações sequenciais.
+
+![](Images/dplyr.png){fig-align="center" width="600"}
+
+## O pacote `dplyr`
+
+As principais funções do `dplyr` são:
+
+::: {.incremental}
+-   `select()`: seleciona por coluna do banco de dados
+-   `filter()`: seleciona linhas baseado em seu valor
+-   `mutate()`: cria/modifica colunas baseado em colunas existentes
+-   `summarise()`: realiza operações sobre um conjunto de valores
+-   `arrange()`: reordena as linhas da base de dados
+:::
+
+. . .
+
+Tais funções correspodem a maior parte das operações usuais de
+manipulação. Para aprender mais, ver `vignette("dplyr")`
+
+## Dados do PNUD
+
+Nesta parte, utilizaremos os dados do PNUD (Programa das Nações Unidas
+para o Desenvolvimento), contendo informações socioeconômicas de todos
+os municípios do país, obtidos a partir dos Censos de 1991, 2000 e 2010.
+
+```{r, echo = TRUE, collapse = TRUE}
+# Abrir dados
+pnud_mun <- readr::read_csv(
+  "Dados/pnud_mun.csv",
+  show_col_types = F
+)
+
+# Ver dados
+head(pnud_mun)
+```
+
+## A função `select()`
+
+Utilizamos `select()` para selecionar variáveis ou colunas de uma base
+de dados:
+
+![](Images/select.png){fig-align="center" width="600"}
+
+## A função `select()`
+
+A função `select()` seleciona um subconjunto das variáveis (colunas).
+
+```{r, echo = FALSE, collapse = TRUE}
+library(dplyr)
+```
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|3-5|"
+# Selecionar variaveis
+pnud_mun |>
+  select(
+    ano, regiao, muni
+    )
+```
+
+## A função `select()`
+
+É possível selecionar variáveis através dos nomes, índices, intervalos
+de variáveis ou utilizar as *select helpers*: `starts_with()`,
+`ends_with()`, `contains()`, `matchs()`, entre outras (ver
+[link](https://www.rdocumentation.org/packages/dplyr/versions/0.7.3/topics/select_helpers)):
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|3-5|"
+# Selecionar variaveis
+pnud_mun |>
+  select(
+    1, muni, starts_with("idhm")
+    )
+```
+
+## A função `select()`
+
+Outros exemplos:
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|3-5|"
+# Selecionar variáveis
+pnud_mun |>
+  select(
+    muni, uf, ends_with("vida"), contains("pc")
+      )
+```
+
+## A função `filter()`
+
+A função `filter()` permite selecionar observações baseado em seus
+valores ou em uma condição:
+
+![](Images/filter.png){fig-align="center" width="600"}
+
+## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/cb8d9c50-f48e-4c6d-a5b3-1d30ce0be2ad_rw_1920.png?h=1a879eda58a5efbf709ad0a59d784f98" background-size="cover"}
+
+
+
+## A função `filter()`
+
+A função `filter()` filtra por linhas. Ela é semelhante à função
+`subset()` nativa do `R`.
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|6-8|"
+# Filtrar linhas
+pnud_mun |>
+  select(
+    ano:uf, gini, pop
+    ) |>
+  filter(
+    uf == "PB"
+    )
+```
+
+## A função `filter()`
+
+Ainda, é possível realizar operações condicionais:
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|6-10|"
+# Filtrar linhas
+pnud_mun |>
+  select(
+    ano:uf, gini, pop
+  ) |>
+  filter(
+    uf %in% c("PB", "RN"),
+    gini > 0.5,
+    ano == 2010
+  )
+```
+
+O operador lógico `%in%` é utilizado para identificar se um elemento
+pertence ao vetor.
+
+## A função `filter()`
+
+Para filtrar elementos contidos em um intervalo específico, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|6-9|"
+# Filtrar linhas
+pnud_mun |>
+  select(
+    ano, muni, uf, gini, pop
+  ) |>
+  filter(
+    between(pop, 10000, 20000),
+    ano == 2010
+  )
+```
+
+Neste caso, `between(pop, 10000, 20000)` equivale a testar se
+`pop >= 10000 & pop <= 20000`.
+
+## A função `filter()`
+
+Para excluir elementos específicos, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|6-9|"
+# Filtrar linhas
+pnud_mun |>
+  select(
+    ano, muni, uf, regiao, rdpc
+  ) |>
+  filter(
+    !(regiao %in% c("Norte", "Nordeste")),
+    ano == 2010
+  )
+```
+
+## A função `mutate()`
+
+A função `mutate()` cria ou modifica variáveis (colunas) baseado em
+outras variáveis do banco de dados:
+
+![](Images/mutate.png){fig-align="center" width="600"}
+
+## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/bd4ae264-ae51-4d18-bd60-7a058ab42fba_rw_1920.png?h=a3757d1f46f418c59e7e7946d026344e" background-size="1300px"}
+
+## A função `mutate()`
+
+A função `mutate()` cria ou modifica colunas (variáveis). Como exemplo,
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-12|"
+# Criar variaveis
+pnud_mun |>
+  select(
+    muni, uf, rdpc, pop
+  ) |>
+  filter(
+    uf == "PB"
+  ) |>
+  mutate(
+    pib = rdpc * pop,
+    pais = "Brasil"
+  )
+```
+
+## A função `transmute()`
+
+Se você deseja manter apenas a nova variável criada e excluir as demais,
+utilize a função `transmute()`:
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-9|9-13|"
+# Manter variaveis criadas
+pnud_mun |>
+  select(
+    ano, muni, uf, rdpc, pop
+  ) |>
+  filter(
+    uf == "PB",
+    ano == 2010
+  ) |>
+  transmute(
+    muni = muni,
+    pib = rdpc * pop
+  )
+```
+
+## Alterando múltiplas colunas com `across()`
+
+-   Em muitas situações, é comum fazer uma mesma operação em múltipas
+    colunas. No entanto, copiar e colar pode ser tedioso e passível de
+    erros.
+-   A função `across()` facilita tais operações de uma forma clara e
+    sucinta
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/2471e3f8-348e-470c-a162-3eea0606ff96_rw_1920.png?h=1caf8d5f3d25792fbaf296a1e62b670a){fig-align="center"
+width="600"}
+
+## Alterando múltiplas colunas com `across()`
+
+Utilizamos `across()` dentro da função `mutate()` para alterar múltiplas
+colunas:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Alterar escala de variaveis
+pnud_mun |>
+  select(
+    ano:idhm_r
+  ) |>
+  filter(
+    uf == "CE"
+  ) |>
+  mutate(
+    across(starts_with("idhm"), ~ .x * 100)
+  ) |>
+  slice(1:5)
+```
+
+. . .
+
+-   O símbolo `~.x` representa uma variável dinâmica, guardando
+    informações sobre todas as variáveis selecionadas.
+-   A funcão `slice()` seleciona linhas baseado emsuas posições.
+
+## Usando `where()`
+
+A função `where()` afeta as variáveis condicionalmente. É utilizada para
+transformar as variáveis de uma classe em outra:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Mudar classe de variaveis
+pnud_mun |>
+  select(ano:idhm_r) |>
+  mutate(across(where(is.character), as.factor))
+```
+
+## Usando `everything()`
+
+Já `everything()` afeta todas as variáveis. Por exemplo, para mudar o
+sistema de coordenadas de decimal para DMS, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Transformar coordenadas de decimal para graus
+library(celestial)
+
+pnud_mun |>
+  select(
+    lat, lon
+  ) |>
+  mutate(
+    across(everything(), ~ deg2dms(.x, type = "cat", sep = ":"))
+  )
+```
+
+## A função `arrange()`
+
+A função `arrange()` ordena a base de dados baseada em uma ou mais
+variáveis:
+
+![](Images/arrange.png){fig-align="center" width="600"}
+
+## A função `arrange()`
+
+-   A função `arrange()` ordena a base de dados, baseada em uma ou mais
+    variáveis -Como *default*, os valores são ordenados na ordem
+    **crescente**
+-   Para ordenar em ordem **decrescente**, utiliza-se o argumento
+    `desc()`
+
+```{r, echo = TRUE, collapse = TRUE}
+# Ordenar linhas
+pnud_mun |>
+  select(
+    ano, muni, uf, regiao, espvida
+  ) |>
+  filter(
+    ano == 2010,
+    regiao == "Nordeste"
+  ) |>
+  arrange(
+    desc(espvida)
+  )
+```
+
+## A função `summarise()`
+
+A função `summarise()` realiza operações sobre um conjunto de
+observações, reduzindo variáveis a valores.
+
+![](Images/summarise.png){fig-align="center" width="600"}
+
+## A função `summarise()`
+
+A função `summarise()` realiza operações sobre um conjunto de valores.
+Suponha que queiramos obter a renda per capita média dos municípios em
+2010:
+
+```{r, echo = TRUE, collapse = TRUE}
+pnud_mun |>
+  filter(ano == 2010) |>
+  summarise(media_rdpc = mean(rdpc))
+```
+
+## A função `summarise()`
+
+Em geral, tal função é utilizada conjuntamente com a função
+`group_by()`, a qual serve para realizar operações dentro de um grupo.
+Por exemplo, para obter a renda média dos estados brasileiros, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+pnud_mun |>
+  filter(
+    ano == 2010
+  ) |>
+  group_by(
+    uf
+  ) |>
+  summarise(
+    m_rdpc = mean(rdpc)
+  ) |>
+  arrange(
+    desc(m_rdpc)
+  )
+```
+
+## A função `summarise()`
+
+Podemos agrupar por mais de uma variável, como no exemplo a seguir:
+
+```{r, echo = TRUE, collapse = TRUE}
+pnud_mun |>
+  select(
+    ano, regiao, gini
+  ) |>
+  group_by(
+    regiao, ano
+  ) |>
+  summarise(
+    m_gini = mean(gini)
+  ) |>
+  arrange(
+    desc(m_gini)
+  )
+```
+
+## Contando elementos
+
+Algumas funções auxiliam na contagem de elementos em um banco de dados
+
+- `n()`: permite a contagem do número de elementos (linhas) por grupo.
+- `n_distinct()`: possibilita a contagem de elementos distintos em um
+  vetor.
+- `count()`: permite sumarizar a contagem de linhas em um grupo.
+
+## Contando elementos
+
+```{r, echo = TRUE, collapse = TRUE}
+# Numero de municipios distintos
+pnud_mun |>
+  select(ano, muni, uf) |>
+  summarise(n = n_distinct(uf, muni))
+```
+
+## Contando elementos
+
+```{r, echo = TRUE, collapse = TRUE}
+# Contando elementos por grupo
+pnud_mun |>
+  select(
+    ano, uf, regiao, gini
+  ) |>
+  filter(
+    ano == 2010
+  ) |>
+  group_by(
+    uf
+  ) |>
+  count() |>
+  head(5)
+```
+
+## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/ed07d56b-c5c8-43af-84be-5bcab97eca75_rw_1920.png?h=b58505e05aa7e9cb9e417dc66762728b" background-size="cover"}
+
+## Renomeando variáveis com `rename()`
+
+Para **renomear** variáveis, utilizamos a função `rename()`, com
+a sintaxe dada por `rename(nome_novo = nome_antigo)`
+
+```{r, echo = TRUE, collapse = TRUE}
+pnud_mun |>
+  select(
+    ano, regiao, gini
+  ) |>
+  rename(
+    regiao_br = regiao, ind_gini = gini
+  )
+```
+
+## Usando `if_else()`
+
+
+## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6ffcd6d6-c783-4087-ae76-99aa851663ed_rw_1920.png?h=5f67935d69c92e1fda9074d00dfea972" background-size="cover"}
+
+## A função `case_when`
+
+A função `case_when()` permite vetorizar múltiplas operações condicionais 
+do tipo `ifelse` 
+
+```{r, echo = TRUE, collapse = TRUE}
+pnud_mun |>
+  select(
+    ano, regiao, gini
+  ) |>
+  mutate(
+    concentracao = case_when(
+      gini < 0.4 ~ "baixa",
+      gini >= 0.4 & gini < 0.6 ~ "média",
+      gini >= 0.6 ~ "alta"
+    )
+  )
+```
+
+
+## Mais sobre `dplyr`
+
+Para uma visão geral de todas as funções disponíveis no `dplyr`, ver os links 
+abaixo:
+
+- [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf) 
+- [Documentação oficial](https://dplyr.tidyverse.org/reference/index.html)
+- [Tutorial com exemplos](https://sparkbyexamples.com/r-programming/r-dplyr-tutorial-learn-with-examples/)
+- [Tutorial (vídeo)](https://www.youtube.com/watch?v=qKGdU5yAK8s&t=2033s&ab_channel=LuisOtavio)
+
+## 
+
+![](Images/principio_agora_pt.png){fig-align="center" width="800"}
+
+# <font color="1b5299"> Roteiro prático </font> {background-color="#BBDEF0"}
+
+
+## Roteiro prático {.inverse background-color="#386FA4"}
+
+*"De acordo com a OMS (Organização Mundial da Saúde), o Brasil é o quarto país no mundo em mortes por violência no trânsito. Em 2018, 1,35 milhão de pessoas morreram no trânsito."* (Exame, 24/09/2019)
+
+![](https://thumbs.dreamstime.com/b/os-sinais-de-estrada-amarelos-advertem-motoristas-para-adiante-curva-perigosa-83208232.jpg){fig-align="center" width="600"}
+
+
+- Este roteiro utiliza os dados de acidentes agrupados por pessoas da PRF (Polícia Rodoviária Federal) para o ano de 2022, disponível neste [link](https://drive.google.com/file/d/1sd8YIqIHapYaxQeaa-6yeWMdVLTl6hgD/view)
+
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+- Instale e carregue o pacote `dplyr`.
+- Crie a pasta `Dados` no seu dirétorio de trabalho e salve o arquivo `acidentes2022.zip`.
+- Abra o arquivo através de uma das funções do pacote `readr`, salvando
+  com o nome `acidentes_br_2022`. Dica: *verificar encoding dos dados*.
+- Observe a estrutura dos dados através da função `glimpse()`, uma opção à função `str()`.
+- Obtenha o número total de pessoas envolvidas em acidentes de trânsito, utilizando a variável `pessoas` do banco de dados.
+- Qual o número total de feridos graves no trânsito em 2022? E o de pessoas mortas? 
+
+
+## Quizz #1 {.inverse background-color="#386FA4"}   
+
+- Em que dia da semana se concentrou o maior número de acidentes? E em que dia ocorreu
+  menos acidentes? 
+- Calcule o número de acidentes que ocorre por tipo de pista, através da variável `tipo_pista`.
+- E em qual turno do dia ocorrem mais acidentes? Utilize a variável `fase_dia`.
+- Mostre o número de acidentes por estado (em termos percentuais).
+- Apresente as cinco principais causas de acidentes de trânsito em 2022, listados em ordem decrescente.
+- Elabore mais uma estatística interessante com os dados.
+
