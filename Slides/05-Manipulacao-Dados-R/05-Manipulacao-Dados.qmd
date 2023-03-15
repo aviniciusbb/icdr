@@ -484,6 +484,7 @@ Utilizamos `across()` dentro da função `mutate()` para alterar múltiplas
 colunas:
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-11|12|"
 # Alterar escala de variaveis
 pnud_mun |>
   select(
@@ -493,14 +494,14 @@ pnud_mun |>
     uf == "CE"
   ) |>
   mutate(
-    across(starts_with("idhm"), ~ .x * 100)
+    across(starts_with("idhm"), ~.x * 100)
   ) |>
   slice(1:5)
 ```
 
 . . .
 
--   O símbolo `~.x` representa uma variável dinâmica, guardando
+-   O símbolo `~.x` representa uma **variável dinâmica**, guardando
     informações sobre todas as variáveis selecionadas.
 -   A funcão `slice()` seleciona linhas baseado emsuas posições.
 
@@ -510,10 +511,15 @@ A função `where()` afeta as variáveis condicionalmente. É utilizada para
 transformar as variáveis de uma classe em outra:
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|"
 # Mudar classe de variaveis
 pnud_mun |>
-  select(ano:idhm_r) |>
-  mutate(across(where(is.character), as.factor))
+  select(
+    ano:idhm_r
+    ) |>
+  mutate(
+    across(where(is.character), as.factor)
+    )
 ```
 
 ## Usando `everything()`
@@ -522,6 +528,7 @@ Já `everything()` afeta todas as variáveis. Por exemplo, para mudar o
 sistema de coordenadas de decimal para DMS, fazemos:
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|4|5-7|8-10|"
 # Transformar coordenadas de decimal para graus
 library(celestial)
 
@@ -550,6 +557,7 @@ variáveis:
     `desc()`
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-9|10-12|"
 # Ordenar linhas
 pnud_mun |>
   select(
@@ -578,9 +586,15 @@ Suponha que queiramos obter a renda per capita média dos municípios em
 2010:
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|"
+# Sumario
 pnud_mun |>
-  filter(ano == 2010) |>
-  summarise(media_rdpc = mean(rdpc))
+  filter(
+    ano == 2010
+    ) |>
+  summarise(
+    media_rdpc = mean(rdpc)
+    )
 ```
 
 ## A função `summarise()`
@@ -590,6 +604,8 @@ Em geral, tal função é utilizada conjuntamente com a função
 Por exemplo, para obter a renda média dos estados brasileiros, fazemos:
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-11|12-14|"
+# Agregacao por gupo
 pnud_mun |>
   filter(
     ano == 2010
@@ -610,6 +626,8 @@ pnud_mun |>
 Podemos agrupar por mais de uma variável, como no exemplo a seguir:
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-11|12-14|"
+# Agregacao por gupo
 pnud_mun |>
   select(
     ano, regiao, gini
@@ -629,7 +647,7 @@ pnud_mun |>
 
 Algumas funções auxiliam na contagem de elementos em um banco de dados
 
-- `n()`: permite a contagem do número de elementos (linhas) por grupo.
+- `n()`: permite a contagem do número de linhas por grupo, independente de agrupamento
 - `n_distinct()`: possibilita a contagem de elementos distintos em um
   vetor.
 - `count()`: permite sumarizar a contagem de linhas em um grupo.
@@ -637,15 +655,58 @@ Algumas funções auxiliam na contagem de elementos em um banco de dados
 ## Contando elementos
 
 ```{r, echo = TRUE, collapse = TRUE}
-# Numero de municipios distintos
+#| code-line-numbers: "|2|3-5|6-8|9-11|"
+# Numero de municipios distintos por ano
 pnud_mun |>
-  select(ano, muni, uf) |>
-  summarise(n = n_distinct(uf, muni))
+  select(
+    ano, muni
+    ) |> 
+  filter(
+    ano == 1991
+  ) |>
+  summarise(
+    n_municipios = n()
+    )
 ```
 
 ## Contando elementos
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-11|"
+# Numero de municipios distintos por ano
+pnud_mun |>
+  select(
+    ano, muni, uf
+    ) |>
+  group_by(
+    ano
+    ) |> 
+  summarise(
+    n_municipios = n_distinct(muni)
+    )
+```
+
+## Contando elementos
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-11|"
+# Numero de municipios distintos por ano
+pnud_mun |>
+  select(
+    ano, muni, uf
+    ) |>
+  group_by(
+    ano
+    ) |> 
+  summarise(
+    n_municipios = n_distinct(uf, muni)
+    )
+```
+
+## Contando elementos
+
+```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|9-11|12|"
 # Contando elementos por grupo
 pnud_mun |>
   select(
@@ -657,8 +718,7 @@ pnud_mun |>
   group_by(
     uf
   ) |>
-  count() |>
-  head(5)
+  count()
 ```
 
 ## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/ed07d56b-c5c8-43af-84be-5bcab97eca75_rw_1920.png?h=b58505e05aa7e9cb9e417dc66762728b" background-size="cover"}
@@ -669,6 +729,8 @@ Para **renomear** variáveis, utilizamos a função `rename()`, com
 a sintaxe dada por `rename(nome_novo = nome_antigo)`
 
 ```{r, echo = TRUE, collapse = TRUE}
+#| code-line-numbers: "|2|3-5|6-8|"
+# Renomeando variaveis
 pnud_mun |>
   select(
     ano, regiao, gini
@@ -680,13 +742,47 @@ pnud_mun |>
 
 ## Usando `if_else()`
 
+Uma função bastante útil é `if_else()`. Ela é utilizada para criar uma nova variável baseado
+em uma condição: se a condição for `TRUE`, atribuímos um valor; caso contrário (se `FALSE`), atribuímos outro valor.
 
-## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6ffcd6d6-c783-4087-ae76-99aa851663ed_rw_1920.png?h=5f67935d69c92e1fda9074d00dfea972" background-size="cover"}
+![](Images/ifelse.png){fig-align="center" width="800"}
+
+## Usando `if_else()`
+
+Por exemplo, considere que desejamos criar uma variável indicando se a expectativa de 
+vida é *alta* ou *baixa* baseado na média da expectativa de vida:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Criando variaveis baseado em uma condicao
+media_espvida_2010 <- pnud_mun |> 
+  filter(
+    ano == 2010
+  ) |> 
+  summarise(
+    m_esp_vida = mean(espvida)
+  ) |> 
+  pull()
+
+pnud_mun |>
+  filter(
+    ano == 2010
+  ) |>
+  select(
+    muni, uf, espvida
+  ) |>
+  mutate(
+    ind_espvida = if_else(espvida >= media_espvida_2010, "alta", "baixa")
+  )
+```
+
+
+
+## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6ffcd6d6-c783-4087-ae76-99aa851663ed_rw_1920.png?h=5f67935d69c92e1fda9074d00dfea972" background-size="1500px"}
 
 ## A função `case_when`
 
 A função `case_when()` permite vetorizar múltiplas operações condicionais 
-do tipo `ifelse` 
+do tipo `if_else`. Neste caso, permite criar várias categorias: 
 
 ```{r, echo = TRUE, collapse = TRUE}
 pnud_mun |>
