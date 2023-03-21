@@ -1,0 +1,507 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 06 </font> - Manipulação de Dados - Joins</h2>
+
+<h2><font color="FFFFFF"> Aula 06 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSqnEtmOJuxIqcyPn--WJ2VijE0ONniWoGYOKSGZMq2eZY_E495oY-Gm1CGIRbjz9qdSA&usqp=CAU){.absolute top="400" left="1050" width="550"}
+
+# <font color="1b5299"> Junção de Dados </font> {background-color="#BBDEF0"}
+
+## Junção de Dados
+
+- Nesta parte do curso, veremos algumas funções úteis para realizar a junção (ou **joins** ou **merge**) de bases de dados no `R`.
+- O **join** de bases de dados surge da necessidade de juntar informações de fontes distintas 
+em uma única base de dados.
+- **Join** é um conceito bastante comum para quem já trabalha com bancos de dados (principalmente com *SQL*).
+
+
+![](Images/merge.png){fig-align="center" width="400"}
+
+## Junção de Dados
+
+Para realizar joins, utilizamos o conceito de **chaves**, variáveis que 
+identificam cada observação de maneira única. Alguns exemplos:
+
+- O **CPF** de um indivíduo
+- O **número de matrícula** de uma aluno
+- O **CNPJ** de um estabelecimento
+- O **código IBGE** de um município
+- A **sigla** de um país...
+
+. . .
+
+Em muitas situações, no entanto, as chaves de identificação das unidades de observação
+estão restritas a bases de dados **não públicas**. Além disso, nos últimos anos foi
+necessária a adequação à [Lei Geral de Proteção de dados (LGPD)](https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm).
+
+
+## Junção de Dados
+
+Para entender o conceito de joins, utilizaremos a representação gráfica baseada no livro [R for Data Science](https://r4ds.had.co.nz). Considere dois bancos de dados, com a *chave* dos indivíduos e o valor de uma variável
+
+
+![](Images/join_1.png){fig-align="center" width="800"}
+
+## Junção de Dados
+
+```{r, echo = FALSE, collapse = TRUE}
+library(dplyr)
+```
+
+```{r, echo = TRUE, collapse = TRUE}
+# Base de dados 
+x <- tibble(
+  key = c(1, 2, 3),
+  val_x = c("x1", "x2", "x3")
+)
+
+y <- tibble(
+  key = c(1, 2, 4),
+  val_y = c("y1", "y2", "y3")
+)
+```
+
+
+## De forma geral
+
+O pacote `dplyr` possui funções que possibilitam realizar o **joins** (ou *merge*)
+de duas bases de dados. Podemos utilizar o diagrama de Venn para ter uma visão geral dos
+diferentes tipos:
+
+<br><br>
+
+![](https://d33wubrfki0l68.cloudfront.net/aeab386461820b029b7e7606ccff1286f623bae1/ef0d4/diagrams/join-venn.png){fig-align="center" width="800"}
+
+## Joins
+
+As principais funções utilizadas são:
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`
+- `semi_join()`
+- `anti_join()`
+
+
+
+## Usando o `inner_join()`
+
+As principais funções utilizadas são:
+
+- `inner_join()`: **retorna apenas as linhas com correspondências nas duas bases**.
+- `left_join()`
+- `right_join()`
+- `full_join()`
+- `semi_join()`
+- `anti_join()`
+
+## Usando o `inner_join()`
+
+O resultado do `inner_join()` é uma nova base que contem as chaves comuns nas duas bases e
+os valores da variáveis na base de dados **x** e na base de dados **y**
+
+
+![](Images/inner_join.png){fig-align="center" width="800"}
+
+. . .
+
+```{r, echo = TRUE, collapse = TRUE}
+# Juncao de bases 
+inner_join(x, y, by = "key")
+```
+
+
+
+## Usando o `inner_join()`
+
+Para um exemplo mais concreto, utilizaremos dois bancos de dados: um com informações sobre os
+funcionários de uma empresa e outro com a remuneração média para cada cargo.
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Base de empregados
+empregados <- tibble(
+  id_empregado = 1:11,
+  nome_empregado = c("Renato", "Miguel", "Paulo", "Patrícia", "Inês", 
+                     "Saulo", "Diego", "Maria", "José", "Júlia", "Tiago"),
+  idade = c(30, 31, 29, 30, 25, 30, 30, 35, 24, 31, 29),
+  uf = c("MG", "DF", "CE", "DF", "DF", "DF", "RJ", "SP", "RS", "SC", "BA"),
+  id_cargo = c(4, 4, 4, 4, 5, 4, 6, 3, 1, 2, 8)
+)
+
+# Base de cargos
+cargos <- tibble(
+  id_cargo = 1:7,
+  nome_cargo = c("Técnico", "Assistente", "Consultor", "Analista", 
+                 "Auditor", "Gerente", "Gestor"),
+  salario = c(7000, 4000, 15000, 11000, 10000, 13000, 20000)
+)
+```
+
+
+
+## Usando o `inner_join()`
+
+
+::: columns
+
+::: {.column width="50%"}
+```{r, echo = TRUE, collapse = TRUE}
+# Visualizando empregados
+empregados
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo = TRUE, collapse = TRUE}
+# Visualizando cargos
+cargos
+```
+:::
+
+:::
+
+## Usando o `inner_join()`
+
+O `inner_join()` cria uma base retornando apenas as ocorrências (linhas) que possuem chaves 
+iguais nos dois conjuntos:
+
+```{r, echo = TRUE, collapse = TRUE}
+inner_join(empregados, cargos, by = "id_cargo")
+```
+
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+Suponha que o nome das variáveis utilizadas para fazer o join são **distintas**, conforme o exemplo a seguir. Como realizar o `inner_join()` neste caso?
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Data x
+data_x <- tibble(
+  id = c(1, 2, 3, 4),
+  valor_x = c(12, 54, 7, 42)
+)
+
+# Data y
+data_y <- tibble(
+  codigo = c(1, 3, 4, 5),
+  valor_y = c(23, 56, 23, 11)
+)
+```
+
+
+
+## Usando o `inner_join()`
+
+- Um ponto importante é o fato do `inner_join` desconsiderar do resultado
+as informações que não tiveram *matching*.
+- Isto pode ser uma propriedade **não desejada** caso queiramos manter todas 
+as informações em uma análise de dados, dada a **perda de informações**
+
+
+
+## *Outer joins*
+
+Como vimos, o `inner_join()` não leva em consideração as linhas onde as chaves não coincidem. 
+Se quisermos manter todas  as informações, utilizamos o conceito de *outer joins*. Existem três tipos básicos: 
+
+- `left_join()` 
+- `right_join()` 
+- `full_join()`
+
+
+## *Outer joins*
+
+Para os exemplos a seguir, considere as seguintes bases de dados:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Base de dados pacientes
+pacientes <- tibble(
+  id_paciente = 1:9,
+  nome = c("A.A.M", "S.S.G.F", "T.I.A", "L.O.S.M", "Y.Q.W", 
+           "F.A", "T.B.N", "J.J.L", "M.S.S"),
+  exame_a = c(3.8, 3.8, 3.9, 4.0, 4.4, 3.8, 3.7, 3.6, 4.0),
+  exame_b = c(89.9, 89.9, 99.8, 99.9, 100.0, 89.9, 
+              109.9, 109.9, 110.0),
+  exame_c = c(0, 1, 1, 0, 1, 1, 0, 0, 1)
+)
+
+# Base de dados tratamento
+tratamento <- tibble(
+  id_paciente = c(1, 4, 5, 7, 8, 11, 15, 25),
+  medicamento = c("A", "B", "A", "B", "A", "A", "B", "B")
+)
+```
+
+
+## *Outer joins*
+
+::: columns
+
+::: {.column width="50%"}
+```{r, echo = TRUE, collapse = TRUE}
+# Visualizando pacientes
+pacientes
+```
+:::
+::: {.column width="50%"}
+```{r, echo = TRUE, collapse = TRUE}
+# Visualizando tratamento
+tratamento
+```
+:::
+
+:::
+
+## Usando o `left_join()`
+
+As principais funções utilizadas são:
+
+- `inner_join()`
+- `left_join()`: **mantém todas as observações do banco `x`** (*o banco do lado esquerdo*)
+- `right_join()`
+- `full_join()`
+- `semi_join()`
+- `anti_join()`
+
+
+## Usando o `left_join()`
+
+A função `left_join()` preserva todas as observações do lado esquerdo (`x`) e remove 
+as informações do lado direito (`y`) que não possuem correspondência.
+
+![](Images/left_join.png){fig-align="center" width="800"}
+
+
+- O resultado é uma base com informações dos indivíduos 1, 2, e 3 . 
+- O indivíduo 4 foi excluído por não ter correspondência em `x`.
+
+
+## Usando o `left_join()`
+
+Para preservar todos os pacientes e desprezar os registros de tratamento que não correspondem a
+pacientes hospitalizados, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Left join do dplyr
+left_join(pacientes, tratamento, by = "id_paciente")
+```
+
+
+## Usando o `right_join()`
+
+As principais funções são:
+
+- inner_join()
+- left_join()
+- right_join(): **mantém todas as observações do banco `y`** (*o banco do lado direito*)
+- full_join()
+- semi_join()
+- anti_join()
+
+
+## Usando o `right_join()`
+
+O comando `right_join()` preserva todas as observações do lado direito e remove as informações
+do lado esquerdo que não possuem correspondência.
+
+![](Images/right_join.png){fig-align="center" width="800"}
+
+- Neste caso, o resultado é uma base com informações dos pacientes 1, 2, e 4. O indivíduo
+3 foi excluido por não ter não ter correspondência em `y`.
+
+
+## Usando o `right_join()`
+
+Para preservar todos as linhas do conjunto da direita (tratamento) e desprezar os 
+pacientes sem correspondência de chave, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Right join do dplyr
+right_join(pacientes, tratamento, by = "id_paciente")
+```
+
+
+## Usando o `full_join()`
+
+As principais funções são:
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`: **mantem todas as observações dos bancos `x` e `y`**
+- `semi_join()`
+- `anti_join()`
+
+
+## Usando o `full_join()`
+
+O comando `full_join()` preserva todas as observações de ambos os bancos
+
+![](Images/full_join.png){fig-align="center" width="800"}
+
+- O resultado é uma base com informações completas, com as correspondências incompletas 
+representadas por `NA`.
+
+
+## Usando o `full_join()`
+
+Para preservar todos os registros de ambos os conjuntos de dados, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Full join do dplyr
+full_join(pacientes, tratamento, by = "id_paciente")
+```
+
+
+## Correspondências com funções do `R-base`
+
+O `R` possui funções básicas para realizar \texttt{merge()}. As equivalências 
+com as funções do `dplyr` são:
+
+![](Images/merge_base.png){fig-align="center" width="800"}
+
+
+## Quizz #2 {.inverse background-color="#386FA4"}
+
+Considere duas bases de dados:
+
+```{r, echo = TRUE, collapse = TRUE}
+# PIB dos Municipios
+pib_municipio <- tibble(
+  municipio = rep(c("JOAO PESSOA", "CAMPINA GRANDE"), each = 8),
+  cod_municipio = rep(c(2507507, 2504009), each = 8),
+  trim = rep(c(1, 2, 3, 4), 4),
+  ano = rep(rep(c(2017, 2018), each = 4), 2),
+  pib = c(12.3, 12.7, 13.6, 13.8, 12.8, 12.9, 20.3, 21.1,
+          7.4, 7.5, 8.0, 8.3, 9.3, 10.2, 9.9, 11.3) # valor em milhoes
+)
+
+# Populacao por ano
+pop_municipio <- tibble(
+  nome_mun = rep(c("João Pessoa", "Campina Grande"), times = 2),
+  cod_ibge = rep(c("2507507", "2504009"), times = 2),
+  ano = rep(c(2017, 2018), each = 2),
+  populacao = c(811526, 407245, 812746, 409762)
+)
+```
+
+Apenas utilizando as funções do `dplyr`, pede-se para calcular o 
+**PIB per capita anual** para dos dois municipios.
+
+
+
+## Usando o `semi_join()`
+
+As principais funções são:
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`
+- `semi_join()`: **retornar todas as linhas de `x` COM correspondência em `y`**
+- `anti_join()`
+
+
+## Usando o `semi_join()`
+
+A representação do `semi_join()` é dada pela figura a seguir
+
+
+![](https://r4ds.hadley.nz/diagrams/join/semi.png){fig-align="center" width="800"}
+
+
+## Usando o `semi_join()`
+
+Para entender o conceito, utilizaremos dados *built-in* do pacote `dplyr`
+
+```{r, echo = TRUE, collapse = TRUE}
+band_members
+
+band_instruments
+```
+
+## Usando o `semi_join()`
+
+```{r, echo = TRUE, collapse = TRUE}
+# Usando o semi join
+band_members |>  
+  semi_join(band_instruments)
+```
+Como resultado, temos uma base de dados apenas com as linhas da base do lado
+esquerdo (`band_members`) com correspondência no lado direito (`band_instruments`)
+
+
+## Usando o `anti_join()`
+
+As principais funções são:
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`
+- `semi_join()`
+- `anti_join()`: **retorna todas as linhas de `x` SEM uma correspondência em `y`**
+
+
+## Usando o `anti_join()`
+
+A representação do `anti_join()` é dada pela figura a seguir
+
+
+![](https://r4ds.hadley.nz/diagrams/join/anti.png){fig-align="center" width="800"}
+
+
+## Usando o `anti_join()`
+
+```{r, echo = TRUE, collapse = TRUE}
+# Usando o anti join
+band_members |>  
+  anti_join(band_instruments)
+```
+
+## Joins
+
+Para outros tipos mais específicos de joins como
+
+- `cross_join()`
+- `filter_joins`
+- `nest_join()`
+
+Ver capítulo 20 de [R for Data Science](https://r4ds.hadley.nz/joins.html). 
