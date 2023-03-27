@@ -21,6 +21,7 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 3. **Estrutura de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/03-Estruturas-Dados-R/03-Estruturas-Dados.html)
 4. **Leitura de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/04-Leitura-Dados-R/04-Leitura-Dados.html)
 5. **Manipulação de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/05-Manipulacao-Dados-R/05-Manipulacao-Dados.html)
+5. **Junção de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/06-Juncao-Dados-R/06-Juncao-Dados.html)
 
 
 ## Listas e Quizzes
