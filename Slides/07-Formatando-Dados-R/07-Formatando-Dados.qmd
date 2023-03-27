@@ -1,0 +1,357 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 07 </font> - Formatando Dados </h2>
+
+<h2><font color="FFFFFF"> Aula 07 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/209ee1eb-fd83-4e4c-9bed-82ae43b0f3e9_rw_1920.jpg?h=e57409fd5269656f2f4a4d9135cd18a4){.absolute top="400" left="850" width="750"}
+
+# <font color="1b5299"> Formatando Dados </font> {background-color="#BBDEF0"}
+
+## Manipulação de Dados
+
+Alguns importantes pacotes de
+**manipulação de dados** no `R`:
+
+- `dplyr`: pacote para tratamento e manipulação de bases de dados.
+- `tidyr`: pacote para a formatação dos dados.
+
+
+Estes e outros pacotes fazem parte de um sistema integrado de pacotes para
+ciência de dados conhecido por `tidyverse`, os quais compartilham de uma
+mesma concepção, gramática e funcionalidade.
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/ae747f50-27ee-474a-b312-09a063b38c0e_rw_1920.jpg?h=7f98f2dd734887a88105b57866266a65){fig-align="center" width="600"}
+
+
+
+
+## O pacote `tidyr`
+
+O pacote `tidyr` dispõe de funções bastante úteis para **organizar** os dados no formato 
+necessário para a análise. 
+
+![](https://rapidsurveys.io/css/images/hex/tidyr.png){fig-align="center" width="100"}
+
+
+
+## O pacote `tidyr`
+
+As funções do pacote podem ser *agrupadas* em categorias:
+
+:::{.incremental}
+- **Pivoting**: funções que convertem os dados para os formatos *long* ou *wide*.
+- **Nesting**: funções que convertem dados agrupados de forma que cada grupo se transforma numa
+única linha.
+- **Combinando e separando colunas**: funções que agregam ou separam colunas baseado em um padrão.
+- **Dados faltantes**: funções que manipulam informações faltantes.
+- **Completando dados**: funções que transformam combinações implícitas em explícitas.  
+:::
+
+## Pivoting
+
+As principais funções para transformar os dados para formato *long* ou *wide* são:
+
+- `pivot_longer()`: empilha o banco de dados, deixando no formato **longo** (*long*). 
+- `pivot_wider()`: transforma o banco para um formato **expandido** (*wide*).
+
+. . .
+
+![](Images/wide_long.jpeg){fig-align="center" width="1500"}
+
+## A função `pivot_longer()`
+
+
+- `pivot_longer()`: empilha o banco de dados, deixando no formato **longo**. 
+
+
+![](Images/longer_sch.png){fig-align="center" width="1500"}
+
+
+## A função `pivot_longer()`
+
+Neste exemplo, vamos criar um `tibble`:
+
+```{r, echo = FALSE, collapse = TRUE}
+library(tidyr)
+library(dplyr)
+```
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Criar dados
+dados_uf <- tibble(
+  uf = c("RJ", "SP", "PB"),
+  `2017` = c(23, 45, 19),
+  `2018` = c(20, 38, 17),
+  `2019` = c(28, 36, 20)
+)
+
+dados_uf
+```
+
+
+
+## A função `pivot_longer()`
+
+
+Utilizando a função `pivot_longer()`
+
+
+```{r, echo = TRUE, collapse = TRUE}
+dados_uf_long <- dados_uf |>  
+  pivot_longer(
+    cols = `2017`:`2019`,
+    names_to = "ano",
+    values_to = "valor"
+    )
+
+dados_uf_long
+```
+
+. . .
+
+Tal formato é bastante utilizado para análises de unidades ao longo do tempo (por exemplo, em 
+análises de **dados de séries temporais** ou **dados em painel**)
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+Altere para **long** o formato do banco com informações do peso (em gramas) de recém 
+nascidos, transformando apenas as variáveis contendo informações do peso, ordenados em ordem
+alfabética dos nomes:
+
+ 
+```{r, echo = TRUE, collapse = TRUE}
+peso_recem_nascido <- tibble(
+  nome = c("João", "Maria", "José", "Ana"),
+  sobrenome = c("Oliveira", "Duarte", "Silveira", "Cavalcante"),
+  sexo = c("M", "F", "M", "F"),
+  mes_0 = c(4300, 5240, 5180, 5450),
+  mes_1 = c(5300, NA, 6607, 6900),
+  mes_2 = c(4560, 6301, NA, 8765),
+  mes_3 = c(5003, NA, 6015, 6399)
+)
+
+peso_recem_nascido
+```
+ 
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 5
+)
+``` 
+ 
+## Quizz \#2 {.inverse background-color="#386FA4"}
+
+
+Neste exercício, retomaremos ao exemplo dos dados históricos do Índice Bovespa (Ibovespa) disponíveis
+no site da B3 [http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm](http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm)
+
+1. Baixe os dados referente ao segundo semestre de 2022
+2. Leia os dados corretamente, transformando em um formato *tidy*.
+3. Transforme os dados para o formato *long*
+4. [*Desafio*] Como você faria para colocar os dados em ordem cronológica crescente?
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+``` 
+
+
+## A função `pivot_wider()`
+
+A função `pivot_wider()` transforma o banco para um formato **expandido** (*wide*)
+
+![](Images/wider_sch.png){fig-align="center" width="1500"}
+
+
+## A função `pivot_wider()`
+
+Pra transformar do formato *long* para *wide*:
+ 
+```{r, echo = TRUE, collapse = TRUE}
+# Formato wide
+dados_uf_long |> 
+  pivot_wider(
+    names_from = "ano",
+    values_from = "valor",
+    names_prefix =  "ano_"
+  )
+```
+
+## Quizz \#3 {.inverse background-color="#386FA4"}
+
+1. Utilize os dados `population` inseridos no pacote `tidyr` através de `tidyr::population`
+2. Salve os dados em um objeto
+3. Transforme para o formato *wide*
+4. Utilize o argumento `prefix` par adicionar `ano_` antes do nome de cada coluna pivoteada.
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 5
+)
+``` 
+
+
+
+## Dados aninhados (*nested data*)
+
+
+Dados aninhados são dados onde uma (ou mais) colunas é uma lista de data frames. Para entender esse conceito, vamos construir um banco de dados aninhados:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Dados aninhados
+dados_aninhados <- tibble(
+  g = c(1, 2, 3),
+  data = list(
+    tibble(x = 1, y = 2),
+    tibble(x = 4:5, y = 6:7),
+    tibble(x = 10)
+  )
+)
+
+dados_aninhados
+```
+## A função `nest()`
+
+A função `nest()` permite criar dados aninhados simplesmente especificando quais
+colunas serão aninhadas
+
+```{r, echo = TRUE, collapse = TRUE}
+# Dados aninhados
+peso_recem_nascido |> 
+  nest(
+    historico_peso = contains("mes_")
+  )
+```
+
+## A função `unnest()`
+
+A função contrária de `nest()` é `unnest()`
+
+```{r, echo = TRUE, collapse = TRUE}
+# Desaninhar dados
+dados_aninhados |> 
+  unnest(data)
+```
+
+
+## A função `separate()`
+
+A função `separate()` permite quebrar uma variável em duas ou mais colunas, 
+de acordo com um padrão específico:
+
+![](Images/separate_sch.png){fig-align="center" width="1500"}
+
+
+## A função `separate()`
+
+Suponha novamente a base de dados com informações de peso de recém nascidos, agora no formato 
+*long*.
+
+ 
+```{r, echo = TRUE, collapse = TRUE}
+peso_recem_nascido |>
+  pivot_longer(
+    cols = contains("mes"),
+    names_to = "mes",
+    values_to = "peso"
+  ) 
+```
+
+
+
+## A função `separate()`
+
+A função `separate()` permite quebrar uma variável em duas ou mais colunas, 
+de acordo com um padrão específico:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Utilizando separate()
+peso_recem_nascido |>
+  pivot_longer(
+    cols = contains("mes"),
+    names_to = "mes",
+    values_to = "peso"
+  ) |> 
+  separate(
+    col = mes, 
+    into = c("unidade", "mes")
+    ) 
+```
+
+## A função `unite()`
+
+Agora, suponha que queiramos juntar duas colunas em apenas uma. Para isso,
+podemos utilizar a função `unite()`.
+
+![](Images/unite_sch.png){fig-align="center" width="1500"}
+
+
+
+## A função `unite()`
+
+Seja a base de dados com informações de peso de recém nascidos. Caso queiramos
+juntar nome e sobrenome em uma mesma coluna, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Unir variaveis
+peso_recem_nascido |> 
+  unite(
+    nome:sobrenome,
+    col = nome_completo, 
+    sep = " ",
+    remove = TRUE
+    )
+```
+
+
+## Manipulando dados faltantes
+
+Para manipular dados faltantes, existem três funções importantes no pacote `tidyr`:
+
+- `drop_na()`: remove todas as linhas contendo `NA`
+- `fill()`: substitui valores `NA` baseado nos valores anteriores ou posteriores
+- `replace_na()`: especifica um valor específico para substituir `NA`
+
+## Manipulando dados faltantes
+
+![](Images/fillna_sch.png){fig-align="center" width="1500"}
+
+
