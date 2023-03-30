@@ -85,14 +85,23 @@ As funções do pacote podem ser *agrupadas* em categorias:
 
 ## Pivoting
 
+Existem dois tipos de formatação dos dados:
+
+. . .
+
+
+![](https://bookdown.org/Maxine/r4ds/images/12.png){fig-align="center" width="900"}
+
+## Pivoting
+
 As principais funções para transformar os dados para formato *long* ou *wide* são:
 
 - `pivot_longer()`: empilha o banco de dados, deixando no formato **longo** (*long*). 
 - `pivot_wider()`: transforma o banco para um formato **expandido** (*wide*).
 
-. . .
 
-![](Images/wide_long.jpeg){fig-align="center" width="1500"}
+![](https://www.pipinghotdata.com/posts/2021-08-27-a-tidyverse-pivot-approach-to-data-preparation-in-r/gatherspread_modified.jpg){fig-align="center" width="1200"}
+
 
 ## A função `pivot_longer()`
 
