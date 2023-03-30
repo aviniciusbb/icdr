@@ -81,6 +81,8 @@ As funções do pacote podem ser *agrupadas* em categorias:
 - **Completando dados**: funções que transformam combinações implícitas em explícitas.  
 :::
 
+# <font color="1b5299"> Pivoting </font> {background-color="#BBDEF0"}
+
 ## Pivoting
 
 As principais funções para transformar os dados para formato *long* ou *wide* são:
@@ -182,8 +184,8 @@ no site da B3 [http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-
 
 1. Baixe os dados referente ao segundo semestre de 2022
 2. Leia os dados corretamente, transformando em um formato *tidy*.
-3. Transforme os dados para o formato *long*
-4. [*Desafio*] Como você faria para colocar os dados em ordem cronológica crescente?
+3. Transforme os dados para o formato *long*.
+4. [*Desafio*] Como você faria para colocar os dados em ordem cronológica crescente? (*Ver documentação da função*)
 
 ```{r, echo = FALSE, collapse = TRUE}
 countdown::countdown(
@@ -215,9 +217,9 @@ dados_uf_long |>
 
 ## Quizz \#3 {.inverse background-color="#386FA4"}
 
-1. Utilize os dados `population` inseridos no pacote `tidyr` através de `tidyr::population`
-2. Salve os dados em um objeto
-3. Transforme para o formato *wide*
+1. Utilize os dados `population` inseridos no pacote `tidyr` através de `tidyr::population`.
+2. Salve os dados em um objeto.
+3. Transforme para o formato *wide*.
 4. Utilize o argumento `prefix` par adicionar `ano_` antes do nome de cada coluna pivoteada.
 
 ```{r, echo = FALSE, collapse = TRUE}
@@ -225,6 +227,7 @@ countdown::countdown(
   minutes = 5
 )
 ``` 
+
 
 
 
@@ -247,6 +250,10 @@ dados_aninhados <- tibble(
 
 dados_aninhados
 ```
+
+Dados aninhados são comuns para o formato `JSON` ou `XML`.
+
+
 ## A função `nest()`
 
 A função `nest()` permite criar dados aninhados simplesmente especificando quais
@@ -256,7 +263,7 @@ colunas serão aninhadas
 # Dados aninhados
 peso_recem_nascido |> 
   nest(
-    historico_peso = contains("mes_")
+    historico_peso = starts_with("mes_")
   )
 ```
 
@@ -342,16 +349,248 @@ peso_recem_nascido |>
 ```
 
 
+## Quizz \#4 {.inverse background-color="#386FA4"}
+
+Suponha uma base de dados com informações de notas de português e matemática para 3 unidades.
+
+```{r, echo = TRUE, collapse = TRUE}
+# Gerar numeros aleatorios replicaveis
+set.seed(12345)
+
+# Notas estudantes
+notas_estudantes <- tibble(
+  estudante_id = 1:10,
+  port_1 = rnorm(10, 5, 1), 
+  port_2 = rnorm(10, 6, 1), 
+  port_3 = rnorm(10, 7, 1),
+  mat_1 = rnorm(10, 9, 1), 
+  mat_2 = rnorm(10, 6, 1), 
+  mat_3 = rnorm(10, 7, 1)
+  )
+
+notas_estudantes
+```
+
+## Quizz \#4 {.inverse background-color="#386FA4"}
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+1. Usar as funções do `tidyr` para obter a seguinte base:
+
+```{r, echo = FALSE, collapse = TRUE}
+notas_estudantes |> 
+  pivot_longer(
+    cols = port_1:mat_3
+  ) |> 
+  separate(
+    col = name,
+    into = c("disciplina", "unidade")
+  ) |> 
+  pivot_wider(
+    names_from = disciplina,
+    values_from = value
+  )
+```
+:::
+
+::: {.column width="45%"}
+
+2. Gerar a base com as **médias** calculadas por aluno:
+
+```{r, echo = FALSE, collapse = TRUE}
+notas_estudantes |> 
+  pivot_longer(
+    cols = port_1:mat_3
+  ) |> 
+  separate(
+    col = name,
+    into = c("disciplina", "unidade")
+  ) |> 
+  pivot_wider(
+    names_from = disciplina,
+    values_from = value
+  ) |> 
+  group_by(
+    estudante_id
+  ) |> 
+  summarise(across(c(port, mat), mean)
+            )
+```
+
+:::
+
+::::
+
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+``` 
+
+
 ## Manipulando dados faltantes
 
 Para manipular dados faltantes, existem três funções importantes no pacote `tidyr`:
 
+
+:::{.incremental}
 - `drop_na()`: remove todas as linhas contendo `NA`
 - `fill()`: substitui valores `NA` baseado nos valores anteriores ou posteriores
 - `replace_na()`: especifica um valor específico para substituir `NA`
+:::
+
 
 ## Manipulando dados faltantes
 
 ![](Images/fillna_sch.png){fig-align="center" width="1500"}
+
+## Manipulando dados faltantes
+
+Considere os dados do históricos da B3 no formato *long*
+
+
+```{r, echo = FALSE, collapse = TRUE}
+dados_b3 <- readr::read_csv2("Dados/Evolucao_Diaria.csv",
+                             skip = 1) |> 
+  pivot_longer(
+    cols = Jan:Dez,
+    names_to = "mes",
+    values_to = "indice",
+    cols_vary = "slowest"
+  )
+```
+
+```{r, echo = TRUE, collapse = TRUE}
+# Dados B3
+dados_b3
+```
+
+
+## A função `drop_na()`
+
+Para remover todas as linhas contendo `NA` em uma ou mais colunas, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Dados B3
+dados_b3 |> 
+  drop_na()
+```
+
+
+## A função `fill()`
+
+A função `fill()` substitui os valores `NA` com os valores anteriores ou posteriores
+
+```{r, echo = TRUE, collapse = TRUE}
+# Dados B3
+dados_b3 |> 
+  fill(
+    indice,
+    .direction = "down"
+    )
+```
+
+
+## A função `replace_na()`
+
+A função `replace_na()` especifica um valor para substituir `NA` para cada coluna:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Dados B3
+dados_b3 |> 
+  replace_na(
+    list(indice = 0)
+  )
+```
+
+
+# <font color="1b5299"> Completanto Dados </font> {background-color="#BBDEF0"}
+
+## Completanto Dados
+
+Para entender os conceitos de completar informações faltantes na base de dados, considere
+as seguintes informações:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Historico de corridas
+dados_corridas <- tibble(
+  ano = c(2010, 2011, 2013, 2016, 2018, 2018, 2022),
+  tipo = c("meia maratona", "maratona", "meia maratona",
+           "10km", "10km", "meia maratona", "maratona"),
+  tempo_min = c(110, 230, 105, 50, 45, 100, 210)
+)
+
+dados_corridas
+```
+
+Os dados trazem informações sobre o histórico de corridas realizadas
+entre 2010 e 2022, para 3 categorias distintas.
+
+
+## A função `complete()`
+
+A função `complete()` converte combinações implicitas em combinações explícitas. 
+Por exemplo, supondo que desejamos obter todas as combinações de corridas durante
+os anos, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Expandir combinacoes
+dados_corridas |> 
+  complete(
+    ano, tipo
+  )
+```
+
+Portanto, temos agora todas as combinações de tipos de corrida para os anos disponíveis
+nos dados.
+
+## A função `complete()`
+
+Caso desejamos ampliar as combinações para todos os anos em um intervalo, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Expandir combinacoes
+dados_corridas |> 
+  complete(
+    ano = 2010:2022, tipo
+  )
+```
+
+
+## A função `expand()`
+
+A função `expand()` é bastante similiar à `complete()`. A única diferença é 
+que ela apresenta todas as combinações apenas das variáveis especificadas na função:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Expandir combinacoes
+dados_corridas |> 
+  expand(
+    ano, tipo
+  )
+```
+
+## A função `crossing()`
+
+A função `crossing()` expande uma base de dados diretamente através de vetores,
+sem a necessidade de criar um data frame. Por exemplo, considere os 4 principais
+torneios de [Grand Slam](https://pt.wikipedia.org/wiki/Grand_Slam_de_t%C3%AAnis) de tênis:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Expandir com crossing
+crossing(
+  anos = 1905:2023,
+  grand_slam = c("Australian Open", "Roland Garros", 
+                 "Wimbledon", "US Open")
+)
+```
+
+##
+
+![](https://pbs.twimg.com/media/E7dgtA6XMAQwk5i.jpg){fig-align="center" width="1000"}
+
 
 
