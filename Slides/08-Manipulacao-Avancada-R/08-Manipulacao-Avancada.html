@@ -402,7 +402,7 @@
 <p>Antonio Vinícius Barbosa</p>
 <h2>
 </h2><h3>
-03-04-2023
+04-04-2023
 </h3>
 
 <p><br></p>
@@ -426,7 +426,7 @@
 
 </section><section id="manipulando-datas-no-r" class="slide level2"><h2>Manipulando datas no <code>R</code>
 </h2>
-<p>Em muitas situações, é necessário manipular informações que contêm <strong>datas</strong> a fim de capturar, por exemplo, o intervalo de tempo entre dois eventos ou a sequência temporal de uma variável.</p>
+<p>Em muitas situações, é necessário manipular informações que contêm <strong>datas</strong> a fim de capturar, por exemplo, o intervalo de tempo entre dois eventos ou a dinâmica temporal de uma variável.</p>
 <p>O pacote <code>lubridate</code> possui diversas funções que facilitam a manipulação de datas.</p>
 
 <img data-src="Images/lubridate.jpg" width="400" class="r-stretch quarto-figure-center"><p>Foi criado por Garrett Grolemund e Hadley Wickham e faz parte do conjunto de pacotes do <code>tidyverse</code>. Ver <a href="https://lubridate.tidyverse.org/">documentação oficial</a>.</p>
@@ -514,9 +514,9 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Data atual</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">today</span>()</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="do">## [1] "2023-04-03"</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="do">## [1] "2023-04-04"</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="fu">now</span>()</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="do">## [1] "2023-04-03 22:32:33 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="do">## [1] "2023-04-04 07:54:42 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O último bloco de informações da função <code>now()</code> corresponde ao <a href="https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio">fuso horário</a>.</p>
 </section><section id="o-pacote-lubridate-4" class="slide level2"><h2>O pacote <code>lubridate</code>
@@ -525,12 +525,12 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>hora_atual <span class="ot">&lt;-</span> <span class="fu">now</span>()</span>
 <span id="cb6-2"><a href="#cb6-2"></a>hora_atual</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="do">## [1] "2023-04-03 22:32:33 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="do">## [1] "2023-04-04 07:54:42 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Extrair data</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">date</span>(hora_atual)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="do">## [1] "2023-04-03"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="do">## [1] "2023-04-04"</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Extrair ano</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a><span class="fu">year</span>(hora_atual)</span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="do">## [1] 2023</span></span>
@@ -539,16 +539,16 @@
 <span id="cb7-9"><a href="#cb7-9"></a><span class="do">## [1] 4</span></span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Extrair dia do mes</span></span>
 <span id="cb7-11"><a href="#cb7-11"></a><span class="fu">day</span>(hora_atual)</span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="do">## [1] 3</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="do">## [1] 4</span></span>
 <span id="cb7-13"><a href="#cb7-13"></a><span class="co"># Extrair hora</span></span>
 <span id="cb7-14"><a href="#cb7-14"></a><span class="fu">hour</span>(hora_atual)</span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="do">## [1] 22</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="do">## [1] 7</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a><span class="co"># Extrair minutos</span></span>
 <span id="cb7-17"><a href="#cb7-17"></a><span class="fu">minute</span>(hora_atual)</span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="do">## [1] 32</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="do">## [1] 54</span></span>
 <span id="cb7-19"><a href="#cb7-19"></a><span class="co"># Extrair segundos</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a><span class="fu">second</span>(hora_atual)</span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="do">## [1] 33.41931</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="do">## [1] 42.24142</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="o-pacote-lubridate-5" class="slide level2"><h2>O pacote <code>lubridate</code>
 </h2>
@@ -556,7 +556,7 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Extrair dia da semana</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="fu">wday</span>(hora_atual, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="do">## [1] Mon</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="do">## [1] Tue</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="do">## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Outras informações:</p>
@@ -587,13 +587,13 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Adição de datas</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="fu">today</span>() <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">10</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="do">## [1] "2023-04-13"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="do">## [1] "2023-04-14"</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="fu">today</span>() <span class="sc">+</span> <span class="fu">years</span>(<span class="dv">2</span>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="do">## [1] "2025-04-03"</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="do">## [1] "2025-04-04"</span></span>
 <span id="cb10-6"><a href="#cb10-6"></a><span class="co"># Datas recorrentes</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a>aulas <span class="ot">&lt;-</span> <span class="fu">today</span>() <span class="sc">+</span> <span class="fu">weeks</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) </span>
 <span id="cb10-8"><a href="#cb10-8"></a>aulas</span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="do">## [1] "2023-04-10" "2023-04-17"</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="do">## [1] "2023-04-11" "2023-04-18"</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a><span class="co"># Diferença de datas</span></span>
 <span id="cb10-11"><a href="#cb10-11"></a><span class="fu">as.period</span>(periodo); <span class="fu">as.period</span>(periodo, <span class="at">unit =</span> <span class="st">"day"</span>)</span>
 <span id="cb10-12"><a href="#cb10-12"></a><span class="do">## [1] "2m 8d 0H 0M 0S"</span></span>

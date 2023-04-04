@@ -59,7 +59,7 @@ Nesta parte, veremos mais alguns pacotes importantes para a manipulação de dad
 
 ## Manipulando datas no `R`
 
-Em muitas situações, é necessário manipular informações que contêm **datas** a fim de capturar, por exemplo, o intervalo de tempo entre dois eventos ou a sequência temporal de uma variável.  
+Em muitas situações, é necessário manipular informações que contêm **datas** a fim de capturar, por exemplo, o intervalo de tempo entre dois eventos ou a dinâmica temporal de uma variável.  
 
 
 
