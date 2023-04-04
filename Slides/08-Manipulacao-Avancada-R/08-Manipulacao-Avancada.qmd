@@ -1,0 +1,314 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 08 </font> - Manipulação Avançada </h2>
+
+<h2><font color="FFFFFF"> Aula 08 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://www.newsasset.com/Files/Homepage/Content/section01-cube.png){.absolute top="400" left="1150" width="400"}
+
+# <font color="1b5299"> Formatando Dados </font> {background-color="#BBDEF0"}
+
+## Manipulação de Dados
+
+Nesta parte, veremos mais alguns pacotes importantes para a manipulação de dados no 
+`R`:
+
+- `lubridate`: pacote para manipular variáveis contendo datas.
+- `stringr`: manipulação de variáveis de texto (*characters* ou *strings*).
+- `forcats`: manipulação de fatores.
+
+![](Images/datar.png){fig-align="center" width="350"}  
+
+
+
+# <font color="1b5299"> Manipulando datas </font> {background-color="#BBDEF0"}
+
+
+## Manipulando datas no `R`
+
+Em muitas situações, é necessário manipular informações que contêm **datas** a fim de capturar, por exemplo, o intervalo de tempo entre dois eventos ou a sequência temporal de uma variável.  
+
+
+
+O pacote `lubridate` possui diversas funções que facilitam a manipulação de datas.
+
+![](Images/lubridate.jpg){fig-align="center" width="400"}  
+
+Foi criado por Garrett Grolemund e Hadley Wickham e faz parte
+do conjunto de pacotes do `tidyverse`. Ver [documentação oficial](https://lubridate.tidyverse.org/).
+
+
+## {background-image="https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/3017cf57-d7d9-4f73-9b66-f2be0ebf2489_rw_1920.png?h=2cdd179bc087c56b43f8aa6ea849ca1a" background-size="cover"}
+
+
+## Manipulando datas no `R`
+
+Nesta seção, veremos como:
+
+:::{.incremental}
+- Transformar e extrair datas
+- Aprender funções básicas para a manipulação de datas
+- Realizar operações com datas
+:::
+
+
+## A classe `Date`
+
+Variáveis que contêm datas são tratadas como um tipo especial de objeto, 
+da classe `Date`. Para criar um objeto dessa classe, fazemos:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Criar data
+data_char <- c("31/12/2021", "01/01/2022")
+class(data_char)
+
+# Usando a funcao as.Date()
+data_date <- as.Date(data_char)
+class(data_date)
+data_date
+```
+
+
+. . .
+
+A função `as.Date()` transforma objetos na classe `Date`, porém com um valor inesperado. 
+Tal função se ajusta apenas para datas do tipo `yyyy-mm-dd`.
+
+
+## O pacote `lubridate`
+
+Para lidar com datas do tipo `dd-mm-yyyy`, o pacote `lubridate` oferece a 
+função `dmy()` (**d**ay, **m**onth, **y**ear):
+
+```{r, echo = FALSE, collapse = TRUE}
+library(tidyverse)
+```
+
+```{r, echo = TRUE, collapse = TRUE}
+# Criar data
+data_char <- c("31/12/2021", "01/01/2022")
+
+# Usando a funcao dmy()
+data <- dmy(data_char)
+class(data)
+data
+```
+
+
+Para os demais ordenações de datas, o pacote oferece as variações `dym()`, `mdy()`,  
+`myd()`,  `ymd()` e `ydm()`.
+
+
+## Formatos de datas ao redor do mundo
+
+![](https://vividmaps.com/wp-content/uploads/2021/03/date-format-by-country.png){fig-align="center" width="400"}  
+
+
+## O pacote `lubridate`
+
+Podemos transformar diversos formatos para a classe `Date`:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Datas com diferentes formatos
+dmy(31122019) # numerico
+dmy("31122019") # character
+dmy("31/12/2019") # separado por "/"
+dmy("31.12.2019") # separado por "."
+```
+
+## 
+
+![](Images/meme_date_format.jpeg){fig-align="center" width="400"}  
+
+
+## O pacote `lubridate`
+
+Além de datas, podemos adicionar as horas. Para isso, basta identificar a ordem
+do *year*(`y`), *month*(`m`), *day*(`d`), *hour*(`h`), *minute*(`m`) e *second*(`s`)
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Datas e horarios
+ymd_h("2020020515")
+ymd_hm("202002051531")
+ymd_hms("20200205153140")
+```
+
+
+## O pacote `lubridate`
+
+Para extrair informações instantâneas do sistema, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+# Data atual
+today()
+now()
+```
+
+
+O último bloco de informações da função `now()` corresponde ao [fuso horário](https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio).
+
+## O pacote `lubridate`
+
+Há diversas funções para extrair informações de um objeto da classe \texttt{Date}:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+hora_atual <- now()
+hora_atual
+```
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Extrair data
+date(hora_atual)
+# Extrair ano
+year(hora_atual)
+# Extrair mes
+month(hora_atual)
+# Extrair dia do mes
+day(hora_atual)
+# Extrair hora
+hour(hora_atual)
+# Extrair minutos
+minute(hora_atual)
+# Extrair segundos
+second(hora_atual)
+```
+
+
+
+## O pacote `lubridate`
+
+Outras informações de um objeto da classe `Date`:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Extrair dia da semana
+wday(hora_atual, label = TRUE)
+```
+
+Outras informações:
+
+![](Images/dates.png){fig-align="center" width="400"}  
+
+
+## Operações com datas
+
+Intervalos de datas são realizados areavés da função `interval()`
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Datas
+data_inic <- ymd("2023-04-08")
+data_fim <- ymd("2023-06-16")
+
+# Intervalo de datas
+periodo <- interval(data_inic, data_fim)
+periodo
+
+# Outra notação (operador intervalo %--%)
+periodo <- data_inic %--% data_fim
+periodo
+
+evento <- ymd("2023-12-10")
+evento %within% periodo
+```
+
+
+## Operações com datas
+
+Algumas operações aritméticas disponíveis são:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Adição de datas
+today() + days(10)
+today() + years(2)
+# Datas recorrentes
+aulas <- today() + weeks(1:2) 
+aulas
+# Diferença de datas
+as.period(periodo); as.period(periodo, unit = "day")
+```
+
+## Datas em `R`
+
+- Outras classes de datas no R são `POSIXct` e `POSIXlt`.
+- A classe `POSIXct` é útil para datas que contenham horas.
+- A classe `POSIXlt` facilita a extração de componentes da data.
+- O pacote `lubridate` é um *wrapper* para manipular as duas classes, 
+  com uma sintaxe mais simples e intuitiva.
+- Para mais informações, ver a ajuda das funções [https://lubridate.tidyverse.org](https://lubridate.tidyverse.org)
+  
+
+
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+1. Utilize a função do `lubridate` apropriada para analisar cada uma das seguintes datas:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+d1 <- "January 20, 2020"
+d2 <- "2020-Abril-01"
+d3 <- "11-Nov-2020"
+d4 <- c("July 13 (1969)", "August 23 (1972)", "July 1 (1975)")
+d5 <- "2008/13/10" 
+```
+
+
+2. Precisamente, qual a sua idade agora? Calcule a idade em anos, meses, semanas, dias, horas e minutos.
+
+
+## Quizz #2 {.inverse background-color="#386FA4"}
+
+Para este exercício, será necessário utilizar a base `dados::voo`
+
+1. Observar a estrutura de dados utilizando \texttt{glimpse()}.
+2. Criar uma variável informando a velocidade média (km/h) do voo utilizando as
+variáveis `distancia` e `tempo_voo` (*medida em minutos*).
+4. Construa a variável com a data e hora exata da decolagem.
+5. Reporte a hora de chegada relativa ao local de partida.
+6. Criar um banco apenas com dados dos voos atrasados.
+
+
+
+
+# <font color="1b5299"> Strings (ou *variáveis de texto*) </font> {background-color="#BBDEF0"}
+
