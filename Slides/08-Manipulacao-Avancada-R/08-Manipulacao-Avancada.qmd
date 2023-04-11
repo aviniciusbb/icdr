@@ -185,7 +185,7 @@ O último bloco de informações da função `now()` corresponde ao [fuso horár
 
 ## O pacote `lubridate`
 
-Há diversas funções para extrair informações de um objeto da classe \texttt{Date}:
+Há diversas funções para extrair informações de um objeto da classe `Date`:
 
 
 ```{r, echo = TRUE, collapse = TRUE}
@@ -300,7 +300,7 @@ d5 <- "2008/13/10"
 
 Para este exercício, será necessário utilizar a base `dados::voo`
 
-1. Observar a estrutura de dados utilizando \texttt{glimpse()}.
+1. Observar a estrutura de dados utilizando `glimpse()`.
 2. Criar uma variável informando a velocidade média (km/h) do voo utilizando as
 variáveis `distancia` e `tempo_voo` (*medida em minutos*).
 4. Construa a variável com a data e hora exata da decolagem.
@@ -308,7 +308,292 @@ variáveis `distancia` e `tempo_voo` (*medida em minutos*).
 6. Criar um banco apenas com dados dos voos atrasados.
 
 
-
-
 # <font color="1b5299"> Strings (ou *variáveis de texto*) </font> {background-color="#BBDEF0"}
+
+
+## Variáveis de texto
+
+- Outra classe importante são as variáveis *character* (ou *strings*).
+- Muitas vezes, é difícil manipular strings devido a existência de
+  diversas funções com diferentes argumentos.
+- Neste sentido, o pacote `stringr` traz uma sintaxe mais consistente
+  e simples para manipular tais variáveis
+
+![](https://stringr.tidyverse.org/logo.png){fig-align="center" width="400"}  
+
+
+## As funções do `stringr`
+
+```{r, echo = TRUE, collapse = TRUE, eval = FALSE}
+# Instalar e carregar pacote 
+install.packages("stringr")
+library(stringr)
+```
+
+- O pacote também faz parte do `tidyverse`
+- As funções de manipulação de texto começam com `str_`
+- Para listar todas as funções disponíveis, basta digitar `stringr::str_` e visualizar
+  todas as funções com este prefixo
+
+
+## As funções do `stringr`
+
+Algumas funções básicas para manipulação de caracteres:
+
+```{r, echo = FALSE, collapse = TRUE}
+library(stringr)
+```
+
+```{r, echo = TRUE, collapse = TRUE}
+# Numero de caracteres
+str_length("João Pessoa")
+
+# Minusculas
+str_to_lower("João Pessoa")
+
+# Maiusculas
+str_to_upper("João Pessoa")
+
+# Iniciais maiusculas
+str_to_title("joão pessoa")
+```  
+
+## As funções do `stringr`
+
+```{r, echo = TRUE, collapse = TRUE}
+# Extrair por posicao
+str_sub("João Pessoa", start = 1, end = 4)
+
+# Extrair por padrao
+cidades <- c("Sapé", "Sumé", "Cuité", "Santa Rita")
+
+# Detectar
+str_detect(cidades, "Sa")
+
+# Subconjunto
+str_subset(cidades, "Sa")
+```
+  
+
+## As funções do `stringr`
+
+```{r, echo = TRUE, collapse = TRUE}
+# Variavel sexo
+sexo_quest <- c("M", "F", " M", "F ", " M ")
+sexo_quest
+
+# Remover espacos em branco
+sexo <- str_trim(sexo_quest)
+sexo
+
+# Remover espacos em branco em qualquer parte
+str_squish("  Este   texto está   com espaços  ")
+
+# Concatenar strings
+pre <- "O status é:"
+status <- "APROVADO"
+str_c(pre, status, sep = " ")
+
+# Excluir padrões
+id_var <- c("id1", "id2", "id3")
+str_replace(id_var, "id", "")
+```  
+
+
+## As funções do `stringr`
+
+Para dividir elementos de uma string baseada em um caractere específico, utilizamos 
+a função `str_split()`:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+# Inserir texto
+texto <- c("Lorem ipsum dolor sit amet")
+
+# Dividir string (em lista)
+str_split(texto, " ")
+
+# Dividir string (em matriz)
+str_split(texto, " ", simplify = TRUE)
+```
+
+
+## As funções do `stringr`
+
+Para adicionar caracteres e ajustar em um tamanho fixo, utilizamos a função 
+`str_pad()`
+
+```{r, echo = TRUE, collapse = TRUE}
+# CNPJ numerico
+cnpj_bb <- 00000000000191
+cnpj_bb
+
+# Ajustar CNPJ
+str_pad(cnpj_bb, width = 14, side = "left", pad = 0)
+```
+
+
+## Documentação oficial
+
+- [Vignette](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html)
+- [Cheat Sheet](http://edrub.in/CheatSheets/cheatSheetStringr.pdf)
+
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/6bbcc35c-1863-49df-8204-d981303d8cd3_rw_1920.png?h=cef2364d9766f60c5abac6b454d561a2){fig-align="center" width="400"}  
+
+## Quizz #3 {.inverse background-color="#386FA4"}
+
+### **Exercício 1**
+
+O CPF é um número composto por 11 dígitos. Por exemplo, 54491651884. No entanto, para facilitar a 
+visualização, costumamos mostrá-lo com separadores a cada 3 casas: 544.916.518-84. Como obter esse padrão
+utilizando unicamente as funções do pacote `stringr`?
+
+
+### **Exercício 2**
+
+Suponha que tenhamos o seguinte endereço em uma URL:
+`https://www.ibge.gov.br/cidades-e-estados/pb/campina-grande.html`
+Transforme o endereço no formato identificador **Campina Grande (PB)**
+
+
+
+# <font color="1b5299"> O pacote `forcats` </font> {background-color="#BBDEF0"}
+
+
+
+## Fatores
+
+Até o momento, vimos a existência de objetos da classe `factor`. De forma geral:
+
+
+- Representam uma forma prática de lidar com variáveis categorizadas, 
+tanto para fins de modelagem quanto para fins de visualização.
+
+
+![](https://forcats.tidyverse.org/logo.png){fig-align="center" width="400"}  
+
+
+
+## Fatores
+
+- As principais funções do pacote `forcats` auxiliam na reordenação das categorias
+e na modificação dos níveis de um fator.
+
+
+- Fatores são estruturas de dados utilizadas para ordenar strings. Formalmente, um fator é 
+definido como um vetor de `integers` com dois atributos específicos:
+  - **levels**: vetor de strings que indica a relação de ordem entre as variáveis.
+  - **class**: a string atômica `factor`.
+
+
+
+## Variáveis categóricas
+
+Suponha um vetor com as disciplinas preferidas dos alunos em uma dado semestre:
+
+```{r, echo = TRUE, collapse = TRUE}
+disciplinas <- c("micro", "macro", "econometria", "macro", 
+                 "micro", "brasileira", "macro", "econometria", 
+                 "micro", "brasileira", "macro", "micro")
+class(disciplinas)
+```
+
+. . .
+
+Para transformar o objeto em fator, fazemos:
+
+```{r, echo = TRUE, collapse = TRUE}
+disciplinas <- factor(disciplinas)
+class(disciplinas)
+str(disciplinas)
+levels(disciplinas)
+```
+
+## Variáveis categóricas
+
+Fatores são estruturas úteis que permitem ter maior controle durante a análise dos dados: 
+
+```{r, echo = TRUE, collapse = TRUE}
+disciplinas <- factor(disciplinas, 
+                      levels = c("micro","macro", "econometria", 
+                                 "brasileira"))
+str(disciplinas)
+levels(disciplinas)
+```
+
+
+## O pacote `forcats`
+
+Para entender as funcionalidades do pacote `forcats`, utilizaremos o banco de dados
+`airquality`:
+
+```{r, echo = TRUE, collapse = TRUE}
+tibble::glimpse(airquality)
+```
+
+
+## O pacote `forcats`
+
+Estamos interessados em mudar os níveis de um fator: 
+
+```{r, echo = TRUE, collapse = TRUE}
+airquality$Month <- as.factor(airquality$Month)
+levels(airquality$Month)
+```
+
+
+Podemos renomear os `levels` através da função `fct_recode()`:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+airquality$Month <- fct_recode(airquality$Month, 
+                               "Mai" = "5", "Jun" = "6", 
+                               "Jul" = "7", "Ago" = "8", 
+                               "Set" = "9")
+levels(airquality$Month)
+```
+
+
+## O pacote `forcats`
+
+É possível mudar a ordem em que os `levels` são apresentados:
+
+
+```{r, echo = TRUE, collapse = TRUE}
+airquality$Month <- fct_relevel(airquality$Month, 
+                                'Jul', 'Ago', 'Jun', 
+                                'Set', 'Mai')
+levels(airquality$Month)
+```
+
+
+## O pacote `forcats`
+
+Outra função bastante útil para agrupar categorias é a `fct_lump`. Considere o seguinte vetor:
+
+```{r, echo = TRUE, collapse = TRUE}
+letras <- factor(sample(letters[1:10], 100, replace = TRUE))
+fct_count(letras)
+```
+
+
+## O pacote `forcats`
+
+A função `fct_lump()` utiliza o level de menor frequência e categoriza como "Outros" 
+
+```{r, echo = TRUE, collapse = TRUE}
+fct_lump(letras, other_level = "Outros") |>        
+  fct_count()
+```
+
+
+## O pacote `forcats`
+
+Ainda, podemos definir o número de categorias e agregar as demais em  "Outros" 
+
+```{r, echo = TRUE, collapse = TRUE}
+fct_lump(letras, n = 4, other_level = "Outros") |>        
+  fct_count()
+```
 
