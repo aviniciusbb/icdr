@@ -298,7 +298,7 @@ d5 <- "2008/13/10"
 
 ## Quizz #2 {.inverse background-color="#386FA4"}
 
-Para este exercício, será necessário utilizar a base `dados::voo`
+Para este exercício, será necessário utilizar a base `dados::voos`
 
 1. Observar a estrutura de dados utilizando `glimpse()`.
 2. Criar uma variável informando a velocidade média (km/h) do voo utilizando as
@@ -314,10 +314,10 @@ variáveis `distancia` e `tempo_voo` (*medida em minutos*).
 ## Variáveis de texto
 
 - Outra classe importante são as variáveis *character* (ou *strings*).
-- Muitas vezes, é difícil manipular strings devido a existência de
+- Muitas vezes, é difícil manipular *strings* devido a existência de
   diversas funções com diferentes argumentos.
 - Neste sentido, o pacote `stringr` traz uma sintaxe mais consistente
-  e simples para manipular tais variáveis
+  e simples para manipular tais variáveis.
 
 ![](https://stringr.tidyverse.org/logo.png){fig-align="center" width="400"}  
 
