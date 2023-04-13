@@ -28,7 +28,7 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 
 ## Projeto
 
-O roteiro do projeto está disponível neste [link](https://github.com/aviniciusbb/icdr/blob/master/Ementa/Ementa_ICDR.pdf).
+O roteiro do projeto está disponível neste [link](https://github.com/aviniciusbb/icdr/blob/master/Projeto/Roteiro_Projeto_ICDR.pdf).
 
 
 ## Outros Materiais
