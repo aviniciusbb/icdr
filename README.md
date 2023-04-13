@@ -26,6 +26,10 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 8. **Manipulação Avançada** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/08-Manipulacao-Avancada-R/08-Manipulacao-Avancada.html)
 
 
+## Projeto
+
+O link para o roteiro do projeto está disponível neste [link]()
+
 ## Listas e Quizzes
 
 
