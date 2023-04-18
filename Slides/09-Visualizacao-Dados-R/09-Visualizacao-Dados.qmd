@@ -1,0 +1,1596 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 09 </font> - Visualização de Dados </h2>
+
+<h2><font color="FFFFFF"> Aula 09 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/1cf11f57-5d06-43bf-8916-d4a79465a758_rw_1920.png?h=314479e61fcb66dbe0059dbde36d3610){.absolute top="350" left="900" width="800"}
+
+# <font color="1b5299"> Visualização de Dados </font> {background-color="#BBDEF0"}
+
+## Visualização de Dados
+
+
+> "Um simples **gráfico** trouxe mais informações ao analista de dados do que qualquer outro dispositivo." (John Tukey, *Exploratory Data Analysis*, 1977)
+
+![](Images/graph_analysis.jpg){fig-align="center" width="800"}
+
+
+## Objetivo
+
+Nesta parte do curso, iremos discutir o funcionamento do pacote mais elegante e flexível 
+de visualização gráfica do `R` , o `ggplot2`.
+
+
+:::{.incremental}
+- O pacote introduz a "**g**ramática dos **g**ráficos", um sistema versátil para 
+  descrever e construir gráficos.
+- Possui lógica semelhante ao `pipe` (`|>`), onde é possível adicionar camadas e
+  informações através de um operador sequencial (`+`)
+- Através dele, podemos definir sistematicamente quais são as **camadas** de um gráfico e como 
+  eles se interelacionam.
+:::
+
+## O pacote `ggplot2`
+
+O `ggplot2` faz parte do *toolkit* do `tidyverse` para ciência de dados.
+
+![](Images/ggplot2_logo.png){fig-align="center" width="800"}
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Instalar e carregar pacote
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+
+## Alguns exemplos
+
+
+![](https://editor.analyticsvidhya.com/uploads/91819ggplot_plots.png){fig-align="center" width="800"}
+
+
+# <font color="1b5299"> Gramática dos Gráficos </font> {background-color="#BBDEF0"}
+
+
+## Gramática dos Gráficos
+
+- A **gramática dos gráficos** nos permite descrever concisamente os 
+componentes (ou camadas) de um gráfico.
+
+- No `ggplot2`, existem 7 **camadas** principais:
+
+![](Images/ggplot2_elements.png){fig-align="center" width="800"}
+
+
+## Camadas
+
+- **Data** (`data`): O conjunto de dados a ser plotado.
+- **Aesthetics** (`aes`): A forma na qual mapeamos os dados: cor, tamanho, forma, localização... 
+- **Geometry** (`geom`): As formas geométricas usadas para visualizar os dados.
+- **Facets** (`facet`): Subplots de múltiplas categorias. 
+- **Statistics** (`stats`): Análise estatística e descrição dos dados. 
+- **Coordinates** (`coords`): Usado para organizar os objetos geométricos mapeando as coordenadas dos dados.
+- **Themes** (`theme`): Aspectos visuais dos gráficos, como plano de fundo, cores e fontes.
+
+
+
+## Dados IMDb  
+
+Para ilustrar os elementos de um gráfico, iremos trabalhar com o banco de dados de filmes
+disponíveis no IMDb ([https://www.imdb.com](https://www.imdb.com))
+
+
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
+# Carregar pacotes
+library(tidyverse)
+
+# Carregar dados
+imdb <- readr::read_csv("Dados/imdb_movies.csv")
+```
+
+
+
+## Dados IMDb
+
+```{r, echo = TRUE, collapse = TRUE}
+# Analisar dados
+glimpse(imdb)
+```
+
+## A camada `Data`
+
+A camada `Data` especifica o conjunto de dados a ser plotado. 
+
+![](Images/layer_data.png){fig-align="center" width="800"}
+
+. . .
+
+Para adicionar este elemento ao nosso plot, fazemos:
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Plot
+ggplot(data = imdb)
+```
+
+. . .
+
+Alternativamente,
+
+```{r, echo = TRUE, eval = FALSE, collapse = TRUE}
+# Utilizando pipes
+imdb |> 
+  ggplot()
+```
+
+
+## A camada `Data`
+
+
+```{r, echo = FALSE, eval = TRUE, collapse = TRUE, fig.align='center'}
+# Utilizando pipes
+imdb |> 
+  ggplot()
+```
+
+
+Como resultado, temos apenas um quadro em branco (cinza, na verdade!). 
+Precisamos adicionar mais **camadas** ao gráfico.
+
+## A camada `Aesthetic`
+
+A camada `Aesthetic`, ou simplesmente `aes`, adiciona os eixos (variáveis) e 
+seus elementos visuais.
+
+![](Images/layer_data_aes.png){fig-align="center" width="800"}
+
+
+## A camada `Aesthetic`
+
+Para adicionar este elemento ao nosso plot, fazemos:
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Plot
+imdb |> 
+  ggplot(aes(x = worlwide_gross_income, y = avg_vote))
+```
+
+
+## A camada `Aesthetic`
+
+```{r, echo = FALSE, eval = TRUE, collapse = TRUE, fig.align='center'}
+ggplot(data = imdb, aes(x = worlwide_gross_income, y = avg_vote))
+```
+
+Como resultado, saimos de um quadro em branco para a representação das variáveis
+nos eixos *x* e *y*. Precisamos informar o tipo (**geometria**) de gráfico!
+
+
+## A camada `Geometries`
+
+A camada `Geometries` é utilizada para o mapeamento das informações e define 
+a forma como os dados serão apresentados.
+
+![](Images/layer_d_aes_geom.png){fig-align="center" width="800"}
+
+. . .
+
+O código plota um **gráfico de dispersão** (pontos) entre as variáveis receita e nota média do filme.
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Plot
+imdb |> 
+  ggplot() +
+  geom_point(aes(x = worlwide_gross_income, y = avg_vote))
+```
+
+
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  ggplot() +
+  geom_point(aes(x  = worlwide_gross_income, y = avg_vote))
+```
+
+
+
+## Sintaxe básica
+
+De forma geral, existem quatro partes fundamentais para a visualização no `ggplot2`:
+
+![](Images/ggplot_basics.png){fig-align="center" width="800"}
+
+A função `ggplot()`, a camada `data`, os parâmetros `aes()` e
+a camada de geometria, especificada por `geom_xxx()`
+
+
+## A camada `Geometries`
+
+Suponha que queiramos analisar a relação entre o orçamento do filme com a arrecadação
+de bilheteria.
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income))
+```
+
+Neste caso, `filter(currency == "$")` filtra apenas os filmes com orçamento e receita 
+medidas em dólares.
+
+## A camada `Geometries`
+
+
+```{r}
+#| echo: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income))
+```
+
+
+## A camada `Geometries`
+
+É possível alterar alguns elementos da geometria `geom_point()`, tais como cor, transparência,
+formato, tamanho,...
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income), 
+             col = "orange", size = 1.8, shape = 17)
+```
+
+![](Images/point_shape.jpeg){fig-align="center" width="800"}
+
+
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income), 
+             col = "orange", size = 1.8, shape = 17)
+```
+
+
+## A camada `Geometries`
+
+Outra possibilidade é ajustar o tamanho dos pontos de acordo com alguma característica observável.
+Suponha que desejamos relacionar cada filme com a sua nota no IMDb.
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income, 
+                 size = avg_vote), 
+             col = "magenta", alpha = 0.3)
+```
+
+O argumento `alpha` define a transparência do elemento, variando entre 0 
+(totalmente transparente) e 1 (totalmente opaco).
+
+## A camada `Geometries`
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income, size = avg_vote), 
+             col = "magenta", alpha = 0.3)
+```
+
+
+## A camada `Geometries`
+
+Estamos interessados em separar os filmes que geraram lucro dos que geraram prejuízo. 
+Podemos adicionar uma reta separando o plano através de `geom_abline()`:
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income)) +
+  geom_abline(intercept = 0, slope = 1, color = "brown")
+```
+
+Pontos **acima** da reta indicam filmes cuja receita foi **maior** que o seu orçamento, 
+enquanto pontos **abaixo** indicam aqueles com receita **inferior** ao orçamento.
+
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income)) +
+  geom_abline(intercept = 0, slope = 1, color = "brown")
+```
+
+
+## A camada `Geometries`
+
+Podemos melhorar a visualização categorizando os filmes por cores. Para isto, 
+devemos criar uma variável indicativa de lucro.
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  mutate(
+    lucro = worlwide_gross_income - budget,
+    lucro_ind = if_else(lucro > 0, "Lucro", "Prejuízo")
+  ) |> 
+  filter(
+    !is.na(lucro)
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income,
+             color = lucro_ind))
+```
+
+
+Observem que podemos utilizar os comandos do `ggplot2` sequencialmente
+aos do `dplyr`. 
+
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  mutate(
+    lucro = worlwide_gross_income - budget,
+    lucro_ind = if_else(lucro > 0, "Lucro", "Prejuízo")
+  ) |> 
+  filter(
+    !is.na(lucro)
+  ) |> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income,
+             color = lucro_ind))
+```
+
+
+## A camada `Geometries`
+
+Para adicionar uma camada especificando o nomes dos atributos, utilizamos \texttt{labs()}.
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  mutate(
+    lucro = worlwide_gross_income - budget,
+    lucro_ind = if_else(lucro > 0, "Lucro", "Prejuízo")
+  ) |> 
+  filter(
+    !is.na(lucro)
+  )|> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income,
+             color = lucro_ind)) +
+  labs(x = "Orçamento", y = "Bilheteria", color = "Lucro")
+```
+
+
+## A camada `Geometries`
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  mutate(
+    lucro = worlwide_gross_income - budget,
+    lucro_ind = if_else(lucro > 0, "Lucro", "Prejuízo")
+  ) |> 
+  filter(
+    !is.na(lucro)
+  )|> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income,
+             color = lucro_ind)) +
+  labs(x = "Orçamento", y = "Bilheteria", color = "Lucro")
+```
+
+
+## A camada `Geometries`
+
+Para mudar a escala das variável nos eixos, podemos fazer:
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  mutate(
+    lucro = worlwide_gross_income - budget,
+    lucro_ind = if_else(lucro > 0, "Lucro", "Prejuízo"),
+    worlwide_gross_income = worlwide_gross_income/1e+06,
+    budget = budget/1e+06
+  ) |> 
+  filter(
+    !is.na(lucro)
+  )|> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income,
+             color = lucro_ind)) +
+  labs(x = "Orçamento (em milhões de US$)", 
+       y = "Bilheteria (em milhões de US$)",
+       color = "Lucro")
+```
+
+
+## A camada `Geometries`
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Plot
+imdb |> 
+  filter(
+    currency == "$"
+  ) |> 
+  mutate(
+    lucro = worlwide_gross_income - budget,
+    lucro_ind = if_else(lucro > 0, "Lucro", "Prejuízo"),
+    worlwide_gross_income = worlwide_gross_income/1e+06,
+    budget = budget/1e+06
+  ) |> 
+  filter(
+    !is.na(lucro)
+  )|> 
+  ggplot() +
+  geom_point(aes(x = budget, y = worlwide_gross_income,
+             color = lucro_ind)) +
+  labs(x = "Orçamento (em milhões de US$)", 
+       y = "Bilheteria (em milhões de US$)",
+       color = "Lucro")
+```
+
+
+## As diferentes geometrias
+
+Outras geometrias bastante utilizadas são:
+
+- `geom_line()` - para linhas definidas por pares (*x*,*y*).
+- `geom_abline()` - retas definidas por intercepto e inclinação.
+- `geom_hline()`, `geom_vline()` - para retas horizontais/verticais
+- `geom_bar()`, `geom_col()` - para gráfico de barras ou colunas
+- `geom_histogram()` - para plotar histogramas
+- `geom_boxplot()` - para boxplots
+- `geom_density()` - para plotar a densidade de uma variável
+- `geom_areas()` - para a plotagem de áreas
+- `geom_bin2d()` - para heatmaps
+
+Mais opções: [https://ggplot2.tidyverse.org/reference/](https://ggplot2.tidyverse.org/reference/)
+
+## A camada `Geometries`
+
+Para gerar um **gráfico de linhas**, utilizamos o `geom_line()`
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de linhas
+imdb |> 
+  filter(
+    actor_1 == "Clint Eastwood" 
+    ) |> 
+  group_by(year) |> 
+  summarise(
+    media_imdb = mean(avg_vote)
+    ) |> 
+  ggplot() +
+  geom_line(aes(x = year, y = media_imdb), color = "purple") +
+  geom_point(aes(x = year, y = media_imdb), color = "purple") +
+  labs(title = "Notas IMDb: filmes com Clint Eastwood")
+```
+
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de linhas
+imdb |> 
+  filter(
+    actor_1 == "Clint Eastwood"
+    ) |> 
+  group_by(year) |> 
+  summarise(
+    media_imdb = mean(avg_vote)
+    ) |> 
+  ggplot() +
+  geom_line(aes(x = year, y = media_imdb), color = "purple") +
+  geom_point(aes(x = year, y = media_imdb), color = "purple") +
+  labs(title = "Notas IMDb: filmes com Clint Eastwood")
+```
+
+
+## A camada `Geometries`
+
+Para gerar histogramas, utilizamos o `geom_histogram()`
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Histograma  
+imdb |> 
+ggplot() +
+  geom_histogram(aes(x = duration), color = "blue4", 
+                 fill = "dodgerblue", alpha = .8) +
+  labs(x = "Duração (em min)", y = "Número de filmes",
+       title = "Histograma: duração das produções") 
+```
+
+
+O histograma requer apenas o mapeamento da variável *x* para o cálculo
+da frequência de cada classe.
+
+
+## A camada `Geometries`
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Histograma  
+imdb |> 
+  ggplot() +
+  geom_histogram(aes(x = duration), color = "blue4", 
+                 fill = "dodgerblue", alpha = .8) +
+  labs(x = "Duração (em min)", y = "Número de filmes",
+       title = "Histograma: duração das produções") 
+```
+
+
+## A camada `Geometries`
+
+Adicionando um **reta vertical** através de `geom_vline()` no valor da média:
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Histograma  
+imdb |> 
+ggplot() +
+  geom_histogram(aes(x = duration), color = "blue4", 
+                 fill = "dodgerblue", alpha = .8) +
+  geom_vline(xintercept = mean(imdb$duration, na.rm = TRUE),
+             color = "orange", lwd = 1, linetype = "dashed") +
+  labs(x = "Duração (em min)", y = "Número de filmes",
+       title = "Histograma: duração das produções") 
+```
+
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Histograma  
+imdb |> 
+ggplot() +
+  geom_histogram(aes(x = duration), color = "blue4", 
+                 fill = "dodgerblue", alpha = .8) +
+  geom_vline(xintercept = mean(imdb$duration, na.rm = TRUE),
+             color = "orange", lwd = 1.5, linetype = "dashed") +
+  labs(x = "Duração (em min)", y = "Número de filmes",
+       title = "Histograma: duração das produções") 
+```
+
+
+## A camada `Geometries`
+
+Para **densidades**, utilizamos o `geom_density()`
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Densidade  
+imdb |> 
+  filter(
+    duration <= 300
+  ) |> 
+  ggplot() +
+  geom_density(aes(x = duration), color = "lightsalmon4", 
+                 fill = "lightsalmon2", alpha = 0.7) +
+  labs(x = "Duração (em min)", y = "Densidade",
+       title = "Densidade")
+```
+Neste caso, filtramos apenas para filmes com duração até 300min.
+
+## A camada `Geometries`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Densidade  
+imdb |> 
+  filter(
+    duration <= 300
+  ) |> 
+  ggplot() +
+  geom_density(aes(x = duration), color = "lightsalmon4", 
+                 fill = "lightsalmon2", alpha = 0.7) +
+  labs(x = "Duração (em min)", y = "Densidade",
+       title = "Densidade")
+```
+
+
+## Boxplots
+
+**Boxplots** são plotados com `geom_boxplot()`
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Boxplot  
+imdb |> 
+  filter(
+    director %in% c("Martin Scorsese", "Quentin Tarantino", 
+                    "Francis Ford Coppola", "Steven Spielberg")
+    ) |>
+  ggplot() +
+  geom_boxplot(aes(x = director, y = worlwide_gross_income, 
+                   fill = director), show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = "Diretor", y = "Receita",
+       title = "Boxplot: receita por diretor")
+```
+
+
+## Boxplots
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Boxplot  
+imdb |> 
+  filter(
+    director %in% c("Martin Scorsese", "Quentin Tarantino", 
+                    "Francis Ford Coppola", "Steven Spielberg")
+    ) |>
+  ggplot() +
+  geom_boxplot(aes(x = director, y = worlwide_gross_income, 
+                   fill = director), show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = "Diretor", y = "Receita",
+       title = "Boxplot: receita por diretor")
+```
+
+
+## Gráfico de barras
+
+**Gráficos de barras** são plotados com `geom_bar()`
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+  filter(
+    year < 2019
+  ) |> 
+  ggplot() +
+  geom_bar(aes(x = year), color = "black", fill = "skyblue") +
+  labs(x = "Ano", y = "Número de Produções",
+       title = "Número de produções por ano")
+```
+
+
+## Gráfico de barras
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+  filter(
+    year < 2019
+  ) |> 
+  ggplot() +
+  geom_bar(aes(x = year), color = "black", fill = "skyblue") +
+  labs(x = "Ano", y = "Número de Produções",
+       title = "Número de produções por ano")
+```
+
+
+## Gráfico de barras
+
+Podemos criar gráfico de barras agrupados.
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+   mutate(
+     genero = stringr::str_split(
+       genre, 
+       pattern = ",", 
+       simplify = TRUE)[,1]
+     ) |> 
+  filter(
+    genero %in% c("Comedy", "Action", "Romance",
+                  "Drama", "Adventure", "Biography"),
+    between(year, 2015, 2019)
+    ) |>
+  ggplot() +
+  geom_bar(aes(x = year, fill = genero)) +
+  labs(x = "Ano", y = "Número de Produções",
+       title = "Número de produções por ano")
+```
+
+## Gráfico de barras
+
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+   mutate(
+     genero = stringr::str_split(
+       genre, 
+       pattern = ",", 
+       simplify = TRUE)[,1]
+     ) |> 
+  filter(
+    genero %in% c("Comedy", "Action", "Romance",
+                  "Drama", "Adventure", "Biography"),
+    between(year, 2015, 2019)
+    ) |>
+  ggplot() +
+  geom_bar(aes(x = year, fill = genero)) +
+  labs(x = "Ano", y = "Número de Produções",
+       title = "Número de produções por ano")
+```
+
+
+## Gráfico de barras
+
+Alternativamente
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+   mutate(
+     genero = stringr::str_split(
+       genre, 
+       pattern = ",", 
+       simplify = TRUE)[,1]
+     ) |> 
+  filter(
+    genero %in% c("Comedy", "Action", "Romance",
+                  "Drama", "Adventure", "Biography"),
+    between(year, 2015, 2019)
+    ) |>
+  ggplot() +
+  geom_bar(aes(x = year, fill = genero), position = "dodge") +
+  labs(x = "Ano", y = "Número de Produções",
+       title = "Número de produções por ano")
+```
+
+## Gráfico de barras
+
+Alternativamente
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+   mutate(
+     genero = stringr::str_split(
+       genre, 
+       pattern = ",", 
+       simplify = TRUE)[,1]
+     ) |> 
+  filter(
+    genero %in% c("Comedy", "Action", "Romance",
+                  "Drama", "Adventure", "Biography"),
+    between(year, 2015, 2019)
+    ) |>
+  ggplot() +
+  geom_bar(aes(x = year, fill = genero), position = "dodge") +
+  labs(x = "Ano", y = "Número de Produções",
+       title = "Número de produções por ano")
+```
+
+## Gráfico de barras
+
+Caso já tenhamos calculado a soma, utilizamos `geom_col()`
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+  filter(
+    !is.na(director)
+    ) |> 
+  group_by(director) |> 
+  summarise(n_filmes = n()) |> 
+  arrange(desc(n_filmes)) |> 
+  slice(1:5) |> 
+  ggplot() +
+  geom_col(aes(x = director, y = n_filmes, 
+               color = director, fill = director),
+           show.legend = FALSE) +
+  labs(x = "", y = "Número de filmes",
+       title = "Produções por diretor") 
+```
+
+## Gráfico de barras
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+  filter(
+    !is.na(director)
+    ) |> 
+  group_by(director) |> 
+  summarise(n_filmes = n()) |> 
+  arrange(desc(n_filmes)) |> 
+  slice(1:5) |> 
+  ggplot() +
+  geom_col(aes(x = director, y = n_filmes, 
+               color = director, fill = director),
+           show.legend = FALSE) +
+  labs(x = "", y = "Número de filmes",
+       title = "Produções por diretor") 
+```
+
+
+Perceba que os diretores foram apresentados em ordem alfabética. Para colocar em 
+ordem crescente, fazemos:
+
+
+## Gráfico de barras
+
+Colocando as barras em ordem crescente:
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+  filter(
+    !is.na(director)
+    ) |> 
+  group_by(director) |> 
+  summarise(n_filmes = n()) |> 
+  arrange(desc(n_filmes)) |> 
+  slice(1:5) |> 
+  ggplot() +
+  geom_col(aes(x = reorder(director, n_filmes), y = n_filmes, 
+               color = director, fill = director),
+           show.legend = FALSE) +
+  labs(x = "", y = "Número de filmes",
+       title = "Produções por diretor") 
+```
+
+
+
+## Gráfico de barras
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Grafico de barras  
+imdb |> 
+  filter(
+    !is.na(director)
+    ) |> 
+  group_by(director) |> 
+  summarise(n_filmes = n()) |> 
+  arrange(desc(n_filmes)) |> 
+  slice(1:5) |> 
+  ggplot() +
+  geom_col(aes(x = reorder(director, n_filmes), y = n_filmes, 
+               color = director, fill = director),
+           show.legend = FALSE) +
+  labs(x = "", y = "Número de filmes",
+       title = "Produções por diretor") 
+```
+
+
+## A camada `Facets`
+
+Outra funcionalidade bastante útil é a possibilidade de usar 
+`facets` para replicar um gráfico para cada categorias de uma variável.
+
+![](Images/layer_facet.png){fig-align="center" width="800"}
+
+Para exemplificar esta camada, vamos criar uma variável com o primeiro gênero de cada filme,
+conforme código a seguir.
+
+
+## A camada `Facets`
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Criar variavel de genero
+imdb |> 
+  mutate(
+    genero = stringr::str_split(
+      genre, 
+      pattern = ",", 
+      simplify = TRUE)[,1]
+    ) |> 
+  filter(
+    genero %in% c("Comedy", "Action", "Romance",
+                  "Drama", "Adventure", "Biography"),
+    duration < 300
+    ) |> 
+  ggplot() + 
+  geom_density(aes(x = duration, color = genero, 
+                     fill = genero), show.legend = FALSE) +
+  facet_wrap(~genero, nrow = 2, ncol = 3)
+```
+
+
+
+## A camada `Facets`
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Criar variavel de genero
+imdb |> 
+  mutate(
+    genero = stringr::str_split(
+      genre, 
+      pattern = ",", 
+      simplify = TRUE)[,1]
+    ) |> 
+  filter(
+    genero %in% c("Comedy", "Action", "Romance",
+                  "Drama", "Adventure", "Biography"),
+    duration < 300
+    ) |> 
+  ggplot() + 
+  geom_density(aes(x = duration, color = genero, 
+                     fill = genero), show.legend = FALSE) +
+  facet_wrap(~genero, nrow = 2, ncol = 3)
+```
+
+
+## A camada `Statistics`
+
+A camada `Statistics` permite plotar estatísticas calculadas a partir dos dados.
+
+![](Images/layer_stats.png){fig-align="center" width="800"}
+
+
+## A camada `Statistics`
+
+Nos exemplos a seguir, utilizaremos novamente os dados do **PNUD** sobre os municípios 
+brasileiros nos últimos três Censos.
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Abrir dados
+pnud_mun <- readr::read_csv("Dados/pnud_mun.csv")
+
+# Explorar dados
+glimpse(pnud_mun)
+```
+
+
+
+## A camada `Statistics`
+
+Primeiro, podemos plotar a relação linear entre a renda per capita e o IDHM: 
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  filter(ano == 2010) |> 
+  ggplot() +
+  geom_point(aes(x = rdpc, y = idhm, 
+                 size = pop), color = "darkblue") +
+  geom_smooth(aes(x = rdpc, y = idhm), 
+              color = "black", se = TRUE, method = "lm")
+```
+
+
+
+## A camada `Statistics`
+
+Primeiro, podemos plotar a relação linear entre a renda per capita e o IDHM: 
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  filter(ano == 2010) |> 
+  ggplot() +
+  geom_point(aes(x = rdpc, y = idhm, 
+                 size = pop), color = "darkblue") +
+  geom_smooth(aes(x = rdpc, y = idhm), 
+              color = "black", se = TRUE, method = "lm")
+```
+
+
+
+
+## A camada `Statistics`
+
+Podemos fazer a mesma análise por região do Brasil
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Analise por regiao
+pnud_mun |> 
+  filter(
+    ano == 2010
+    ) |> 
+  ggplot() +
+  geom_point(aes(x = rdpc, y = idhm, 
+                 color = regiao)) +
+  geom_smooth(aes(x = rdpc, y = idhm), color = "black", 
+              se = TRUE, method = "lm") +
+  facet_wrap(~regiao) +
+  labs(x = "Renda domiciliar per capita",
+       y = "IDHM",
+       color = "Região")
+```
+
+
+## A camada `Statistics`
+
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Analise por regiao
+pnud_mun |> 
+  filter(
+    ano == 2010
+    ) |> 
+  ggplot() +
+  geom_point(aes(x = rdpc, y = idhm, 
+                 color = regiao)) +
+  geom_smooth(aes(x = rdpc, y = idhm), color = "black", 
+              se = TRUE, method = "lm") +
+  facet_wrap(~regiao) +
+  labs(x = "Renda domiciliar per capita",
+       y = "IDHM",
+       color = "Região")
+```
+
+
+## A camada `Themes`
+
+A camada `Themes` altera a forma de apresentação dos gráficos.
+
+![](Images/layer_themes.png){fig-align="center" width="800"}
+
+Existem 3 elementos básicos da camada `Themes`: texto, linhas e retângulos. Juntos, 
+este elementos controlam qualquer elemento visual de um gráfico.
+
+
+
+## A camada `Themes`
+
+Para modificar o tipo do tema, vamos considerar o histograma abaixo
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = TRUE) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+
+
+## A camada `Themes`
+
+Para modificar o tipo do tema, vamos considerar o histograma abaixo
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = TRUE) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+
+## A camada `Themes`
+
+Para reordenar as categorias e remover a legenda, fazemos:
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+## A camada `Themes`
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+
+## A camada `Themes`
+
+Para escolher as cores das categorias manualmente, fazemos:
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+
+## A camada `Themes`
+
+Para escolher as cores das categorias manualmente, fazemos:
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+
+
+## A camada `Themes`
+
+Existem alguns temas já prontos disponíveis no `ggplot2` (ver opções diversas neste 
+[link](https://ggplot2.tidyverse.org/reference/ggtheme.html). Para alguns exemplos: 
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") +
+  theme_bw()
+```
+
+
+## A camada `Themes`
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") +
+  theme_bw()
+```
+
+
+## Built-in Themes
+
+Existem alguns temas já prontos disponíveis no `ggplot2` (ver opções diversas neste 
+[link](https://ggplot2.tidyverse.org/reference/ggtheme.html). Para alguns exemplos:   
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita")  +
+  theme_minimal()
+```
+
+
+## Built-in Themes
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita")  +
+  theme_minimal()
+```
+
+
+## Built-in Themes
+
+Ainda, é possível utilizar algumas opções do pacote `ggthemes` 
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Carregar pacote
+library(ggthemes)
+
+# Plot 
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita")  +
+  theme_economist()
+```
+
+
+
+## Built-in Themes
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Carregar pacote
+library(ggthemes)
+
+# Plot 
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita")  +
+  theme_economist()
+```
+
+
+
+
+## Outras referências
+
+Para obter mais material sobre o `ggplot2`:
+
+
+- Conceitos básicos: [https://r4ds.had.co.nz/data-visualisation.html](https://r4ds.had.co.nz/data-visualisation.html)
+- Capítulo *R Graphics Cookbook*: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/)
+- Galeria `ggplot2`: [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyverse.org/gallery/)
+- Gráfico dinâmicos com `ggploty`: [https://plot.ly/ggplot2/extending-ggplotly/](https://plot.ly/ggplot2/extending-ggplotly/)
+
