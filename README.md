@@ -1,6 +1,6 @@
 # Introdução à Ciência de Dados no `R` <img align="right" height="150" src="logo.png">
 
-Bem-vindos ao curso de Introdução à Ciência de Dados no `R` da Universidade Federal da Paraíba. Nesta página, os alunos terão acesso a todos os materiais utilizados durante o semestre, como notas de aula (slides), listas de exercícios, dados e demais materiais de apoio.
+Bem-vindos ao curso de Introdução à Ciência de Dados no `R` da Universidade Federal da Paraíba (UFPB). Nesta página, os alunos terão acesso a todos os materiais utilizados durante o semestre, como notas de aula (*slides*), listas de exercícios, dados e demais materiais de apoio.
 
 - **Professor**: Antonio Vinícius Barbosa
 
@@ -26,7 +26,9 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 8. **Manipulação Avançada** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/08-Manipulacao-Avancada-R/08-Manipulacao-Avancada.html)
 
 
-## Listas e Quizzes
+## Projeto
+
+O roteiro do projeto está disponível neste [link](https://github.com/aviniciusbb/icdr/blob/master/Projeto/Roteiro_Projeto_ICDR.pdf).
 
 
 ## Outros Materiais
