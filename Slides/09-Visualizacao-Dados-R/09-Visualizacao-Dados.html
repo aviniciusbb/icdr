@@ -402,7 +402,7 @@
 <p>Antonio Vinícius Barbosa</p>
 <h2>
 </h2><h3>
-18-04-2023
+20-04-2023
 </h3>
 
 <p><br></p>
@@ -881,7 +881,7 @@
 <p>Alternativamente</p>
 
 <img data-src="09-Visualizacao-Dados_files/figure-revealjs/unnamed-chunk-40-1.png" width="960" class="r-stretch quarto-figure-center"></section><section id="gráfico-de-barras-6" class="slide level2"><h2>Gráfico de barras</h2>
-<p>Caso já tenhamos calculado a soma, utilizamos <code>geom_col()</code></p>
+<p>Caso já tenhamos calculado a estatística a ser apresentada, utilizamos <code>geom_col()</code></p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Grafico de barras  </span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>imdb <span class="sc">|&gt;</span> </span>
@@ -1147,7 +1147,110 @@
 </div>
 </section><section id="built-in-themes-3" class="slide level2"><h2>Built-in Themes</h2>
 
-<img data-src="09-Visualizacao-Dados_files/figure-revealjs/unnamed-chunk-63-1.png" width="960" class="r-stretch quarto-figure-center"></section><section id="outras-referências" class="slide level2"><h2>Outras referências</h2>
+<img data-src="09-Visualizacao-Dados_files/figure-revealjs/unnamed-chunk-63-1.png" width="960" class="r-stretch quarto-figure-center"></section><section id="a-camada-themes-9" class="slide level2"><h2>A camada <code>Themes</code>
+</h2>
+<p>Podemos ajustar os elementos do <code>theme</code> manualmente</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>pnud_mun <span class="sc">|&gt;</span> </span>
+<span id="cb35-2"><a href="#cb35-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> regiao, <span class="at">y =</span> rdpc, <span class="at">fill =</span> regiao),</span>
+<span id="cb35-4"><a href="#cb35-4"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb35-7"><a href="#cb35-7"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Nordeste"</span>, <span class="st">"Norte"</span>, <span class="st">"Centro-Oeste"</span>, </span>
+<span id="cb35-8"><a href="#cb35-8"></a>               <span class="st">"Sudeste"</span>, <span class="st">"Sul"</span>)) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#fc8d62"</span>, <span class="st">"#8da0cb"</span>, </span>
+<span id="cb35-10"><a href="#cb35-10"></a>                               <span class="st">"#e78ac3"</span>, <span class="st">"#a6d854"</span>, </span>
+<span id="cb35-11"><a href="#cb35-11"></a>                               <span class="st">"#666666"</span>)) <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Região"</span>, <span class="at">y =</span> <span class="st">"Renda disponível per capita"</span>,</span>
+<span id="cb35-13"><a href="#cb35-13"></a>       <span class="at">title =</span> <span class="st">"Boxplot: renda disponível per capita"</span>) <span class="sc">+</span></span>
+<span id="cb35-14"><a href="#cb35-14"></a>  <span class="fu">theme</span>(</span>
+<span id="cb35-15"><a href="#cb35-15"></a>    </span>
+<span id="cb35-16"><a href="#cb35-16"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">'#F0F0C9'</span>, <span class="at">color =</span> <span class="st">'#373F51'</span>),</span>
+<span id="cb35-17"><a href="#cb35-17"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">'#58A4B0'</span>, <span class="at">linetype =</span> <span class="st">'dotted'</span>),</span>
+<span id="cb35-18"><a href="#cb35-18"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb35-19"><a href="#cb35-19"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>)</span>
+<span id="cb35-20"><a href="#cb35-20"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Outras opções na <a href="https://ggplot2.tidyverse.org/reference/theme.html">documentação</a>.</p>
+</section><section id="a-camada-themes-10" class="slide level2"><h2>A camada <code>Themes</code>
+</h2>
+<p>Podemos ajustar os elementos do <code>theme</code> manualmente</p>
+
+<img data-src="09-Visualizacao-Dados_files/figure-revealjs/unnamed-chunk-65-1.png" width="960" class="r-stretch quarto-figure-center"></section><section id="salvando-gráficos-em-objetos" class="slide level2"><h2>Salvando gráficos em objetos</h2>
+<p>Da mesma forma que atribuímos valores em objetos, podemos atribuir gráficos a objetos. Por exemplo, podemos fazer:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>plot_boxplot <span class="ot">&lt;-</span> pnud_mun <span class="sc">|&gt;</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> regiao, <span class="at">y =</span> rdpc, <span class="at">fill =</span> regiao),</span>
+<span id="cb36-4"><a href="#cb36-4"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>dollar) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb36-7"><a href="#cb36-7"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Nordeste"</span>, <span class="st">"Norte"</span>, <span class="st">"Centro-Oeste"</span>, </span>
+<span id="cb36-8"><a href="#cb36-8"></a>               <span class="st">"Sudeste"</span>, <span class="st">"Sul"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="salvando-gráficos-em-objetos-1" class="slide level2"><h2>Salvando gráficos em objetos</h2>
+<p>Uma vez salvo, podemos adicionar mais camadas ao gráfico:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>plot_boxplot <span class="sc">+</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#fc8d62"</span>, <span class="st">"#8da0cb"</span>, </span>
+<span id="cb37-3"><a href="#cb37-3"></a>                               <span class="st">"#e78ac3"</span>, <span class="st">"#a6d854"</span>, </span>
+<span id="cb37-4"><a href="#cb37-4"></a>                               <span class="st">"#666666"</span>)) <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Região"</span>, <span class="at">y =</span> <span class="st">"Renda disponível per capita"</span>,</span>
+<span id="cb37-6"><a href="#cb37-6"></a>       <span class="at">title =</span> <span class="st">"Boxplot: renda disponível per capita"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="salvando-gráficos" class="slide level2"><h2>Salvando gráficos</h2>
+<p>Para salvar gráficos no computador, existem duas opções:</p>
+<ul>
+<li>Pelo ícone <code>Export</code>
+</li>
+<li>Pela função <code>ggsave()</code>
+</li>
+</ul>
+<div class="fragment">
+<p>Para o segundo caso, fazemos:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="co"># Salvar grafico</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">ggsave</span>(<span class="st">"plot_boxplot.png"</span>, </span>
+<span id="cb38-3"><a href="#cb38-3"></a>       <span class="at">plot =</span> plot_boxplot,</span>
+<span id="cb38-4"><a href="#cb38-4"></a>       <span class="at">path =</span> <span class="st">"Plots/"</span>,</span>
+<span id="cb38-5"><a href="#cb38-5"></a>       <span class="at">width =</span> <span class="dv">14</span> , <span class="at">height =</span> <span class="fl">8.5</span>, <span class="at">units =</span> <span class="st">"in"</span></span>
+<span id="cb38-6"><a href="#cb38-6"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section><section id="combinando-plots" class="slide level2"><h2>Combinando plots</h2>
+<p>Suponha que queiramos combinar vários plots em uma única imagem, uma opção bastante simples é atravé do pacote <code>patchwork</code>.</p>
+
+<img data-src="https://patchwork.data-imaginist.com/reference/figures/logo.png" width="800" class="r-stretch quarto-figure-center"><div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Instalar e carregar pacote</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="exemplos-de-uso-do-patchwork" class="slide level2"><h2>Exemplos de uso do <code>patchwork</code>
+</h2>
+<div class="cell">
+
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Compor graficos</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(mpg, disp))</span>
+<span id="cb40-3"><a href="#cb40-3"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(gear, disp, <span class="at">group =</span> gear))</span>
+<span id="cb40-4"><a href="#cb40-4"></a></span>
+<span id="cb40-5"><a href="#cb40-5"></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="09-Visualizacao-Dados_files/figure-revealjs/unnamed-chunk-71-1.png" width="960" class="r-stretch quarto-figure-center"></section><section id="exemplos-de-uso-do-patchwork-1" class="slide level2"><h2>Exemplos de uso do <code>patchwork</code>
+</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># Compor graficos</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(disp, qsec))</span>
+<span id="cb41-3"><a href="#cb41-3"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(carb))</span>
+<span id="cb41-4"><a href="#cb41-4"></a></span>
+<span id="cb41-5"><a href="#cb41-5"></a>(p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span></span>
+<span id="cb41-6"><a href="#cb41-6"></a>      p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="09-Visualizacao-Dados_files/figure-revealjs/unnamed-chunk-72-1.png" width="960" class="r-stretch quarto-figure-center"></section><section id="outras-referências" class="slide level2"><h2>Outras referências</h2>
 <p>Para obter mais material sobre o <code>ggplot2</code>:</p>
 <ul>
 <li>Conceitos básicos: <a href="https://r4ds.had.co.nz/data-visualisation.html">https://r4ds.had.co.nz/data-visualisation.html</a>
@@ -1157,6 +1260,8 @@
 <li>Galeria <code>ggplot2</code>: <a href="https://exts.ggplot2.tidyverse.org/gallery/">https://exts.ggplot2.tidyverse.org/gallery/</a>
 </li>
 <li>Gráfico dinâmicos com <code>ggploty</code>: <a href="https://plot.ly/ggplot2/extending-ggplotly/">https://plot.ly/ggplot2/extending-ggplotly/</a>
+</li>
+<li>Gráficos animados com <code>gganimate</code><a href="https://gganimate.com/">https://gganimate.com/</a>
 </li>
 </ul>
 <div class="footer footer-default">

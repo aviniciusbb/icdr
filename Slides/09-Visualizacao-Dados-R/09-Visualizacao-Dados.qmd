@@ -978,7 +978,7 @@ imdb |>
 
 ## Gráfico de barras
 
-Caso já tenhamos calculado a soma, utilizamos `geom_col()`
+Caso já tenhamos calculado a estatística a ser apresentada, utilizamos `geom_col()`
 
 ```{r}
 #| echo: TRUE
@@ -1418,6 +1418,9 @@ pnud_mun |>
 
 
 
+
+
+
 ## A camada `Themes`
 
 Existem alguns temas já prontos disponíveis no `ggplot2` (ver opções diversas neste 
@@ -1581,7 +1584,187 @@ pnud_mun |>
   theme_economist()
 ```
 
+## A camada `Themes`
 
+Podemos ajustar os elementos do `theme` manualmente
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") +
+  theme(
+    
+    panel.background = element_rect(fill = '#F0F0C9', color = '#373F51'),
+    panel.grid.major = element_line(color = '#58A4B0', linetype = 'dotted'),
+    panel.grid.minor = element_blank(),
+    text = element_text(size = 20)
+  )
+```
+
+Outras opções na [documentação](https://ggplot2.tidyverse.org/reference/theme.html).
+
+## A camada `Themes`
+
+Podemos ajustar os elementos do `theme` manualmente
+
+
+```{r}
+#| echo: FALSE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul")) +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") +
+  theme(
+    
+    panel.background = element_rect(fill = '#F0F0C9', color = '#373F51'),
+    panel.grid.major = element_line(color = '#58A4B0', linetype = 'dotted'),
+    panel.grid.minor = element_blank(),
+    text = element_text(size = 20)
+  )
+```
+
+## Salvando gráficos em objetos
+
+Da mesma forma que atribuímos valores em objetos, podemos atribuir
+gráficos a objetos. Por exemplo, podemos fazer:
+
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+plot_boxplot <- pnud_mun |> 
+  ggplot() +
+  geom_boxplot(aes(x = regiao, y = rdpc, fill = regiao),
+               show.legend = FALSE) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_discrete(
+    limits = c("Nordeste", "Norte", "Centro-Oeste", 
+               "Sudeste", "Sul"))
+```
+
+
+## Salvando gráficos em objetos
+
+Uma vez salvo, podemos adicionar mais camadas ao gráfico:
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+plot_boxplot +
+  scale_fill_manual(values = c("#fc8d62", "#8da0cb", 
+                               "#e78ac3", "#a6d854", 
+                               "#666666")) +
+  labs(x = "Região", y = "Renda disponível per capita",
+       title = "Boxplot: renda disponível per capita") 
+```
+
+
+## Salvando gráficos 
+
+Para salvar gráficos no computador, existem duas opções:
+
+- Pelo ícone `Export`
+- Pela função `ggsave()`
+
+. . .
+
+Para o segundo caso, fazemos:
+
+```{r}
+#| echo: TRUE
+#| eval: FALSE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Salvar grafico
+ggsave("plot_boxplot.png", 
+       plot = plot_boxplot,
+       path = "Plots/",
+       width = 14 , height = 8.5, units = "in"
+       )
+```
+
+
+## Combinando plots
+
+Suponha que queiramos combinar vários plots em uma única imagem, uma 
+opção bastante simples é atravé do pacote `patchwork`.
+
+![](https://patchwork.data-imaginist.com/reference/figures/logo.png){fig-align="center" width="800"}
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Instalar e carregar pacote
+install.packages("patchwork")
+library(patchwork)
+```
+
+
+## Exemplos de uso do `patchwork`
+
+```{r, echo=FALSE}
+library(patchwork)
+```
+
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Compor graficos
+p1 <- ggplot(mtcars) + geom_point(aes(mpg, disp))
+p2 <- ggplot(mtcars) + geom_boxplot(aes(gear, disp, group = gear))
+
+p1 + p2
+```
+
+
+
+## Exemplos de uso do `patchwork`
+
+
+```{r}
+#| echo: TRUE
+#| eval: TRUE
+#| collapse: TRUE
+#| fig.align: 'center'
+# Compor graficos
+p3 <- ggplot(mtcars) + geom_smooth(aes(disp, qsec))
+p4 <- ggplot(mtcars) + geom_bar(aes(carb))
+
+(p1 | p2 | p3) /
+      p4
+```
 
 
 ## Outras referências
@@ -1593,4 +1776,4 @@ Para obter mais material sobre o `ggplot2`:
 - Capítulo *R Graphics Cookbook*: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/)
 - Galeria `ggplot2`: [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyverse.org/gallery/)
 - Gráfico dinâmicos com `ggploty`: [https://plot.ly/ggplot2/extending-ggplotly/](https://plot.ly/ggplot2/extending-ggplotly/)
-
+- Gráficos animados com `gganimate`[https://gganimate.com/](https://gganimate.com/)
