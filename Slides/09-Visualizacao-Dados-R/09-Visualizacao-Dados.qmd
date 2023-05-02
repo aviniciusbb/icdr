@@ -1776,4 +1776,4 @@ Para obter mais material sobre o `ggplot2`:
 - Capítulo *R Graphics Cookbook*: [http://www.cookbook-r.com/Graphs/](http://www.cookbook-r.com/Graphs/)
 - Galeria `ggplot2`: [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyverse.org/gallery/)
 - Gráfico dinâmicos com `ggploty`: [https://plot.ly/ggplot2/extending-ggplotly/](https://plot.ly/ggplot2/extending-ggplotly/)
-- Gráficos animados com `gganimate`[https://gganimate.com/](https://gganimate.com/)
+- Gráficos animados com `gganimate`: [https://gganimate.com/](https://gganimate.com/)
