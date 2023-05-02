@@ -25,7 +25,7 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 7. **Formatando Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/07-Formatando-Dados-R/07-Formatando-Dados.html)
 8. **Manipulação Avançada** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/08-Manipulacao-Avancada-R/08-Manipulacao-Avancada.html)
 9. **Visualização de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/09-Visualizacao-Dados-R/09-Visualizacao-Dados.html)
-
+10. **Visualização por Mapas** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/10-Visualizacao-Mapas-R/10-Visualizacao-Mapas.html)
 
 
 ## Projeto
