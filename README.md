@@ -33,5 +33,12 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 O roteiro do projeto está disponível neste [link](https://github.com/aviniciusbb/icdr/blob/master/Projeto/Roteiro_Projeto_ICDR.pdf).
 
 
-## Outros Materiais
+## Links
+
+- [Christian Burkhart tips](https://twitter.com/ChBurkhart)
+- [Blog Curso-R](https://blog.curso-r.com/)
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [From Data to Viz](https://www.data-to-viz.com/)
+- [Quarto.org](https://quarto.org/)
+- [Coolors - Pallete generator](https://coolors.co/)
 
