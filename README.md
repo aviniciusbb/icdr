@@ -41,4 +41,5 @@ O roteiro do projeto está disponível neste [link](https://github.com/avinicius
 - [From Data to Viz](https://www.data-to-viz.com/)
 - [Quarto.org](https://quarto.org/)
 - [Coolors - Pallete generator](https://coolors.co/)
+- [Tutorail Git e GitHub](https://beatrizmilz.github.io/RLadies-Git-RStudio-2019/#1)
 
