@@ -42,4 +42,7 @@ O roteiro do projeto está disponível neste [link](https://github.com/avinicius
 - [Quarto.org](https://quarto.org/)
 - [Coolors - Pallete generator](https://coolors.co/)
 - [Tutorail Git e GitHub](https://beatrizmilz.github.io/RLadies-Git-RStudio-2019/#1)
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+- [Cookbook for R](http://www.cookbook-r.com/)
+- [YaRrr! The Pirate’s Guide to R](https://bookdown.org/ndphillips/YaRrr/)
 
