@@ -1,0 +1,549 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 11 </font> - Documentos Dinâmicos</h2>
+
+<h2><font color="FFFFFF"> Aula 11 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://static.vecteezy.com/system/resources/previews/002/575/405/original/paper-document-with-code-line-and-fill-style-icon-free-vector.jpg){.absolute
+top="400" left="1150" width="400"}
+
+# <font color="1b5299"> Documentos Dinâmicos </font> {background-color="#BBDEF0"}
+
+## Literate programming
+
+> A ideia do **Literate programming** consiste em combinar inputs e
+> outputs com o objetivo de criar documentos reproduzíveis
+
+-   De forma geral, combina o texto da forma usual com elementos de
+    programação.
+-   Assim, os diversos elementos são combinados para gerar um documento
+    reprodutível e auto explicativo
+
+![](https://images.wisegeek.com/slideshow-mobile-small/math-cypher.jpg){fig-align="center"
+width="800"}
+
+## Pacotes
+
+Alguns pacotes do `R` permitem a integração de textos e cófigos
+
+-   `Sweave`: permitia que o código R fosse integrado a documentos LaTeX
+-   `knitr`: variação do Markdown que permite a junção de códigos
+-   `RMarkdown`: permite a construção de textos, apresentações, sites...
+
+. . .
+
+Atualmente, o `quarto` é a ferramenta mais completa para gerar documentos dinâmicos
+
+![](https://www.rebeccabarter.com/blog/img/quarto/quarto.jpg){fig-align="center" width="800"}
+
+# <font color="1b5299"> `quarto` </font> {background-color="#BBDEF0"}
+
+## `quarto`
+
+-   `quarto` é um sistema de publicação científica e técnica de código
+    aberto
+-   É possível combinar texto narrativo e código para produzir uma saída
+    elegantemente formatada como documentos, páginas da Web, postagens
+    de blog, livros e muito mais.
+
+Para instalar, fazemos:
+
+```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
+#Instalar pacote
+install.packages("knitr")
+install.packages("quarto")
+```
+
+![](https://jthomasmock.github.io/quarto-2hr-webinar/materials/images/horst_quarto_schematic.png){fig-align="center"
+width="800"}
+
+
+## `quarto`
+
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-hello.png){fig-align="center"
+width="800"}
+
+## Como o `quarto` funciona?
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-qmd-how-it-works.png){fig-align="center"
+width="800"}
+
+* Ao renderizar um documento `quarto`, primeiro o `knitr` executa todos os blocos de código e cria um novo documento `markdown` (.md) que inclui o código e sua saída. 
+* O arquivo `markdown` gerado é então processado pelo `pandoc`, que cria o formato finalizado. 
+* O botão `Render` encapsula essas ações e as executa na ordem certa.
+
+
+## Criando um documento `quarto`
+
+- Para criar um novo documento vá em `File > New File > Quarto Document`
+- Alternativamente, utilize os comandos `Ctrl+Shift+P` para criar um novo documento
+
+![](https://quarto.org/docs/get-started/authoring/images/rstudio-new-document.png){fig-align="center"
+width="800"}
+
+
+## Renderização
+
+Use o botão  Render no RStudio IDE para renderizar o arquivo e visualizar a saída com um único clique ou atalho de teclado (Ctrl + Shift + K).
+
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-render.png){fig-align="center"
+width="800"}
+
+Ao renderizar, o `quarto` gera um novo arquivo que contém texto, código e resultados selecionados do arquivo `.qmd`. O novo arquivo pode ser um documento HTML,PDF, MS Word, apresentação, website, livro, documento interativo ou outro formato.
+
+
+## Formas de visualização
+
+Existem dois tipos de editores: **Source** e **Visual**
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-source-visual.png){fig-align="center"
+width="800"}
+
+
+
+## A anatomia de um documento
+
+Há três componentes principais em um documento `Quarto`:
+
+- Os **metadados** (`YAML`) contêm as informações básicas do documento, tais como título,
+autor e o tipo de output, além de outras opções. Este componente está compreendido entre três linhas (`---`).
+- O **corpo** do documento, escrito em `Markdown`.
+- O bloco de código (ou *code chunk*) com a indicação da linguagem utilizada a ser executada.
+
+## A anatomia de um documento
+
+Como exemplo, considere o seguinte código
+
+````
+---
+title: "ggplot2 demo"
+date: "5/22/2021"
+format: html
+---
+
+## Air Quality
+
+There is a relationship between temperature and the ozone level.
+
+```{{r}}
+#| label: fig-airquality
+library(ggplot2)
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess"
+)
+```
+````
+
+
+## Metadata: `YAML`
+
+Como vimos, os metadados são inseridos entre os três traços (`---`).
+A sintaxe dos metadados é o `YAML` (YAML Ain’t Markup Language). Nela, inserimos
+informações básicas do documento, tais como o título do documento, o nome do
+autor, a filiação, a data e o formato do output. De forma geral:
+
+
+````{{r}}
+---
+key: value
+---
+
+````
+
+. . . 
+
+Por exemplo, para inserir o título fazemos:
+
+````{{r}}
+---
+title: "Meu primeiro documento"
+---
+````
+
+. . . 
+
+Para inserir data no documento:
+
+````{{r}}
+---
+date: 09/05/2023
+---
+````
+
+## Opções de Formatos
+
+Existem várias opções de formatos.  O formato HTML cria documentos que podem ser 
+abertos no navegador.
+
+````{{r}}
+---
+format: html
+---
+````
+
+Para documentos com formato PDF:
+
+````{{r}}
+---
+format: pdf
+---
+````
+
+Para apresentações, utilizamos:
+
+
+````{{r}}
+---
+format: revealjs
+---
+````
+
+
+Outras opções disponíveis podem ser vistas neste [link](https://quarto.org/docs/output-formats/all-formats.html).
+
+
+## Opções de Formatos
+
+Além disso, é possível definir opções dentro de um formato:
+
+````{{r}}
+---
+format: 
+  html:
+    toc: true
+    code-fold: true
+---
+````
+
+Notar que a identação (espaçamento) importa no YAML.
+
+
+## `format: html`
+
+* Para outras opções do formato HTML, ver a [documentação](https://quarto.org/docs/reference/formats/html.html).
+* Além disso, ver o [guia de referência](https://quarto.org/docs/output-formats/html-basics.html).   
+
+
+## Markdown: elementos textuais
+
+- Desenvolvido em 2004 por John Gruber e Aaron Swartz para simplificar a estruturação de um texto, o **Markdown** é um sistema de formatação aberto que torna a escrita e a leitura mais simples. Com uma codificação mínima, além de fácil, ele é visualmente mais "limpo" e pode ser convertido facilmente para HTML.
+
+![](https://codingnconcepts.com/img/markdown/whatsapp-supports-markdown.png){fig-align="center" width="800"}
+
+## Sintaxe Markdown
+
+Do lado esquerdo temos alguns exemplos da sintaxe do Markdown e, do
+lado direito, o resultado gerado.
+
+![](Images/sintaxe_plain.png){fig-align="center" width="800"}
+
+## Sintaxe Markdown
+
+
+Para inserir seções e subseções no texto, fazemos através do símbolo \#
+
+![](Images/markdown_sections.png){fig-align="center" width="800"}
+
+
+
+## Sintaxe Markdown
+
+Para inserir tópicos, listas ordenadas e tabelas no Markdown, utilizamos
+a seguinte sintaxe:
+
+![](Images/markdown_lists.png){fig-align="center" width="800"}
+
+## Adicionando links e hyperlinks
+
+Para adicionar um link, podemos fazer:
+
+
+````{{r}}
+A [UFPB](https://www.ufpb.br/) é a maior universidade do estado.
+````
+
+A [UFPB](https://www.ufpb.br/) é a maior universidade do estado.
+
+
+Ou diretamente, através de:
+
+
+````{{r}}
+Website da UFPB: <https://www.ufpb.br/>
+````
+
+Website da UFPB: <https://www.ufpb.br/>
+
+
+## Bloco de códigos
+
+Um bloco de código (ou *code chunks*) possui a seguinte estrutura básica:
+
+````
+```{{r}}
+#| label: car-stuff
+#| echo: false
+mtcars |>  
+  distinct(cyl)
+```
+
+````
+
+. . . 
+
+* Um código é inserido entre os símbolos ` ``` `
+* `{r}` siginifica a linguagem que o código será executado
+* As opções de execução são inseridos através de comentário especial `#|` (hashpipe)
+
+## Códigos em linha
+
+Para incluir expressões executáveis, utilizamos a notação  `'r '` . Por exemplo, podemos usar código embutido para indicar o número de observações em nossos dados. 
+
+
+> A base `mtcars` possui `r nrow(mtcars)` linhas e `r ncol(mtcars)` colunas. 
+
+
+
+
+## Bloco de códigos
+
+* A forma como adicionamos códigos no documento depende do contexto.
+* Para fins didáticos, é sempre importante mostrar o código e o resultado gerado.
+* Para relatórios e trabalhos acadêmicos, no entanto, podemo omitir o código e 
+apresentar apenas o output.
+
+
+## Bloco de códigos
+
+Por exemplo, as opções `eval` e `echo` mudam a forma de apresentação e execução:
+
+````
+```{{r}}
+#| eval: true
+#| echo: true
+head(mtcars)
+```
+
+````
+
+O código gera o seguinte resultado
+
+```{r}
+#| eval: true
+#| echo: true
+head(mtcars)
+```
+
+
+## Bloco de códigos
+
+Para apresentar apenas o output, fazemos:
+
+````
+```{{r}}
+#| eval: true
+#| echo: false
+head(mtcars)
+```
+
+````
+
+Obtendo, como resulado:
+
+```{r}
+#| eval: true
+#| echo: false
+head(mtcars)
+```
+
+
+## Bloco de códigos
+
+Ainda, é possível apresentar apenas o código, mas não executar:
+
+````
+```{{r}}
+#| eval: false
+#| echo: true
+head(mtcars)
+```
+
+````
+
+Obtendo, como resulado:
+
+```{r}
+#| eval: false
+#| echo: true
+head(mtcars)
+```
+
+
+## Outras opções de execução
+
+* `include:` (`true`) Inclui o resultado do código no documento.
+* `message:` (`true`) Inclui mensagem do `R`.
+* `warning:` (`true`) Inclui avisos do `R`.
+* `output:` (`true`) Como e se incluir os resultados.
+* `label: ` Adicionar um label para um código
+* `collapse` (`true`) Junta código e resultado num mesmo quadro.
+
+
+
+## Outras opções de execução
+
+````
+```{{r}}
+#| label: meu_histograma
+#| eval: true
+#| echo: true
+#| warning: false
+#| message: false
+#| collapse: true
+head(mtcars)
+```
+
+````
+ Como resultado, obtemos:
+
+
+```{r}
+#| label: minha_soma
+#| eval: true
+#| echo: true
+#| warning: false
+#| message: false
+#| collapse: true
+c(1, 1) + c(2, 4, 5)
+```
+
+
+## Destacando partes do código
+
+É possível destacar linhas (ou conjunto de linhas de um código):
+
+```{r}
+#| label: meu_histograma
+#| eval: false
+#| echo: fenced
+#| code-line-numbers: "|5|7-11|"
+library(ggplot2)
+
+ggplot(data = mtcars) +
+  geom_histogram(
+    aes(x = hp), bins = 10
+  ) +
+  theme_minimal()
+
+```
+
+
+## Callout Blocks
+
+- Os *Callout Blocks* são uma excelente maneira de chamar atenção para determinados 
+conceitos.
+
+- Existem cinco tipos diferentes de chamadas disponíveis:
+
+  + `note`
+  + `warning`
+  + `important`
+  + `tip`
+  + `caution`
+  
+## Callout Blocks
+
+````{{r}}
+:::{.callout-note}
+## Importante
+Este é um exemplo para notas!
+:::
+````
+
+
+````{{r}}
+:::{.callout-tip}
+## Dica
+Este é um exemplo para dicas!
+:::
+````
+
+
+````{{r}}
+:::{.callout-warning}
+## Aviso
+Este é um exemplo para avisos!
+:::
+````
+
+
+````{{r}}
+:::{.callout-important}
+## Importante
+Este é um exemplo para algo importante!
+:::
+````
+
+## Callout Blocks
+
+
+:::{.callout-note}
+## Importante
+Este é um exemplo para notas!
+:::
+
+
+:::{.callout-tip}
+## Dica
+Este é um exemplo para dicas!
+:::
+
+:::{.callout-warning}
+## Aviso
+Este é um exemplo para avisos!
+:::
+
+:::{.callout-important}
+## Importante
+Este é um exemplo para algo importante!
+:::
+
+
+
+# <font color="1b5299"> Apresentações </font> {background-color="#BBDEF0"}
