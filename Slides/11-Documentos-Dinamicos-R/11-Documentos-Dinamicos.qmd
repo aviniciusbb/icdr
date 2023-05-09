@@ -83,7 +83,7 @@ Para instalar, fazemos:
 
 ```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
 #Instalar pacote
-install.packages("knitr")
+install.packages("rmarkdown")
 install.packages("quarto")
 ```
 
