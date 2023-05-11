@@ -939,5 +939,14 @@ Para publicar um conteúdo, é necessário criar um projeto no `RStudio`. Em seg
 quarto publish quarto-pub
 ````
 
-
 Após isso, é necessário adicionar o login e senha cadastrados.
+
+
+# <font color="1b5299"> Galeria </font> {background-color="#BBDEF0"}
+
+## Galeria
+
+Para aprender mais, ver galeria com exemplos e códigos ([link](https://quarto.org/docs/gallery/)).
+
+
+![](Images/gallery.png){fig-align="center"}
