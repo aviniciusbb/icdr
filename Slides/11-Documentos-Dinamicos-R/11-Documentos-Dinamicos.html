@@ -402,7 +402,7 @@
 <p>Antonio Vinícius Barbosa</p>
 <h2>
 </h2><h3>
-09-05-2023
+10-05-2023
 </h3>
 
 <p><br></p>
@@ -421,14 +421,14 @@
 </ul>
 
 <img data-src="https://images.wisegeek.com/slideshow-mobile-small/math-cypher.jpg" width="800" class="r-stretch quarto-figure-center"></section><section id="pacotes" class="slide level2"><h2>Pacotes</h2>
-<p>Alguns pacotes do <code>R</code> permitem a integração de textos e cófigos</p>
+<p>Alguns pacotes do <code>R</code> permitem a integração de textos e códigos</p>
 <ul>
 <li>
-<code>Sweave</code>: permitia que o código R fosse integrado a documentos LaTeX</li>
+<code>sweave</code>: permitia que o código R fosse integrado a documentos LaTeX</li>
 <li>
 <code>knitr</code>: variação do Markdown que permite a junção de códigos</li>
 <li>
-<code>RMarkdown</code>: permite a construção de textos, apresentações, sites…</li>
+<code>rmarkdown</code>: permite a construção de textos, apresentações, sites…</li>
 </ul>
 <div class="fragment">
 <p>Atualmente, o <code>quarto</code> é a ferramenta mais completa para gerar documentos dinâmicos</p>
@@ -772,11 +772,326 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </div>
 </div>
-</section></section><section id="apresentações" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Apresentações </font></h1>
+</section><section id="inserindo-figuras" class="slide level2"><h2>Inserindo figuras</h2>
+<p><code>quarto</code> possui uma série de ferramentas para introduzir finguras nos documentos. Para introduzir uma figura em Markdown, fazemos</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb27-1"><a href="#cb27-1"></a>![Elefante](elefante.jpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="Images/elefante.jpg" class="r-stretch quarto-figure-center"><p class="caption">Elefante</p></section><section id="opções-de-figuras" class="slide level2"><h2>Opções de figuras</h2>
+<p>Para alterar as dimensões de uma figura, utilizamos os parâmetros <code>width</code> e <code>height</code>. Além disso, podemos ajustar o alinhamento através de <code>fig-align</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb28-1"><a href="#cb28-1"></a>![Elefante](elefante.jpg){width=200 fig-align="left"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="Images/elefante.jpg" width="200" class="r-stretch quarto-figure-left"><p class="caption">Elefante</p></section><section id="figuras-através-de-links" class="slide level2"><h2>Figuras através de links</h2>
+<p>Para inserir figuras externas, obtidas através de links, fazemos:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb29-1"><a href="#cb29-1"></a>![Caramelo](https://p16.resso.me/img/tos-alisg-i-0000/d0b1ea1759d84159a3bbd11952613b68~c5_500x500.jpg){width=100 fig.align="center"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img data-src="https://p16.resso.me/img/tos-alisg-i-0000/d0b1ea1759d84159a3bbd11952613b68~c5_500x500.jpg" data-fig.align="center" width="100" class="r-stretch quarto-figure-center"><p class="caption">Caramelo</p></section><section id="subfiguras" class="slide level2"><h2>Subfiguras</h2>
+<p>Para adicionar múltiplas figuras, fazemos:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb30-1"><a href="#cb30-1"></a>::: {#fig-elephants layout-ncol=2}</span>
+<span id="cb30-2"><a href="#cb30-2"></a></span>
+<span id="cb30-3"><a href="#cb30-3"></a>![Subfigura 1](https://quarto.org/docs/gallery/interactive/interactive-jupyter.png)</span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a>![Subfigura 2](https://quarto.org/docs/gallery/articles/advanced-layout-pdf.png)</span>
+<span id="cb30-6"><a href="#cb30-6"></a></span>
+<span id="cb30-7"><a href="#cb30-7"></a>Famous Elephants</span>
+<span id="cb30-8"><a href="#cb30-8"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="subfiguras-1" class="slide level2"><h2>Subfiguras</h2>
+<div id="fig-elephants" class="quarto-layout-panel">
+<figure><div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="https://quarto.org/docs/gallery/interactive/interactive-jupyter.png"></p>
+<p></p><figcaption>Subfigura 1</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="https://quarto.org/docs/gallery/articles/advanced-layout-pdf.png"></p>
+<p></p><figcaption>Subfigura 2</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption>Figure&nbsp;1: Exemplo de documentos <code>quarto</code></figcaption><p></p>
+</figure>
+</div>
+</section><section id="tabelas" class="slide level2"><h2>Tabelas</h2>
+<p>A melhor forma de adicionar tabelas é através da função <code>kable</code> do pacote <code>knitr</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb31-2"><a href="#cb31-2"></a>  dados<span class="sc">::</span>dados_starwars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],</span>
+<span id="cb31-3"><a href="#cb31-3"></a>  <span class="at">caption =</span> <span class="st">"Personagens Starwars"</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<caption>Personagens Starwars</caption>
+<thead><tr class="header">
+<th style="text-align: left;">nome</th>
+<th style="text-align: right;">altura</th>
+<th style="text-align: right;">massa</th>
+<th style="text-align: left;">cor_do_cabelo</th>
+<th style="text-align: left;">cor_da_pele</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Luke Skywalker</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: left;">Loiro</td>
+<td style="text-align: left;">Branca clara</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C-3PO</td>
+<td style="text-align: right;">167</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Ouro</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R2-D2</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Branca, Azul</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Darth Vader</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: left;">Nenhum</td>
+<td style="text-align: left;">Branca</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leia Organa</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">Castanho</td>
+<td style="text-align: left;">Clara</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Para outras opções de costumização das tabelas, é recomendado o pacote <code>kableExtra</code></p>
+</section></section><section><section id="apresentações" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Apresentações </font></h1>
+
+</section><section id="apresentações-1" class="slide level2"><h2>Apresentações</h2>
+<p>O <code>quarto</code> suporta alguns formatos para criar apresentações:</p>
+<ul>
+<li>
+<code>revealjs</code> — reveal.js (HTML)</li>
+<li>
+<code>pptx</code> — PowerPoint (MS Office)</li>
+<li>
+<code>beamer</code> — Beamer (LaTeX/PDF)</li>
+</ul>
+<p>Enquanto o formato <code>pptx</code> e <code>beamer</code> geram apresentações estáticas, o formato <code>revealjs</code> gera aprensetações mais flexíveis.</p>
+</section><section id="criando-apresentações" class="slide level2"><h2>Criando apresentações</h2>
+<p>Em Markdown, os slides são delineados usando seções. Por exemplo, esta é uma apresentação simples com dois slides (cada um definido com um título de nível 2 (##):</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb32-1"><a href="#cb32-1"></a>---</span>
+<span id="cb32-2"><a href="#cb32-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb32-3"><a href="#cb32-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb32-4"><a href="#cb32-4"></a>format: revealjs</span>
+<span id="cb32-5"><a href="#cb32-5"></a>---</span>
+<span id="cb32-6"><a href="#cb32-6"></a></span>
+<span id="cb32-7"><a href="#cb32-7"></a>## Slide 1</span>
+<span id="cb32-8"><a href="#cb32-8"></a></span>
+<span id="cb32-9"><a href="#cb32-9"></a>- Apresentacao</span>
+<span id="cb32-10"><a href="#cb32-10"></a>- Objetivos</span>
+<span id="cb32-11"><a href="#cb32-11"></a></span>
+<span id="cb32-12"><a href="#cb32-12"></a>## Slide 2</span>
+<span id="cb32-13"><a href="#cb32-13"></a></span>
+<span id="cb32-14"><a href="#cb32-14"></a>- Resultados</span>
+<span id="cb32-15"><a href="#cb32-15"></a>- Conclusão</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="criando-apresentações-1" class="slide level2"><h2>Criando apresentações</h2>
+<p>Para dividir os slides por seções, podemos introduzir títulos de nível 1 (#)</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb33-1"><a href="#cb33-1"></a>---</span>
+<span id="cb33-2"><a href="#cb33-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb33-3"><a href="#cb33-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb33-4"><a href="#cb33-4"></a>format: revealjs</span>
+<span id="cb33-5"><a href="#cb33-5"></a>---</span>
+<span id="cb33-6"><a href="#cb33-6"></a></span>
+<span id="cb33-7"><a href="#cb33-7"></a># Parte 1</span>
+<span id="cb33-8"><a href="#cb33-8"></a></span>
+<span id="cb33-9"><a href="#cb33-9"></a>## Slide 1</span>
+<span id="cb33-10"><a href="#cb33-10"></a></span>
+<span id="cb33-11"><a href="#cb33-11"></a>- Apresentacao</span>
+<span id="cb33-12"><a href="#cb33-12"></a>- Objetivos</span>
+<span id="cb33-13"><a href="#cb33-13"></a></span>
+<span id="cb33-14"><a href="#cb33-14"></a></span>
+<span id="cb33-15"><a href="#cb33-15"></a># Parte 2</span>
+<span id="cb33-16"><a href="#cb33-16"></a></span>
+<span id="cb33-17"><a href="#cb33-17"></a>## Slide 2</span>
+<span id="cb33-18"><a href="#cb33-18"></a></span>
+<span id="cb33-19"><a href="#cb33-19"></a>- Resultados</span>
+<span id="cb33-20"><a href="#cb33-20"></a>- Conclusão</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="listas-incrementais" class="slide level2"><h2>Listas incrementais</h2>
+<p>Por default, os <em>bullets</em> em um slide são apresentados de única vez. Podemos, no entanto, utilizar listas incrementais, conforme o exemplo a seguir:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb34-1"><a href="#cb34-1"></a>---</span>
+<span id="cb34-2"><a href="#cb34-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb34-3"><a href="#cb34-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb34-4"><a href="#cb34-4"></a>format: revealjs</span>
+<span id="cb34-5"><a href="#cb34-5"></a>---</span>
+<span id="cb34-6"><a href="#cb34-6"></a></span>
+<span id="cb34-7"><a href="#cb34-7"></a>## Slide 1</span>
+<span id="cb34-8"><a href="#cb34-8"></a></span>
+<span id="cb34-9"><a href="#cb34-9"></a>::: {.incremental}</span>
+<span id="cb34-10"><a href="#cb34-10"></a></span>
+<span id="cb34-11"><a href="#cb34-11"></a>- Apresentacao</span>
+<span id="cb34-12"><a href="#cb34-12"></a>- Objetivos</span>
+<span id="cb34-13"><a href="#cb34-13"></a></span>
+<span id="cb34-14"><a href="#cb34-14"></a>:::</span>
+<span id="cb34-15"><a href="#cb34-15"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="listas-incrementais-1" class="slide level2"><h2>Listas incrementais</h2>
+<p>É possível definir as listas incrementais de maneira global. Isto tornará default durante toda a apresentação:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb35-1"><a href="#cb35-1"></a>---</span>
+<span id="cb35-2"><a href="#cb35-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb35-3"><a href="#cb35-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb35-4"><a href="#cb35-4"></a>format: </span>
+<span id="cb35-5"><a href="#cb35-5"></a>  revealjs:</span>
+<span id="cb35-6"><a href="#cb35-6"></a>    incremental: true</span>
+<span id="cb35-7"><a href="#cb35-7"></a>---</span>
+<span id="cb35-8"><a href="#cb35-8"></a></span>
+<span id="cb35-9"><a href="#cb35-9"></a>## Slide 1</span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a>- Apresentacao</span>
+<span id="cb35-12"><a href="#cb35-12"></a>- Objetivos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="slides-com-pausas" class="slide level2"><h2>Slides com pausas</h2>
+<p>Para adicionar pausas dentro de um slide, inserimos três pontos (<code>. . .</code>) separados por espaços:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb36-1"><a href="#cb36-1"></a>---</span>
+<span id="cb36-2"><a href="#cb36-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb36-3"><a href="#cb36-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb36-4"><a href="#cb36-4"></a>format: </span>
+<span id="cb36-5"><a href="#cb36-5"></a>  revealjs:</span>
+<span id="cb36-6"><a href="#cb36-6"></a>    incremental: true</span>
+<span id="cb36-7"><a href="#cb36-7"></a>---</span>
+<span id="cb36-8"><a href="#cb36-8"></a></span>
+<span id="cb36-9"><a href="#cb36-9"></a>## Slide 1</span>
+<span id="cb36-10"><a href="#cb36-10"></a></span>
+<span id="cb36-11"><a href="#cb36-11"></a>Texto inicial, antes da pausa</span>
+<span id="cb36-12"><a href="#cb36-12"></a></span>
+<span id="cb36-13"><a href="#cb36-13"></a>. . .</span>
+<span id="cb36-14"><a href="#cb36-14"></a></span>
+<span id="cb36-15"><a href="#cb36-15"></a>- Item 1</span>
+<span id="cb36-16"><a href="#cb36-16"></a>- Item 2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="múltiplas-colunas" class="slide level2"><h2>Múltiplas Colunas</h2>
+<p>Para inserir colunas lado a lado, você pode usar a classe <code>.columns</code>, contendo dois ou mais elementos <code>.columns</code> e o atributo <code>width</code>, conforme o exemplo a seguir:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb37-1"><a href="#cb37-1"></a>---</span>
+<span id="cb37-2"><a href="#cb37-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb37-3"><a href="#cb37-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb37-4"><a href="#cb37-4"></a>format: revealjs</span>
+<span id="cb37-5"><a href="#cb37-5"></a>---</span>
+<span id="cb37-6"><a href="#cb37-6"></a></span>
+<span id="cb37-7"><a href="#cb37-7"></a>## Slide 1</span>
+<span id="cb37-8"><a href="#cb37-8"></a></span>
+<span id="cb37-9"><a href="#cb37-9"></a>:::: {.columns}</span>
+<span id="cb37-10"><a href="#cb37-10"></a></span>
+<span id="cb37-11"><a href="#cb37-11"></a>::: {.column width="40%"}</span>
+<span id="cb37-12"><a href="#cb37-12"></a>Coluna 1</span>
+<span id="cb37-13"><a href="#cb37-13"></a>:::</span>
+<span id="cb37-14"><a href="#cb37-14"></a></span>
+<span id="cb37-15"><a href="#cb37-15"></a>::: {.column width="60%"}</span>
+<span id="cb37-16"><a href="#cb37-16"></a>Coluna 2</span>
+<span id="cb37-17"><a href="#cb37-17"></a>:::</span>
+<span id="cb37-18"><a href="#cb37-18"></a></span>
+<span id="cb37-19"><a href="#cb37-19"></a>::::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="adicionando-guias" class="slide level2"><h2>Adicionando guias</h2>
+<p>Para adicionar guias (ou <em>tabset panel</em>), utilizamos a classe <code>.panel-tabset</code>. Note que é importante incluir seções (##) para cada guia. Considere o exemplo abaixo</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby">
+<li><a data-tabby-default="" href="#tabset-1-1">Guia 1</a></li>
+<li><a href="#tabset-1-2">Guia 2</a></li>
+</ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<p>Inserir conteúdo da guia 1</p>
+</div>
+<div id="tabset-1-2">
+<p>Inserir conteúdo da guia 2</p>
+</div>
+</div>
+</div>
+</section><section id="adicionando-guias-1" class="slide level2"><h2>Adicionando guias</h2>
+<p>Para obter as guias, fazemos:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb38-1"><a href="#cb38-1"></a>---</span>
+<span id="cb38-2"><a href="#cb38-2"></a>title: "Apresentacao ICDR"</span>
+<span id="cb38-3"><a href="#cb38-3"></a>author: "Antonio Vinicius"</span>
+<span id="cb38-4"><a href="#cb38-4"></a>format: revealjs</span>
+<span id="cb38-5"><a href="#cb38-5"></a>---</span>
+<span id="cb38-6"><a href="#cb38-6"></a></span>
+<span id="cb38-7"><a href="#cb38-7"></a>## Slide 1</span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a>::: {.panel-tabset}</span>
+<span id="cb38-10"><a href="#cb38-10"></a></span>
+<span id="cb38-11"><a href="#cb38-11"></a>## Guia 1</span>
+<span id="cb38-12"><a href="#cb38-12"></a></span>
+<span id="cb38-13"><a href="#cb38-13"></a>Inserir conteúdo da guia 1</span>
+<span id="cb38-14"><a href="#cb38-14"></a></span>
+<span id="cb38-15"><a href="#cb38-15"></a>## Guia 2</span>
+<span id="cb38-16"><a href="#cb38-16"></a></span>
+<span id="cb38-17"><a href="#cb38-17"></a>Inserir conteúdo da guia 2</span>
+<span id="cb38-18"><a href="#cb38-18"></a></span>
+<span id="cb38-19"><a href="#cb38-19"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="gerando-pdf" class="slide level2"><h2>Gerando PDF</h2>
+<p>Para gerar arquivos PDF, é necessário instalar uma distribuição TeX. No terminal, fazer:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb39-1"><a href="#cb39-1"></a>quarto install tool tinytex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Uma vez instalado, ajustamos o formato do documento:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb40-1"><a href="#cb40-1"></a>---</span>
+<span id="cb40-2"><a href="#cb40-2"></a>format: pdf</span>
+<span id="cb40-3"><a href="#cb40-3"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="opções-do-pdf" class="slide level2"><h2>Opções do PDF</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb41-1"><a href="#cb41-1"></a>title: "Meu documento"</span>
+<span id="cb41-2"><a href="#cb41-2"></a>format: </span>
+<span id="cb41-3"><a href="#cb41-3"></a>  pdf: </span>
+<span id="cb41-4"><a href="#cb41-4"></a>    documentclass: report</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    classoption: [twocolumn, landscape]</span>
+<span id="cb41-6"><a href="#cb41-6"></a>    lof: true</span>
+<span id="cb41-7"><a href="#cb41-7"></a>    lot: true</span>
+<span id="cb41-8"><a href="#cb41-8"></a>    geometry:</span>
+<span id="cb41-9"><a href="#cb41-9"></a>      - top=30mm</span>
+<span id="cb41-10"><a href="#cb41-10"></a>      - left=20mm</span>
+<span id="cb41-11"><a href="#cb41-11"></a>      - heightrounded</span>
+<span id="cb41-12"><a href="#cb41-12"></a>    fontfamily: libertinus</span>
+<span id="cb41-13"><a href="#cb41-13"></a>    colorlinks: true</span>
+<span id="cb41-14"><a href="#cb41-14"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li>
+<code>documentclass</code>: classe do documento, como <em>article</em>, <em>report</em> ou <em>book</em>
+</li>
+<li>
+<code>classoption</code>: estrutura <em>onecolumn</em>/<em>twocolumn</em>, <em>portrait</em>/<em>landscape</em>
+</li>
+<li>
+<code>lof</code>-<code>lot</code>: lista de figuras e tabelas</li>
+<li>
+<code>geometry</code>: recuo das margens</li>
+<li>
+<code>fontfamily</code>: usar fontes do sistema. Ver lista completa em <code><a href="https://rdrr.io/pkg/systemfonts/man/system_fonts.html">systemfonts::system_fonts()</a></code>
+</li>
+<li>
+<code>colorlinks</code>: destacar links do texto</li>
+</ul>
+</div>
+</div>
+</section></section><section><section id="publicação" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Publicação </font></h1>
+
+</section><section id="quarto-pub" class="slide level2"><h2><code>Quarto Pub</code></h2>
+<p><code>Quarto Pub</code> é um serviço gratuito de publicação de conteúdo criado com o Quarto. É ideal para blogs, sites de cursos ou projetos, livros e apresentações.</p>
+
+<img data-src="Images/quartopub.png" class="r-stretch quarto-figure-center"><p>O primeiro passo consiste em criar uma conta gratuita no <a href="https://quartopub.com/">Quarto Pub</a>.</p>
+</section><section id="quarto-pub-1" class="slide level2"><h2><code>Quarto Pub</code></h2>
+<p>Para publicar um conteúdo, é necessário criar um projeto no <code>RStudio</code>. Em seguida, digitar no Terminal</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb42-1"><a href="#cb42-1"></a>quarto publish quarto-pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Após isso, é necessário adicionar o login e senha cadastrados.</p>
 <div class="footer footer-default">
 <p>ICDR</p>
 </div>
-</section>
+</section></section>
 </div>
   </div>
 

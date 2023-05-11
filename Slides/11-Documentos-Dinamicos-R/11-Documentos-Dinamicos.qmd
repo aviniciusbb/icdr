@@ -57,11 +57,11 @@ width="800"}
 
 ## Pacotes
 
-Alguns pacotes do `R` permitem a integração de textos e cófigos
+Alguns pacotes do `R` permitem a integração de textos e códigos
 
--   `Sweave`: permitia que o código R fosse integrado a documentos LaTeX
+-   `sweave`: permitia que o código R fosse integrado a documentos LaTeX
 -   `knitr`: variação do Markdown que permite a junção de códigos
--   `RMarkdown`: permite a construção de textos, apresentações, sites...
+-   `rmarkdown`: permite a construção de textos, apresentações, sites...
 
 . . .
 
@@ -545,5 +545,399 @@ Este é um exemplo para algo importante!
 :::
 
 
+## Inserindo figuras
+
+`quarto` possui uma série de ferramentas para introduzir finguras nos documentos.
+Para introduzir uma figura em Markdown, fazemos
+
+
+````{{r}}
+![Elefante](elefante.jpg)
+````
+
+![Elefante](Images/elefante.jpg)
+
+## Opções de figuras
+
+Para alterar as dimensões de uma figura, utilizamos os parâmetros `width` e `height`.
+Além disso, podemos ajustar o alinhamento através de `fig-align`.
+
+
+````{{r}}
+![Elefante](elefante.jpg){width=200 fig-align="left"}
+````
+
+![Elefante](Images/elefante.jpg){width=200 fig-align="left"}
+
+
+## Figuras através de links
+
+Para inserir figuras externas, obtidas através de links, fazemos:
+
+
+````{{r}}
+![Caramelo](https://p16.resso.me/img/tos-alisg-i-0000/d0b1ea1759d84159a3bbd11952613b68~c5_500x500.jpg){width=100 fig.align="center"}
+````
+
+
+![Caramelo](https://p16.resso.me/img/tos-alisg-i-0000/d0b1ea1759d84159a3bbd11952613b68~c5_500x500.jpg){width=100 fig.align="center"}
+
+
+## Subfiguras
+
+Para adicionar múltiplas figuras, fazemos:
+
+
+````{{r}}
+::: {#fig-elephants layout-ncol=2}
+
+![Subfigura 1](https://quarto.org/docs/gallery/interactive/interactive-jupyter.png)
+
+![Subfigura 2](https://quarto.org/docs/gallery/articles/advanced-layout-pdf.png)
+
+Famous Elephants
+:::
+````
+
+
+## Subfiguras
+
+::: {#fig-elephants layout-ncol=2}
+
+![Subfigura 1](https://quarto.org/docs/gallery/interactive/interactive-jupyter.png)
+
+![Subfigura 2](https://quarto.org/docs/gallery/articles/advanced-layout-pdf.png)
+
+Exemplo de documentos `quarto`
+:::
+
+
+
+
+## Tabelas
+
+
+A melhor forma de adicionar tabelas é através da função `kable` do pacote `knitr`
+
+```{r}
+#| eval: false
+knitr::kable(
+  dados::dados_starwars[1:5,1:5],
+  caption = "Personagens Starwars"
+  )
+```
+
+
+```{r}
+#| eval: true
+#| echo: false
+knitr::kable(
+  dados::dados_starwars[1:5,1:5],
+  caption = "Personagens Starwars"
+  )
+```
+
+Para outras opções de costumização das tabelas, é recomendado o pacote `kableExtra`
 
 # <font color="1b5299"> Apresentações </font> {background-color="#BBDEF0"}
+
+
+## Apresentações
+
+O `quarto` suporta alguns formatos para criar apresentações:
+
+- `revealjs` — reveal.js (HTML)
+- `pptx` — PowerPoint (MS Office)
+- `beamer` — Beamer (LaTeX/PDF)
+
+Enquanto o formato `pptx` e `beamer` geram apresentações estáticas, o formato
+`revealjs` gera aprensetações mais flexíveis.
+
+
+## Criando apresentações
+
+Em Markdown, os slides são delineados usando seções. Por exemplo, esta é uma apresentação simples com dois slides (cada um definido com um título de nível 2 (\#\#):
+
+
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: revealjs
+---
+
+## Slide 1
+
+- Apresentacao
+- Objetivos
+
+## Slide 2
+
+- Resultados
+- Conclusão
+
+````
+
+
+## Criando apresentações
+
+Para dividir os slides por seções, podemos introduzir títulos de nível 1 (\#)
+
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: revealjs
+---
+
+# Parte 1
+
+## Slide 1
+
+- Apresentacao
+- Objetivos
+
+
+# Parte 2
+
+## Slide 2
+
+- Resultados
+- Conclusão
+
+````
+
+
+## Listas incrementais
+
+Por default, os *bullets* em um slide são apresentados de única vez. Podemos, no
+entanto, utilizar listas incrementais, conforme o exemplo a seguir:
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: revealjs
+---
+
+## Slide 1
+
+::: {.incremental}
+
+- Apresentacao
+- Objetivos
+
+:::
+
+
+````
+
+## Listas incrementais
+
+É possível definir as listas incrementais de maneira global. Isto tornará
+default durante toda a apresentação:
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: 
+  revealjs:
+    incremental: true
+---
+
+## Slide 1
+
+- Apresentacao
+- Objetivos
+
+````
+
+
+## Slides com pausas
+
+Para adicionar pausas dentro de um slide, inserimos três pontos (`. . .`) separados por espaços:
+
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: 
+  revealjs:
+    incremental: true
+---
+
+## Slide 1
+
+Texto inicial, antes da pausa
+
+. . .
+
+- Item 1
+- Item 2
+
+````
+
+
+## Múltiplas Colunas
+
+
+Para inserir colunas lado a lado, você pode usar a classe `.columns`, contendo dois ou mais elementos `.columns` e o atributo `width`, conforme o exemplo a seguir:
+
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: revealjs
+---
+
+## Slide 1
+
+:::: {.columns}
+
+::: {.column width="40%"}
+Coluna 1
+:::
+
+::: {.column width="60%"}
+Coluna 2
+:::
+
+::::
+
+````
+
+
+## Adicionando guias
+
+Para adicionar guias (ou *tabset panel*), utilizamos a classe `.panel-tabset`. Note
+que é importante incluir seções (\#\#) para cada guia. Considere o exemplo abaixo
+
+
+::: {.panel-tabset}
+
+## Guia 1
+
+Inserir conteúdo da guia 1
+
+## Guia 2
+
+Inserir conteúdo da guia 2
+
+:::
+
+
+## Adicionando guias
+
+Para obter as guias, fazemos:
+
+
+````{{r}}
+---
+title: "Apresentacao ICDR"
+author: "Antonio Vinicius"
+format: revealjs
+---
+
+## Slide 1
+
+::: {.panel-tabset}
+
+## Guia 1
+
+Inserir conteúdo da guia 1
+
+## Guia 2
+
+Inserir conteúdo da guia 2
+
+:::
+
+````
+
+## Gerando PDF
+
+
+Para gerar arquivos PDF, é necessário instalar uma distribuição TeX. No terminal, fazer:
+
+
+````{{r}}
+quarto install tool tinytex
+````
+
+Uma vez instalado, ajustamos o formato do documento:
+
+
+````{{r}}
+---
+format: pdf
+---
+````
+
+
+## Opções do PDF
+:::: {.columns}
+
+::: {.column width="60%"}
+````{{r}}
+title: "Meu documento"
+format: 
+  pdf: 
+    documentclass: report
+    classoption: [twocolumn, landscape]
+    lof: true
+    lot: true
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
+    fontfamily: libertinus
+    colorlinks: true
+---
+````
+:::
+
+
+
+::: {.column width="40%"}
+
+- `documentclass`: classe do documento, como *article*, *report* ou *book* 
+- `classoption`: estrutura *onecolumn*/*twocolumn*, *portrait*/*landscape* 
+- `lof`-`lot`: lista de figuras e tabelas
+- `geometry`: recuo das margens
+- `fontfamily`: usar fontes do sistema. Ver lista completa em `systemfonts::system_fonts()`
+- `colorlinks`: destacar links do texto
+:::
+
+
+::::
+
+
+
+# <font color="1b5299"> Publicação </font> {background-color="#BBDEF0"}
+
+
+## `Quarto Pub`
+
+`Quarto Pub` é um serviço gratuito de publicação de conteúdo criado com o Quarto. 
+É ideal para blogs, sites de cursos ou projetos, livros e apresentações.
+
+![](Images/quartopub.png){fig-align="center"}
+
+O primeiro passo consiste em criar uma conta gratuita no [Quarto Pub](https://quartopub.com/).
+
+
+## `Quarto Pub`
+
+Para publicar um conteúdo, é necessário criar um projeto no `RStudio`. Em seguida, digitar no Terminal
+
+````{{r}}
+quarto publish quarto-pub
+````
+
+
+Após isso, é necessário adicionar o login e senha cadastrados.
