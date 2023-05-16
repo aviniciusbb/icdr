@@ -381,6 +381,8 @@
       margin-right: 0; 
     }
   </style>
+<link href="11-Documentos-Dinamicos_files/libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+<script src="11-Documentos-Dinamicos_files/libs/countdown-0.4.0/countdown.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -402,7 +404,7 @@
 <p>Antonio Vinícius Barbosa</p>
 <h2>
 </h2><h3>
-10-05-2023
+15-05-2023
 </h3>
 
 <p><br></p>
@@ -1034,30 +1036,101 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <span id="cb38-17"><a href="#cb38-17"></a>Inserir conteúdo da guia 2</span>
 <span id="cb38-18"><a href="#cb38-18"></a></span>
 <span id="cb38-19"><a href="#cb38-19"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="transições-de-slides" class="slide level2"><h2>Transições de slides</h2>
+<p>Para os diferentes tipos de transições de slides, temos</p>
+<ul>
+<li>
+<code>none</code>: sem transição (instantâneo)</li>
+<li>
+<code>fade</code>: cross fade</li>
+<li>
+<code>slide</code>: Slide horizontal</li>
+<li>
+<code>convex</code>: slide convexo</li>
+<li>
+<code>concave</code>: slide côncavo</li>
+<li>
+<code>zoom</code>: do centro para fora da tela</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb39-1"><a href="#cb39-1"></a>---</span>
+<span id="cb39-2"><a href="#cb39-2"></a>format: </span>
+<span id="cb39-3"><a href="#cb39-3"></a>  revealjs:</span>
+<span id="cb39-4"><a href="#cb39-4"></a>    transition: fade</span>
+<span id="cb39-5"><a href="#cb39-5"></a>    transition-speed: fast</span>
+<span id="cb39-6"><a href="#cb39-6"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="numerando-slides" class="slide level2"><h2>Numerando slides</h2>
+<p>Para adicionar o número do slide, fazemos</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb40-1"><a href="#cb40-1"></a>---</span>
+<span id="cb40-2"><a href="#cb40-2"></a>format: </span>
+<span id="cb40-3"><a href="#cb40-3"></a>  revealjs:</span>
+<span id="cb40-4"><a href="#cb40-4"></a>    slide-number: c/t</span>
+<span id="cb40-5"><a href="#cb40-5"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Onde <code>c/t</code> significa slide corrente/total de slides. Outras opões são <code>c</code>, <code>h.v</code>, <code>h/v</code>.</p>
+</section><section id="adicionando-texto-de-rodapé" class="slide level2"><h2>Adicionando texto de rodapé</h2>
+<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb41-1"><a href="#cb41-1"></a>---</span>
+<span id="cb41-2"><a href="#cb41-2"></a>format:</span>
+<span id="cb41-3"><a href="#cb41-3"></a>  revealjs: </span>
+<span id="cb41-4"><a href="#cb41-4"></a>    footer: "Meu texto de rodapé"</span>
+<span id="cb41-5"><a href="#cb41-5"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Para adicionar um texto de rodapé numa apresentação:</p>
+</section><section id="quizz-1" class="slide level2 inverse" data-background-color="#386FA4"><h2>Quizz #1</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Crie uma nova apresentação revealjs no Quarto.</li>
+<li>Mude o <code>YAML</code>:
+<ul>
+<li>Nome do autor: eu nome</li>
+<li>Título: “Minha primeira apresentação Quarto!”</li>
+<li>Adiciona o número do slide</li>
+<li>Inserir rodapé: “Minha apresentação!”</li>
+</ul>
+</li>
+<li>No segundo slide, adiciona uma lista incremental sobre as top 5 disciplinas que você mais gostou no curso.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Adicionar um slide com 2 colunas. No lado direito, adicionar apenas o <code>code chunk</code> e no lado direito apenas o resultado da execução.</li>
+<li>Adicionar um slide com 2 guias. Na primeira guia, adicionar apenas o <code>code chunk</code> e na segunda guia apenas o resultado da execução.</li>
+<li>No próximo slide, adicione uma figura externa</li>
+<li>Gere a apresentação!</li>
+</ul>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_0152c274" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls">
+<button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
+</div>
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
 </section><section id="gerando-pdf" class="slide level2"><h2>Gerando PDF</h2>
 <p>Para gerar arquivos PDF, é necessário instalar uma distribuição TeX. No terminal, fazer:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb39-1"><a href="#cb39-1"></a>quarto install tool tinytex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb42-1"><a href="#cb42-1"></a>quarto install tool tinytex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Uma vez instalado, ajustamos o formato do documento:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb40-1"><a href="#cb40-1"></a>---</span>
-<span id="cb40-2"><a href="#cb40-2"></a>format: pdf</span>
-<span id="cb40-3"><a href="#cb40-3"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb43-1"><a href="#cb43-1"></a>---</span>
+<span id="cb43-2"><a href="#cb43-2"></a>format: pdf</span>
+<span id="cb43-3"><a href="#cb43-3"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="opções-do-pdf" class="slide level2"><h2>Opções do PDF</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div class="sourceCode" id="cb41"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb41-1"><a href="#cb41-1"></a>title: "Meu documento"</span>
-<span id="cb41-2"><a href="#cb41-2"></a>format: </span>
-<span id="cb41-3"><a href="#cb41-3"></a>  pdf: </span>
-<span id="cb41-4"><a href="#cb41-4"></a>    documentclass: report</span>
-<span id="cb41-5"><a href="#cb41-5"></a>    classoption: [twocolumn, landscape]</span>
-<span id="cb41-6"><a href="#cb41-6"></a>    lof: true</span>
-<span id="cb41-7"><a href="#cb41-7"></a>    lot: true</span>
-<span id="cb41-8"><a href="#cb41-8"></a>    geometry:</span>
-<span id="cb41-9"><a href="#cb41-9"></a>      - top=30mm</span>
-<span id="cb41-10"><a href="#cb41-10"></a>      - left=20mm</span>
-<span id="cb41-11"><a href="#cb41-11"></a>      - heightrounded</span>
-<span id="cb41-12"><a href="#cb41-12"></a>    fontfamily: libertinus</span>
-<span id="cb41-13"><a href="#cb41-13"></a>    colorlinks: true</span>
-<span id="cb41-14"><a href="#cb41-14"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb44-1"><a href="#cb44-1"></a>title: "Meu documento"</span>
+<span id="cb44-2"><a href="#cb44-2"></a>format: </span>
+<span id="cb44-3"><a href="#cb44-3"></a>  pdf: </span>
+<span id="cb44-4"><a href="#cb44-4"></a>    documentclass: report</span>
+<span id="cb44-5"><a href="#cb44-5"></a>    classoption: [twocolumn, landscape]</span>
+<span id="cb44-6"><a href="#cb44-6"></a>    lof: true</span>
+<span id="cb44-7"><a href="#cb44-7"></a>    lot: true</span>
+<span id="cb44-8"><a href="#cb44-8"></a>    geometry:</span>
+<span id="cb44-9"><a href="#cb44-9"></a>      - top=30mm</span>
+<span id="cb44-10"><a href="#cb44-10"></a>      - left=20mm</span>
+<span id="cb44-11"><a href="#cb44-11"></a>      - heightrounded</span>
+<span id="cb44-12"><a href="#cb44-12"></a>    fontfamily: libertinus</span>
+<span id="cb44-13"><a href="#cb44-13"></a>    colorlinks: true</span>
+<span id="cb44-14"><a href="#cb44-14"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column" style="width:40%;">
 <ul>
 <li>
@@ -1086,7 +1159,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <img data-src="Images/quartopub.png" class="r-stretch quarto-figure-center"><p>O primeiro passo consiste em criar uma conta gratuita no <a href="https://quartopub.com/">Quarto Pub</a>.</p>
 </section><section id="quarto-pub-1" class="slide level2"><h2><code>Quarto Pub</code></h2>
 <p>Para publicar um conteúdo, é necessário criar um projeto no <code>RStudio</code>. Em seguida, digitar no Terminal</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb42-1"><a href="#cb42-1"></a>quarto publish quarto-pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb45-1"><a href="#cb45-1"></a>quarto publish quarto-pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Após isso, é necessário adicionar o login e senha cadastrados.</p>
 </section></section><section><section id="galeria" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Galeria </font></h1>
 

@@ -859,6 +859,89 @@ Inserir conteúdo da guia 2
 
 ````
 
+## Transições de slides
+
+Para os diferentes tipos de transições de slides, temos
+
+- `none`: sem transição (instantâneo)
+- `fade`:	cross fade
+- `slide`:	Slide horizontal
+- `convex`:	slide convexo
+- `concave`:	slide côncavo
+- `zoom`: do centro para fora da tela
+
+
+````{{r}}
+---
+format: 
+  revealjs:
+    transition: fade
+    transition-speed: fast
+---
+````
+
+## Numerando slides
+
+Para adicionar o número do slide, fazemos
+
+````{{r}}
+---
+format: 
+  revealjs:
+    slide-number: c/t
+---
+````
+
+Onde `c/t` significa slide corrente/total de slides. Outras
+opões são `c`, `h.v`, `h/v`.
+
+
+## Adicionando texto de rodapé
+
+````{{r}}
+---
+format:
+  revealjs: 
+    footer: "Meu texto de rodapé"
+---
+````
+
+Para adicionar um texto de rodapé numa apresentação:
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+:::: {.columns}
+
+::: {.column width="50%"}
+- Crie uma nova apresentação revealjs no Quarto.
+- Mude o `YAML`:
+  + Nome do autor: eu nome
+  + Título: “Minha primeira apresentação Quarto!”
+  + Adiciona o número do slide 
+  + Inserir rodapé: “Minha apresentação!”
+- No segundo slide, adiciona uma lista incremental sobre as top 5 
+disciplinas que você mais gostou no curso.
+:::
+
+::: {.column width="50%"}
+
+- Adicionar um slide com 2 colunas. No lado direito, adicionar apenas o `code chunk`
+e no lado direito apenas o resultado da execução.
+- Adicionar um slide com 2 guias. Na primeira guia, adicionar apenas o `code chunk`
+e na segunda guia apenas o resultado da execução.
+- No próximo slide, adicione uma figura externa
+- Gere a apresentação!
+:::
+
+::::
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 15
+)
+```
+
+
+
 ## Gerando PDF
 
 
