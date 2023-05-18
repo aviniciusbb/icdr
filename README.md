@@ -27,6 +27,10 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 9. **Visualização de Dados** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/09-Visualizacao-Dados-R/09-Visualizacao-Dados.html)
 10. **Visualização por Mapas** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/10-Visualizacao-Mapas-R/10-Visualizacao-Mapas.html)
 11. **Documentos Dinâmicos** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/11-Documentos-Dinamicos-R/11-Documentos-Dinamicos.html)
+12. **Estatística descritiva** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/12-Estatistica-Descritiva-R/12-Estatistica-Descritiva.html)
+
+
+12-Estatistica-Descritiva-R/12-Estatistica-Descritiva.html
 
 
 
