@@ -1,0 +1,753 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 12 </font> - Estatística descritiva dos
+dados</h2>
+
+<h2><font color="FFFFFF"> Aula 12 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](Images/stat_logo.png){.absolute top="400" left="1150" width="300"}
+
+# <font color="1b5299"> Estatística descritiva dos dados </font> {background-color="#BBDEF0"}
+
+## Estatística Descritiva
+
+<h2><font color="FFFFFF"> Objetivo </font></h2>
+
+. . .
+
+<h3>Objetivo</h3>
+
+> Nesta aula, veremos algumas características dos dados e aprenderemos
+> como calcular e visualizar estatísticas básicas.
+
+## Estrutura da aula
+
+::: columns
+::: {.column width="50%"}
+-   Análise univariada
+    -   Média aritmética
+    -   Média truncada
+    -   Moda
+-   Medidas de centralidade
+    -   Mediana, quartil, decil, percentil
+-   Medidas de dispersão
+    -   Intervalo
+    -   Desvios
+    -   Variância amostral
+    -   Desvio-padrão amostral\
+:::
+
+::: {.column width="50%"}
+-   Visualização dos dados
+    -   Histogramas
+    -   Densidades
+    -   Boxplots
+-   Dados categóricos
+    -   Gráfico de barras
+    -   Gráfico de pontos
+-   A análise bivariada
+    -   Plots
+    -   Covariância
+    -   Correlação
+:::
+:::
+
+# <font color="1b5299"> Análise univariada </font> {background-color="#BBDEF0"}
+
+## Dados univariados
+
+A análise univariada consiste em descrever a distribuição de uma
+**única** variável.
+
+. . .
+
+-   Uma **variável** representa uma medida ou característica de uma
+    determinada unidade de observação.
+
+-   Um *dado univariado* é um conjunto de medidas de uma variável para
+    uma coleção de unidades, representado pelo vetor
+
+    $$
+    \begin{equation*}    x = \begin{bmatrix}         x_{1} \\         x_{2} \\         \vdots \\         x_{n} \\        \end{bmatrix}  \end{equation*}
+    $$
+
+com $x_{i}$ representando a medida para a unidade observada
+$i = 1, 2, \ldots, n$. 
+
+## Unidades de medida
+
+As variáveis podem ser representadas de diferentes formas:
+
+. . .
+
+- **Fatores**: variáveis categóricas, como sexo, nível educacional, região.
+- **Caracteres**: variáveis do tipo *string*, tais como id, endereço, nome do município.
+- **Dados discretos**: variáveis representando valores contáveis, como o número de moradores em um domicílio ou o número de escolas de um município.
+- **Dados contínuos**: informações contidas dentro de um intervalo contínuo, tais como gastos   com saúde e renda per capita.
+- **Datas**: variáveis com informações temporais, como dias da semana, meses e anos.
+
+
+## Dados univariados
+
+Suponha um conjunto de dados de precipitação de alguns municípios da Paraíba:
+
+```{r}
+#| collapse: TRUE
+# Dados de precipitação (em mm)
+precip <- c(33.1, 32.6, 26.9, 26.5, 25.4, 20.1, 
+            17.8, 17.3, 17.0, 16.1, 20.3, 17.6)
+# Tamanho do vetor
+length(precip)
+
+# Soma dos elemetos do vetor
+sum(precip)
+```
+## A média aritmética
+
+
+A **média aritmética** é definida como a soma dos elementos de uma variável dividida pelo número de observações:
+
+
+$$
+ \bar{x} = \frac{\sum_{i=1}^{n}x_{i}}{n} = \frac{1}{n}\sum_{i=1}^{n}x_{i}
+$$
+com $i =1, 2, \ldots, n$, sendo $n$ o número de observações.
+
+. . .
+
+```{r}
+#| collapse: TRUE
+# Calculando a média 
+sum(precip)/length(precip)
+# Calculando a média 
+mean(precip)
+```
+
+
+## A média truncada   
+
+Em algumas situações, no entanto, algumas observações podem ter grande influência no cálculo da média. Uma possível solução é "aparar" (*trim*) os dois lados da amostra com valores mais extremos.
+
+
+```{r}
+#| collapse: TRUE
+# Adicionando dados de chuva
+precip_c <- c(33.1, 32.6, 26.9, 26.5, 25.4, 20.1, 
+              17.8, 17.3, 17.0, 16.1, 20.3, 17.6,
+              4.0, 86.7)
+
+# Calculando a média 
+mean(precip_c)
+
+# Calculando a média truncada (em 10%)
+mean(precip_c, trim = 0.1)
+```
+
+## Moda
+
+A **moda** é o valor que ocorre mais vezes, ou com maior frequência nos dados
+
+```{r}
+#| collapse: TRUE
+# Calculando a moda
+x <- c(8, 9, 7, 1, 2, 9, 8, 2, 10, 9)
+count_x <- table(x)
+count_x
+names(count_x)[which(count_x == max(count_x))]
+```
+
+Ainda, podem existir séries *amodais*, *bimodias* ou *multimodais*
+
+## O cálculo da mediana
+
+
+A **mediana** (M) é o valor da observação que divide a amostra em duas parte iguais: quando 50% das observações estão do lado esquerdo e os outros 50% estão do lado direto.
+
+Para encontrar a mediana, devemos:
+
+::: {.incremental}
+- Ordenar os dados do menor para o maior
+- Se tivermos $n = 2k + 1$ observações (ímpar), então M é o $k+1$-ésimo elemento da ordenação.
+- Se tivermos $n = 2k$ observações (par), M é a média dos elementos $k$ e $k+1$
+:::
+
+. . .
+
+```{r}
+#| collapse: TRUE
+# Calculando a mediana
+ord_precip <- sort(precip)
+ord_precip
+median(ord_precip)
+```
+
+
+
+A função `median()` já ordena a série de dados automaticamente.
+
+
+## Quartis
+
+Da mesma forma, os **quartis** de um conjunto de dados são os valores que dividem a amostra em quarto partes iguais. 
+
+![](Images/quartiles.jpg){fig-align="center" width="300"}
+
+
+## Quartis
+
+Para o cálculo dos quartis, utilizaremos os dados sobre salários incluídos no pacote `dados`: 
+
+```{r}
+#| echo: FALSE
+#| message: FALSE
+library(dplyr)
+```
+
+
+```{r}
+#| collapse: TRUE
+# Calculando os quartis
+library(dados)
+
+# Calculando os quartis
+dados::salarios |> 
+  filter(ano == 2016) |> 
+  select(salario) |> 
+  pull() |> 
+  quantile(c(0.25, 0.50, 0.75))
+
+# Calulando a mediana (quartil 0.50)
+dados::salarios |> 
+  filter(ano == 2016) |> 
+  select(salario) |> 
+  pull() |> 
+  median()
+```
+
+## Decis
+
+Os **decis** são os valores que dividem a amostra em 10 partes iguais:
+
+
+```{r}
+#| echo: FALSE
+#| message: FALSE
+# Criar dados
+delta <- 0.001 
+quantiles <- 10
+z.df <- data.frame(x = seq(from = -3, to = 3, by = delta))
+z.df$pdf <- dnorm(z.df$x)
+z.df$qt <- cut(pnorm(z.df$x),breaks = quantiles, labels = F)
+# Carregar pacote e plotar gráfico
+library(ggplot2)
+ggplot(z.df,aes(x = x,y = pdf)) +
+  geom_area(aes(x = x,y = pdf, group = qt, fill = qt), color = "black") +
+  scale_fill_gradient2(low = "purple", high = "orange", midpoint = median(unique(z.df$qt)), 
+                       guide  = "none") +
+  labs(x = "Variável", y = "FDP") +
+  theme_minimal()
+```
+
+## Decis
+
+Os **decis** são os valores que dividem a amostra em 10 partes iguais. Considere a distribuição a seguir:
+
+
+```{r}
+#| collapse: TRUE
+# Calculando os decis
+decis <- seq(0.10, 0.90, 0.10)
+
+dados::salarios |> 
+  filter(ano == 2016) |> 
+  select(salario) |> 
+  pull() |> 
+  quantile(decis)
+```
+
+## Percentis
+
+Os **percentis**, por sua vez, são os valores que dividem a amostra em 100 partes iguais. 
+
+
+
+```{r}
+#| collapse: TRUE
+# Calculando os decis
+percentis <- c(.35, .78, .99)
+
+dados::salarios |> 
+  filter(ano == 2016) |> 
+  select(salario) |> 
+  pull() |> 
+  quantile(percentis)
+```
+
+
+# <font color="1b5299"> Medidas de dispersão </font> {background-color="#BBDEF0"}
+
+
+## Intervalo
+
+
+A **dispersão** é uma importante característica de uma variável. A primeira medida de interesse
+é o **intervalo** no qual os dados estão inseridos:
+
+
+```{r}
+#| collapse: TRUE
+# Dados de precipitação
+precip
+# Intervalo
+range(precip)
+# Alernativamente
+c(min(precip), max(precip))
+```
+
+
+## Desvios da média
+
+
+O desvio de uma observação $i$ em relação à média é dado por
+
+$$
+  d_{i} = x_{i} - \bar{x}
+$$
+
+```{r}
+#| collapse: TRUE
+# Calculando o desvio
+desvio <- precip - mean(precip)
+desvio
+```
+
+. . .
+
+O cálculo dos desvios implicam em "centrar" os dados em relação à média. Neste caso,
+nos cinco primeiros municípios choveu uma quantidade maior do que a média, enquanto que nos
+demais choveu menos em relação à média . 
+
+
+## Desvios da média
+
+Uma candidata a medida de dispersão seria a soma dos desvios, dada por
+
+$$
+  \delta = \sum_{i = 1}^{n}(x_{i} - \bar{x})
+$$
+
+. . .
+
+```{r}
+#| collapse: TRUE
+# Soma dos desvios
+delta <- sum(desvio)
+delta
+round(delta)
+```
+
+. . .
+
+No entanto, ao somar valores positivos com valores negativos, o resultado é aproximadamente igual
+a zero. Portanto utilizamos a soma dos desvios ao quadrado:
+
+
+## Desvios da média
+
+Podemos utilizar, portanto, a soma dos desvios ao **quadrado**
+
+$$
+  \Delta = \sum_{i = 1}^{n}(x_{i} - \bar{x})^{2}
+$$
+
+. . . 
+
+
+```{r}
+#| collapse: TRUE
+# Soma dos desvios
+Delta <- sum(desvio^2)
+Delta
+```
+
+. . .
+
+Agora, basta encontrar uma medida representativa (média) dos desvios. Buscamos, portanto, a **variância** dos dados.
+
+## Variância amostral
+
+Para obter uma boa medida de dispersão dos dados, calculamos a **variância amostral**, definida como 
+o quadrado dos desvios em relação à média amostral, dividido por $n -1$.
+
+$$
+  \text{Variância amostral} = s^{2} = \frac{1}{(n-1)}\sum_{i}^{n}(x_{i} - \bar{x})^2
+$$     
+
+Valores distantes do centro (média) têm maior desvio e, quando elevados ao quadrado,
+ficam cada vez maiores. Portanto, quando **mais disperso** for um conjunto de dados,
+**maior será a variância**.
+
+
+## Variância amostral
+
+Para obter uma boa medida de dispersão dos dados, utilizamos a média do quadrado dos desvios 
+em relação à média.
+
+```{r}
+#| collapse: TRUE
+# Calculando a variancia
+sum((precip - mean(precip))^2) / (length(precip) - 1)
+
+# Ou atraves da função var()
+var(precip)
+```
+
+## Desvio-padrão amostral
+
+Como os dados de precipitação estão em $mm$, a variância é medida em $(mm)^2$, o que dificulta
+a sua interpretação. Para evitar este problema, basta calcular a raiz quadrada para obter o **desvio-padrão**
+da amostra.
+
+$$
+  \text{Desvio-padrão} = \sqrt{s^{2}} = s  = \sqrt{\frac{1}{(N-1)}\sum_{i}^{n}(x_{i} - \bar{x})^2}
+$$
+. . .
+
+```{r}
+#| collapse: TRUE
+# Calculando o desvio-padrao
+sqrt(var(precip))
+
+# Ou atraves da função sd()
+sd(precip)
+```
+
+## Histogramas
+
+Um **histograma** consiste numa representação gráfica, em barras (retângulos), de um conjunto 
+de dados previamente tabulados e divididos em classes uniformes. Os dados são divididos em intervalos 
+regulares, chamados de *bins*. 
+
+. . .
+
+
+Para plotar histogramas, podemo fazer:
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| eval: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_histogram(
+    aes(x = wage),
+    col = "#FB6376", fill = "#FCB1A6"
+  ) + 
+  theme_minimal()
+```
+
+
+## Histogramas
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| echo: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_histogram(
+    aes(x = wage),
+    col = "#FB6376", fill = "#FCB1A6"
+  ) + 
+  theme_minimal()
+```
+
+
+## Histogramas
+
+Para mudar o número de *bins*, ajustamos o argumento `binwidth` da função `geom_histogram()`
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| eval: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_histogram(
+    aes(x = wage), binwidth = 20,
+    col = "#FB6376", fill = "#FCB1A6"
+  ) + 
+  theme_minimal()
+```
+
+
+## Histogramas
+
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| echo: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_histogram(
+    aes(x = wage), binwidth = 20,
+    col = "#FB6376", fill = "#FCB1A6"
+  ) + 
+  theme_minimal()
+```
+
+## Densidades
+
+Uma forma alternativa de visualizar um histograma é estimar 
+a distribuição teórica (*kernel*) dos dados. Agora, a pergunta é: se pergarmos um valor aleatório da variável, qual a probabilidade
+de estar contida em um dado *bin*?
+
+
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| eval: false
+ISLR::Wage |> 
+  ggplot(aes(x = wage)) +
+  geom_histogram(
+   aes(y = ..density..), 
+    col = "#FB6376", fill = "#FCB1A6"
+  ) + 
+  geom_density() +
+  theme_minimal()
+```
+
+
+## Densidades
+
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| echo: false
+ISLR::Wage |> 
+  ggplot(aes(x = wage)) +
+  geom_histogram(
+   aes(y = ..density..), 
+    col = "#FB6376", fill = "#FCB1A6"
+  ) + 
+  geom_density() +
+  theme_minimal()
+```
+
+## Estatísticas básicas
+
+Vimos que a função `summary()` mostra estatísticas básicas de
+uma variável.
+
+```{r}
+#| collapse: TRUE
+summary(ISLR::Wage$wage)
+```
+
+
+As cinco estatísticas (mínimo, máximo, primeiro quartil, mediana e terceiro quartil) dão uma boa 
+ideia das características do conjunto de dados. 
+
+
+## Boxplots
+
+
+Um dispositivo gráfico útil para visualizar tais estatísticas é o **boxplot**:
+
+
+- A "caixa" é desenhada de acordo com os dados compreendidos entre o primeiro e terceiro 
+  quartis, correspondendo à 50% da amostra.
+- A mediana é indica como a reta que divide a caixa em duas partes: 25% dos dados do lado
+  direito e 25% dos dados do lado esquerdo.
+- Os dados abaixo do quartil 1 e acima do quartil 3 são indicados por retas 
+  (*whiskers*), representando os valores máximos e mínimos.
+
+
+![](Images/boxplot.png){fig-align="center" width="300"}
+
+## Boxplots
+
+Para plotar boxplots, fazemos:
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| eval: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_boxplot(
+    aes(x = wage),
+    col = "#4E6151", fill = "#94E8B4"
+  ) + 
+  coord_flip() +
+  theme_minimal()
+```
+
+
+## Boxplots
+
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| echo: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_boxplot(
+    aes(x = wage),
+    col = "#4E6151", fill = "#94E8B4"
+  ) + 
+  coord_flip() +
+  theme_minimal()
+```
+
+
+## Dados categóricos
+
+Obter estatística descritiva de dados categóricos é uma tarefa simples. O primeiro passo consiste 
+em tabular os dados. 
+
+```{r}
+#| collapse: TRUE
+# Tabulacao de dados
+table(ISLR::Wage$education)
+table(ISLR::Wage$health_ins)
+```
+
+## Gráfico de Barras
+
+Para visualizar a tabulação em um gráfico, utilizamos a função `geom_bar()`
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| eval: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_bar(
+    aes(x = education),
+    col = "#467599", fill = "#9ED8DB"
+  ) + 
+  theme_minimal()
+```
+
+
+## Gráfico de Barras
+
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| echo: false
+ISLR::Wage |> 
+  ggplot() +
+  geom_bar(
+    aes(x = education),
+    col = "#467599", fill = "#9ED8DB"
+  ) + 
+  theme_minimal()
+```
+
+## Lollipop charts
+
+Uma alternativa para o gráfico de barras são os gráficos do tipo *lollipop*:
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| eval: false
+# Grafico lollipop
+ISLR::Wage |>
+  group_by(education) |> 
+  summarise(total = n()) |> 
+  ggplot() +
+  geom_segment(
+    aes(x = education, xend = education, 
+        y = 0, yend = total),
+    col = "#AD343E"
+    ) + 
+  geom_point(
+    aes(x = education, y = total),
+    col = "#525174"
+  ) +
+  coord_flip() +
+  theme_minimal()
+```
+
+
+## Lollipop charts
+
+Uma alternativa para o gráfico de barras são os gráficos do tipo *lollipop*:
+
+```{r}
+#| collapse: TRUE
+#| message: false
+#| warning: false
+#| echo: false
+# Grafico lollipop
+ISLR::Wage |>
+  group_by(education) |> 
+  summarise(total = n()) |> 
+  ggplot() +
+  geom_segment(
+    aes(x = education, xend = education, 
+        y = 0, yend = total),
+    col = "#AD343E"
+    ) + 
+  geom_point(
+    aes(x = education, y = total),
+    col = "#525174"
+  ) +
+  coord_flip() +
+  theme_minimal()
+```
+
+# <font color="1b5299"> Análise bivariada </font> {background-color="#BBDEF0"}
+
