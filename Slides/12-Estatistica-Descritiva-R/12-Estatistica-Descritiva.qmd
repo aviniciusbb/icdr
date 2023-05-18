@@ -144,7 +144,7 @@ A **média aritmética** é definida como a soma dos elementos de uma variável 
 $$
  \bar{x} = \frac{\sum_{i=1}^{n}x_{i}}{n} = \frac{1}{n}\sum_{i=1}^{n}x_{i}
 $$
-com $i =1, 2, \ldots, n$, sendo $n$ o número de observações.
+com $i =1, 2,\ldots, n$, sendo $n$ o número de observações.
 
 . . .
 
