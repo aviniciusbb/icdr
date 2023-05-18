@@ -30,9 +30,6 @@ Esta disciplina introduz as principais técnicas computacionais em `R` para a le
 12. **Estatística descritiva** <br> [.html](https://raw.githack.com/aviniciusbb/icdr/master/Slides/12-Estatistica-Descritiva-R/12-Estatistica-Descritiva.html)
 
 
-12-Estatistica-Descritiva-R/12-Estatistica-Descritiva.html
-
-
 
 ## Projeto
 
