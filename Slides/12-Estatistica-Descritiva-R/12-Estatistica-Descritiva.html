@@ -402,7 +402,7 @@
 <p>Antonio Vinícius Barbosa</p>
 <h2>
 </h2><h3>
-18-05-2023
+22-05-2023
 </h3>
 
 <p><br></p>
@@ -860,7 +860,7 @@ Objetivo
 <span id="cb22-10"><a href="#cb22-10"></a>    ) <span class="sc">+</span> </span>
 <span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">geom_point</span>(</span>
 <span id="cb22-12"><a href="#cb22-12"></a>    <span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">y =</span> total),</span>
-<span id="cb22-13"><a href="#cb22-13"></a>    <span class="at">col =</span> <span class="st">"#525174"</span></span>
+<span id="cb22-13"><a href="#cb22-13"></a>    <span class="at">col =</span> <span class="st">"#525174"</span>, <span class="at">size =</span> <span class="dv">2</span></span>
 <span id="cb22-14"><a href="#cb22-14"></a>  ) <span class="sc">+</span></span>
 <span id="cb22-15"><a href="#cb22-15"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -868,11 +868,308 @@ Objetivo
 </section><section id="lollipop-charts-1" class="slide level2"><h2>Lollipop charts</h2>
 <p>Uma alternativa para o gráfico de barras são os gráficos do tipo <em>lollipop</em>:</p>
 
-<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section></section><section id="análise-bivariada" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Análise bivariada </font></h1>
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section></section><section><section id="análise-bivariada" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Análise bivariada </font></h1>
+
+</section><section id="análise-bivariada-1" class="slide level2"><h2>Análise bivariada</h2>
+<p>Podemos estender a nossa análise para estatísticas envolvendo outras variáveis ou, mais especificamente, entender a relação existente entre duas variáveis.</p>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="Images/chocolate.jpg" width="700"></p>
+</figure>
+</div>
+</div>
+</section><section id="gráfico-de-dispersão" class="slide level2"><h2>Gráfico de dispersão</h2>
+<p>Para investigar a relação entre duas variáveis, pode visulizar através de uma gráfico de dispersão (ou de pontos)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">library</span>(abjData)</span>
+<span id="cb23-3"><a href="#cb23-3"></a></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co"># Grafico de dispersao</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>pnud_min <span class="sc">|&gt;</span> </span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2010</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb23-7"><a href="#cb23-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb23-9"><a href="#cb23-9"></a>    <span class="fu">aes</span>(<span class="at">x =</span> rdpc, <span class="at">y =</span> idhm), <span class="at">col =</span> <span class="st">"#735cdd"</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>    ) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="gráfico-de-dispersão-1" class="slide level2"><h2>Gráfico de dispersão</h2>
+<p>Para investigar a relação entre duas variáveis, pode visulizar através de uma gráfico de dispersão (ou de pontos)</p>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-32-1.png" width="960" class="r-stretch"></section><section id="covariância" class="slide level2"><h2>Covariância</h2>
+<p>Considere, ainda, a relação entre Gini e expectativa de vida</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="fu">library</span>(abjData)</span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co"># Graficos de dispersao</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>p1 <span class="ot">&lt;-</span> pnud_min <span class="sc">|&gt;</span> </span>
+<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2010</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb24-8"><a href="#cb24-8"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb24-10"><a href="#cb24-10"></a>    <span class="fu">aes</span>(<span class="at">x =</span> rdpc, <span class="at">y =</span> idhm), <span class="at">col =</span> <span class="st">"#735cdd"</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a>    ) <span class="sc">+</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb24-13"><a href="#cb24-13"></a></span>
+<span id="cb24-14"><a href="#cb24-14"></a>p2 <span class="ot">&lt;-</span> pnud_min <span class="sc">|&gt;</span> </span>
+<span id="cb24-15"><a href="#cb24-15"></a>  <span class="fu">filter</span>(ano <span class="sc">==</span> <span class="dv">2010</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb24-16"><a href="#cb24-16"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb24-17"><a href="#cb24-17"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb24-18"><a href="#cb24-18"></a>    <span class="fu">aes</span>(<span class="at">x =</span> gini, <span class="at">y =</span> espvida), <span class="at">col =</span> <span class="st">"#7E007B"</span></span>
+<span id="cb24-19"><a href="#cb24-19"></a>    ) <span class="sc">+</span></span>
+<span id="cb24-20"><a href="#cb24-20"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb24-21"><a href="#cb24-21"></a></span>
+<span id="cb24-22"><a href="#cb24-22"></a><span class="co"># Juntar plots</span></span>
+<span id="cb24-23"><a href="#cb24-23"></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="covariância-1" class="slide level2"><h2>Covariância</h2>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section><section id="covariância-2" class="slide level2"><h2>Covariância</h2>
+<p>Enquanto na primeira relação as variáveis parecem caminhar juntas, nenhum padrão é observado no segundo caso.</p>
+<div class="fragment">
+<blockquote>
+<h3>
+Definição
+</h3>
+<p>A covariância mede a relação linear entre duas variáveis x e y</p>
+</blockquote>
+<p><span class="math display">\[
+  cov(x, y) = \frac{1}{N-1}\sum_{i=1}^{N}(x_{i} - \bar{x})(y_{i} - \bar{y})
+\]</span></p>
+<p>A <strong>covariância</strong> entre duas variáveis aleatórias reais <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, é definida como a medida de como duas variáveis variam conjuntamente.</p>
+</div>
+</section><section id="covariância-3" class="slide level2"><h2>Covariância</h2>
+<p>Geometricamente, temos:</p>
+
+<img data-src="Images/Cov_amostral_1.jpg" width="300" class="r-stretch quarto-figure-center"><p>Uma associação linear entre <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> no <strong>mesmo sentido</strong> faz com que predominem as parcelas <strong>positivas</strong> no cálculo da covariância.</p>
+</section><section id="covariância-4" class="slide level2"><h2>Covariância</h2>
+<p>Geometricamente, temos:</p>
+
+<img data-src="Images/Cov_amostral_2.jpg" width="300" class="r-stretch quarto-figure-center"><p>Uma associação linear entre <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> em <strong>sentido contrário</strong> faz com que predominem as parcelas <strong>negativas</strong> no cálculo da covariância.</p>
+</section><section id="covariância-5" class="slide level2"><h2>Covariância</h2>
+<p>Geometricamente, temos:</p>
+
+<img data-src="Images/Cov_amostral_3.jpg" width="300" class="r-stretch quarto-figure-center"><p>Se não for verificado uma associação linear entre as variáveis, então nem predominam as parcelas positivas, nem as negativas, obtendo-se para a <strong>covariância nula</strong>.</p>
+</section><section id="covariância-6" class="slide level2"><h2>Covariância</h2>
+<p>Para o cálculo da covariância, fazemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Covariancia</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">cov</span>(pnud_min<span class="sc">$</span>rdpc, pnud_min<span class="sc">$</span>idhm)</span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="do">## [1] 27.34128</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="fu">cov</span>(pnud_min<span class="sc">$</span>gini, pnud_min<span class="sc">$</span>espvida)</span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="do">## [1] -0.08666184</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="coeficiente-de-correlação" class="slide level2"><h2>Coeficiente de correlação</h2>
+<p>Para saber o quão forte um variável está correlacionada com a outra, utilizamos o <strong>coeficiente de correlação</strong>.</p>
+<blockquote>
+<h3>
+Definição
+</h3>
+<p>O <strong>coeficiente de correlação</strong> é uma medida que mostra o quanto uma variável <span class="math inline">\(x\)</span> está relacionada linearmente com outra variável <span class="math inline">\(y\)</span>.</p>
+</blockquote>
+<p><span class="math display">\[
+  cor(x, y) = \frac{1}{N-1}\sum_{i=1}^{N}\left(\frac{x_{i} - \bar{x}}{s_{x}}\right)\left(\frac{y_{i} - \bar{y}}{s_{y}}\right) = \frac{cov(x, y)}{s_{x}s_{y}} \in [-1, +1]
+\]</span></p>
+<div class="fragment">
+<ul>
+<li>Valores mais próximos de -1 indicam um forte relação <strong>negativa</strong> entre as variáveis (inclinação negativa)</li>
+<li>Valores mais próximos de +1 indicam um forte relação <strong>positiva</strong> (inclinação positiva).</li>
+</ul>
+</div>
+</section><section id="correlação" class="slide level2"><h2>Correlação</h2>
+<p>Para calcular o coeficiente de correlação, fazemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Coeficiente de correlacao</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="fu">cor</span>(pnud_min<span class="sc">$</span>rdpc, pnud_min<span class="sc">$</span>idhm) </span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="do">## [1] 0.8269191</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="fu">cor</span>(pnud_min<span class="sc">$</span>gini, pnud_min<span class="sc">$</span>espvida)</span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="do">## [1] -0.2202493</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>No primeiro caso, as variáveis têm <strong>correlação positiva forte</strong>.</li>
+<li>No segundo caso, as variáveis têm <strong>correlação negativa fraca</strong>.</li>
+</ul></section><section id="matriz-de-correlação" class="slide level2"><h2>Matriz de Correlação</h2>
+<p>Podemos fazer uma análise de correlação para múltiplas variáveis. O resultado é uma matriz com os coeficientes de correlação para cada par de variáveis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># Dados</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>matriz <span class="ot">&lt;-</span> pnud_min  <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="fu">filter</span>(</span>
+<span id="cb27-4"><a href="#cb27-4"></a>    ano <span class="sc">==</span> <span class="dv">2010</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb27-6"><a href="#cb27-6"></a>  <span class="fu">select</span>(</span>
+<span id="cb27-7"><a href="#cb27-7"></a>    idhm_e<span class="sc">:</span>gini</span>
+<span id="cb27-8"><a href="#cb27-8"></a>    )</span>
+<span id="cb27-9"><a href="#cb27-9"></a></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="co"># Matriz de correlacao (com 4 casas decimais)</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="fu">round</span>(<span class="fu">cor</span>(matriz), <span class="dv">4</span>)</span>
+<span id="cb27-12"><a href="#cb27-12"></a><span class="do">##          idhm_e  idhm_l  idhm_r espvida    rdpc    gini</span></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="do">## idhm_e   1.0000  0.7045  0.8199  0.7045  0.7917 -0.4233</span></span>
+<span id="cb27-14"><a href="#cb27-14"></a><span class="do">## idhm_l   0.7045  1.0000  0.8339  1.0000  0.7843 -0.3796</span></span>
+<span id="cb27-15"><a href="#cb27-15"></a><span class="do">## idhm_r   0.8199  0.8339  1.0000  0.8338  0.9617 -0.3580</span></span>
+<span id="cb27-16"><a href="#cb27-16"></a><span class="do">## espvida  0.7045  1.0000  0.8338  1.0000  0.7842 -0.3796</span></span>
+<span id="cb27-17"><a href="#cb27-17"></a><span class="do">## rdpc     0.7917  0.7843  0.9617  0.7842  1.0000 -0.2736</span></span>
+<span id="cb27-18"><a href="#cb27-18"></a><span class="do">## gini    -0.4233 -0.3796 -0.3580 -0.3796 -0.2736  1.0000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="visualizando-a-matriz-de-correlação" class="slide level2"><h2>Visualizando a Matriz de Correlação</h2>
+<p>Alguns dispositivos gráficos facilitam a visualização de uma matrix de correlação. O primeiro deles é obtido através da função <code>corrplot()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb28-3"><a href="#cb28-3"></a></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="co"># Plot da matriz de correlacao</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(matriz), <span class="at">type =</span> <span class="st">"upper"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6"></a>         <span class="at">tl.col =</span> <span class="st">"black"</span>, <span class="at">tl.srt =</span> <span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="visualizando-a-matriz-de-correlação-1" class="slide level2"><h2>Visualizando a Matriz de Correlação</h2>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-39-1.png" width="960" class="r-stretch"></section><section id="mapas-de-calor-heatmaps" class="slide level2"><h2>Mapas de calor (heatmaps)</h2>
+<p>A outra maneira é utilizar mapas de calor, através da função <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Heatmaps</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>colors <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"white"</span>, <span class="st">"blue"</span>))(<span class="dv">20</span>)</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="fu">heatmap</span>(<span class="fu">cor</span>(matriz), <span class="at">Rowv =</span> <span class="cn">NA</span>, <span class="at">symm =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="mapas-de-calor-heatmaps-1" class="slide level2"><h2>Mapas de calor (heatmaps)</h2>
+<p>A outra maneira é utilizar mapas de calor, através da função <code><a href="https://rdrr.io/r/stats/heatmap.html">heatmap()</a></code></p>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-41-1.png" width="960" class="r-stretch"></section><section id="regressão-linear-simples" class="slide level2"><h2>Regressão linear simples</h2>
+<ul>
+<li><p>A <strong>regressão linear simples</strong> é um método estatístico que podemos usar para encontrar a equação da linha que melhor se “ajusta” a um conjunto de dados. O objetivo é entender a relação exata entre duas variáveis.</p></li>
+<li><p>Para entender o conceito, suponha que estejamos interessados em saber a relação exata entre renda do domicílio (<em>variável independente</em> ou <em>explicativa</em>) e despesa com alimentação das famílias (<em>variável dependente</em> ou <em>explicada</em>)</p></li>
+</ul></section><section id="regressão-linear-simples-1" class="slide level2"><h2>Regressão linear simples</h2>
+<ul>
+<li>Supondo uma relação linear entre as duas variáves:</li>
+</ul>
+<p><span class="math display">\[
+Consumo_{i} = \beta_{0} + \beta_{1}Renda_{i} + \epsilon_{i}
+\]</span></p>
+<ul>
+<li>
+<span class="math inline">\(Consumo_{i}\)</span> é a <em>variável dependente</em> ou <em>explicada</em>
+</li>
+<li>
+<span class="math inline">\(Renda_{i}\)</span> é a <em>variável independente</em> ou <em>explicativa</em>
+</li>
+<li>
+<span class="math inline">\(\beta_{0}\)</span> é o parâmetro de intercepto</li>
+<li>
+<span class="math inline">\(\beta_{1}\)</span> é o parâmetro de inclinação</li>
+<li>
+<span class="math inline">\(\epsilon_{i}\)</span> é o termo de erro do modelo</li>
+</ul></section><section id="reta-de-regressão" class="slide level2"><h2>Reta de regressão</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">library</span>(PoEdata)</span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">data</span>(<span class="st">"food"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="co"># Grafico de dispersao</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>food <span class="sc">|&gt;</span> </span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb30-9"><a href="#cb30-9"></a>    <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> food_exp),</span>
+<span id="cb30-10"><a href="#cb30-10"></a>    <span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"#4682b4"</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a>  ) <span class="sc">+</span> </span>
+<span id="cb30-12"><a href="#cb30-12"></a>  <span class="fu">xlab</span>(<span class="st">"Renda familiar"</span>) <span class="sc">+</span></span>
+<span id="cb30-13"><a href="#cb30-13"></a>  <span class="fu">ylab</span>(<span class="st">"Gastos com alimentação"</span>) <span class="sc">+</span></span>
+<span id="cb30-14"><a href="#cb30-14"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="reta-de-regressão-1" class="slide level2"><h2>Reta de regressão</h2>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-43-1.png" width="960" class="r-stretch"></section><section id="reta-de-regressão-2" class="slide level2"><h2>Reta de regressão</h2>
+<p>Para adicionar a reta de regressão, fazemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">library</span>(PoEdata)</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">data</span>(<span class="st">"food"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="co"># Grafico de dispersao</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>food <span class="sc">|&gt;</span> </span>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb31-9"><a href="#cb31-9"></a>    <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> food_exp),</span>
+<span id="cb31-10"><a href="#cb31-10"></a>    <span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"#4682b4"</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>  ) <span class="sc">+</span> </span>
+<span id="cb31-12"><a href="#cb31-12"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb31-13"><a href="#cb31-13"></a>    <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> food_exp),</span>
+<span id="cb31-14"><a href="#cb31-14"></a>    <span class="at">color =</span> <span class="st">"red"</span>,</span>
+<span id="cb31-15"><a href="#cb31-15"></a>    <span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>  ) <span class="sc">+</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a>  <span class="fu">xlab</span>(<span class="st">"Renda familiar"</span>) <span class="sc">+</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a>  <span class="fu">ylab</span>(<span class="st">"Gastos com alimentação"</span>) <span class="sc">+</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="reta-de-regressão-3" class="slide level2"><h2>Reta de regressão</h2>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-45-1.png" width="960" class="r-stretch"></section><section id="como-a-reta-de-regressão-é-ajustada" class="slide level2"><h2>Como a reta de regressão é ajustada?</h2>
+<ul>
+<li>Ao <strong>estimar</strong> os parâmetros correspondentes aos verdadeiros parâmetros populacionais, obtemos:</li>
+</ul>
+<p><span class="math display">\[
+\widehat{Consumo}_{i} = \hat{\beta}_{0} + \hat{\beta}_{1}Renda_{i}
+\]</span> com <span class="math inline">\(\hat{\beta}_{0}\)</span> e <span class="math inline">\(\hat{\beta}_{1}\)</span> os estimadores dos parâmetros.</p>
+<ul>
+<li>A ideia do método <strong>mínimos quadrados ordinários</strong> (MQO) consiste em encontrar os valores de <span class="math inline">\(\hat{\beta}_0\)</span> e <span class="math inline">\(\hat{\beta}_1\)</span> que minimizem os resíduos do nosso modelo.</li>
+</ul>
+<p><span class="math display">\[
+    \hat{\epsilon}_{i} = Y_{i} - \hat{Y}_{i}
+\]</span></p>
+</section><section id="como-a-reta-de-regressão-é-ajustada-1" class="slide level2"><h2>Como a reta de regressão é ajustada?</h2>
+<p>O objetivo do método é minimizar a soma do quadrado dos resíduos (SQR), definido por</p>
+<p><span class="math display">\[
+\min_{\{\hat{\beta}_0,\hat{\beta}_1\}} SQR =  \sum (Y_{i} - \hat{Y}_{i})^{2}
+\]</span></p>
+<p><span class="math display">\[
+\min_{\{\hat{\beta}_0,\hat{\beta}_1\}} SQR =  \sum (Y_{i} - \hat{\beta}_0 - \hat{\beta}_1 X_{i})^{2}
+\]</span></p>
+<p>Com um pouco de matemática, podemos obter:</p>
+<p><span class="math display">\[
+  \hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}
+\]</span> <span class="math display">\[
+\hat{\beta}_1 = \frac{Cov(X_{i}, Y_{i})}{Var(X_{i})}
+\]</span></p>
+</section><section id="como-a-reta-de-regressão-é-ajustada-2" class="slide level2"><h2>Como a reta de regressão é ajustada?</h2>
+
+<img data-src="12-Estatistica-Descritiva_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section><section id="estimando-o-modelo" class="slide level2"><h2>Estimando o modelo</h2>
+<p>Estimamos um modelo de regressão linear através da função <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Estimacao do modelo linear</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>fit_consumo <span class="ot">&lt;-</span> <span class="fu">lm</span>(food_exp <span class="sc">~</span> income, <span class="at">data =</span> food)</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="fu">summary</span>(fit_consumo)</span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="do">## </span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="do">## Call:</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="do">## lm(formula = food_exp ~ income, data = food)</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a><span class="do">## </span></span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="do">## Residuals:</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="do">## -223.025  -50.816   -6.324   67.879  212.044 </span></span>
+<span id="cb32-11"><a href="#cb32-11"></a><span class="do">## </span></span>
+<span id="cb32-12"><a href="#cb32-12"></a><span class="do">## Coefficients:</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span id="cb32-14"><a href="#cb32-14"></a><span class="do">## (Intercept) 83.41600   43.41016   1.922   0.0622 .  </span></span>
+<span id="cb32-15"><a href="#cb32-15"></a><span class="do">## income       0.10210    0.02093   4.877 1.95e-05 ***</span></span>
+<span id="cb32-16"><a href="#cb32-16"></a><span class="do">## ---</span></span>
+<span id="cb32-17"><a href="#cb32-17"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb32-18"><a href="#cb32-18"></a><span class="do">## </span></span>
+<span id="cb32-19"><a href="#cb32-19"></a><span class="do">## Residual standard error: 89.52 on 38 degrees of freedom</span></span>
+<span id="cb32-20"><a href="#cb32-20"></a><span class="do">## Multiple R-squared:  0.385,  Adjusted R-squared:  0.3688 </span></span>
+<span id="cb32-21"><a href="#cb32-21"></a><span class="do">## F-statistic: 23.79 on 1 and 38 DF,  p-value: 1.946e-05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="estimando-o-modelo-1" class="slide level2"><h2>Estimando o modelo</h2>
+<ul>
+<li>O modelo estimado é:</li>
+</ul>
+<p><span class="math display">\[
+\widehat{Consumo}_{i} = 83.416  + 0.1021*Renda_{i}
+\]</span></p>
+<ul>
+<li><p>Isso significa que para cada $1 de aumento na renda, o consumo com alimentação aumenta em, aproximadamente, $0.10 (dado pelo estimador <span class="math inline">\(\hat{\beta}_{1}\)</span>)</p></li>
+<li><p>Além disso, o nível de gasto autônomo (que independe da renda) é igual a R$83.41)</p></li>
+</ul>
 <div class="footer footer-default">
 <p>ICDR</p>
 </div>
-</section>
+</section></section>
 </div>
   </div>
 

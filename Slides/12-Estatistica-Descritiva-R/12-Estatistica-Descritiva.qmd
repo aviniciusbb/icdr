@@ -715,7 +715,7 @@ ISLR::Wage |>
     ) + 
   geom_point(
     aes(x = education, y = total),
-    col = "#525174"
+    col = "#525174", size = 2
   ) +
   coord_flip() +
   theme_minimal()
@@ -743,7 +743,7 @@ ISLR::Wage |>
     ) + 
   geom_point(
     aes(x = education, y = total),
-    col = "#525174"
+    col = "#525174", size = 2
   ) +
   coord_flip() +
   theme_minimal()
@@ -751,3 +751,523 @@ ISLR::Wage |>
 
 # <font color="1b5299"> Análise bivariada </font> {background-color="#BBDEF0"}
 
+
+
+## Análise bivariada
+
+Podemos estender a nossa análise para estatísticas envolvendo outras variáveis ou, mais
+especificamente, entender a relação existente entre duas variáveis.
+
+. . .
+
+
+![](Images/chocolate.jpg){fig-align="center" width="700"}
+
+## Gráfico de dispersão
+
+Para investigar a relação entre duas variáveis, pode visulizar através de uma gráfico de
+dispersão (ou de pontos)
+
+
+```{r}
+#| echo: true
+#| eval: false
+# Carregar pacote
+library(abjData)
+
+# Grafico de dispersao
+pnud_min |> 
+  filter(ano == 2010) |>  
+  ggplot() +
+  geom_point(
+    aes(x = rdpc, y = idhm), col = "#735cdd"
+    ) +
+  theme_minimal()
+```
+
+## Gráfico de dispersão
+
+Para investigar a relação entre duas variáveis, pode visulizar através de uma gráfico de
+dispersão (ou de pontos)
+
+
+```{r}
+#| echo: false
+#| eval: true
+# Carregar pacote
+library(abjData)
+
+# Grafico de dispersao
+pnud_min |> 
+  filter(ano == 2010) |>  
+  ggplot() +
+  geom_point(
+    aes(x = rdpc, y = idhm), col = "#735cdd"
+    ) +
+  theme_minimal()
+```
+
+
+
+
+## Covariância
+
+Considere, ainda, a relação entre Gini e expectativa de vida
+
+
+```{r}
+#| echo: true
+#| eval: false
+# Carregar pacote
+library(abjData)
+library(patchwork)
+
+# Graficos de dispersao
+p1 <- pnud_min |> 
+  filter(ano == 2010) |>  
+  ggplot() +
+  geom_point(
+    aes(x = rdpc, y = idhm), col = "#735cdd"
+    ) +
+  theme_minimal()
+
+p2 <- pnud_min |> 
+  filter(ano == 2010) |>  
+  ggplot() +
+  geom_point(
+    aes(x = gini, y = espvida), col = "#7E007B"
+    ) +
+  theme_minimal()
+
+# Juntar plots
+p1 + p2
+```
+
+
+## Covariância
+
+
+```{r}
+#| echo: false
+#| eval: true
+# Carregar pacote
+library(abjData)
+library(patchwork)
+
+# Graficos de dispersao
+p1 <- pnud_min |> 
+  filter(ano == 2010) |>  
+  ggplot() +
+  geom_point(
+    aes(x = rdpc, y = idhm), col = "#735cdd"
+    ) +
+  theme_minimal()
+
+p2 <- pnud_min |> 
+  filter(ano == 2010) |>  
+  ggplot() +
+  geom_point(
+    aes(x = gini, y = espvida), col = "#7E007B"
+    ) +
+  theme_minimal()
+
+# Juntar plots
+p1 + p2
+```
+
+
+## Covariância
+
+Enquanto na primeira relação as variáveis parecem caminhar juntas, nenhum padrão
+é observado no segundo caso.
+
+. . . 
+
+> <h3>Definição</h3>
+A covariância mede a relação linear entre duas variáveis x e y
+
+$$
+  cov(x, y) = \frac{1}{N-1}\sum_{i=1}^{N}(x_{i} - \bar{x})(y_{i} - \bar{y})
+$$
+
+
+
+A **covariância** entre duas variáveis aleatórias reais $x$ e $y$, é definida como a medida de como duas variáveis variam conjuntamente.
+
+## Covariância
+
+Geometricamente, temos:
+
+
+![](Images/Cov_amostral_1.jpg){fig-align="center" width="300"}
+
+Uma associação linear entre $x$ e $y$ no **mesmo sentido** faz com que predominem as parcelas **positivas** no cálculo da covariância.
+
+
+## Covariância
+
+Geometricamente, temos:
+
+
+![](Images/Cov_amostral_2.jpg){fig-align="center" width="300"}
+
+Uma associação linear entre $x$ e $y$ em **sentido contrário** faz com que predominem as parcelas **negativas** no cálculo da covariância.
+
+
+## Covariância
+
+Geometricamente, temos:
+
+
+![](Images/Cov_amostral_3.jpg){fig-align="center" width="300"}
+
+Se não for verificado uma associação linear entre as variáveis, então nem predominam as parcelas positivas, nem as negativas, obtendo-se para a **covariância nula**.
+
+
+
+## Covariância
+
+Para o cálculo da covariância, fazemos:
+
+```{r}
+#| collapse: true
+# Covariancia
+cov(pnud_min$rdpc, pnud_min$idhm)
+cov(pnud_min$gini, pnud_min$espvida)
+```
+
+## Coeficiente de correlação
+
+Para saber o quão forte um variável está correlacionada com a outra, utilizamos o **coeficiente de correlação**.
+
+> <h3>Definição</h3>
+O **coeficiente de correlação** é uma medida que mostra o quanto uma variável $x$ está relacionada linearmente com outra variável $y$.
+
+$$
+  cor(x, y) = \frac{1}{N-1}\sum_{i=1}^{N}\left(\frac{x_{i} - \bar{x}}{s_{x}}\right)\left(\frac{y_{i} - \bar{y}}{s_{y}}\right) = \frac{cov(x, y)}{s_{x}s_{y}} \in [-1, +1]
+$$
+
+. . .
+
+- Valores mais próximos de -1 indicam um forte relação **negativa** entre as variáveis (inclinação negativa)
+- Valores mais próximos de +1 indicam um forte relação **positiva** (inclinação positiva).
+
+## Correlação
+
+Para calcular o coeficiente de correlação, fazemos:
+
+```{r}
+#| collapse: true
+# Coeficiente de correlacao
+cor(pnud_min$rdpc, pnud_min$idhm) 
+cor(pnud_min$gini, pnud_min$espvida)
+```
+
+
+- No primeiro caso, as variáveis têm **correlação positiva forte**.
+- No segundo caso, as variáveis têm **correlação negativa fraca**.
+
+
+
+
+## Matriz de Correlação
+
+Podemos fazer uma análise de correlação para múltiplas variáveis. O resultado
+é uma matriz com os coeficientes de correlação para cada par de variáveis.
+
+
+```{r}
+#| collapse: true
+# Dados
+matriz <- pnud_min  |> 
+  filter(
+    ano == 2010
+    ) |> 
+  select(
+    idhm_e:gini
+    )
+
+# Matriz de correlacao (com 4 casas decimais)
+round(cor(matriz), 4)
+```
+
+
+
+## Visualizando a Matriz de Correlação
+
+Alguns dispositivos gráficos facilitam a visualização de uma matrix de correlação. O primeiro deles é obtido através da função `corrplot()`
+
+```{r}
+#| collapse: true
+#| eval: false
+# Carregar pacote
+library(corrplot)
+
+# Plot da matriz de correlacao
+corrplot(cor(matriz), type = "upper",
+         tl.col = "black", tl.srt = 45)
+```
+
+## Visualizando a Matriz de Correlação
+
+
+```{r}
+#| collapse: true
+#| echo: false
+# Carregar pacote
+library(corrplot)
+
+# Plot da matriz de correlacao
+corrplot(cor(matriz), type = "upper",
+         tl.col = "black", tl.srt = 45)
+```
+
+
+## Mapas de calor (heatmaps)
+
+A outra maneira é utilizar mapas de calor, através da 
+função `heatmap()`
+
+```{r}
+#| collapse: true
+#| eval: false
+# Heatmaps
+colors <- colorRampPalette(c("red", "white", "blue"))(20)
+heatmap(cor(matriz), Rowv = NA, symm = TRUE, col = colors)
+```
+
+
+## Mapas de calor (heatmaps)
+
+A outra maneira é utilizar mapas de calor, através da 
+função `heatmap()`
+
+```{r}
+#| collapse: true
+#| echo: false
+# Heatmaps
+colors <- colorRampPalette(c("red", "white", "blue"))(20)
+heatmap(cor(matriz), Rowv = NA, symm = TRUE, col = colors)
+```
+
+
+## Regressão linear simples
+
+ - A **regressão linear simples** é um método estatístico que podemos usar para encontrar a equação da linha que melhor se "ajusta" a um conjunto de dados. O objetivo é entender a relação exata entre duas variáveis.
+
+- Para entender o conceito, suponha que estejamos interessados em saber a relação exata
+entre renda do domicílio (*variável independente* ou *explicativa*) e despesa com alimentação das famílias (*variável dependente* ou *explicada*)
+
+
+## Regressão linear simples
+
+- Supondo uma relação linear entre as duas variáves:
+
+$$
+Consumo_{i} = \beta_{0} + \beta_{1}Renda_{i} + \epsilon_{i}
+$$
+
+- $Consumo_{i}$ é a *variável dependente* ou *explicada*
+- $Renda_{i}$ é a *variável independente* ou *explicativa*
+- $\beta_{0}$ é o parâmetro de intercepto
+- $\beta_{1}$ é o parâmetro de inclinação
+- $\epsilon_{i}$ é o termo de erro do modelo
+
+## Reta de regressão
+
+```{r}
+#| eval: false
+# Carregar pacote
+library(PoEdata)
+data("food")
+
+# Grafico de dispersao
+food |> 
+  ggplot() +
+  geom_point(
+    aes(x = income, y = food_exp),
+    size = 4, color = "#4682b4"
+  ) + 
+  xlab("Renda familiar") +
+  ylab("Gastos com alimentação") +
+  theme_minimal()
+```
+
+
+## Reta de regressão
+
+```{r}
+#| echo: false
+# Carregar pacote
+library(PoEdata)
+data("food")
+
+# Grafico de dispersao
+food |> 
+  ggplot() +
+  geom_point(
+    aes(x = income, y = food_exp),
+    size = 4, color = "#4682b4"
+  ) + 
+  xlab("Renda familiar") +
+  ylab("Gastos com alimentação") +
+  theme_minimal()
+```
+
+
+## Reta de regressão
+
+Para adicionar a reta de regressão, fazemos:
+
+```{r}
+#| eval: false
+# Carregar pacote
+library(PoEdata)
+data("food")
+
+# Grafico de dispersao
+food |> 
+  ggplot() +
+  geom_point(
+    aes(x = income, y = food_exp),
+    size = 4, color = "#4682b4"
+  ) + 
+  geom_smooth(
+    aes(x = income, y = food_exp),
+    color = "red",
+    method = lm, se = FALSE, fullrange = TRUE
+  ) +
+  xlab("Renda familiar") +
+  ylab("Gastos com alimentação") +
+  theme_minimal()
+```
+
+
+## Reta de regressão
+
+
+
+```{r}
+#| echo: false
+# Carregar pacote
+library(PoEdata)
+
+# Abrir dados
+data("food")
+
+food <- food |> 
+  mutate(income = income * 100)
+
+# Grafico de dispersao
+food |> 
+  ggplot() +
+  geom_point(
+    aes(x = income, y = food_exp),
+    size = 4, color = "#4682b4"
+  ) + 
+  geom_smooth(
+    aes(x = income, y = food_exp),
+    color = "red",
+    method = lm, se = FALSE, fullrange = TRUE
+  ) +
+  xlab("Renda familiar") +
+  ylab("Gastos com alimentação") +
+  theme_minimal()
+```
+
+
+## Como a reta de regressão é ajustada?
+
+- Ao **estimar** os parâmetros correspondentes aos verdadeiros 
+parâmetros populacionais, obtemos:
+
+$$
+\widehat{Consumo}_{i} = \hat{\beta}_{0} + \hat{\beta}_{1}Renda_{i}
+$$
+com $\hat{\beta}_{0}$ e $\hat{\beta}_{1}$ os estimadores dos parâmetros.
+
+- A ideia do método **mínimos quadrados ordinários** (MQO) consiste em encontrar os valores de $\hat{\beta}_0$ e $\hat{\beta}_1$ que minimizem os resíduos do nosso modelo.
+
+$$
+    \hat{\epsilon}_{i} = Y_{i} - \hat{Y}_{i}
+$$
+
+## Como a reta de regressão é ajustada?
+
+O objetivo do método é minimizar a soma do quadrado dos resíduos (SQR), definido por
+
+$$
+ \min_{\{\hat{\beta}_0,\hat{\beta}_1\}} SQR =  \sum (Y_{i} - \hat{Y}_{i})^{2}
+$$
+
+$$
+ \min_{\{\hat{\beta}_0,\hat{\beta}_1\}} SQR =  \sum (Y_{i} - \hat{\beta}_0 - \hat{\beta}_1 X_{i})^{2}
+$$
+
+Com um pouco de matemática, podemos obter:
+
+$$
+  \hat{\beta}_0 = \bar{Y} - \hat{\beta}_1\bar{X}
+$$
+$$
+ \hat{\beta}_1 = \frac{Cov(X_{i}, Y_{i})}{Var(X_{i})}
+$$
+
+
+## Como a reta de regressão é ajustada?
+
+```{r}
+#| echo: false
+fit_consumo <- lm(food_exp ~ income, data = food)
+#summary(fit_consumo)
+
+food$predicted <- predict(fit_consumo) 
+food$residuals <- residuals(fit_consumo) 
+
+# Grafico com residuos
+food |> 
+  ggplot() +
+  geom_segment(
+    aes(x = income, y = food_exp, 
+        xend = income, yend = predicted),
+    linetype = 2, color = "#4682b4"
+  ) +
+  geom_point(
+    aes(x = income, y = food_exp),
+    size = 4, color = "#4682b4"
+  ) + 
+  geom_smooth(
+    aes(x = income, y = food_exp),
+    color = "red", lwd = 1,
+    method = lm, se = FALSE, fullrange = TRUE
+  ) +
+  xlab("Renda familiar") +
+  ylab("Gastos com alimentação") +
+  theme_minimal()
+```
+
+
+## Estimando o modelo
+
+Estimamos um modelo de regressão linear através da função `lm()`
+
+```{r}
+#| collapse: true
+# Estimacao do modelo linear
+fit_consumo <- lm(food_exp ~ income, data = food)
+summary(fit_consumo)
+```
+
+
+## Estimando o modelo
+
+- O modelo estimado é:
+
+$$
+\widehat{Consumo}_{i} = 83.416  + 0.1021*Renda_{i}
+$$
+
+- Isso significa que para cada \$1 de aumento na renda, o consumo com
+alimentação aumenta em, aproximadamente, \$0.10 (dado pelo estimador $\hat{\beta}_{1}$)
+
+- Além disso, o nível de gasto autônomo (que independe da renda) é igual a R\$83.41)

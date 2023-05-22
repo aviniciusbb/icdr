@@ -1,0 +1,45 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 12 </font> - Construindo Tabelas </h2>
+
+<h2><font color="FFFFFF"> Aula 12 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://cdn-icons-png.flaticon.com/512/7604/7604036.png){.absolute top="400" left="1150" width="300"}
+
+# <font color="1b5299"> Estatística descritiva dos dados </font> {background-color="#BBDEF0"}
+
+## Estatística Descritiva
+
