@@ -783,9 +783,20 @@ countdown::countdown(
 
 ## Referências
 
+Materias de referência para o `gt`
+
 - [`gt`](https://gt.rstudio.com/index.html)
 - [`gtExtras`](https://jthomasmock.github.io/gtExtras/)
 - [`gt` avançado](https://themockup.blog/static/resources/gt-cookbook-advanced.html#gt-functions)
 - [Tutoriais](https://themockup.blog/posts/2020-05-16-gt-a-grammar-of-tables/index.html#basics-of-gt)
+
+Outros pacotes para construção de tabelas
+
+- [`kable` + `kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
+
+- [`formattable`](https://renkun-ken.github.io/formattable/)
+- [`DT`](https://rstudio.github.io/DT/)
+- [`reactable`](https://glin.github.io/reactable/index.html)
+- [`flextable`](https://davidgohel.github.io/flextable/index.html)
 
 
