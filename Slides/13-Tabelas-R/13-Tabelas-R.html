@@ -27,6 +27,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #767676;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #767676;  padding-left: 4px; }
+    div.sourceCode
+      { color: #545454; background-color: #fefefe; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #545454; } /* Normal */
+    code span.al { color: #7928a1; } /* Alert */
+    code span.an { color: #696969; } /* Annotation */
+    code span.at { color: #a55a00; } /* Attribute */
+    code span.bn { color: #7928a1; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #d91e18; } /* ControlFlow */
+    code span.ch { color: #008000; } /* Char */
+    code span.cn { color: #d91e18; } /* Constant */
+    code span.co { color: #696969; } /* Comment */
+    code span.cv { color: #696969; font-style: italic; } /* CommentVar */
+    code span.do { color: #696969; font-style: italic; } /* Documentation */
+    code span.dt { color: #7928a1; } /* DataType */
+    code span.dv { color: #7928a1; } /* DecVal */
+    code span.er { color: #7928a1; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #a55a00; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #696969; } /* Information */
+    code span.kw { color: #d91e18; } /* Keyword */
+    code span.op { color: #00769e; } /* Operator */
+    code span.ot { color: #d91e18; } /* Other */
+    code span.pp { color: #7928a1; } /* Preprocessor */
+    code span.sc { color: #00769e; } /* SpecialChar */
+    code span.ss { color: #008000; } /* SpecialString */
+    code span.st { color: #008000; } /* String */
+    code span.va { color: #a55a00; } /* Variable */
+    code span.vs { color: #008000; } /* VerbatimString */
+    code span.wa { color: #696969; font-style: italic; } /* Warning */
   </style>
 <link rel="stylesheet" href="13-Tabelas-R_files/libs/revealjs/dist/theme/quarto.css" id="theme">
 <link href="13-Tabelas-R_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -317,6 +381,8 @@
       margin-right: 0; 
     }
   </style>
+<link href="13-Tabelas-R_files/libs/countdown-0.4.0/countdown.css" rel="stylesheet">
+<script src="13-Tabelas-R_files/libs/countdown-0.4.0/countdown.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -338,16 +404,6125 @@
 <p>Antonio Vinícius Barbosa</p>
 <h2>
 </h2><h3>
-22-05-2023
+24-05-2023
 </h3>
 
 <p><br></p>
 <h3>
 </h3>
 <p><img data-src="https://cdn-icons-png.flaticon.com/512/7604/7604036.png" class="absolute" style="top: 400px; left: 1150px; width: 300px; "></p>
-</section><section><section id="estatística-descritiva-dos-dados" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Estatística descritiva dos dados </font></h1>
+</section><section><section id="comunicação-efetiva-de-dados" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Comunicação efetiva de dados </font></h1>
 
-</section><section id="estatística-descritiva" class="slide level2"><h2>Estatística Descritiva</h2>
+</section><section id="comunicação-efetiva-de-dados-1" class="slide level2"><h2>Comunicação efetiva de dados</h2>
+<ul>
+<li>Na maioria dos relatórios, a comunicação dos resultados ocorre por meio de uma combinação de <strong>visualização de dados</strong> e <strong>tabelas</strong>
+</li>
+<li>No <code>R</code>, há diversas maneiras de criar tabelas que comuniquem seus resultados com eficiência</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<h3>
+Objetivo
+</h3>
+<p>Apresentar o <code>gt</code>, um pacote flexível para a construção de tabelas</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="https://gt.rstudio.com/logo.svg" width="300"></p>
+</figure>
+</div>
+</div>
+</section><section id="o-pacote-gt" class="slide level2"><h2>O pacote <code>gt</code>
+</h2>
+<ul>
+<li>O pacote <code>gt</code> (<code>g</code>rammar of <code>t</code>ables) permite a construção de tabelas através de ajustes nos seus elementos.</li>
+<li>Basicamente, o pacote possibilita a transformação de um <code>data frame</code> em tabelas elaboradas</li>
+</ul>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="https://gt.rstudio.com/reference/figures/gt_workflow_diagram.svg" width="2000"></p>
+</figure>
+</div>
+</div>
+</section><section id="alguns-exemplos" class="slide level2"><h2>Alguns exemplos</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="https://themockup.blog/posts/2020-05-16-gt-a-grammar-of-tables/preview.png" class="absolute" style="top: 250px; width: 700px; "></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="https://themockup.blog/posts/2020-09-04-10-table-rules-in-r/preview.png" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="as-partes-de-uma-tabela" class="slide level2"><h2>As partes de uma tabela</h2>
+<p>O <code>gt</code> estrutura a tabela em diferentes partes. Estas incluem <code>table header</code>, <code>stub head</code>, <code>column labels</code>, a <code>table body</code> e o <code>table footer</code>.</p>
+
+<img data-src="https://gt.rstudio.com/reference/figures/gt_parts_of_a_table.svg" width="700" class="r-stretch quarto-figure-center"></section><section id="instalação-do-gt" class="slide level2"><h2>Instalação do <code>gt</code>
+</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Instalacao do CRAN</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"gt"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Instalacao do repositorio GitHub</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rstudio/gt"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Carregar</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+
+</div>
+</section><section id="dados" class="slide level2"><h2>Dados</h2>
+<p>Para contruir as tabelas com <code>gt</code>, utilizaremos os dados de produção agrícola dos países</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Carregar url e ler dados</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>url <span class="ot">&lt;-</span> <span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-01/key_crop_yields.csv'</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>prod_agricola <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(url)</span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># Visualizar dados</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>prod_agricola</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="do">## # A tibble: 13,075 × 14</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="do">##    Entity      Code   Year `Wheat (tonnes per hectare)` Rice (tonnes per hecta…¹</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="do">##    &lt;chr&gt;       &lt;chr&gt; &lt;dbl&gt;                        &lt;dbl&gt;                    &lt;dbl&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="do">##  1 Afghanistan AFG    1961                        1.02                      1.52</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="do">##  2 Afghanistan AFG    1962                        0.974                     1.52</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="do">##  3 Afghanistan AFG    1963                        0.832                     1.52</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="do">##  4 Afghanistan AFG    1964                        0.951                     1.73</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="do">##  5 Afghanistan AFG    1965                        0.972                     1.73</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="do">##  6 Afghanistan AFG    1966                        0.867                     1.52</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="do">##  7 Afghanistan AFG    1967                        1.12                      1.92</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="do">##  8 Afghanistan AFG    1968                        1.16                      1.95</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="do">##  9 Afghanistan AFG    1969                        1.19                      1.98</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="do">## 10 Afghanistan AFG    1970                        0.956                     1.81</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="do">## # ℹ 13,065 more rows</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="do">## # ℹ abbreviated name: ¹​`Rice (tonnes per hectare)`</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="do">## # ℹ 9 more variables: `Maize (tonnes per hectare)` &lt;dbl&gt;,</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="do">## #   `Soybeans (tonnes per hectare)` &lt;dbl&gt;,</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="do">## #   `Potatoes (tonnes per hectare)` &lt;dbl&gt;, `Beans (tonnes per hectare)` &lt;dbl&gt;,</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="do">## #   `Peas (tonnes per hectare)` &lt;dbl&gt;, `Cassava (tonnes per hectare)` &lt;dbl&gt;,</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="do">## #   `Barley (tonnes per hectare)` &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dados-1" class="slide level2"><h2>Dados</h2>
+<p>Manipulando os dados:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Carregar pacote</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Manipular dados</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>prod_agr_data <span class="ot">&lt;-</span> prod_agricola <span class="sc">|&gt;</span>  </span>
+<span id="cb3-6"><a href="#cb3-6"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span>  </span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">rename_with</span>(</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="sc">~</span><span class="fu">str_remove</span>(., <span class="st">"_tonnes_per_hectare"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    ) <span class="sc">|&gt;</span>  </span>
+<span id="cb3-10"><a href="#cb3-10"></a>  <span class="fu">select</span>(</span>
+<span id="cb3-11"><a href="#cb3-11"></a>    entity<span class="sc">:</span>beans, <span class="sc">-</span>code</span>
+<span id="cb3-12"><a href="#cb3-12"></a>    ) <span class="sc">|&gt;</span>  </span>
+<span id="cb3-13"><a href="#cb3-13"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb3-14"><a href="#cb3-14"></a>    <span class="at">cols =</span> wheat<span class="sc">:</span>beans, </span>
+<span id="cb3-15"><a href="#cb3-15"></a>    <span class="at">names_to =</span> <span class="st">"crop"</span>, </span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="at">values_to =</span> <span class="st">"yield"</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>    ) <span class="sc">|&gt;</span>  </span>
+<span id="cb3-18"><a href="#cb3-18"></a>  <span class="fu">rename</span>(<span class="at">country =</span> entity) <span class="sc">|&gt;</span> </span>
+<span id="cb3-19"><a href="#cb3-19"></a>  <span class="fu">filter</span>(</span>
+<span id="cb3-20"><a href="#cb3-20"></a>    country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"China"</span>, <span class="st">"United States"</span>, <span class="st">"Brazil"</span>),</span>
+<span id="cb3-21"><a href="#cb3-21"></a>    year <span class="sc">%in%</span> <span class="dv">2016</span><span class="sc">:</span><span class="dv">2018</span>,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>    crop <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"maize"</span>, <span class="st">"soybeans"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb3-24"><a href="#cb3-24"></a>  <span class="fu">mutate</span>(<span class="at">crop =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-25"><a href="#cb3-25"></a>    crop <span class="sc">==</span> <span class="st">"maize"</span> <span class="sc">~</span> <span class="st">"Milho"</span>,</span>
+<span id="cb3-26"><a href="#cb3-26"></a>    crop <span class="sc">==</span> <span class="st">"soybeans"</span> <span class="sc">~</span> <span class="st">"Soja"</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a>    )</span>
+<span id="cb3-28"><a href="#cb3-28"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb3-29"><a href="#cb3-29"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb3-30"><a href="#cb3-30"></a>    <span class="at">names_from =</span> year, </span>
+<span id="cb3-31"><a href="#cb3-31"></a>    <span class="at">values_from =</span> yield</span>
+<span id="cb3-32"><a href="#cb3-32"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="dados-2" class="slide level2"><h2>Dados</h2>
+<p>Como resultado, obtemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>prod_agr_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  country       crop  `2016` `2017` `2018`
+  &lt;chr&gt;         &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Brazil        Milho   4.29   5.62   5.10
+2 Brazil        Soja    2.90   3.38   3.39
+3 China         Milho   5.97   6.11   6.10
+4 China         Soja    1.80   1.79   1.78
+5 United States Milho  11.7   11.9   11.9 
+6 United States Soja    3.49   3.31   3.47</code></pre>
+</div>
+</div>
+</section><section id="gt-básico" class="slide level2"><h2>
+<code>gt</code> básico</h2>
+<p>Para gerar uma tabela básica, fazemos:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">gt</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="seyglzanrm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#seyglzanrm table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#seyglzanrm thead, #seyglzanrm tbody, #seyglzanrm tfoot, #seyglzanrm tr, #seyglzanrm td, #seyglzanrm th {
+  border-style: none;
+}
+
+#seyglzanrm p {
+  margin: 0;
+  padding: 0;
+}
+
+#seyglzanrm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#seyglzanrm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#seyglzanrm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#seyglzanrm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#seyglzanrm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#seyglzanrm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#seyglzanrm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#seyglzanrm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#seyglzanrm .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#seyglzanrm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#seyglzanrm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#seyglzanrm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#seyglzanrm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#seyglzanrm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#seyglzanrm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#seyglzanrm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#seyglzanrm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#seyglzanrm .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#seyglzanrm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#seyglzanrm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#seyglzanrm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#seyglzanrm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#seyglzanrm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#seyglzanrm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#seyglzanrm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#seyglzanrm .gt_left {
+  text-align: left;
+}
+
+#seyglzanrm .gt_center {
+  text-align: center;
+}
+
+#seyglzanrm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#seyglzanrm .gt_font_normal {
+  font-weight: normal;
+}
+
+#seyglzanrm .gt_font_bold {
+  font-weight: bold;
+}
+
+#seyglzanrm .gt_font_italic {
+  font-style: italic;
+}
+
+#seyglzanrm .gt_super {
+  font-size: 65%;
+}
+
+#seyglzanrm .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#seyglzanrm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#seyglzanrm .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#seyglzanrm .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#seyglzanrm .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#seyglzanrm .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#seyglzanrm .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="country">country</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="crop">crop</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">4.2877</td>
+<td headers="2017" class="gt_row gt_right">5.6183</td>
+<td headers="2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">2.9049</td>
+<td headers="2017" class="gt_row gt_right">3.3785</td>
+<td headers="2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">5.9667</td>
+<td headers="2017" class="gt_row gt_right">6.1103</td>
+<td headers="2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">1.8030</td>
+<td headers="2017" class="gt_row gt_right">1.7862</td>
+<td headers="2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">11.7433</td>
+<td headers="2017" class="gt_row gt_right">11.8754</td>
+<td headers="2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">3.4936</td>
+<td headers="2017" class="gt_row gt_right">3.3133</td>
+<td headers="2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="modificando-o-título" class="slide level2"><h2>Modificando o título</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>             <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="jetkgqzyww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jetkgqzyww table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jetkgqzyww thead, #jetkgqzyww tbody, #jetkgqzyww tfoot, #jetkgqzyww tr, #jetkgqzyww td, #jetkgqzyww th {
+  border-style: none;
+}
+
+#jetkgqzyww p {
+  margin: 0;
+  padding: 0;
+}
+
+#jetkgqzyww .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jetkgqzyww .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jetkgqzyww .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jetkgqzyww .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jetkgqzyww .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jetkgqzyww .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jetkgqzyww .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jetkgqzyww .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jetkgqzyww .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jetkgqzyww .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jetkgqzyww .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jetkgqzyww .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jetkgqzyww .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jetkgqzyww .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jetkgqzyww .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jetkgqzyww .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jetkgqzyww .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jetkgqzyww .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jetkgqzyww .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jetkgqzyww .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jetkgqzyww .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jetkgqzyww .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jetkgqzyww .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jetkgqzyww .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jetkgqzyww .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jetkgqzyww .gt_left {
+  text-align: left;
+}
+
+#jetkgqzyww .gt_center {
+  text-align: center;
+}
+
+#jetkgqzyww .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jetkgqzyww .gt_font_normal {
+  font-weight: normal;
+}
+
+#jetkgqzyww .gt_font_bold {
+  font-weight: bold;
+}
+
+#jetkgqzyww .gt_font_italic {
+  font-style: italic;
+}
+
+#jetkgqzyww .gt_super {
+  font-size: 65%;
+}
+
+#jetkgqzyww .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jetkgqzyww .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jetkgqzyww .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jetkgqzyww .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jetkgqzyww .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jetkgqzyww .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jetkgqzyww .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total da produção em toneladas por hectare</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="country">country</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="crop">crop</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">4.2877</td>
+<td headers="2017" class="gt_row gt_right">5.6183</td>
+<td headers="2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">2.9049</td>
+<td headers="2017" class="gt_row gt_right">3.3785</td>
+<td headers="2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">5.9667</td>
+<td headers="2017" class="gt_row gt_right">6.1103</td>
+<td headers="2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">1.8030</td>
+<td headers="2017" class="gt_row gt_right">1.7862</td>
+<td headers="2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">11.7433</td>
+<td headers="2017" class="gt_row gt_right">11.8754</td>
+<td headers="2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">3.4936</td>
+<td headers="2017" class="gt_row gt_right">3.3133</td>
+<td headers="2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="adicionando-a-fonte-dos-dados" class="slide level2"><h2>Adicionando a fonte dos dados</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb8-4"><a href="#cb8-4"></a>             <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="bzwlltoipa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bzwlltoipa table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#bzwlltoipa thead, #bzwlltoipa tbody, #bzwlltoipa tfoot, #bzwlltoipa tr, #bzwlltoipa td, #bzwlltoipa th {
+  border-style: none;
+}
+
+#bzwlltoipa p {
+  margin: 0;
+  padding: 0;
+}
+
+#bzwlltoipa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#bzwlltoipa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bzwlltoipa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bzwlltoipa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bzwlltoipa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bzwlltoipa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bzwlltoipa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bzwlltoipa .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bzwlltoipa .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#bzwlltoipa .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#bzwlltoipa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bzwlltoipa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bzwlltoipa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bzwlltoipa .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bzwlltoipa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzwlltoipa .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#bzwlltoipa .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#bzwlltoipa .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#bzwlltoipa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzwlltoipa .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#bzwlltoipa .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzwlltoipa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bzwlltoipa .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzwlltoipa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bzwlltoipa .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bzwlltoipa .gt_left {
+  text-align: left;
+}
+
+#bzwlltoipa .gt_center {
+  text-align: center;
+}
+
+#bzwlltoipa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bzwlltoipa .gt_font_normal {
+  font-weight: normal;
+}
+
+#bzwlltoipa .gt_font_bold {
+  font-weight: bold;
+}
+
+#bzwlltoipa .gt_font_italic {
+  font-style: italic;
+}
+
+#bzwlltoipa .gt_super {
+  font-size: 65%;
+}
+
+#bzwlltoipa .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#bzwlltoipa .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#bzwlltoipa .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#bzwlltoipa .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#bzwlltoipa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#bzwlltoipa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#bzwlltoipa .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total da produção em toneladas por hectare</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="country">country</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="crop">crop</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">4.2877</td>
+<td headers="2017" class="gt_row gt_right">5.6183</td>
+<td headers="2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">2.9049</td>
+<td headers="2017" class="gt_row gt_right">3.3785</td>
+<td headers="2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">5.9667</td>
+<td headers="2017" class="gt_row gt_right">6.1103</td>
+<td headers="2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">1.8030</td>
+<td headers="2017" class="gt_row gt_right">1.7862</td>
+<td headers="2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">11.7433</td>
+<td headers="2017" class="gt_row gt_right">11.8754</td>
+<td headers="2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">3.4936</td>
+<td headers="2017" class="gt_row gt_right">3.3133</td>
+<td headers="2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="5">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="modificando-o-nome-das-colunas" class="slide level2"><h2>Modificando o nome das colunas</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb9-4"><a href="#cb9-4"></a>             <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">cols_label</span>(<span class="at">country =</span> <span class="st">"País"</span>, <span class="at">crop =</span> <span class="st">"Produto"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="qamgjlyxah" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qamgjlyxah table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qamgjlyxah thead, #qamgjlyxah tbody, #qamgjlyxah tfoot, #qamgjlyxah tr, #qamgjlyxah td, #qamgjlyxah th {
+  border-style: none;
+}
+
+#qamgjlyxah p {
+  margin: 0;
+  padding: 0;
+}
+
+#qamgjlyxah .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qamgjlyxah .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qamgjlyxah .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qamgjlyxah .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qamgjlyxah .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qamgjlyxah .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qamgjlyxah .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qamgjlyxah .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qamgjlyxah .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qamgjlyxah .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qamgjlyxah .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qamgjlyxah .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qamgjlyxah .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qamgjlyxah .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qamgjlyxah .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qamgjlyxah .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qamgjlyxah .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qamgjlyxah .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qamgjlyxah .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qamgjlyxah .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qamgjlyxah .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qamgjlyxah .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qamgjlyxah .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qamgjlyxah .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qamgjlyxah .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qamgjlyxah .gt_left {
+  text-align: left;
+}
+
+#qamgjlyxah .gt_center {
+  text-align: center;
+}
+
+#qamgjlyxah .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qamgjlyxah .gt_font_normal {
+  font-weight: normal;
+}
+
+#qamgjlyxah .gt_font_bold {
+  font-weight: bold;
+}
+
+#qamgjlyxah .gt_font_italic {
+  font-style: italic;
+}
+
+#qamgjlyxah .gt_super {
+  font-size: 65%;
+}
+
+#qamgjlyxah .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qamgjlyxah .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qamgjlyxah .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qamgjlyxah .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qamgjlyxah .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qamgjlyxah .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qamgjlyxah .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total da produção em toneladas por hectare</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="País">País</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Produto">Produto</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">4.2877</td>
+<td headers="2017" class="gt_row gt_right">5.6183</td>
+<td headers="2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">Brazil</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">2.9049</td>
+<td headers="2017" class="gt_row gt_right">3.3785</td>
+<td headers="2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">5.9667</td>
+<td headers="2017" class="gt_row gt_right">6.1103</td>
+<td headers="2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">China</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">1.8030</td>
+<td headers="2017" class="gt_row gt_right">1.7862</td>
+<td headers="2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Milho</td>
+<td headers="2016" class="gt_row gt_right">11.7433</td>
+<td headers="2017" class="gt_row gt_right">11.8754</td>
+<td headers="2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="crop" class="gt_row gt_left">Soja</td>
+<td headers="2016" class="gt_row gt_right">3.4936</td>
+<td headers="2017" class="gt_row gt_right">3.3133</td>
+<td headers="2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="5">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="apresentando-por-grupos" class="slide level2"><h2>Apresentando por grupos</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="nrlldsphxa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#nrlldsphxa table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#nrlldsphxa thead, #nrlldsphxa tbody, #nrlldsphxa tfoot, #nrlldsphxa tr, #nrlldsphxa td, #nrlldsphxa th {
+  border-style: none;
+}
+
+#nrlldsphxa p {
+  margin: 0;
+  padding: 0;
+}
+
+#nrlldsphxa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#nrlldsphxa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nrlldsphxa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nrlldsphxa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nrlldsphxa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nrlldsphxa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nrlldsphxa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nrlldsphxa .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nrlldsphxa .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#nrlldsphxa .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#nrlldsphxa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nrlldsphxa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nrlldsphxa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nrlldsphxa .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nrlldsphxa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nrlldsphxa .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#nrlldsphxa .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#nrlldsphxa .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#nrlldsphxa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nrlldsphxa .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#nrlldsphxa .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nrlldsphxa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nrlldsphxa .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nrlldsphxa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nrlldsphxa .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nrlldsphxa .gt_left {
+  text-align: left;
+}
+
+#nrlldsphxa .gt_center {
+  text-align: center;
+}
+
+#nrlldsphxa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nrlldsphxa .gt_font_normal {
+  font-weight: normal;
+}
+
+#nrlldsphxa .gt_font_bold {
+  font-weight: bold;
+}
+
+#nrlldsphxa .gt_font_italic {
+  font-style: italic;
+}
+
+#nrlldsphxa .gt_super {
+  font-size: 65%;
+}
+
+#nrlldsphxa .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#nrlldsphxa .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#nrlldsphxa .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#nrlldsphxa .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#nrlldsphxa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#nrlldsphxa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#nrlldsphxa .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right">4.2877</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right">5.6183</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right">2.9049</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right">3.3785</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China">China</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right">5.9667</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right">6.1103</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right">1.8030</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right">1.7862</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right">11.7433</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right">11.8754</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right">3.4936</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right">3.3133</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="agrupando-colunas" class="slide level2"><h2>Agrupando colunas</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb11-8"><a href="#cb11-8"></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">label =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">2016</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="vuutcnegfc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vuutcnegfc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vuutcnegfc thead, #vuutcnegfc tbody, #vuutcnegfc tfoot, #vuutcnegfc tr, #vuutcnegfc td, #vuutcnegfc th {
+  border-style: none;
+}
+
+#vuutcnegfc p {
+  margin: 0;
+  padding: 0;
+}
+
+#vuutcnegfc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vuutcnegfc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vuutcnegfc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vuutcnegfc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vuutcnegfc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vuutcnegfc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vuutcnegfc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vuutcnegfc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vuutcnegfc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vuutcnegfc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vuutcnegfc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vuutcnegfc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vuutcnegfc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vuutcnegfc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vuutcnegfc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuutcnegfc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vuutcnegfc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vuutcnegfc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vuutcnegfc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuutcnegfc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vuutcnegfc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuutcnegfc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vuutcnegfc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuutcnegfc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vuutcnegfc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vuutcnegfc .gt_left {
+  text-align: left;
+}
+
+#vuutcnegfc .gt_center {
+  text-align: center;
+}
+
+#vuutcnegfc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vuutcnegfc .gt_font_normal {
+  font-weight: normal;
+}
+
+#vuutcnegfc .gt_font_bold {
+  font-weight: bold;
+}
+
+#vuutcnegfc .gt_font_italic {
+  font-style: italic;
+}
+
+#vuutcnegfc .gt_super {
+  font-size: 65%;
+}
+
+#vuutcnegfc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vuutcnegfc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vuutcnegfc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vuutcnegfc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vuutcnegfc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vuutcnegfc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vuutcnegfc .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Ano">
+        <span class="gt_column_spanner">Ano</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right">4.2877</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right">5.6183</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right">2.9049</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right">3.3785</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China">China</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right">5.9667</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right">6.1103</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right">1.8030</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right">1.7862</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right">11.7433</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right">11.8754</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right">3.4936</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right">3.3133</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="adicionando-footnotes" class="slide level2"><h2>Adicionando <em>footnotes</em>
+</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="at">label =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">2016</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb12-12"><a href="#cb12-12"></a>   <span class="fu">tab_footnote</span>(</span>
+<span id="cb12-13"><a href="#cb12-13"></a>    <span class="at">footnote =</span> <span class="st">"Quantidades baseadas em relatórios oficiais."</span>,</span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="at">groups =</span> <span class="st">"subtitle"</span>)</span>
+<span id="cb12-15"><a href="#cb12-15"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb12-16"><a href="#cb12-16"></a>   <span class="fu">tab_footnote</span>(</span>
+<span id="cb12-17"><a href="#cb12-17"></a>    <span class="at">footnote =</span> <span class="st">"Dados projetados"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18"></a>    <span class="at">locations =</span> <span class="fu">cells_row_groups</span>(<span class="at">groups =</span> <span class="fu">c</span>(<span class="st">"China"</span>))</span>
+<span id="cb12-19"><a href="#cb12-19"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="apsgbtizzq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#apsgbtizzq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#apsgbtizzq thead, #apsgbtizzq tbody, #apsgbtizzq tfoot, #apsgbtizzq tr, #apsgbtizzq td, #apsgbtizzq th {
+  border-style: none;
+}
+
+#apsgbtizzq p {
+  margin: 0;
+  padding: 0;
+}
+
+#apsgbtizzq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#apsgbtizzq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#apsgbtizzq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#apsgbtizzq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#apsgbtizzq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#apsgbtizzq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#apsgbtizzq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#apsgbtizzq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#apsgbtizzq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#apsgbtizzq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#apsgbtizzq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#apsgbtizzq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#apsgbtizzq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#apsgbtizzq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#apsgbtizzq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#apsgbtizzq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#apsgbtizzq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#apsgbtizzq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#apsgbtizzq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#apsgbtizzq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#apsgbtizzq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#apsgbtizzq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#apsgbtizzq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#apsgbtizzq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#apsgbtizzq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#apsgbtizzq .gt_left {
+  text-align: left;
+}
+
+#apsgbtizzq .gt_center {
+  text-align: center;
+}
+
+#apsgbtizzq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#apsgbtizzq .gt_font_normal {
+  font-weight: normal;
+}
+
+#apsgbtizzq .gt_font_bold {
+  font-weight: bold;
+}
+
+#apsgbtizzq .gt_font_italic {
+  font-style: italic;
+}
+
+#apsgbtizzq .gt_super {
+  font-size: 65%;
+}
+
+#apsgbtizzq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#apsgbtizzq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#apsgbtizzq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#apsgbtizzq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#apsgbtizzq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#apsgbtizzq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#apsgbtizzq .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Ano">
+        <span class="gt_column_spanner">Ano</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right">4.2877</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right">5.6183</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right">5.1044</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right">2.9049</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right">3.3785</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right">3.3903</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China<span class=&quot;gt_footnote_marks&quot; style=&quot;white-space:nowrap;font-style:italic;font-weight:normal;&quot;><sup>2</sup></span>">China<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>2</sup></span>
+</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right">5.9667</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right">6.1103</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right">6.1042</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right">1.8030</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right">1.7862</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right">1.7800</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right">11.7433</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right">11.8754</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right">11.8639</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right">3.4936</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right">3.3133</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right">3.4681</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+<tfoot class="gt_footnotes">
+<tr>
+<td class="gt_footnote" colspan="4">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Quantidades baseadas em relatórios oficiais.</td>
+    </tr>
+<tr>
+<td class="gt_footnote" colspan="4">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>2</sup></span> Dados projetados</td>
+    </tr>
+</tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="formatando-elementos-das-células" class="slide level2"><h2>Formatando elementos das células</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="at">label =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">2016</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb13-12"><a href="#cb13-12"></a>   <span class="fu">tab_footnote</span>(</span>
+<span id="cb13-13"><a href="#cb13-13"></a>    <span class="at">footnote =</span> <span class="st">"Quantidades baseadas em relatórios oficiais."</span>,</span>
+<span id="cb13-14"><a href="#cb13-14"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="at">groups =</span> <span class="st">"subtitle"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb13-16"><a href="#cb13-16"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="pqroafyqwg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pqroafyqwg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pqroafyqwg thead, #pqroafyqwg tbody, #pqroafyqwg tfoot, #pqroafyqwg tr, #pqroafyqwg td, #pqroafyqwg th {
+  border-style: none;
+}
+
+#pqroafyqwg p {
+  margin: 0;
+  padding: 0;
+}
+
+#pqroafyqwg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pqroafyqwg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pqroafyqwg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pqroafyqwg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pqroafyqwg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pqroafyqwg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pqroafyqwg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pqroafyqwg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pqroafyqwg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pqroafyqwg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pqroafyqwg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pqroafyqwg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pqroafyqwg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pqroafyqwg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pqroafyqwg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqroafyqwg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pqroafyqwg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pqroafyqwg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pqroafyqwg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqroafyqwg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pqroafyqwg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqroafyqwg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pqroafyqwg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqroafyqwg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pqroafyqwg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pqroafyqwg .gt_left {
+  text-align: left;
+}
+
+#pqroafyqwg .gt_center {
+  text-align: center;
+}
+
+#pqroafyqwg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pqroafyqwg .gt_font_normal {
+  font-weight: normal;
+}
+
+#pqroafyqwg .gt_font_bold {
+  font-weight: bold;
+}
+
+#pqroafyqwg .gt_font_italic {
+  font-style: italic;
+}
+
+#pqroafyqwg .gt_super {
+  font-size: 65%;
+}
+
+#pqroafyqwg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pqroafyqwg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pqroafyqwg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pqroafyqwg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pqroafyqwg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pqroafyqwg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pqroafyqwg .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Ano">
+        <span class="gt_column_spanner">Ano</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right">4.29</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right">5.62</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right">5.10</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right">2.90</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right">3.38</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right">3.39</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China">China</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right">5.97</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right">6.11</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right">6.10</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right">1.80</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right">1.79</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right">1.78</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right">11.74</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right">11.88</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right">11.86</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right">3.49</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right">3.31</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right">3.47</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+<tfoot class="gt_footnotes"><tr>
+<td class="gt_footnote" colspan="4">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Quantidades baseadas em relatórios oficiais.</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="ajustando-a-aparência" class="slide level2"><h2>Ajustando a aparência</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="at">label =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">2016</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb14-12"><a href="#cb14-12"></a>   <span class="fu">tab_footnote</span>(</span>
+<span id="cb14-13"><a href="#cb14-13"></a>    <span class="at">footnote =</span> <span class="st">"Quantidades baseadas em relatórios oficiais."</span>,</span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="at">groups =</span> <span class="st">"subtitle"</span>)</span>
+<span id="cb14-15"><a href="#cb14-15"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb14-16"><a href="#cb14-16"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-17"><a href="#cb14-17"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb14-18"><a href="#cb14-18"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb14-19"><a href="#cb14-19"></a>    <span class="at">heading.background.color =</span> <span class="st">"#C1EEFF"</span>,</span>
+<span id="cb14-20"><a href="#cb14-20"></a>    <span class="at">footnotes.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb14-21"><a href="#cb14-21"></a>    <span class="at">source_notes.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb14-22"><a href="#cb14-22"></a>    <span class="at">heading.align =</span> <span class="st">"left"</span>,</span>
+<span id="cb14-23"><a href="#cb14-23"></a>    <span class="at">table.border.top.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb14-24"><a href="#cb14-24"></a>    <span class="at">table.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb14-25"><a href="#cb14-25"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="kzqckeuqke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kzqckeuqke table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kzqckeuqke thead, #kzqckeuqke tbody, #kzqckeuqke tfoot, #kzqckeuqke tr, #kzqckeuqke td, #kzqckeuqke th {
+  border-style: none;
+}
+
+#kzqckeuqke p {
+  margin: 0;
+  padding: 0;
+}
+
+#kzqckeuqke .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kzqckeuqke .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kzqckeuqke .gt_subtitle {
+  color: #333333;
+  font-size: 18px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kzqckeuqke .gt_heading {
+  background-color: #C1EEFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kzqckeuqke .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kzqckeuqke .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kzqckeuqke .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kzqckeuqke .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kzqckeuqke .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kzqckeuqke .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kzqckeuqke .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kzqckeuqke .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kzqckeuqke .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kzqckeuqke .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kzqckeuqke .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kzqckeuqke .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kzqckeuqke .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kzqckeuqke .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kzqckeuqke .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kzqckeuqke .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kzqckeuqke .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kzqckeuqke .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kzqckeuqke .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_footnote {
+  margin: 0px;
+  font-size: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kzqckeuqke .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kzqckeuqke .gt_sourcenote {
+  font-size: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kzqckeuqke .gt_left {
+  text-align: left;
+}
+
+#kzqckeuqke .gt_center {
+  text-align: center;
+}
+
+#kzqckeuqke .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kzqckeuqke .gt_font_normal {
+  font-weight: normal;
+}
+
+#kzqckeuqke .gt_font_bold {
+  font-weight: bold;
+}
+
+#kzqckeuqke .gt_font_italic {
+  font-style: italic;
+}
+
+#kzqckeuqke .gt_super {
+  font-size: 65%;
+}
+
+#kzqckeuqke .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kzqckeuqke .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kzqckeuqke .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kzqckeuqke .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kzqckeuqke .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kzqckeuqke .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kzqckeuqke .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Ano">
+        <span class="gt_column_spanner">Ano</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right">4.29</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right">5.62</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right">5.10</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right">2.90</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right">3.38</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right">3.39</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China">China</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right">5.97</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right">6.11</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right">6.10</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right">1.80</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right">1.79</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right">1.78</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right">11.74</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right">11.88</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right">11.86</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right">3.49</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right">3.31</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right">3.47</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+<tfoot class="gt_footnotes"><tr>
+<td class="gt_footnote" colspan="4">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Quantidades baseadas em relatórios oficiais.</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="alterando-a-fonte" class="slide level2"><h2>Alterando a fonte</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb15-9"><a href="#cb15-9"></a>    <span class="at">label =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">2016</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-12"><a href="#cb15-12"></a>   <span class="fu">tab_footnote</span>(</span>
+<span id="cb15-13"><a href="#cb15-13"></a>    <span class="at">footnote =</span> <span class="st">"Quantidades baseadas em relatórios oficiais."</span>,</span>
+<span id="cb15-14"><a href="#cb15-14"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="at">groups =</span> <span class="st">"subtitle"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb15-17"><a href="#cb15-17"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb15-18"><a href="#cb15-18"></a>    <span class="at">heading.background.color =</span> <span class="st">"#C1EEFF"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19"></a>    <span class="at">footnotes.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb15-20"><a href="#cb15-20"></a>    <span class="at">source_notes.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb15-21"><a href="#cb15-21"></a>    <span class="at">heading.align =</span> <span class="st">"left"</span>,</span>
+<span id="cb15-22"><a href="#cb15-22"></a>    <span class="at">table.border.top.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb15-23"><a href="#cb15-23"></a>    <span class="at">table.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb15-24"><a href="#cb15-24"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb15-25"><a href="#cb15-25"></a>    <span class="at">table.font.size =</span> <span class="fu">px</span>(<span class="dv">30</span>),</span>
+<span id="cb15-26"><a href="#cb15-26"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb15-27"><a href="#cb15-27"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb15-28"><a href="#cb15-28"></a>   <span class="fu">opt_table_font</span>(</span>
+<span id="cb15-29"><a href="#cb15-29"></a>    <span class="at">font =</span> <span class="fu">list</span>(</span>
+<span id="cb15-30"><a href="#cb15-30"></a>      <span class="fu">google_font</span>(<span class="at">name =</span> <span class="st">"Abel"</span>)</span>
+<span id="cb15-31"><a href="#cb15-31"></a>    )</span>
+<span id="cb15-32"><a href="#cb15-32"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="pwmjxqsdcp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Abel:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#pwmjxqsdcp table {
+  font-family: Abel, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pwmjxqsdcp thead, #pwmjxqsdcp tbody, #pwmjxqsdcp tfoot, #pwmjxqsdcp tr, #pwmjxqsdcp td, #pwmjxqsdcp th {
+  border-style: none;
+}
+
+#pwmjxqsdcp p {
+  margin: 0;
+  padding: 0;
+}
+
+#pwmjxqsdcp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pwmjxqsdcp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pwmjxqsdcp .gt_subtitle {
+  color: #333333;
+  font-size: 18px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pwmjxqsdcp .gt_heading {
+  background-color: #C1EEFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pwmjxqsdcp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pwmjxqsdcp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pwmjxqsdcp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pwmjxqsdcp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pwmjxqsdcp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pwmjxqsdcp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pwmjxqsdcp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pwmjxqsdcp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pwmjxqsdcp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pwmjxqsdcp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pwmjxqsdcp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwmjxqsdcp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pwmjxqsdcp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pwmjxqsdcp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pwmjxqsdcp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwmjxqsdcp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pwmjxqsdcp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwmjxqsdcp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pwmjxqsdcp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_footnote {
+  margin: 0px;
+  font-size: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwmjxqsdcp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pwmjxqsdcp .gt_sourcenote {
+  font-size: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwmjxqsdcp .gt_left {
+  text-align: left;
+}
+
+#pwmjxqsdcp .gt_center {
+  text-align: center;
+}
+
+#pwmjxqsdcp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pwmjxqsdcp .gt_font_normal {
+  font-weight: normal;
+}
+
+#pwmjxqsdcp .gt_font_bold {
+  font-weight: bold;
+}
+
+#pwmjxqsdcp .gt_font_italic {
+  font-style: italic;
+}
+
+#pwmjxqsdcp .gt_super {
+  font-size: 65%;
+}
+
+#pwmjxqsdcp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pwmjxqsdcp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pwmjxqsdcp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pwmjxqsdcp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pwmjxqsdcp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pwmjxqsdcp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pwmjxqsdcp .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Ano">
+        <span class="gt_column_spanner">Ano</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right">4.29</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right">5.62</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right">5.10</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right">2.90</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right">3.38</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right">3.39</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China">China</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right">5.97</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right">6.11</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right">6.10</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right">1.80</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right">1.79</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right">1.78</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right">11.74</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right">11.88</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right">11.86</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right">3.49</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right">3.31</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right">3.47</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+<tfoot class="gt_footnotes"><tr>
+<td class="gt_footnote" colspan="4">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Quantidades baseadas em relatórios oficiais.</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="alterando-as-cores-das-células" class="slide level2"><h2>Alterando as cores das células</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>prod_agr_data <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(country) <span class="sc">|&gt;</span> </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="fu">gt</span>(<span class="at">rowname_col =</span> <span class="st">"crop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"**Produção agrícola dos países**"</span>),</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="at">subtitle =</span> <span class="fu">md</span>(<span class="st">"Total de produção em toneladas por hectare"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-7"><a href="#cb16-7"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb16-8"><a href="#cb16-8"></a>  <span class="fu">tab_spanner</span>(</span>
+<span id="cb16-9"><a href="#cb16-9"></a>    <span class="at">label =</span> <span class="st">"Ano"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    <span class="at">columns =</span> <span class="st">`</span><span class="at">2016</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2018</span><span class="st">`</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb16-12"><a href="#cb16-12"></a>   <span class="fu">tab_footnote</span>(</span>
+<span id="cb16-13"><a href="#cb16-13"></a>    <span class="at">footnote =</span> <span class="st">"Quantidades baseadas em relatórios oficiais."</span>,</span>
+<span id="cb16-14"><a href="#cb16-14"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="at">groups =</span> <span class="st">"subtitle"</span>)</span>
+<span id="cb16-15"><a href="#cb16-15"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb16-16"><a href="#cb16-16"></a>  <span class="fu">tab_options</span>(</span>
+<span id="cb16-17"><a href="#cb16-17"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb16-18"><a href="#cb16-18"></a>    <span class="at">heading.background.color =</span> <span class="st">"#C1EEFF"</span>,</span>
+<span id="cb16-19"><a href="#cb16-19"></a>    <span class="at">footnotes.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb16-20"><a href="#cb16-20"></a>    <span class="at">source_notes.font.size =</span> <span class="dv">18</span>,</span>
+<span id="cb16-21"><a href="#cb16-21"></a>    <span class="at">heading.align =</span> <span class="st">"left"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22"></a>    <span class="at">table.border.top.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-23"><a href="#cb16-23"></a>    <span class="at">table.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-24"><a href="#cb16-24"></a>    <span class="at">column_labels.border.bottom.color =</span> <span class="st">"black"</span>,</span>
+<span id="cb16-25"><a href="#cb16-25"></a>    <span class="at">table.font.size =</span> <span class="fu">px</span>(<span class="dv">30</span>),</span>
+<span id="cb16-26"><a href="#cb16-26"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb16-27"><a href="#cb16-27"></a>  <span class="fu">fmt_number</span>(<span class="at">decimals =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-28"><a href="#cb16-28"></a>   <span class="fu">opt_table_font</span>(</span>
+<span id="cb16-29"><a href="#cb16-29"></a>    <span class="at">font =</span> <span class="fu">list</span>(</span>
+<span id="cb16-30"><a href="#cb16-30"></a>      <span class="fu">google_font</span>(<span class="at">name =</span> <span class="st">"Abel"</span>)</span>
+<span id="cb16-31"><a href="#cb16-31"></a>    )</span>
+<span id="cb16-32"><a href="#cb16-32"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb16-33"><a href="#cb16-33"></a>  <span class="fu">data_color</span>(</span>
+<span id="cb16-34"><a href="#cb16-34"></a>    <span class="at">method =</span> <span class="st">"numeric"</span>,</span>
+<span id="cb16-35"><a href="#cb16-35"></a>    <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"#A0D2DB"</span>, <span class="st">"#424874"</span>)</span>
+<span id="cb16-36"><a href="#cb16-36"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="qmeckujfpz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Abel:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#qmeckujfpz table {
+  font-family: Abel, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qmeckujfpz thead, #qmeckujfpz tbody, #qmeckujfpz tfoot, #qmeckujfpz tr, #qmeckujfpz td, #qmeckujfpz th {
+  border-style: none;
+}
+
+#qmeckujfpz p {
+  margin: 0;
+  padding: 0;
+}
+
+#qmeckujfpz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qmeckujfpz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qmeckujfpz .gt_subtitle {
+  color: #333333;
+  font-size: 18px;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qmeckujfpz .gt_heading {
+  background-color: #C1EEFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qmeckujfpz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qmeckujfpz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qmeckujfpz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qmeckujfpz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qmeckujfpz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qmeckujfpz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qmeckujfpz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qmeckujfpz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qmeckujfpz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qmeckujfpz .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qmeckujfpz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qmeckujfpz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qmeckujfpz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qmeckujfpz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qmeckujfpz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qmeckujfpz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qmeckujfpz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qmeckujfpz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qmeckujfpz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_footnote {
+  margin: 0px;
+  font-size: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qmeckujfpz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qmeckujfpz .gt_sourcenote {
+  font-size: 18px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qmeckujfpz .gt_left {
+  text-align: left;
+}
+
+#qmeckujfpz .gt_center {
+  text-align: center;
+}
+
+#qmeckujfpz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qmeckujfpz .gt_font_normal {
+  font-weight: normal;
+}
+
+#qmeckujfpz .gt_font_bold {
+  font-weight: bold;
+}
+
+#qmeckujfpz .gt_font_italic {
+  font-style: italic;
+}
+
+#qmeckujfpz .gt_super {
+  font-size: 65%;
+}
+
+#qmeckujfpz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qmeckujfpz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qmeckujfpz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qmeckujfpz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qmeckujfpz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qmeckujfpz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qmeckujfpz .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style=""><strong>Produção agrícola dos países</strong></td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Total de produção em toneladas por hectare<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
+</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" scope="colgroup" id="Ano">
+        <span class="gt_column_spanner">Ano</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2016">2016</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2017">2017</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="2018">2018</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="Brazil">Brazil</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="Brazil stub_1_1 2016" class="gt_row gt_right" style="background-color: #88ADC0; color: #000000;">4.29</td>
+<td headers="Brazil stub_1_1 2017" class="gt_row gt_right" style="background-color: #7C9BB3; color: #FFFFFF;">5.62</td>
+<td headers="Brazil stub_1_1 2018" class="gt_row gt_right" style="background-color: #81A2B8; color: #FFFFFF;">5.10</td>
+</tr>
+<tr>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="Brazil stub_1_2 2016" class="gt_row gt_right" style="background-color: #95C2CF; color: #000000;">2.90</td>
+<td headers="Brazil stub_1_2 2017" class="gt_row gt_right" style="background-color: #91BBCA; color: #000000;">3.38</td>
+<td headers="Brazil stub_1_2 2018" class="gt_row gt_right" style="background-color: #91BACA; color: #000000;">3.39</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="China">China</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="China stub_1_3 2016" class="gt_row gt_right" style="background-color: #7895AF; color: #FFFFFF;">5.97</td>
+<td headers="China stub_1_3 2017" class="gt_row gt_right" style="background-color: #7794AE; color: #FFFFFF;">6.11</td>
+<td headers="China stub_1_3 2018" class="gt_row gt_right" style="background-color: #7794AE; color: #FFFFFF;">6.10</td>
+</tr>
+<tr>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="China stub_1_4 2016" class="gt_row gt_right" style="background-color: #A0D2DB; color: #000000;">1.80</td>
+<td headers="China stub_1_4 2017" class="gt_row gt_right" style="background-color: #A0D2DB; color: #000000;">1.79</td>
+<td headers="China stub_1_4 2018" class="gt_row gt_right" style="background-color: #A0D2DB; color: #000000;">1.78</td>
+</tr>
+<tr class="gt_group_heading_row">
+<th colspan="4" class="gt_group_heading" scope="colgroup" id="United States">United States</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Milho</th>
+<td headers="United States stub_1_5 2016" class="gt_row gt_right" style="background-color: #424874; color: #FFFFFF;">11.74</td>
+<td headers="United States stub_1_5 2017" class="gt_row gt_right" style="background-color: #424874; color: #FFFFFF;">11.88</td>
+<td headers="United States stub_1_5 2018" class="gt_row gt_right" style="background-color: #424874; color: #FFFFFF;">11.86</td>
+</tr>
+<tr>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Soja</th>
+<td headers="United States stub_1_6 2016" class="gt_row gt_right" style="background-color: #90B9C9; color: #000000;">3.49</td>
+<td headers="United States stub_1_6 2017" class="gt_row gt_right" style="background-color: #92BCCB; color: #000000;">3.31</td>
+<td headers="United States stub_1_6 2018" class="gt_row gt_right" style="background-color: #90B9C9; color: #000000;">3.47</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="4">Fonte: <a href="https://www.usda.gov/">U.S. Department of Agriculture</a>
+</td>
+    </tr></tfoot>
+<tfoot class="gt_footnotes"><tr>
+<td class="gt_footnote" colspan="4">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> Quantidades baseadas em relatórios oficiais.</td>
+    </tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="quizz-1" class="slide level2 inverse" data-background-color="#386FA4"><h2>Quizz #1</h2>
+<p>Agora é a sua vez de gerar uma tabela com <code>gt</code></p>
+<ol type="1">
+<li>Utilizar a base disponível em <code><a href="https://rdrr.io/pkg/dados/man/dados_gapminder.html">dados::dados_gapminder</a></code>
+</li>
+<li>Filtrar para os anos de 1952, 1977 e 2007</li>
+<li>Apresentar uma tabela agrupada por continente e mostrar a evolução das variáveis. Os anos são apresentados nas linhas.</li>
+<li>Adicionar um título e um subtítulo para o tabela, além da fonte dos dados.</li>
+<li>Através da função <code>fmt_currency</code>, adicionar o cifrão ($) para a variável do pib per capita. Além disso, utilizar apenas 2 casas decimais para essa variável.</li>
+<li>Apresentar as informações por grupos de continentes.</li>
+<li>Mudar o nome das variáveis.</li>
+<li>Alterar a fonte e demais aspectos visuais.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div class="countdown" id="timer_f8f06bb9" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown-controls">
+<button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
+</div>
+<code class="countdown-time"><span class="countdown-digits minutes">20</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+</div>
+</div>
+</section><section id="referências" class="slide level2"><h2>Referências</h2>
+<ul>
+<li><a href="https://gt.rstudio.com/index.html"><code>gt</code></a></li>
+<li><a href="https://jthomasmock.github.io/gtExtras/"><code>gtExtras</code></a></li>
+<li><a href="https://themockup.blog/static/resources/gt-cookbook-advanced.html#gt-functions"><code>gt</code> avançado</a></li>
+<li><a href="https://themockup.blog/posts/2020-05-16-gt-a-grammar-of-tables/index.html#basics-of-gt">Tutoriais</a></li>
+</ul>
 <div class="footer footer-default">
 <p>ICDR</p>
 </div>

@@ -21,7 +21,7 @@ editor:
 
 <hr>
 
-<h2><font color="736f72"> Aula 12 </font> - Construindo Tabelas </h2>
+<h2><font color="736f72"> Aula 12 </font> - Construindo Tabelas</h2>
 
 <h2><font color="FFFFFF"> Aula 12 </font></h2>
 
@@ -37,9 +37,755 @@ Antonio Vinícius Barbosa
 
 <h3>
 
-![](https://cdn-icons-png.flaticon.com/512/7604/7604036.png){.absolute top="400" left="1150" width="300"}
+![](https://cdn-icons-png.flaticon.com/512/7604/7604036.png){.absolute
+top="400" left="1150" width="300"}
 
-# <font color="1b5299"> Estatística descritiva dos dados </font> {background-color="#BBDEF0"}
+# <font color="1b5299"> Comunicação efetiva de dados </font> {background-color="#BBDEF0"}
 
-## Estatística Descritiva
+## Comunicação efetiva de dados
+
+-   Na maioria dos relatórios, a comunicação dos resultados ocorre por
+    meio de uma combinação de **visualização de dados** e **tabelas**
+-   No `R`, há diversas maneiras de criar tabelas que comuniquem seus
+    resultados com eficiência
+
+. . .
+
+> <h3>Objetivo</h3>
+>
+> Apresentar o `gt`, um pacote flexível para a construção de tabelas
+
+![](https://gt.rstudio.com/logo.svg){fig-align="center" width="300"}
+
+## O pacote `gt`
+
+-   O pacote `gt` (`g`rammar of `t`ables) permite a construção de tabelas através de ajustes nos
+    seus elementos.
+-   Basicamente, o pacote possibilita a transformação de um `data frame`
+    em tabelas elaboradas
+
+. . .
+
+![](https://gt.rstudio.com/reference/figures/gt_workflow_diagram.svg){fig-align="center"
+width="2000"}
+
+## Alguns exemplos
+
+::: columns
+::: {.column width="50%"}
+![](https://themockup.blog/posts/2020-05-16-gt-a-grammar-of-tables/preview.png){.absolute
+top="250" width="700"}
+:::
+
+::: {.column width="50%"}
+![](https://themockup.blog/posts/2020-09-04-10-table-rules-in-r/preview.png){fig-align="center"
+width="700"}
+:::
+:::
+
+## As partes de uma tabela
+
+O `gt` estrutura a tabela em diferentes partes. Estas incluem
+`table header`, `stub head`, `column labels`, a `table body` e o
+`table footer`.
+
+![](https://gt.rstudio.com/reference/figures/gt_parts_of_a_table.svg){fig-align="center"
+width="700"}
+
+## Instalação do `gt`
+
+```{r}
+#| eval: false
+# Instalacao do CRAN
+install.packages("gt")
+
+# Instalacao do repositorio GitHub
+devtools::install_github("rstudio/gt")
+
+# Carregar
+library(gt)
+```
+
+```{r}
+#| echo: false
+# Carregar
+library(gt)
+```
+
+## Dados
+
+Para contruir as tabelas com `gt`, utilizaremos os dados de produção
+agrícola dos países
+
+```{r}
+#| collapse: true
+# Carregar url e ler dados
+url <- 'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-01/key_crop_yields.csv'
+
+prod_agricola <- readr::read_csv(url)
+
+# Visualizar dados
+prod_agricola
+```
+
+## Dados
+
+Manipulando os dados:
+
+```{r}
+#| collapse: true
+# Carregar pacote
+library(tidyverse)
+
+# Manipular dados
+prod_agr_data <- prod_agricola |>  
+  janitor::clean_names() |>  
+  rename_with(
+    ~str_remove(., "_tonnes_per_hectare")
+    ) |>  
+  select(
+    entity:beans, -code
+    ) |>  
+  pivot_longer(
+    cols = wheat:beans, 
+    names_to = "crop", 
+    values_to = "yield"
+    ) |>  
+  rename(country = entity) |> 
+  filter(
+    country %in% c("China", "United States", "Brazil"),
+    year %in% 2016:2018,
+    crop %in% c("maize", "soybeans")
+    ) |> 
+  mutate(crop = case_when(
+    crop == "maize" ~ "Milho",
+    crop == "soybeans" ~ "Soja"
+    )
+  ) |> 
+  pivot_wider(
+    names_from = year, 
+    values_from = yield
+    )
+```
+
+## Dados
+
+Como resultado, obtemos:
+
+```{r}
+prod_agr_data
+```
+
+## `gt` básico
+
+Para gerar uma tabela básica, fazemos:
+
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  gt() 
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+prod_agr_data |> 
+  gt() |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+:::
+
+:::
+
+## Modificando o título
+
+::: columns
+::: {.column width="60%"}
+
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  gt() |> 
+  tab_header(title = md("**Produção agrícola dos países**"),
+             subtitle = md("Total de produção em toneladas por hectare")) 
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  gt() |> 
+  tab_header(title = md("**Produção agrícola dos países**"),
+             subtitle = md("Total da produção em toneladas por hectare"))  |>  
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+
+:::
+
+:::
+
+## Adicionando a fonte dos dados
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  gt() |> 
+  tab_header(title = md("**Produção agrícola dos países**"),
+             subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)"))
+```
+:::
+
+::: {.column width="40%"}
+```{r}
+#| echo: false
+prod_agr_data |> 
+  gt() |> 
+  tab_header(title = md("**Produção agrícola dos países**"),
+             subtitle = md("Total da produção em toneladas por hectare")
+             )  |>  
+ tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")
+                 ) |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+:::
+
+:::
+## Modificando o nome das colunas
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  gt() |> 
+  tab_header(title = md("**Produção agrícola dos países**"),
+             subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  cols_label(country = "País", crop = "Produto")
+```
+
+:::
+::: {.column width="40%"}
+```{r}
+#| echo: false
+prod_agr_data |> 
+  gt() |> 
+  tab_header(title = md("**Produção agrícola dos países**"),
+             subtitle = md("Total da produção em toneladas por hectare"))  |>  
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  cols_label(country = "País", crop = "Produto") |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+:::
+:::
+
+## Apresentando por grupos
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) 
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+
+:::
+
+:::
+
+## Agrupando colunas
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  )
+  
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+   tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+
+:::
+
+:::
+
+
+## Adicionando *footnotes*
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+   tab_footnote(
+    footnote = "Dados projetados",
+    locations = cells_row_groups(groups = c("China"))
+  )
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_footnote(
+    footnote = "Dados projetados",
+    locations = cells_row_groups(groups = c("China"))
+  ) |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+
+:::
+
+:::
+
+## Formatando elementos das células
+
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  fmt_number(decimals = 2)
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  ) |> 
+  fmt_number(decimals = 2)
+```
+
+:::
+
+:::
+
+## Ajustando a aparência
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  fmt_number(decimals = 2) |> 
+  tab_options(
+    heading.subtitle.font.size = 18,
+    heading.background.color = "#C1EEFF",
+    footnotes.font.size = 18,
+    source_notes.font.size = 18,
+    heading.align = "left",
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    column_labels.border.bottom.color = "black"
+  )
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_options(
+    heading.subtitle.font.size = 18,
+    heading.background.color = "#C1EEFF",
+    footnotes.font.size = 18,
+    source_notes.font.size = 18,
+    heading.align = "left",
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    column_labels.border.bottom.color = "black",
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  ) |> 
+  fmt_number(decimals = 2)
+```
+
+:::
+
+:::
+
+## Alterando a fonte
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_options(
+    heading.subtitle.font.size = 18,
+    heading.background.color = "#C1EEFF",
+    footnotes.font.size = 18,
+    source_notes.font.size = 18,
+    heading.align = "left",
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    column_labels.border.bottom.color = "black",
+    table.font.size = px(30),
+  ) |> 
+  fmt_number(decimals = 2) |> 
+   opt_table_font(
+    font = list(
+      google_font(name = "Abel")
+    )
+  )
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_options(
+    heading.subtitle.font.size = 18,
+    heading.background.color = "#C1EEFF",
+    footnotes.font.size = 18,
+    source_notes.font.size = 18,
+    heading.align = "left",
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    column_labels.border.bottom.color = "black",
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  ) |> 
+  fmt_number(decimals = 2) |> 
+   opt_table_font(
+    font = list(
+      google_font(name = "Abel")
+    )
+  )
+```
+
+:::
+
+:::
+
+
+## Alterando as cores das células
+
+
+::: columns
+::: {.column width="60%"}
+
+```{r}
+#| eval: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_options(
+    heading.subtitle.font.size = 18,
+    heading.background.color = "#C1EEFF",
+    footnotes.font.size = 18,
+    source_notes.font.size = 18,
+    heading.align = "left",
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    column_labels.border.bottom.color = "black",
+    table.font.size = px(30),
+  ) |> 
+  fmt_number(decimals = 2) |> 
+   opt_table_font(
+    font = list(
+      google_font(name = "Abel")
+    )
+  ) |> 
+  data_color(
+    method = "numeric",
+    palette = c("#A0D2DB", "#424874")
+    )
+```
+
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| echo: false
+prod_agr_data |> 
+  group_by(country) |> 
+  gt(rowname_col = "crop") |> 
+  tab_header(
+    title = md("**Produção agrícola dos países**"),
+    subtitle = md("Total de produção em toneladas por hectare")) |> 
+  tab_source_note(md("Fonte: [U.S. Department of Agriculture](https://www.usda.gov/)")) |> 
+  tab_spanner(
+    label = "Ano",
+    columns = `2016`:`2018`
+  ) |> 
+   tab_footnote(
+    footnote = "Quantidades baseadas em relatórios oficiais.",
+    locations = cells_title(groups = "subtitle")
+  ) |> 
+  tab_options(
+    heading.subtitle.font.size = 18,
+    heading.background.color = "#C1EEFF",
+    footnotes.font.size = 18,
+    source_notes.font.size = 18,
+    heading.align = "left",
+    table.border.top.color = "black",
+    table.border.bottom.color = "black",
+    column_labels.border.bottom.color = "black",
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  ) |> 
+  fmt_number(decimals = 2) |> 
+   opt_table_font(
+    font = list(
+      google_font(name = "Abel")
+    )
+  ) |> 
+  data_color(
+    method = "numeric",
+    palette = c("#A0D2DB", "#424874")
+    )
+```
+
+:::
+
+:::
+
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+Agora é a sua vez de gerar uma tabela com `gt`
+
+1. Utilizar a base disponível em `dados::dados_gapminder`
+2. Filtrar para os anos de 1952, 1977 e 2007
+3. Apresentar uma tabela agrupada por continente e mostrar a evolução das variáveis. Os anos são apresentados nas linhas.
+4. Adicionar um título e um subtítulo para o tabela, além da fonte dos dados.
+5. Através da função `fmt_currency`, adicionar o cifrão (\$) para a variável do pib per capita. Além disso, utilizar apenas 2 casas decimais para essa variável.
+6. Apresentar as informações por grupos de continentes.
+7. Mudar o nome das variáveis.
+8. Alterar a fonte e demais aspectos visuais.
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 20
+)
+```
+
+
+## Referências
+
+- [`gt`](https://gt.rstudio.com/index.html)
+- [`gtExtras`](https://jthomasmock.github.io/gtExtras/)
+- [`gt` avançado](https://themockup.blog/static/resources/gt-cookbook-advanced.html#gt-functions)
+- [Tutoriais](https://themockup.blog/posts/2020-05-16-gt-a-grammar-of-tables/index.html#basics-of-gt)
+
 
