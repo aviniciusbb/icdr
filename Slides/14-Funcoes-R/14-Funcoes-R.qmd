@@ -1,0 +1,445 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "ICDR"
+    slide-number: c/t
+highlight-style: a11y
+code-link: true
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 14 </font> - Funções em `R`</h2>
+
+<h2><font color="FFFFFF"> Aula 14 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://media.istockphoto.com/id/1342785429/vector/consolidation-vector-2-colour-icon-style-illustration-eps-10-file.jpg?s=612x612&w=0&k=20&c=iTnYlYCUDhhKotBgFE5uSskWTiaNb1JHLzQetczHbfQ=){.absolute
+top="400" left="1150" width="500"}
+
+# <font color="1b5299"> Escrevendo Funções em `R` </font> {background-color="#BBDEF0"}
+
+## Funções em R
+
+> <h3>Objetivo</h3>
+>
+> Entender a lógica e aprender a escrever funções em `R`
+
+. . .
+
+Além disso,
+
+-   Aprender a controlar *inputs* e *outputs* das funções
+-   Aprender a ler funções existentes
+-   Usar condições para avaliar funções
+
+## O que é uma função?
+
+-   Uma função nada mais é do que uma regra de associação entre os
+    valores de entrada (*inputs*) e os valores de saída (*outputs*).
+
+![](https://miro.medium.com/v2/resize:fit:1400/1*vKpmfcU-0QuWfOAFaIRhJQ.png){fig-align="center"
+width="300"}
+
+## Para que servem as funções?
+
+Funções são elementos fundamentais em `R`. As principais vantagens são:
+
+-   Evitam repetições de tarefas
+-   Tornam o código reprodutível
+-   Deixam o código mais *readable*
+-   Tornam o código mais eficiente
+
+. . .
+
+Exemplos de funções nativas do R:
+
+```{r}
+#| eval: false
+# Operacoes sobre vetores
+sum(c(2,3))
+mean(c(2,3))
+
+# Operacoes sobre data frames
+length(data)
+str(data)
+```
+
+## Estrutura básica de uma função
+
+Uma função é criada através da função `function()`:
+
+```{r}
+#| eval: false
+#| code-line-numbers: "|1,6|3|5|"
+#| class-output: highlight
+
+minha_funcao <- function(input){
+  
+  <Inserir codigo da funcao>
+  
+  output  
+  }
+```
+
+-   No argumento da função, adicionamos o *input* (ou conjunto de
+    inputs)
+-   Em seguida, adicionamos o código (regra) que desejamos associar ao
+    input
+-   Por fim, pedimos para imprimir o *output* resultado da função
+
+## Estrutura básica de uma função
+
+Como exemplo, vamos criar uma função simples que calcula o módulo de um
+número:
+
+```{r}
+#| collapse: true
+#| code-line-numbers: "|2-7|9-14|"
+# Criando a funcao
+valor_abs <- function(x){
+  
+  y <- abs(x)
+  
+  y  
+}
+
+# Avaliando a funcao
+valor_abs(-3)
+
+valor_abs(7)
+```
+
+Este é um exemplo de função com um único **argumento**.
+
+## Uma função com dois argumentos
+
+A função a seguir é construída com dois **argumentos**.
+
+```{r}
+#| collapse: true
+#| code-line-numbers: "|2-7|9-15|"
+# Criando a funcao
+fun_produto <- function(a, b){
+  
+  c <- a * b
+  
+  c  
+}
+
+# Avaliando a funcao
+fun_produto(a = 3, b = 2)
+
+# Simplificando
+fun_produto(3, 2)
+```
+
+## Argumentos *default*
+
+Podemos definir o valor de um argumento da função *a priori*
+
+```{r}
+#| collapse: true
+#| code-line-numbers: "|2-7|9-15|"
+# Criando a funcao
+soma_um <- function(a, b = 1){
+  
+  c <- a + b
+  
+  c  
+}
+
+# Avaliando a funcao
+soma_um(a = 2)
+
+soma_um(a = 9)
+```
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+1.  Construa uma função que retorne o quadrado de um número real.
+2.  Construa uma função que retorne a raiz cúbica de um número real
+    positivo.
+3.  Escreva uma função que retorne a soma de dois números reais.
+4.  Escreva uma função que retorne a média aritmética simples de 3
+    números.
+5.  Escreva uma função que retorne a variação percentual entre dois
+    números.
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+```
+
+## Explorando funções existentes do `R`
+
+Aprender a criar funções é útil para aprender a entender funções
+existentes. Considere a seguinte função:
+
+```{r}
+#| collapse: true
+union
+```
+
+Neste caso, `union()` possui 2 argumentos (vetores). Como resultado, a
+função retorna os valores únicos da junção entre os elementos dos dois
+argumentos:
+
+```{r}
+#| collapse: true
+union(c(2, 4, 5), c(4, 4, 9))
+```
+
+## Explorando funções existentes do `R`
+
+-   Uma forma de visualizar o código de uma função é utilizar a função
+    `View()`
+-   Muitas funções de `R` são escritas em `C++` e, por esse motivo, não
+    retornam o código
+
+## Retornando múltiplos **outputs**
+
+Uma função do `R` pode retornar um ou múltiplos **outputs**
+
+```{r}
+elementos_soma <- function(a, b){
+  
+  c <- a + b
+  
+  c(a = a, b = b, c = c)
+}
+```
+
+Como resultado,
+
+```{r}
+elementos_soma(4, 7)
+```
+
+## Avaliações condicionais
+
+Suponha que queiramos realizar a soma entre dois números, mas indicamos
+um "character" de forma acidental:
+
+```{r}
+#| eval: false
+fun_produto(a = 1, b = "z")
+# Error in a + b: non-numeric argument to binary operator
+```
+
+O erro acontece porque a função esperava dois argumentos numéricos para
+realizar a soma. É necessário adicionar um **avaliação condicional**.
+
+## Avaliações condicionais
+
+Adicionamos condições às funções através de comparações lógicas,
+geralmente através de `if-else`. Por exemplo:
+
+> `if` (**condição é verdadeira**) *expressao* `else` *expressao_alt*
+
+Interpretamos a estrutura acima da seguinte maneira:
+
+-   Teste uma condição.
+-   **Se** ela for verdadeira, retorne um valor (*expressao*).
+-   **Caso contrário**, retorne outro valor (*expressao_alt*)
+
+## Avaliações condicionais
+
+A estrutura de avaliações condicionais é dada por:
+
+```{r}
+#| eval: false
+#| code-line-numbers: "|1-2|3-5|"
+if(condicao) {
+    expressao
+} else {
+    expressao_alt
+}
+```
+
+## Avaliações condicionais
+
+```{r}
+fun_produto_2 <- function(a, b){
+  
+  if(!is.numeric(a) | !is.numeric(b)){
+    
+    print("Os argumentos devem ser numéricos")
+    
+  } else{
+    
+    c <- a + b
+    c
+    
+  }
+  
+}
+```
+
+. . .
+
+Como resultado:
+
+```{r}
+#| collapse: true
+fun_produto_2(2, "3")
+
+fun_produto_2(4, 5)
+```
+
+## Avaliações condicionais
+
+De maneira compacta, podemos reescrever a função adicionando um comando
+de `stop` caso algum problema ocorra. Neste caso, ele indicará uma
+mensagem de erro:
+
+```{r}
+fun_produto_2 <- function(a, b){
+  
+  if(!is.numeric(a) | !is.numeric(b)) 
+    stop("Os argumentos devem ser numéricos")
+  
+  c <- a + b
+  c
+    
+}
+```
+
+. . .
+
+Como resultado:
+
+```{r}
+#| collapse: true
+#| eval: false
+fun_produto_2(2, "3")
+## [1] Error in fun_produto_2(2, "3") : Os argumentos devem ser numéricos*
+fun_produto_2(4, 5)
+```
+
+## Quizz #1 {.inverse background-color="#386FA4"}
+
+1.  Construa uma função que retorne a raiz quadrada de um número real.
+    Adicione uma condição para que este número seja positivo.
+2.  Escreva uma função que retorne a divisão entre dois números reais.
+3.  Crie uma função que armazene o número do CPF em formato de
+    `character`. Adicione uma mensagem de erro caso o número fornecido
+    possua menos de 11 caracteres.
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 10
+)
+```
+
+## Elaborando funções
+
+Podemos construir funções mais complexas. Por exemplo, considere a
+função a seguir:
+
+```{r}
+get_r2 <- function(y_var, x_var, data) {
+    modelo = lm(y_var ~ x_var, data = data)
+    sumario = summary(modelo)
+    r2 = round(sumario$r.squared, 
+               digits = 2)
+    r2
+}
+```
+
+-   A função `get_r2_mtcars` retorna o valor do $R^2$ para um modelo de
+    regressão linear simples.
+-   O argumentos `y_var` e `x_var` especificam as variáveis dependente e
+    independente do modelo.
+-   Por fim, a função retorna o output `r2` (com duas casas decimais).
+
+## Elaborando funções
+
+Como resultado, especificamos:
+
+```{r}
+#| collapse: true
+get_r2(mtcars$mpg, mtcars$gear, data = mtcars)
+
+get_r2(iris$Sepal.Length, iris$Petal.Width, data = iris)
+```
+
+## Elaborando funções
+
+Ainda, podemos escrever uma função para obter uma tabela com
+estatísticas de uma variável, agrupada por região:
+
+```{r}
+stats_regiao <- function(x, ano){
+  
+  abjData::pnud_min |> 
+    dplyr::filter(
+      ano == ano
+    ) |> 
+    dplyr::group_by(
+      regiao_nm
+    ) |> 
+    dplyr::summarise(
+      media_var = mean({{x}}, na.rm = TRUE),
+      sd_var = sd({{x}}, na.rm = TRUE)
+    ) |> 
+    gt::gt()
+  
+}
+```
+
+-   Neste caso, usamos o operador curly-curly (`{{ }}`) para especificar
+    qualquer variável do banco de dados.
+-   Além disso, note a dependência da função em relação aos pacotes
+    necessários.
+
+## Elaborando funções
+
+
+
+::: columns
+::: {.column width="50%"}
+
+```{r}
+#| eval: false
+stats_regiao(idhm, 2010)
+```
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| echo: false
+library(gt)
+stats_regiao(idhm, 2010) |> 
+  tab_options(
+    table.font.size = px(30), #< because I've made the slides a lot bigger
+  )
+```
+:::
+
+:::
