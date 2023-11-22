@@ -41,7 +41,7 @@ execute:
 
 - Doutor em Economia pelo PIMES/UFPE e Universitat Pompeu Fabra. 
 - Professor do Departamento de Economia da Universidade Federal da Paraíba (UFPB). 
-- Professor do Programa de Pós-graduação em Economia (PPGE/UFPB)
+- Professor do Programa de Pós-graduação em Economia (PPGE/UFPB).
 - Pesquisador do LEMA (Laboratório de Economia e Modelagem Aplicada).
 
 :::
