@@ -4,8 +4,10 @@ format:
     theme: [default, custom.scss]
     footer: "ICDR"
     slide-number: c/t
+    code-link: true
 highlight-style: a11y
 code-link: true
+engine: knitr
 height: 900
 width: 1600
 execute: 
@@ -17,12 +19,12 @@ execute:
 
 <hr>
 
-<h2><font color="736f72"> Aula 01 </font> - Ciência de Dados</h2>
+<h2><font color="736f72"> Aula 01 </font> - O que é Ciência de Dados?</h2>
 <h2><font color="FFFFFF"> Aula 01 </font> </h2>
 
 <h2>Antonio Vinícius Barbosa<h2>
 
-<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+<h3> `r format(Sys.time(), "%d-%m-%Y")` </h3>
 
 <br>
 
@@ -39,6 +41,7 @@ execute:
 
 - Doutor em Economia pelo PIMES/UFPE e Universitat Pompeu Fabra. 
 - Professor do Departamento de Economia da Universidade Federal da Paraíba (UFPB). 
+- Professor do Programa de Pós-graduação em Economia (PPGE/UFPB)
 - Pesquisador do LEMA (Laboratório de Economia e Modelagem Aplicada).
 
 :::

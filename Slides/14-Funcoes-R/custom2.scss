@@ -1,0 +1,44 @@
+/*-- scss:defaults --*/
+
+// Variables
+$primary-color: #3366cc;
+$secondary-color: #ff9900;
+
+// Mixins
+@mixin fancy-box {
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: $secondary-color;
+  color: white;
+}
+
+// Styles
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: $primary-color;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.fancy-box {
+  @include fancy-box;
+}
+
+.link-button {
+  background-color: $primary-color;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
