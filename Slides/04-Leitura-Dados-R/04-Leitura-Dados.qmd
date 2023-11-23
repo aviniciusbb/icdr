@@ -4,8 +4,11 @@ format:
     theme: [default, custom.scss]
     footer: "ICDR"
     slide-number: c/t
+    code-link: true
+    chalkboard: true
 highlight-style: a11y
 code-link: true
+engine: knitr
 height: 900
 width: 1600
 execute: 
@@ -350,7 +353,7 @@ head(turistas_br_2021, 5)
 
 Considere agora ler um arquivo `.csv` diretamente de uma página na internet (URL). Os dados apresentam informações sobre o número de queimadas 
 
-```{r,  echo = TRUE, collapse = TRUE}
+```{r,  echo = TRUE, collapse = TRUE, eval=FALSE}
 # URL da página 
 url <- "https://queimadas.dgi.inpe.br/queimadas/portal-static/csv_estatisticas/historico_regiao_norte.csv"
 

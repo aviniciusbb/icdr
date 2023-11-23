@@ -4,6 +4,8 @@ format:
     theme: [default, custom.scss]
     footer: "ICDR"
     slide-number: c/t
+    code-link: true
+    chalkboard: true
 highlight-style: a11y
 code-link: true
 height: 900
