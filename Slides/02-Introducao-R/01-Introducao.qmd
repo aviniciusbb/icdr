@@ -2,7 +2,7 @@
 format:
   revealjs: 
     theme: [default, custom.scss]
-    footer: "ICDR"
+    footer: "[https://github.com/aviniciusbb/icdr/](https://github.com/aviniciusbb/icdr/)"
     slide-number: c/t
     code-link: true
     chalkboard: true
@@ -14,13 +14,14 @@ width: 1600
 execute: 
   eval: true
   echo: true
+editor: source  
 ---
 
-<h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
+<h1><font color="1B5299"> Introdução à Ciência de Dados no `R`  </font></h1>
 
 <hr>
 
-<h2><font color="736f72"> Aula 02 </font> - Comandos básicos no `R`</h2>
+<h2><font color="736f72"> Aula 02 </font> - Comandos básicos</h2>
 <h2><font color="FFFFFF"> Aula 02 </font> </h2>
 
 <h2>Antonio Vinícius Barbosa<h2>
@@ -35,6 +36,8 @@ execute:
 
 
 # <font color="1b5299"> Como o `R` funciona? </font> {background-color="#BBDEF0"}
+
+
 
 ## R Básico
 
@@ -103,7 +106,7 @@ h = sqrt(a^2 + b^2)
 h
 ```
 
-## Regra de etiqueta (1)
+## Regra de etiqueta  (1)
 
 Na maior parte do tempo, usuários do `R` utilizam apenas o operador `<-` para 
 atribuições, enquanto o símbolo de igualdade (`=`) é reservado para indicar os argumentos dentro de uma função.   
@@ -137,7 +140,7 @@ imc <- massa_kg/(altura^2)
 imc
 ```
 
-## Quizz \#1 {.inverse background-color="#386FA4"}
+## 🚀 Quizz \#1 {.inverse background-color="#386FA4"}
 
 - Crie a variável `renda_dom` para armazenar o valor da renda total aproximada do seu domicílio.
 - Agora, atribua à variável `n_pessoas` o número de pessoas que moram no seu domicílio.
@@ -177,7 +180,7 @@ ls()
 ```
 
 
-# <font color="1b5299"> Pacotes </font> {background-color="#BBDEF0"}
+# <font color="1b5299"> Pacotes 📦 </font> {background-color="#BBDEF0"}
 
 ## Pacotes no `R`
 
@@ -564,7 +567,7 @@ idade<-c(19 ,21,23 ,24,25 ,31 ,33)
 media_idade<-mean(idade,na.rm=TRUE)
 ```
 
-## Quizz \#2 {.inverse background-color="#386FA4"}
+## 🚀 Quizz \#2 {.inverse background-color="#386FA4"}
 
 Considere o vetor `lista_vegana <- c("maca", "banana", "laranja", "kiwi", "batata", "brocolis")`
 
@@ -696,7 +699,7 @@ t(contas_matriz)
 1000000 * contas_matriz
 ```
 
-## Quizz \#3 {.inverse background-color="#386FA4"}
+## 🚀 Quizz \#3 {.inverse background-color="#386FA4"}
 
 - Crie três vetores `x`, `y` e `z` com inteiros, cada um com 3 elementos. Combine os três vetores para formar uma matriz `A` (3 × 3), onde cada coluna representa um vetor. Altere os nomes das linhas para `a`, `b` e `c`.
 - Crie um vetor com 12 elementos do tipo `numeric`. Converta o vetor em uma matriz `B` (4 x 3) usando `matrix()`. Preencha os elementos por linha ajustando o argumento `byrow = TRUE`.
