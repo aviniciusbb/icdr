@@ -1,0 +1,752 @@
+---
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    footer: "[https://github.com/aviniciusbb/icdr/](https://github.com/aviniciusbb/icdr/)"
+    slide-number: c/t
+    code-link: true
+    chalkboard: true
+highlight-style: a11y
+code-link: true
+engine: knitr
+from: markdown+emoji
+height: 900
+width: 1600
+execute: 
+  eval: true
+  echo: true
+editor: source  
+---
+
+
+
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`
+</font></h1>
+
+<hr>
+
+<h2><font color="736f72"> Aula 10 </font> - Visualização de Mapas </h2>
+
+<h2><font color="FFFFFF"> Aula 10 </font></h2>
+
+<h2>
+
+Antonio Vinícius Barbosa
+
+<h2>
+
+<h3>`r format(Sys.time(), "%d-%m-%Y")`</h3>
+
+<br>
+
+<h3>
+
+![](https://raw.githubusercontent.com/sarahpenir/sarahpenir.github.io/master/_posts/images/2019-01-06-Global-HDI2-og.png){.absolute top="350" left="800" width="800"}
+
+# <font color="1b5299"> Visualização de Dados </font> {background-color="#BBDEF0"}
+
+## Mapas em `R`
+
+De todas as visualizações disponíveis, talvez o mapas sejam os mais fáceis de visualizar. O `R`
+possui vários recursos para a construção e manipulação de mapas.
+
+![](Images/example_map.png){fig-align="center" width="800"}
+
+. . .
+
+> **Objetivo**: Introduzir conceitos básicos de estatísticas espaciais usando mapas em `R`
+
+
+# <font color="1b5299"> Pacotes espaciais </font> {background-color="#BBDEF0"}
+
+
+## Mapas básicos
+
+Nesta aula, utilizaremos alguns pacotes úteis para plotar maps em `R`. Alguns 
+deles já trazem as formas e elementos essenciais para uma visualização
+espacial básica. Para mapas básicos, podemos utilizar o pacote `maps`
+
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(maps)
+map("world","Brazil")
+```
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, fig.align='center'}
+# Carregar pacote
+library(maps)
+map("world","Brazil")
+```
+
+
+
+## Mapas básicos
+
+Para adicionar outros elementos básicos ao mapa através do pacote `maps`, fazemos:
+
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+map("world", "Brazil", fill = T, col = "grey95") # destacar a região
+map(add = T) # adicionar regiões vizinhas
+map.axes() # inserir eixos com coordenadas
+map.scale(x = -48, ratio = F, cex = 0.5) # inserir escala
+abline(h = 0, lty = 2) # linha horizontal
+map.cities(country = "Brazil", col = "grey40", 
+           pch = 19, cex = 0.8) # inserir municípios > 40 mil habitantes
+points(-34.870154, -7.1299447, col = 2, pch = 18) # adicionar pontos
+```
+
+
+## Mapas básicos
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, fig.align='center'}
+map("world", "Brazil", fill = T, col = "grey95") # destacar a região
+map(add = T) # adicionar regiões vizinhas
+map.axes() # inserir eixos com coordenadas
+map.scale(x = -48, ratio = F, cex = 0.5) # inserir escala
+abline(h = 0, lty = 2) # linha horizontal
+map.cities(country = "Brazil", col = "grey40", 
+           pch = 19, cex = 0.8) # inserir municípios > 40 mil habitantes
+points(-34.870154, -7.1299447, col = 2, pch = 18) # adicionar pontos
+```
+
+
+. . .
+
+Tais mapas, no entanto, são bastante simples e não permitem
+uma análise espacial mais elaborada. Precisamos de ferramentas 
+adicionais para gerar mapas mais interessantes.
+
+
+
+# <font color="1b5299"> Shapefiles </font> {background-color="#BBDEF0"}
+
+
+## O que são shapefiles?
+
+
+Um *shapefile* é um formato de armazenamento de dados geoespaciais, tais
+como *pontos*, *linhas* e *polígonos*.
+
+
+![](Images/shp256.png){fig-align="center" width="500"}
+
+A principal fonte de shapefiles para o Brasil é o [IBGE](https://mapas.ibge.gov.br/bases-e-referenciais/bases-cartograficas/malhas-digitais.html). Para este exemplo, iremos explorar o shapefile dos municípios da Paraíba [link](https://geoftp.ibge.gov.br/organizacao_do_territorio/malhas_territoriais/malhas_municipais/municipio_2020/UFs/PB/).
+
+
+## O que são shapefiles?
+
+*Shapefiles* são compostos pelos seguintes arquivos:
+
+
+- `.shp` (**shape format**): geometria base do território
+- `.shx` (**shape index format**): índice de posicionamento da geometria base
+- `.dbf` (**attribute format**): atributos para cada elemento (shape)
+- `.prj` (**projection format**): sistema de coordenadas e de informações de projeção
+- `.cpg` (**code page**): usado em conjunto com o arquivo .dbf para identificar a
+  codificação de caracteres a ser usada
+
+
+## Objetos espaciais
+
+Para importar o *shapefile* para o `R`, lemos o arquivo `.shp` através
+da função `st_read`() do pacote `sf`.
+
+
+
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
+# Ler shapefile
+library(sf)
+shape_PB <- st_read("Shapefiles/25MUE250GC_SIR.shp")
+class(shape_PB)
+```
+
+
+
+## Objetos espaciais
+
+Como resultado, obtemos os dados referentes ao estado e municípios da Paraíba em um formato
+do tipo **sf** (*simple features*). Trata-se de um data frame com uma variável (`geometry`) contendo
+informações de latitude e longitude dos limites territoriais (polígonos).
+
+
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
+# Visualizar shapefile
+head(shape_PB)
+```
+
+
+
+## Objetos espaciais
+
+Para plotar os município da Paraíba, fazemos:
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(tidyverse)
+
+# Plotar mapa
+ggplot(shape_PB) +
+  geom_sf(fill = "gray20", color = "gray80", 
+          size = .1, show.legend = FALSE) +
+  theme_minimal()
+```
+
+
+
+## Objetos espaciais
+
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE}
+# Carregar pacote
+library(tidyverse)
+
+# Plotar mapa
+ggplot(shape_PB) +
+  geom_sf(fill = "gray20", color = "gray80", 
+          size = .1, show.legend = FALSE) +
+  theme_minimal()
+```
+
+
+
+## Objetos espaciais
+
+Para plotar apenas o município de João Pessoa, filtramos os dados antes
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Plotar mapa
+shape_PB |> 
+  filter(
+    NM_MUNICIP == "JOÃO PESSOA"
+  ) |> 
+  ggplot() +
+  geom_sf(fill = "gray20", color = "gray80", 
+          size = .1, show.legend = FALSE) +
+  theme_minimal()
+
+```
+
+
+
+## Objetos espaciais
+
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE}
+# Plotar mapa
+shape_PB |> 
+  filter(
+    NM_MUNICIP == "JOÃO PESSOA"
+  ) |> 
+  ggplot() +
+  geom_sf(fill = "gray20", color = "gray80", 
+          size = .1, show.legend = FALSE) +
+  theme_minimal()
+
+```
+
+
+
+## Objetos espaciais
+
+Podemos adicionar um ponto (ou conjunto de pontos) através
+da imputação direta com `geom_point()`
+
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Adicionar pontos
+locais <- data.frame(
+  id = c("Lagoa", "UFPB"),
+  lat = c(-7.1260272, -7.1368997),
+  long = c(-34.8883438, -34.847522)
+  )
+
+shape_PB |> 
+  filter(
+    NM_MUNICIP == "JOÃO PESSOA"
+  ) |> 
+ggplot() + 
+  geom_sf(fill = "white", col = "black") +
+  geom_point(data = locais, aes(x = long, y = lat),
+             col = "blue") +
+  theme_minimal()
+```
+
+
+
+## Objetos espaciais
+
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE}
+# Adicionar pontos
+locais <- data.frame(
+  id = c("Lagoa", "UFPB"),
+  lat = c(-7.1260272, -7.1368997),
+  long = c(-34.8883438, -34.847522)
+  )
+
+shape_PB |> 
+  filter(
+    NM_MUNICIP == "JOÃO PESSOA"
+  ) |> 
+ggplot() + 
+  geom_sf(fill = "white", col = "black") +
+  #geom_path(size = 1) +
+  geom_point(data = locais, aes(x = long, y = lat),
+             col = "blue") +
+  theme_minimal()
+```
+
+
+
+
+## O pacote `geobr`
+
+O pacote `geobr` é um pacote que contem informações oficiais do Brasil,
+inclusive shapefiles, desenvolvido pelo IPEA ([https://github.com/ipeaGIT/geobr](https://github.com/ipeaGIT/geobr)). 
+
+![](Images/geobr_logo.png){fig-align="center" width="500"}
+
+O pacote possui dados em diferentes escalas geográficas e diferentes anos:
+
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Instalar pacote 
+install.packages("geobr")
+# Disponível através do Github
+devtools::install_github("ipeaGIT/geobr", subdir = "r-package")
+library(geobr)
+```
+
+
+## `geobr`: dados disponíveis
+
+![](Images/geobr_data1.png){fig-align="center" width="500"}
+
+
+
+## `geobr`: dados disponíveis
+
+![](Images/geobr_data2.png){fig-align="center" width="500"}
+
+## `geobr`: dados disponíveis
+
+![](Images/geobr_data3.png){fig-align="center" width="500"}
+
+
+## O pacote `geobr`
+
+A sintaxe da funções do pacote `geobr` é fácil e direta. Como exemplo,
+suponha que queiramos baixar informações do estado da Paraíba. Fazemos:
+
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Estado do Paraíba
+estado_pb <- read_state(code_state = "PB", year = 2020)
+
+# Municípios da Paraíba
+munic_pb <- read_municipality(code_muni = "PB", year = 2020)
+
+# Município de João Pessoa
+munic_jp <- read_municipality(code_muni = 2507507, year = 2020)
+```
+
+
+
+Como resultado, obtemos os dados referentes ao estado e municípios da Paraíba em um formato
+do tipo **sf** (*simple features*). 
+
+
+## O pacote `geobr`
+
+Uma vez baixados os dados, podemos visualizar com `ggplot2` atavés da geometria
+`geom_sf()`
+
+
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(geobr)
+
+# Municipios da Paraiba
+munic_pb <- read_municipality(code_muni = "PB", year = 2020)
+```
+
+
+## O pacote `geobr`
+
+Uma vez baixados os dados, podemos visualizar com `ggplot2` atavés da geometria
+`geom_sf()`
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(geobr)
+
+# Municipios da Paraiba
+munic_pb <- read_municipality(code_muni = "PB", year = 2020)
+
+# Plotar
+munic_pb %>% 
+  ggplot() +
+  geom_sf(fill = "#2D3E50", color = "#FEBF57", 
+          size = .1, show.legend = FALSE) +
+  theme_void()
+```
+
+
+
+## O pacote `geobr`
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, message=FALSE, warning=FALSE}
+# Plotar
+munic_pb %>% 
+  ggplot() +
+  geom_sf(fill = "#2D3E50", color = "#FEBF57", 
+          size = .1, show.legend = FALSE) +
+  theme_void()
+```
+
+
+## O pacote `geobr`
+
+Ok! Vamos adicionar alguns elementos no mapa. Se quisermos colorir o gráfico a partir
+da expectativa de vida dos município, fazemos:
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Municípios da Paraíba
+library(abjData)
+
+# Dados de expectativa de vida
+data_munic <- abjData::pnud_min %>% 
+  filter(ano == 2010,
+         uf_sigla == "PB") %>% 
+  select(code_muni = muni_id, espvida)
+
+# Merge e plot
+munic_pb %>% 
+  mutate(code_muni = as.character(code_muni)) %>% 
+  left_join(data_munic) %>% 
+  ggplot() +
+  geom_sf(aes(fill = espvida), color = "white", 
+          size = .1) +
+  theme_minimal()
+```
+
+
+
+## O pacote `geobr`
+
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE}
+# Municípios da Paraíba
+library(abjData)
+
+# Dados de expectativa de vida
+data_munic <- abjData::pnud_min %>% 
+  filter(ano == 2010,
+         uf_sigla == "PB") %>% 
+  select(code_muni = muni_id, espvida)
+
+# Merge e plot
+munic_pb %>% 
+  mutate(code_muni = as.character(code_muni)) %>% 
+  left_join(data_munic) %>% 
+  ggplot() +
+  geom_sf(aes(fill = espvida), color = "white", 
+          size = .1) +
+  theme_minimal()
+```
+
+
+
+## O pacote `geobr`
+Podemos mudar o padrão de cores dos mapas:
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Municípios da Paraíba
+munic_pb %>% 
+  mutate(code_muni = as.character(code_muni)) %>% 
+  left_join(data_munic) %>% 
+  ggplot() +
+  geom_sf(aes(fill = espvida), color = "white", 
+          size = .1, show.legend = TRUE) +
+  theme_void() +  
+  scale_fill_gradient2(low = "#d73027", 
+                       mid = "yellow", 
+                       high = "#1a9850",
+                       midpoint = median(data_munic$espvida))
+```
+
+
+
+## O pacote `geobr`
+
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE}
+# Municípios da Paraíba
+munic_pb %>% 
+  mutate(code_muni = as.character(code_muni)) %>% 
+  left_join(data_munic) %>% 
+  ggplot() +
+  geom_sf(aes(fill = espvida), color = "white", 
+          size = .1, show.legend = TRUE) +
+  theme_void() +  
+  scale_fill_gradient2(low = "#d73027", 
+                       mid = "yellow", 
+                       high = "#1a9850",
+                       midpoint = median(data_munic$espvida))
+```
+
+
+
+
+## O pacote `geobr`
+
+Vamos observar agora a localização dos estabelecimentos de saúde no estado. Utilizando
+a função do `geobr`, encontramos:
+
+
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
+estabel_saude <- geobr::read_health_facilities() |> 
+  filter(
+    abbrev_state == "PB"
+    ) |> 
+  mutate(
+    code_muni = as.character(code_muni)
+    )
+```
+
+
+
+## O pacote `geobr`
+
+
+
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
+head(estabel_saude)
+```
+
+
+
+## Estabelecimentos de saúde na PB
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Plotar
+ggplot(data = munic_pb) +
+  geom_sf() +
+  geom_sf(data = estabel_saude, col = "red") +
+  theme_void() 
+```
+
+
+## Estabelecimentos de saúde na PB
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, message=FALSE, warning=FALSE}
+# Plotar
+ggplot(data = munic_pb) +
+  geom_sf() +
+  geom_sf(data = estabel_saude, col = "red") +
+  theme_void() 
+```
+
+
+
+# <font color="1b5299"> Pacotes adicionais </font> {background-color="#BBDEF0"}
+
+
+## Pacotes cartográficos adicionais
+
+- `leaflet` - Mapas interativos 
+- `osmdata` - Open Street Maps 
+- `ggmap` - Google Maps
+
+
+
+## Exemplo do pacote `leaflet`
+
+Suponha um mapa com uma localização específica:
+
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE, fig.align='center'}
+library(leaflet)  
+  
+leaflet() %>%
+  addTiles() %>%  
+  addMarkers(lng = -34.8472693, 
+             lat = -7.1356015, 
+             popup = "UFPB")
+```
+
+
+## Exemplo do pacote `leaflet`
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, fig.align='center'}
+library(leaflet)  
+  
+leaflet() %>%
+  addTiles() %>%  
+  addMarkers(lng = -34.8472693, 
+             lat = -7.1356015, 
+             popup = "UFPB")
+```
+
+
+
+
+
+## Exemplo do pacote `osmdata`
+
+Com o pacote `osmdata`, podemos obter dados específicos dos mapas. Mais parâmetros em
+`osmdata::available_features()`.
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE}
+# Carregar pacote
+library(osmdata)
+
+# Obter dados cartograficos
+jp_estradas <- getbb("João Pessoa") |> 
+  opq() |> 
+  add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+# Plot
+ggplot() +
+  geom_sf(data = jp_estradas$osm_lines,
+          color = "gray60", size = .1) +
+  theme_void()
+```
+
+
+
+## Exemplo do pacote `osmdata`
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, fig.align='center'}
+# Carregar pacote
+library(osmdata)
+
+# Obter dados cartograficos
+jp_estradas <- getbb("João Pessoa") |> 
+  opq() |> 
+  add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+# Plot
+ggplot() +
+  geom_sf(data = jp_estradas$osm_lines,
+          color = "gray60", size = .1) +
+  
+  theme_void()
+```
+
+
+
+## Exemplo do pacote `osmdata`
+
+
+```{r, eval = FALSE, echo = TRUE, collapse = TRUE, fig.align='center'}
+# Carregar pacote
+library(osmdata)
+
+# Obter dados cartograficos
+jp_estradas <- getbb("João Pessoa") |> 
+  opq() |> 
+  add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+jp_rios <- getbb("João Pessoa") |> 
+  opq() |> 
+  add_osm_feature(key = "water") |> 
+  osmdata_sf()
+
+# Plot
+ggplot() +
+  geom_sf(data = jp_estradas$osm_lines,
+          color = "gray60", size = .1) +
+  geom_sf(data = jp_rios$osm_lines,
+          color = "cyan", size = .1) +
+  theme_void()
+```
+
+
+
+## Exemplo do pacote `osmdata`
+
+
+```{r, eval = TRUE, echo = FALSE, collapse = TRUE, fig.align='center'}
+# Carregar pacote
+library(osmdata)
+
+# Obter dados cartograficos
+jp_estradas <- getbb("João Pessoa") |> 
+  opq() |> 
+  add_osm_feature(key = "highway") |> 
+  osmdata_sf()
+
+jp_rios <- getbb("João Pessoa") |> 
+  opq() |> 
+  add_osm_feature(key = "water") |> 
+  osmdata_sf()
+
+# Plot
+ggplot() +
+  geom_sf(data = jp_estradas$osm_lines,
+          color = "gray60", size = .1) +
+  geom_sf(data = jp_rios$osm_lines,
+          color = "cyan", size = .1) +
+  theme_void()
+```
+
+
+## [(Twitter)](https://twitter.com/rcityviews) - R City Views
+
+::: {.columns}
+
+::: {.column width="50%"}
+![](Images/chicago.jpeg){fig-align="center" width="700"}
+:::
+
+::: {.column width="50%"}
+![](Images/juiz_fora.png){fig-align="center" width="700"}
+:::
+
+::::
+
+## Quizz \#1 {.inverse background-color="#386FA4"}
+
+- Este quizz consiste em recriar o mapa do IDHM Educação para os municípios do NE.
+- Utilizar os dados do `abjData::pnud_min` para obter os dados
+- Criar as faixas de IDHM conforme o exemplo
+
+![](https://pt-static.z-dn.net/files/d16/1f11d9a13dffb69137b3c1199750a75c.png){fig-align="center" width="700"}
+
+
+
+```{r, echo = FALSE, collapse = TRUE}
+countdown::countdown(
+  minutes = 20
+)
+```
+

@@ -9,6 +9,7 @@ format:
 highlight-style: a11y
 code-link: true
 engine: knitr
+from: markdown+emoji
 height: 900
 width: 1600
 execute: 
@@ -16,6 +17,7 @@ execute:
   echo: true
 editor: source  
 ---
+
 
 <h1><font color="1B5299"> Introdução à Ciência de Dados no `R`  </font></h1>
 

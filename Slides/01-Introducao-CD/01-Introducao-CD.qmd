@@ -2,18 +2,22 @@
 format:
   revealjs: 
     theme: [default, custom.scss]
-    footer: "ICDR"
+    footer: "[https://github.com/aviniciusbb/icdr/](https://github.com/aviniciusbb/icdr/)"
     slide-number: c/t
     code-link: true
+    chalkboard: true
 highlight-style: a11y
 code-link: true
 engine: knitr
+from: markdown+emoji
 height: 900
 width: 1600
 execute: 
   eval: true
   echo: true
+editor: source  
 ---
+
 
 <h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
 
@@ -30,12 +34,12 @@ execute:
 
 <h3>
 
-![](https://www.r-project.org/logo/Rlogo.svg){.absolute top="580" left="1050" width="350"}
+![](Images/logo.png){.absolute top="480" left="1250" width="350"}
 
 
 ## Sobre mim
 
-<h3><font color="1b5299"> Antonio Vinícius Barbosa </font></h3>
+<h3><font color="1b5299"> Antonio Vinícius Barbosa :wave: </font></h3> 
 
 ::: {.incremental}
 
@@ -345,27 +349,41 @@ Informações sobre o tempo da corrida [https://movement.uber.com/](https://move
 * Integrabilidade
 
 
+## O `R` é uma linguagem bastante popular...
+
+
+![](Images/r_guincho.jpeg){fig-align="center" width="600"}
+
+
+
+
 ## Principais linguagens
 
 ![](Images/languages.png){fig-align="center" width="400"}
 
 ## Instalando o `R`
 
-![](Images/install_R_initial.png){fig-align="center" width="400"}
-
-## Instalando o `R`
-
-![](Images/install_R.png){fig-align="center" width="400"}
-
+![1. Acessar [https://cran.r-project.org/](https://cran.r-project.org/) e clicar em `'download R'`.](Images/install_R_initial.png){fig-align="center" width="400"}
 
 
 ## Instalando o `R`
 
-![Selecione a opção para instalar o `R` pela primeira vez](Images/install_mirrors_R.png){fig-align="center" width="400"}
+![2.Selecione o mirror (servidor onde o `R` está disponível para download).](Images/mirror.png){fig-align="center" width="400"}
 
 ## Instalando o `R`
 
-![Selecione o sistema operacional e aguarde o download](Images/install_final_R.png){fig-align="center" width="400"}
+![3. Selecionar o sistema operacional.](Images/install_R.png){fig-align="center" width="400"}
+
+
+
+## Instalando o `R`
+
+![4. Selecione a opção para instalar o `R` pela primeira vez](Images/install_mirrors_R.png){fig-align="center" width="400"}
+
+## Instalando o `R`
+
+![5. Selecione a versão mais recente e aguarde o download](Images/install_final_R.png){fig-align="center" width="400"}
+
 
 
 

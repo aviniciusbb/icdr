@@ -2,19 +2,22 @@
 format:
   revealjs: 
     theme: [default, custom.scss]
-    footer: "ICDR"
+    footer: "[https://github.com/aviniciusbb/icdr/](https://github.com/aviniciusbb/icdr/)"
     slide-number: c/t
     code-link: true
     chalkboard: true
 highlight-style: a11y
 code-link: true
 engine: knitr
+from: markdown+emoji
 height: 900
 width: 1600
 execute: 
   eval: true
   echo: true
+editor: source  
 ---
+
 
 <h1><font color="1b5299"> Introdução à Ciência de Dados no `R` </font></h1>
 
