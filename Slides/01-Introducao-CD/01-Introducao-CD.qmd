@@ -44,7 +44,7 @@ editor: source
 ::: {.incremental}
 
 - Doutor em Economia pelo PIMES/UFPE e Universitat Pompeu Fabra. 
-- Professor do Departamento de Economia da Universidade Federal da Paraíba (UFPB). 
+- Professor do Departamento de Economia da Universidade Federal da Paraíba. 
 - Professor do Programa de Pós-graduação em Economia (PPGE/UFPB).
 - Pesquisador do LEMA (Laboratório de Economia e Modelagem Aplicada).
 
@@ -157,7 +157,7 @@ O *cronograma estimado* de encontros está organizado da seguinte forma:
 
 ::::
 
-Ao longo da disciplina, serão disponibilizadas **quizzes** e **listas de exercício**. Ao final do curso, os alunos deverão entregar um projeto abrangendo o conteúdo discutido
+Ao longo da disciplina, serão disponibilizadas **quizzes** e **listas de exercício**. 
 
 
 
@@ -171,9 +171,9 @@ $$
     \text{NF} = \text{Listas de Exercício} * 0.4 + \text{Avaliação Final}*0.6 
 $$
 
-
-Nesta disciplina, o interesse e o esforço desempenhado pelo aluno serão levados 
-constantemente (e remotamente) em consideração!
+* Ao final do curso, os alunos deverão entregar um projeto abrangendo o conteúdo discutido
+* Nesta disciplina, o interesse e o esforço desempenhado pelo aluno serão levados 
+constantemente em consideração!
 
 
 ## Algumas referências...
@@ -184,10 +184,8 @@ University Press, 2016.
 and model data*. O’Reilly Media, Inc., 2016.
 * TEETOR, Paul. *R cookbook: Proven recipes for data analysis, statistics, and graphics*. O’Reilly
 Media, Inc., 2011.
-* CHAMBERS, John. *Software for data analysis: programming with R*. Springer Science Business
-Media, 2008.
 * KABACOFF, R. I. *R in Action: data analysis and graphics with R*. 2011.
-  \item MATLOFF, Norman. *The art of R programming: A tour of statistical software design*. No Starch
+* MATLOFF, Norman. *The art of R programming: A tour of statistical software design*. No Starch
 Press, 2011.
 * *RStudio Cheat Sheets* [https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/)
 
@@ -340,7 +338,7 @@ Informações sobre o tempo da corrida [https://movement.uber.com/](https://move
 ![The R Project for Statistical Computing](Images/R_logo.png){fig-align="center" width="300"}
 
 
-## Por que utilizar o R?
+## Por que utilizar o `R`?
 
 * Software gratuito
 * CRAN com mais de 10.000 \textit{pacotes}
@@ -395,7 +393,7 @@ Informações sobre o tempo da corrida [https://movement.uber.com/](https://move
 
 ## Ambientes de desenvolvimento integrado (IDE)
 
-* A forma mais conveniente de utilizar o R é através de uma interface gráfica através de janelas.
+* A forma mais conveniente de utilizar o `R` é através de uma interface gráfica através de janelas.
 * É possível interagir com o sistema através do \textit{shell prompt}, embora requeira maior conhecimento do usuário.
 * O desenvolvimento de Ambientes de Desenvolvimento Integrado (IDE) tem como objetivo facilitar a interação entre o usuário e o sistema.  
 
@@ -431,7 +429,7 @@ RStudio é um conjunto eficiente de ferramentas integradas [https://posit.co/](h
 
 ## Outras IDEs
 
-Além do RStudio, existem outras interfaces pra utilizar o R:
+Além do RStudio, existem outras interfaces pra utilizar o `R`:
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Tinn-R](https://tinn-r.org/pt/)

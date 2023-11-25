@@ -108,7 +108,7 @@ h = sqrt(a^2 + b^2)
 h
 ```
 
-## Regra de etiqueta  (1)
+## Regra de etiqueta :bookmark:  (1)
 
 Na maior parte do tempo, usuários do `R` utilizam apenas o operador `<-` para 
 atribuições, enquanto o símbolo de igualdade (`=`) é reservado para indicar os argumentos dentro de uma função.   
@@ -419,7 +419,7 @@ Equivale a soma de `c(1, 2, 3, 1, 2) + c(2, 4, 6, 8, 10)`
 :::
 
 
-## Regras de Etiqueta (2)
+## Regras de Etiqueta :bookmark: (2)
 
 Nome de objetos:
 
@@ -552,7 +552,7 @@ receita[as.numeric(names(receita)) >= 2016]
 ```
 
 
-## Regras de Etiqueta (3)
+## Regras de Etiqueta :bookmark:  (3)
 
 <h2><font color="736f72"> Espaçamento </font> </h2>
 
