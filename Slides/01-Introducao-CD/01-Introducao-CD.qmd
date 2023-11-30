@@ -110,10 +110,10 @@ dominar um conjunto de técnicas e ter conhecimento teórico do assunto.
 métodos e resultados para o desenvovimento da Ciência de Dados. É um campo *multidisciplinar*.
 
 
-# <font color="1b5299"> Sobre o Curso </font> {background-color="#BBDEF0"}
+# <font color="1b5299"> Sobre o Curso :scroll: </font> {background-color="#BBDEF0"}
 
 
-# <font color="1b5299"> Este não é um curso sobre o software **X** ou sobre a linguagem **Y**! </font> {background-color="#BBDEF0"}
+# <font color="1b5299"> Este NÃO é um curso sobre o software **X** ou sobre a linguagem **Y**! </font> {background-color="#BBDEF0"}
 
 
 ## O que é este curso?
@@ -130,7 +130,7 @@ econômica robusta e eficiente.
 
 
 
-## Cronograma de Aulas
+## Cronograma de Aulas :spiral_calendar: 
 
 O *cronograma estimado* de encontros está organizado da seguinte forma:
 
@@ -163,7 +163,7 @@ Ao longo da disciplina, serão disponibilizadas **quizzes** e **listas de exerc�
 
 
 
-## Avaliação durante o curso Curso
+## Avaliação :memo:
 
 A nota final (**NF**) na disciplina será atribuída de acordo com a seguinte função:
 
@@ -176,7 +176,7 @@ $$
 constantemente em consideração!
 
 
-## Algumas referências...
+## Algumas referências :books: 
 
 * BRAUN, W. John; MURDOCH, Duncan J. *A first course in statistical programming with R*. Cambridge
 University Press, 2016.
@@ -191,7 +191,7 @@ Press, 2011.
 
 
 
-## Políticas do curso
+## Políticas do curso :thumbsup:
 
 
 * Todos os alunos são responsáveis por aulas perdidas e serão considerados cientes de qualquer
@@ -436,6 +436,12 @@ Além do RStudio, existem outras interfaces pra utilizar o `R`:
 - [Sublime Text](https://www.sublimetext.com/)
 - [Vim](https://www.vim.org/)
 
+
+## Posit Cloud
+
+Outra possibilidade é utilizar a versão *on-line* do RStudio, através do [Posit Cloud](https://posit.cloud/) 
+
+![](https://posit.cloud/images/posit-cloud.jpg){fig-align="center" width="300"}
 
 # <font color="1b5299"> Conhecendo o RStudio </font> {background-color="#BBDEF0"}
 
