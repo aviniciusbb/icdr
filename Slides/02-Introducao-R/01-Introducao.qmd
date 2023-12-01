@@ -19,7 +19,7 @@ editor: source
 ---
 
 
-<h1><font color="1B5299"> Introdução à Ciência de Dados no `R`  </font></h1>
+<h1><font color="1b5299"> Introdução à Ciência de Dados no `R`  </font></h1>
 
 <hr>
 
