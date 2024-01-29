@@ -46,9 +46,8 @@ As estruturas de dados em `R` podem ser divididas em:
 
 ![](Images/data_structures.png){fig-align="center" width="400"}
 
-# Vetores
+## Vetores
 
-\frametitle{Vetores}
 
 Vimos que os **vetores** possuem as seguintes propriedades:
 
@@ -66,6 +65,11 @@ a <- c(1, 2, 1, 6, 8, 5)
 a[4]
 a[c(2, 5)]
 ```
+
+
+
+## Vetores
+
 
 ::: {.incremental}
 - O primeiro elemento em um vetor é indexado por `[1]`
@@ -108,7 +112,8 @@ e `j` a coluna
 A partir do entendimento de matrizes (elementos com *duas* dimensões), podemos entender o conceito 
 **arrays**. **Arrays** são objetos que armazenam dados em **mais de duas dimensões**.
 
-. . .
+
+## Arrays
 
 - Suponha que tenhamos informações sobre as despesas com saúde, com educação e com funcionários em 3 municípios, para o ano de 2022:
 

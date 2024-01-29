@@ -420,7 +420,7 @@ Antonio Vinícius Barbosa
 </section><section id="estruturas-de-dados-1" class="slide level2"><h2>Estruturas de Dados</h2>
 <p>As estruturas de dados em <code>R</code> podem ser divididas em:</p>
 
-<img data-src="Images/data_structures.png" width="400" class="r-stretch quarto-figure-center"></section></section><section><section id="vetores" class="title-slide slide level1 center"><h1>Vetores</h1>
+<img data-src="Images/data_structures.png" width="400" class="r-stretch quarto-figure-center"></section><section id="vetores" class="slide level2"><h2>Vetores</h2>
 <p>Vimos que os <strong>vetores</strong> possuem as seguintes propriedades:</p>
 <div>
 <ul>
@@ -439,6 +439,8 @@ Antonio Vinícius Barbosa
 <span id="cb1-5"><a href="#cb1-5"></a>a[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)]</span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="do">## [1] 2 8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</div>
+</section><section id="vetores-1" class="slide level2"><h2>Vetores</h2>
 <div>
 <ul>
 <li class="fragment">O primeiro elemento em um vetor é indexado por <code>[1]</code>
@@ -446,7 +448,6 @@ Antonio Vinícius Barbosa
 <li class="fragment">Podemos saber a classe de vetores através das funções <code><a href="https://rdrr.io/r/base/class.html">class()</a></code> ou <code><a href="https://rdrr.io/r/base/typeof.html">typeof()</a></code>
 </li>
 </ul>
-</div>
 </div>
 </section><section id="matrizes" class="slide level2"><h2>Matrizes</h2>
 <div>
@@ -486,7 +487,7 @@ Antonio Vinícius Barbosa
 </div>
 </section><section id="arrays" class="slide level2"><h2>Arrays</h2>
 <p>A partir do entendimento de matrizes (elementos com <em>duas</em> dimensões), podemos entender o conceito <strong>arrays</strong>. <strong>Arrays</strong> são objetos que armazenam dados em <strong>mais de duas dimensões</strong>.</p>
-<div class="fragment">
+</section><section id="arrays-1" class="slide level2"><h2>Arrays</h2>
 <ul>
 <li>Suponha que tenhamos informações sobre as despesas com saúde, com educação e com funcionários em 3 municípios, para o ano de 2022:</li>
 </ul>
@@ -508,11 +509,10 @@ Antonio Vinícius Barbosa
 <span id="cb4-15"><a href="#cb4-15"></a><span class="do">## Educação      23.4  22.7  18.5</span></span>
 <span id="cb4-16"><a href="#cb4-16"></a><span class="do">## Funcionários  17.3  20.1  32.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section><section id="arrays-1" class="slide level2"><h2>Arrays</h2>
+</section><section id="arrays-2" class="slide level2"><h2>Arrays</h2>
 <p>Se dispusermos de informações dos gastos de anos anteriores, podemos pensar numa estrutura de dados de matrizes <em>empilhadas</em>, como na representação abaixo:</p>
 
-<img data-src="Images/array.png" width="400" class="r-stretch quarto-figure-center"></section><section id="arrays-2" class="slide level2"><h2>Arrays</h2>
+<img data-src="Images/array.png" width="400" class="r-stretch quarto-figure-center"></section><section id="arrays-3" class="slide level2"><h2>Arrays</h2>
 <p>Além de 2022, suponha a existência de dados para os anos de 2021 e 2020:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Despesas 2021</span></span>
@@ -531,7 +531,7 @@ Antonio Vinícius Barbosa
 <span id="cb5-14"><a href="#cb5-14"></a><span class="fu">colnames</span>(despesas_mun_2020) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Areia"</span>, <span class="st">"Patos"</span>, <span class="st">"Picuí"</span>)</span>
 <span id="cb5-15"><a href="#cb5-15"></a><span class="fu">rownames</span>(despesas_mun_2020) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Saúde"</span>, <span class="st">"Educação"</span>, <span class="st">"Funcionários"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="arrays-3" class="slide level2"><h2>Arrays</h2>
+</section><section id="arrays-4" class="slide level2"><h2>Arrays</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Despesas 2022</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a>despesas_mun_2022</span>
@@ -554,7 +554,7 @@ Antonio Vinícius Barbosa
 <span id="cb6-19"><a href="#cb6-19"></a><span class="do">## Educação      21.2  17.3  17.1</span></span>
 <span id="cb6-20"><a href="#cb6-20"></a><span class="do">## Funcionários  19.2  21.8  28.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="arrays-4" class="slide level2"><h2>Arrays</h2>
+</section><section id="arrays-5" class="slide level2"><h2>Arrays</h2>
 <p>Para criar um <strong>array</strong>, fazemos:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>hist_despesas_mun <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="fu">c</span>(despesas_mun_2022, </span>
@@ -584,7 +584,7 @@ Antonio Vinícius Barbosa
 <span id="cb7-25"><a href="#cb7-25"></a><span class="do">## [2,] 21.2 17.3 17.1</span></span>
 <span id="cb7-26"><a href="#cb7-26"></a><span class="do">## [3,] 19.2 21.8 28.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="arrays-5" class="slide level2"><h2>Arrays</h2>
+</section><section id="arrays-6" class="slide level2"><h2>Arrays</h2>
 <p>Para selecionar um elemento de uma <strong>array</strong>, utilizamos seus indexadores de acordo com as dimensões:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Selecionar a matriz de 2022</span></span>
@@ -889,7 +889,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_cd6f9ef3" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_1eb47748" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -1011,7 +1011,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_b98e6cce" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_e098fb6f" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
