@@ -58,9 +58,6 @@ editor: source
 ![](https://livro.curso-r.com/assets/img/environmental-data-science-r4ds-general.png){fig-align="center" width="600"}
 
 
-- O ponto de partida dessa jornada se inicia na **importação** (ou leitura) dos dados.
-
-
 ## Manipulação de Dados
 
 ![](https://pbs.twimg.com/media/CwVwtGzUUAAM5x0.jpg){fig-align="center" width="400"}
@@ -92,7 +89,7 @@ para o `R`.
 - Uma vez criado o diretório de trabalho, devemos indicar ao `R` qual o caminho até esta pasta
 :::
 
-. . .
+## Organizando o diretório de trabalho
 
 ```{r,  eval = FALSE, echo = TRUE, collapse = TRUE}
 # Conhecendo o diretório de trabalho
@@ -310,6 +307,8 @@ individuos_alt <- read_delim(
 individuos_alt
 ```
 
+## Importar arquivos `.txt`
+
 :::{.incremental}
 - Neste caso, o delimitador de variáveis é o caractere `|`. Na verdade, qualquer caractere utilizado
 para separar valores das variáveis deve ser indicado no argumento `delim`.
@@ -357,14 +356,14 @@ head(turistas_br_2021, 5)
 Considere agora ler um arquivo `.csv` diretamente de uma página na internet (URL). Os dados apresentam informações sobre o número de queimadas 
 
 ```{r,  echo = TRUE, collapse = TRUE, eval=FALSE}
-# URL da página 
-url <- "https://queimadas.dgi.inpe.br/queimadas/portal-static/csv_estatisticas/historico_regiao_norte.csv"
+# URL da pagina 
+url <- "https://dadosabertos.ibama.gov.br/dados/RAPP/expEcoMadProdSubprodFl/relatorio.csv"
 
 # Importando os dados
-queimadas_norte_br <- read_csv(url, show_col_types = FALSE)
+exploracao_madeira <- read_csv(url, show_col_types = FALSE)
 
 # Checar dimensões da base de dados
-dim(queimadas_norte_br)
+dim(exploracao_madeira)
 ```
 
 - Função similar é `read_csv2()`. A diferença é que esta considera colunas separadas por ponto-e-vírgula (;), enquanto que `read_csv()` considera a separação por vírgula (,).
@@ -378,10 +377,10 @@ Neste exercício, iremos obter os dados históricos do Índice Bovespa (Ibovespa
 no site da B3 [http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm](http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm)
 
 
-![](Images/b3_logo.png){fig-align="center" width="400"}
 
 
-- Baixar os dados referentes ao primeiro semestre de 2021
+
+- Baixar os dados referentes ao segundo semestre de 2023
 - Salvar os dados na sua pasta de trabalho
 - Ajustar o diretório de trabalho
 - Utilizar uma das funções do `readr` para abrir os dados

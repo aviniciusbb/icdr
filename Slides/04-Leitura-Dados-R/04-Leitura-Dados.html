@@ -407,7 +407,7 @@
 Antonio Vinícius Barbosa
 </h2><h2>
 </h2><h3>
-01-02-2024
+06-02-2024
 </h3>
 
 
@@ -426,9 +426,7 @@ Antonio Vinícius Barbosa
 <li>Parte de uma base “crua” e a transforma até obter uma base de dados analítica.</li>
 </ul>
 
-<img data-src="https://livro.curso-r.com/assets/img/environmental-data-science-r4ds-general.png" width="600" class="r-stretch quarto-figure-center"><ul>
-<li>O ponto de partida dessa jornada se inicia na <strong>importação</strong> (ou leitura) dos dados.</li>
-</ul></section><section id="manipulação-de-dados-3" class="slide level2"><h2>Manipulação de Dados</h2>
+<img data-src="https://livro.curso-r.com/assets/img/environmental-data-science-r4ds-general.png" width="600" class="r-stretch quarto-figure-center"></section><section id="manipulação-de-dados-3" class="slide level2"><h2>Manipulação de Dados</h2>
 
 <img data-src="https://pbs.twimg.com/media/CwVwtGzUUAAM5x0.jpg" width="400" class="r-stretch quarto-figure-center"></section><section id="manipulação-de-dados-4" class="slide level2"><h2>Manipulação de Dados</h2>
 <p>O objetivo desta aula é introduzir os principais pacotes e funções para <strong>importar dados</strong> para o <code>R</code>.</p>
@@ -461,7 +459,7 @@ Antonio Vinícius Barbosa
 <li class="fragment">Uma vez criado o diretório de trabalho, devemos indicar ao <code>R</code> qual o caminho até esta pasta</li>
 </ul>
 </div>
-<div class="fragment">
+</section><section id="organizando-o-diretório-de-trabalho-1" class="slide level2"><h2>Organizando o diretório de trabalho</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Conhecendo o diretório de trabalho</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">getwd</span>()</span>
@@ -473,7 +471,6 @@ Antonio Vinícius Barbosa
 <span id="cb1-8"><a href="#cb1-8"></a><span class="co"># Listar objetos no diretório (duas opções)</span></span>
 <span id="cb1-9"><a href="#cb1-9"></a><span class="fu">list.files</span>()</span>
 <span id="cb1-10"><a href="#cb1-10"></a><span class="fu">dir</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </div>
 </section><section id="preparando-o-diretório-de-trabalho" class="slide level2"><h2>Preparando o Diretório de Trabalho</h2>
 <p>É possível definir no <code>RStudio</code> através da sequência:</p>
@@ -489,7 +486,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_0fa0291c" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_6d830510" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -654,6 +651,8 @@ Antonio Vinícius Barbosa
 <span id="cb5-15"><a href="#cb5-15"></a><span class="do">## 5 Martin       22 M     Areia         </span></span>
 <span id="cb5-16"><a href="#cb5-16"></a><span class="do">## 6 Dora         32 F     Conde</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section><section id="importar-arquivos-.txt-3" class="slide level2"><h2>Importar arquivos <code>.txt</code>
+</h2>
 <div>
 <ul>
 <li class="fragment">Neste caso, o delimitador de variáveis é o caractere <code>|</code>. Na verdade, qualquer caractere utilizado para separar valores das variáveis deve ser indicado no argumento <code>delim</code>.</li>
@@ -710,22 +709,21 @@ Antonio Vinícius Barbosa
 </h2>
 <p>Considere agora ler um arquivo <code>.csv</code> diretamente de uma página na internet (URL). Os dados apresentam informações sobre o número de queimadas</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># URL da página </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>url <span class="ot">&lt;-</span> <span class="st">"https://queimadas.dgi.inpe.br/queimadas/portal-static/csv_estatisticas/historico_regiao_norte.csv"</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># URL da pagina </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>url <span class="ot">&lt;-</span> <span class="st">"https://dadosabertos.ibama.gov.br/dados/RAPP/expEcoMadProdSubprodFl/relatorio.csv"</span></span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Importando os dados</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>queimadas_norte_br <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5"></a>exploracao_madeira <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(url, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb8-6"><a href="#cb8-6"></a></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Checar dimensões da base de dados</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">dim</span>(queimadas_norte_br)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">dim</span>(exploracao_madeira)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Função similar é <code>read_csv2()</code>. A diferença é que esta considera colunas separadas por ponto-e-vírgula (;), enquanto que <code>read_csv()</code> considera a separação por vírgula (,).</li>
 </ul></section><section id="quizz-2" class="slide level2 inverse" data-background-color="#386FA4"><h2>Quizz #2</h2>
 <p>Neste exercício, iremos obter os dados históricos do Índice Bovespa (Ibovespa) disponíveis no site da B3 <a href="http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm">http://www.b3.com.br/pt_br/market-data-e-indices/indices/indices-amplos/indice-ibovespa-ibovespa-estatisticas-historicas.htm</a></p>
-
-<img data-src="Images/b3_logo.png" width="400" class="r-stretch quarto-figure-center"><ul>
-<li>Baixar os dados referentes ao primeiro semestre de 2021</li>
+<ul>
+<li>Baixar os dados referentes ao segundo semestre de 2023</li>
 <li>Salvar os dados na sua pasta de trabalho</li>
 <li>Ajustar o diretório de trabalho</li>
 <li>Utilizar uma das funções do <code>readr</code> para abrir os dados</li>
@@ -734,7 +732,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_76feb692" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_34181f5f" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
