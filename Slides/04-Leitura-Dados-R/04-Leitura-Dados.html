@@ -407,7 +407,7 @@
 Antonio Vinícius Barbosa
 </h2><h2>
 </h2><h3>
-06-02-2024
+15-02-2024
 </h3>
 
 
@@ -486,7 +486,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_6d830510" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_134c8d91" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -732,7 +732,7 @@ Antonio Vinícius Barbosa
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_34181f5f" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_ec4069dd" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls">
 <button class="countdown-bump-down">−</button><button class="countdown-bump-up">&amp;plus;</button>
 </div>
@@ -921,7 +921,7 @@ Antonio Vinícius Barbosa
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(rvest)</span>
 <span id="cb15-3"><a href="#cb15-3"></a></span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Definir url da página</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>url <span class="ot">&lt;-</span> <span class="st">"https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A#Classifica%C3%A7%C3%A3o"</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>url <span class="ot">&lt;-</span> <span class="st">"https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2023_-_S%C3%A9rie_A"</span></span>
 <span id="cb15-6"><a href="#cb15-6"></a></span>
 <span id="cb15-7"><a href="#cb15-7"></a><span class="co"># Ler arquivo </span></span>
 <span id="cb15-8"><a href="#cb15-8"></a>cod_html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(url)</span>
@@ -933,33 +933,33 @@ Antonio Vinícius Barbosa
 <span id="cb15-14"><a href="#cb15-14"></a>  ) </span>
 <span id="cb15-15"><a href="#cb15-15"></a></span>
 <span id="cb15-16"><a href="#cb15-16"></a><span class="co"># Transformar para data frame</span></span>
-<span id="cb15-17"><a href="#cb15-17"></a>serie_a_2022 <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tabela_html)</span>
+<span id="cb15-17"><a href="#cb15-17"></a>brasileirao_2023 <span class="ot">&lt;-</span> <span class="fu">html_table</span>(tabela_html)</span>
 <span id="cb15-18"><a href="#cb15-18"></a></span>
 <span id="cb15-19"><a href="#cb15-19"></a><span class="co"># Visualizar dados</span></span>
-<span id="cb15-20"><a href="#cb15-20"></a>serie_a_2022</span>
+<span id="cb15-20"><a href="#cb15-20"></a>brasileirao_2023</span>
 <span id="cb15-21"><a href="#cb15-21"></a><span class="do">## # A tibble: 20 × 11</span></span>
 <span id="cb15-22"><a href="#cb15-22"></a><span class="do">##      Pos Equipevde              Pts     J     V     E     D    GP    GC SG   </span></span>
 <span id="cb15-23"><a href="#cb15-23"></a><span class="do">##    &lt;int&gt; &lt;chr&gt;                &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;</span></span>
-<span id="cb15-24"><a href="#cb15-24"></a><span class="do">##  1     1 Palmeiras (C)           81    38    23    12     3    66    27 +39  </span></span>
-<span id="cb15-25"><a href="#cb15-25"></a><span class="do">##  2     2 Internacional           73    38    20    13     5    58    31 +27  </span></span>
-<span id="cb15-26"><a href="#cb15-26"></a><span class="do">##  3     3 Fluminense              70    38    21     7    10    63    41 +22  </span></span>
-<span id="cb15-27"><a href="#cb15-27"></a><span class="do">##  4     4 Corinthians             65    38    18    11     9    44    36 +8   </span></span>
-<span id="cb15-28"><a href="#cb15-28"></a><span class="do">##  5     5 Flamengo                62    38    18     8    12    60    39 +21  </span></span>
-<span id="cb15-29"><a href="#cb15-29"></a><span class="do">##  6     6 Athletico Paranaense    58    38    16    10    12    48    48 0    </span></span>
-<span id="cb15-30"><a href="#cb15-30"></a><span class="do">##  7     7 Atlético Mineiro        58    38    15    13    10    45    37 +8   </span></span>
-<span id="cb15-31"><a href="#cb15-31"></a><span class="do">##  8     8 Fortaleza               55    38    15    10    13    46    39 +7   </span></span>
-<span id="cb15-32"><a href="#cb15-32"></a><span class="do">##  9     9 São Paulo               54    38    13    15    10    55    42 +13  </span></span>
-<span id="cb15-33"><a href="#cb15-33"></a><span class="do">## 10    10 América Mineiro         53    38    15     8    15    40    40 0    </span></span>
-<span id="cb15-34"><a href="#cb15-34"></a><span class="do">## 11    11 Botafogo                53    38    15     8    15    41    43 −2   </span></span>
-<span id="cb15-35"><a href="#cb15-35"></a><span class="do">## 12    12 Santos                  47    38    12    11    15    44    41 +3   </span></span>
-<span id="cb15-36"><a href="#cb15-36"></a><span class="do">## 13    13 Goiás                   46    38    11    13    14    40    53 −13  </span></span>
-<span id="cb15-37"><a href="#cb15-37"></a><span class="do">## 14    14 Red Bull Bragantino     44    38    11    11    16    49    59 −10  </span></span>
-<span id="cb15-38"><a href="#cb15-38"></a><span class="do">## 15    15 Coritiba                42    38    12     6    20    39    60 −21  </span></span>
-<span id="cb15-39"><a href="#cb15-39"></a><span class="do">## 16    16 Cuiabá                  41    38    10    11    17    31    42 −11  </span></span>
-<span id="cb15-40"><a href="#cb15-40"></a><span class="do">## 17    17 Ceará                   37    38     7    16    15    34    41 −7   </span></span>
-<span id="cb15-41"><a href="#cb15-41"></a><span class="do">## 18    18 Atlético Goianiense     36    38     8    12    18    39    57 −18  </span></span>
-<span id="cb15-42"><a href="#cb15-42"></a><span class="do">## 19    19 Avaí                    35    38     9     8    21    34    60 −26  </span></span>
-<span id="cb15-43"><a href="#cb15-43"></a><span class="do">## 20    20 Juventude               22    38     3    13    22    29    69 −40  </span></span>
+<span id="cb15-24"><a href="#cb15-24"></a><span class="do">##  1     1 Palmeiras (C)           70    38    20    10     8    64    33 +31  </span></span>
+<span id="cb15-25"><a href="#cb15-25"></a><span class="do">##  2     2 Grêmio                  68    38    21     5    12    63    56 +7   </span></span>
+<span id="cb15-26"><a href="#cb15-26"></a><span class="do">##  3     3 Atlético Mineiro        66    38    19     9    10    52    32 +20  </span></span>
+<span id="cb15-27"><a href="#cb15-27"></a><span class="do">##  4     4 Flamengo                66    38    19     9    10    56    42 +14  </span></span>
+<span id="cb15-28"><a href="#cb15-28"></a><span class="do">##  5     5 Botafogo                64    38    18    10    10    58    37 +21  </span></span>
+<span id="cb15-29"><a href="#cb15-29"></a><span class="do">##  6     6 Red Bull Bragantino     62    38    17    11    10    49    35 +14  </span></span>
+<span id="cb15-30"><a href="#cb15-30"></a><span class="do">##  7     7 Fluminense              56    38    16     8    14    51    47 +4   </span></span>
+<span id="cb15-31"><a href="#cb15-31"></a><span class="do">##  8     8 Athletico Paranaense    56    38    14    14    10    51    43 +8   </span></span>
+<span id="cb15-32"><a href="#cb15-32"></a><span class="do">##  9     9 Internacional           55    38    15    10    13    46    45 +1   </span></span>
+<span id="cb15-33"><a href="#cb15-33"></a><span class="do">## 10    10 Fortaleza               54    38    15     9    14    45    44 +1   </span></span>
+<span id="cb15-34"><a href="#cb15-34"></a><span class="do">## 11    11 São Paulo               53    38    14    11    13    40    38 +2   </span></span>
+<span id="cb15-35"><a href="#cb15-35"></a><span class="do">## 12    12 Cuiabá                  51    38    14     9    15    40    39 +1   </span></span>
+<span id="cb15-36"><a href="#cb15-36"></a><span class="do">## 13    13 Corinthians             50    38    12    14    12    47    48 −1   </span></span>
+<span id="cb15-37"><a href="#cb15-37"></a><span class="do">## 14    14 Cruzeiro                47    38    11    14    13    35    32 +3   </span></span>
+<span id="cb15-38"><a href="#cb15-38"></a><span class="do">## 15    15 Vasco da Gama           45    38    12     9    17    41    51 −10  </span></span>
+<span id="cb15-39"><a href="#cb15-39"></a><span class="do">## 16    16 Bahia                   44    38    12     8    18    50    53 −3   </span></span>
+<span id="cb15-40"><a href="#cb15-40"></a><span class="do">## 17    17 Santos                  43    38    11    10    17    39    64 −25  </span></span>
+<span id="cb15-41"><a href="#cb15-41"></a><span class="do">## 18    18 Goiás                   38    38     9    11    18    36    53 −17  </span></span>
+<span id="cb15-42"><a href="#cb15-42"></a><span class="do">## 19    19 Coritiba                30    38     8     6    24    41    73 −32  </span></span>
+<span id="cb15-43"><a href="#cb15-43"></a><span class="do">## 20    20 América Mineiro         24    38     5     9    24    42    81 −39  </span></span>
 <span id="cb15-44"><a href="#cb15-44"></a><span class="do">## # ℹ 1 more variable: `Classificação ou descenso` &lt;chr&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section><section id="salvando-dados-no-formato-r" class="title-slide slide level1 center" data-background-color="#BBDEF0"><h1><font color="1b5299"> Salvando dados no formato <code>R</code> </font></h1>

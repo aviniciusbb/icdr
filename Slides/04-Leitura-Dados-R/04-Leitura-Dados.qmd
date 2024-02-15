@@ -610,7 +610,7 @@ Como exemplo, gostaríamos de baixar os dados da tabela do campeonato brasileiro
 library(rvest)
 
 # Definir url da página
-url <- "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2022_-_S%C3%A9rie_A#Classifica%C3%A7%C3%A3o"
+url <- "https://pt.wikipedia.org/wiki/Campeonato_Brasileiro_de_Futebol_de_2023_-_S%C3%A9rie_A"
 
 # Ler arquivo 
 cod_html <- read_html(url)
@@ -622,10 +622,10 @@ tabela_html <- html_element(
   ) 
 
 # Transformar para data frame
-serie_a_2022 <- html_table(tabela_html)
+brasileirao_2023 <- html_table(tabela_html)
 
 # Visualizar dados
-serie_a_2022
+brasileirao_2023
 ```
 
 # <font color="1b5299"> Salvando dados no formato `R` </font> {background-color="#BBDEF0"}
