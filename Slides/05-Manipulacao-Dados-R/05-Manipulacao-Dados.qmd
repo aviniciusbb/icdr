@@ -826,7 +826,7 @@ abaixo:
 ![](https://thumbs.dreamstime.com/b/os-sinais-de-estrada-amarelos-advertem-motoristas-para-adiante-curva-perigosa-83208232.jpg){fig-align="center" width="600"}
 
 
-- Este roteiro utiliza os dados de acidentes agrupados por pessoas da PRF (Polícia Rodoviária Federal) para o ano de 2022, disponível neste [link](https://drive.google.com/file/d/1-Yk6TV00CH3PixTkKmkoUJQsNiUc5xLm/view)
+- Este roteiro utiliza os dados de acidentes agrupados por pessoas da PRF (Polícia Rodoviária Federal) para o ano de 2023, disponível neste [link](https://drive.google.com/file/d/1-Yk6TV00CH3PixTkKmkoUJQsNiUc5xLm/view)
 
 
 ## Quizz #1 {.inverse background-color="#386FA4"}
