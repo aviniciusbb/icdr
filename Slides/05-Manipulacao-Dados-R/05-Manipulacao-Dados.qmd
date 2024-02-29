@@ -826,15 +826,15 @@ abaixo:
 ![](https://thumbs.dreamstime.com/b/os-sinais-de-estrada-amarelos-advertem-motoristas-para-adiante-curva-perigosa-83208232.jpg){fig-align="center" width="600"}
 
 
-- Este roteiro utiliza os dados de acidentes agrupados por pessoas da PRF (Polícia Rodoviária Federal) para o ano de 2022, disponível neste [link](https://drive.google.com/file/d/1sd8YIqIHapYaxQeaa-6yeWMdVLTl6hgD/view)
+- Este roteiro utiliza os dados de acidentes agrupados por pessoas da PRF (Polícia Rodoviária Federal) para o ano de 2022, disponível neste [link](https://drive.google.com/file/d/1-Yk6TV00CH3PixTkKmkoUJQsNiUc5xLm/view)
 
 
 ## Quizz #1 {.inverse background-color="#386FA4"}
 
 - Instale e carregue o pacote `dplyr`.
-- Crie a pasta `Dados` no seu dirétorio de trabalho e salve o arquivo `acidentes2022.zip`.
+- Crie a pasta `Dados` no seu dirétorio de trabalho e salve o arquivo `acidentes2023.zip`.
 - Abra o arquivo através de uma das funções do pacote `readr`, salvando
-  com o nome `acidentes_br_2022`. Dica: *verificar encoding dos dados*.
+  com o nome `acidentes_br_2023`. Dica: *verificar encoding dos dados*.
 - Observe a estrutura dos dados através da função `glimpse()`, uma opção à função `str()`.
 - Obtenha o número total de pessoas envolvidas em acidentes de trânsito, utilizando a variável `pessoas` do banco de dados.
 - Qual o número total de feridos graves no trânsito em 2022? E o de pessoas mortas? 
@@ -847,6 +847,6 @@ abaixo:
 - Calcule o número de acidentes que ocorre por tipo de pista, através da variável `tipo_pista`.
 - E em qual turno do dia ocorrem mais acidentes? Utilize a variável `fase_dia`.
 - Mostre o número de acidentes por estado (em termos percentuais).
-- Apresente as cinco principais causas de acidentes de trânsito em 2022, listados em ordem decrescente.
+- Apresente as cinco principais causas de acidentes de trânsito em 2023, listados em ordem decrescente.
 - Elabore mais uma estatística interessante com os dados.
 
