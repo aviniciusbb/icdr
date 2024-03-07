@@ -44,6 +44,10 @@ Antonio Vinícius Barbosa
 
 # <font color="1b5299"> Formatando Dados </font> {background-color="#BBDEF0"}
 
+##
+
+![](https://pbs.twimg.com/media/E7dgtA6XMAQwk5i.jpg){fig-align="center" width="1000"}
+
 ## Manipulação de Dados
 
 Alguns importantes pacotes de
@@ -600,9 +604,7 @@ crossing(
 )
 ```
 
-##
 
-![](https://pbs.twimg.com/media/E7dgtA6XMAQwk5i.jpg){fig-align="center" width="1000"}
 
 
 
