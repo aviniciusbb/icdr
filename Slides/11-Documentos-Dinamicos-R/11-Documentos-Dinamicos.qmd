@@ -178,8 +178,7 @@ ggplot(airquality, aes(Temp, Ozone)) +
 
 Como vimos, os metadados são inseridos entre os três traços (`---`).
 A sintaxe dos metadados é o `YAML` (YAML Ain’t Markup Language). Nela, inserimos
-informações básicas do documento, tais como o título do documento, o nome do
-autor, a filiação, a data e o formato do output. De forma geral:
+informações básicas do documento, tais como o título, data:
 
 
 ````{{r}}
@@ -211,8 +210,7 @@ date: 09/05/2023
 
 ## Opções de Formatos
 
-Existem várias opções de formatos.  O formato HTML cria documentos que podem ser 
-abertos no navegador.
+Existem várias opções de formatos. Para o formato HTML:
 
 ````{{r}}
 ---
@@ -508,12 +506,15 @@ Este é um exemplo para dicas!
 ````
 
 
+## Callout Blocks
+
 ````{{r}}
 :::{.callout-warning}
 ## Aviso
 Este é um exemplo para avisos!
 :::
 ````
+
 
 
 ````{{r}}
@@ -536,6 +537,8 @@ Este é um exemplo para notas!
 ## Dica
 Este é um exemplo para dicas!
 :::
+
+## Callout Blocks
 
 :::{.callout-warning}
 ## Aviso
@@ -620,7 +623,7 @@ Exemplo de documentos `quarto`
 ## Tabelas
 
 
-A melhor forma de adicionar tabelas é através da função `kable` do pacote `knitr`
+Uma das formas de adicionar tabelas é através da função `kable` do pacote `knitr`
 
 ```{r}
 #| eval: false
@@ -630,6 +633,7 @@ knitr::kable(
   )
 ```
 
+## Tabelas
 
 ```{r}
 #| eval: true
@@ -641,6 +645,8 @@ knitr::kable(
 ```
 
 Para outras opções de costumização das tabelas, é recomendado o pacote `kableExtra`
+
+Mais adiante veremos as funcionalidades do pacote `gt`.
 
 # <font color="1b5299"> Apresentações </font> {background-color="#BBDEF0"}
 

@@ -409,7 +409,7 @@
 <p>Antonio Vinícius Barbosa</p>
 </h2><h2>
 </h2><h3>
-21-03-2024
+26-03-2024
 </h3>
 <p><br></p>
 <h3>
@@ -532,7 +532,7 @@
 </section>
 <section id="metadata-yaml" class="slide level2">
 <h2>Metadata: <code>YAML</code></h2>
-<p>Como vimos, os metadados são inseridos entre os três traços (<code>---</code>). A sintaxe dos metadados é o <code>YAML</code> (YAML Ain’t Markup Language). Nela, inserimos informações básicas do documento, tais como o título do documento, o nome do autor, a filiação, a data e o formato do output. De forma geral:</p>
+<p>Como vimos, os metadados são inseridos entre os três traços (<code>---</code>). A sintaxe dos metadados é o <code>YAML</code> (YAML Ain’t Markup Language). Nela, inserimos informações básicas do documento, tais como o título, data:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>---</span>
 <span id="cb3-2"><a href="#cb3-2"></a>key: value</span>
 <span id="cb3-3"><a href="#cb3-3"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -551,7 +551,7 @@
 </section>
 <section id="opções-de-formatos" class="slide level2">
 <h2>Opções de Formatos</h2>
-<p>Existem várias opções de formatos. O formato HTML cria documentos que podem ser abertos no navegador.</p>
+<p>Existem várias opções de formatos. Para o formato HTML:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href="#cb6-1"></a>---</span>
 <span id="cb6-2"><a href="#cb6-2"></a>format: html</span>
 <span id="cb6-3"><a href="#cb6-3"></a>---</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -772,6 +772,9 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <span id="cb24-2"><a href="#cb24-2"></a>## Dica</span>
 <span id="cb24-3"><a href="#cb24-3"></a>Este é um exemplo para dicas!</span>
 <span id="cb24-4"><a href="#cb24-4"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="callout-blocks-2" class="slide level2">
+<h2>Callout Blocks</h2>
 <div class="sourceCode" id="cb25"><pre class="sourceCode numberSource {{r}} number-lines code-with-copy"><code class="sourceCode"><span id="cb25-1"><a href="#cb25-1"></a>:::{.callout-warning}</span>
 <span id="cb25-2"><a href="#cb25-2"></a>## Aviso</span>
 <span id="cb25-3"><a href="#cb25-3"></a>Este é um exemplo para avisos!</span>
@@ -781,7 +784,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <span id="cb26-3"><a href="#cb26-3"></a>Este é um exemplo para algo importante!</span>
 <span id="cb26-4"><a href="#cb26-4"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="callout-blocks-2" class="slide level2">
+<section id="callout-blocks-3" class="slide level2">
 <h2>Callout Blocks</h2>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -809,6 +812,9 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </div>
 </div>
+</section>
+<section id="callout-blocks-4" class="slide level2">
+<h2>Callout Blocks</h2>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -894,13 +900,16 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </section>
 <section id="tabelas" class="slide level2">
 <h2>Tabelas</h2>
-<p>A melhor forma de adicionar tabelas é através da função <code>kable</code> do pacote <code>knitr</code></p>
+<p>Uma das formas de adicionar tabelas é através da função <code>kable</code> do pacote <code>knitr</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
 <span id="cb31-2"><a href="#cb31-2"></a>  dados<span class="sc">::</span>dados_starwars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],</span>
 <span id="cb31-3"><a href="#cb31-3"></a>  <span class="at">caption =</span> <span class="st">"Personagens Starwars"</span></span>
 <span id="cb31-4"><a href="#cb31-4"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="tabelas-1" class="slide level2">
+<h2>Tabelas</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table>
@@ -955,6 +964,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 </div>
 <p>Para outras opções de costumização das tabelas, é recomendado o pacote <code>kableExtra</code></p>
+<p>Mais adiante veremos as funcionalidades do pacote <code>gt</code>.</p>
 </section></section>
 <section>
 <section id="apresentações" class="title-slide slide level1 center" data-background-color="#BBDEF0">
@@ -1193,7 +1203,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_2e8233cd" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_13e6c1dd" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
