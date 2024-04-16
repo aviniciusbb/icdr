@@ -407,7 +407,7 @@
 <p>Antonio Vinícius Barbosa</p>
 </h2><h2>
 </h2><h3>
-21-03-2024
+26-03-2024
 </h3>
 <p><br></p>
 <h3>
@@ -533,9 +533,9 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Data atual</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">today</span>()</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="do">## [1] "2024-03-21"</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="do">## [1] "2024-03-26"</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="fu">now</span>()</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="do">## [1] "2024-03-21 10:13:46 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="do">## [1] "2024-03-26 11:24:47 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O último bloco de informações da função <code>now()</code> corresponde ao <a href="https://pt.wikipedia.org/wiki/Fuso_hor%C3%A1rio">fuso horário</a>.</p>
 </section>
@@ -545,12 +545,12 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>hora_atual <span class="ot">&lt;-</span> <span class="fu">now</span>()</span>
 <span id="cb6-2"><a href="#cb6-2"></a>hora_atual</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="do">## [1] "2024-03-21 10:13:46 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="do">## [1] "2024-03-26 11:24:47 -03"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Extrair data</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">date</span>(hora_atual)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="do">## [1] "2024-03-21"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="do">## [1] "2024-03-26"</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co"># Extrair ano</span></span>
 <span id="cb7-5"><a href="#cb7-5"></a><span class="fu">year</span>(hora_atual)</span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="do">## [1] 2024</span></span>
@@ -559,16 +559,16 @@
 <span id="cb7-9"><a href="#cb7-9"></a><span class="do">## [1] 3</span></span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Extrair dia do mes</span></span>
 <span id="cb7-11"><a href="#cb7-11"></a><span class="fu">day</span>(hora_atual)</span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="do">## [1] 21</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="do">## [1] 26</span></span>
 <span id="cb7-13"><a href="#cb7-13"></a><span class="co"># Extrair hora</span></span>
 <span id="cb7-14"><a href="#cb7-14"></a><span class="fu">hour</span>(hora_atual)</span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="do">## [1] 10</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="do">## [1] 11</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a><span class="co"># Extrair minutos</span></span>
 <span id="cb7-17"><a href="#cb7-17"></a><span class="fu">minute</span>(hora_atual)</span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="do">## [1] 13</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="do">## [1] 24</span></span>
 <span id="cb7-19"><a href="#cb7-19"></a><span class="co"># Extrair segundos</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a><span class="fu">second</span>(hora_atual)</span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="do">## [1] 46.91429</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="do">## [1] 47.46304</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="o-pacote-lubridate-5" class="slide level2">
@@ -577,7 +577,7 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Extrair dia da semana</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="fu">wday</span>(hora_atual, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="do">## [1] Thu</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="do">## [1] Tue</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="do">## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Outras informações:</p>
@@ -611,14 +611,14 @@
 <p>Algumas operações aritméticas disponíveis são:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Adição de datas</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">today</span>() <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">10</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">today</span>() <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">5</span>)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="do">## [1] "2024-03-31"</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="fu">today</span>() <span class="sc">+</span> <span class="fu">years</span>(<span class="dv">2</span>)</span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="do">## [1] "2026-03-21"</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="do">## [1] "2026-03-26"</span></span>
 <span id="cb10-6"><a href="#cb10-6"></a><span class="co"># Datas recorrentes</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a>aulas <span class="ot">&lt;-</span> <span class="fu">today</span>() <span class="sc">+</span> <span class="fu">weeks</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) </span>
 <span id="cb10-8"><a href="#cb10-8"></a>aulas</span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="do">## [1] "2024-03-28" "2024-04-04"</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="do">## [1] "2024-04-02" "2024-04-09"</span></span>
 <span id="cb10-10"><a href="#cb10-10"></a><span class="co"># Diferença de datas</span></span>
 <span id="cb10-11"><a href="#cb10-11"></a><span class="fu">as.period</span>(periodo); <span class="fu">as.period</span>(periodo, <span class="at">unit =</span> <span class="st">"day"</span>)</span>
 <span id="cb10-12"><a href="#cb10-12"></a><span class="do">## [1] "2m 8d 0H 0M 0S"</span></span>
@@ -918,16 +918,16 @@
 <span id="cb25-3"><a href="#cb25-3"></a><span class="do">## # A tibble: 10 × 2</span></span>
 <span id="cb25-4"><a href="#cb25-4"></a><span class="do">##    f         n</span></span>
 <span id="cb25-5"><a href="#cb25-5"></a><span class="do">##    &lt;fct&gt; &lt;int&gt;</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a><span class="do">##  1 a         4</span></span>
-<span id="cb25-7"><a href="#cb25-7"></a><span class="do">##  2 b        12</span></span>
-<span id="cb25-8"><a href="#cb25-8"></a><span class="do">##  3 c         6</span></span>
-<span id="cb25-9"><a href="#cb25-9"></a><span class="do">##  4 d        13</span></span>
-<span id="cb25-10"><a href="#cb25-10"></a><span class="do">##  5 e         7</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a><span class="do">##  6 f        11</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a><span class="do">##  7 g        12</span></span>
-<span id="cb25-13"><a href="#cb25-13"></a><span class="do">##  8 h        15</span></span>
-<span id="cb25-14"><a href="#cb25-14"></a><span class="do">##  9 i        10</span></span>
-<span id="cb25-15"><a href="#cb25-15"></a><span class="do">## 10 j        10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="do">##  1 a        11</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="do">##  2 b        10</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="do">##  3 c         8</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="do">##  4 d         2</span></span>
+<span id="cb25-10"><a href="#cb25-10"></a><span class="do">##  5 e        10</span></span>
+<span id="cb25-11"><a href="#cb25-11"></a><span class="do">##  6 f        13</span></span>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="do">##  7 g         8</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a><span class="do">##  8 h         5</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a><span class="do">##  9 i        17</span></span>
+<span id="cb25-15"><a href="#cb25-15"></a><span class="do">## 10 j        16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="o-pacote-forcats-5" class="slide level2">
@@ -936,19 +936,18 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">fct_lump</span>(letras, <span class="at">other_level =</span> <span class="st">"Outros"</span>) <span class="sc">|&gt;</span>        </span>
 <span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">fct_count</span>()</span>
-<span id="cb26-3"><a href="#cb26-3"></a><span class="do">## # A tibble: 10 × 2</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a><span class="do">##    f          n</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a><span class="do">##    &lt;fct&gt;  &lt;int&gt;</span></span>
-<span id="cb26-6"><a href="#cb26-6"></a><span class="do">##  1 b         12</span></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="do">##  2 c          6</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a><span class="do">##  3 d         13</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a><span class="do">##  4 e          7</span></span>
-<span id="cb26-10"><a href="#cb26-10"></a><span class="do">##  5 f         11</span></span>
-<span id="cb26-11"><a href="#cb26-11"></a><span class="do">##  6 g         12</span></span>
-<span id="cb26-12"><a href="#cb26-12"></a><span class="do">##  7 h         15</span></span>
-<span id="cb26-13"><a href="#cb26-13"></a><span class="do">##  8 i         10</span></span>
-<span id="cb26-14"><a href="#cb26-14"></a><span class="do">##  9 j         10</span></span>
-<span id="cb26-15"><a href="#cb26-15"></a><span class="do">## 10 Outros     4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="do">## # A tibble: 9 × 2</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="do">##   f          n</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="do">##   &lt;fct&gt;  &lt;int&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="do">## 1 a         11</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="do">## 2 b         10</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="do">## 3 c          8</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="do">## 4 e         10</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="do">## 5 f         13</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a><span class="do">## 6 g          8</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="do">## 7 i         17</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="do">## 8 j         16</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a><span class="do">## 9 Outros     7</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="o-pacote-forcats-6" class="slide level2">
@@ -960,11 +959,11 @@
 <span id="cb27-3"><a href="#cb27-3"></a><span class="do">## # A tibble: 5 × 2</span></span>
 <span id="cb27-4"><a href="#cb27-4"></a><span class="do">##   f          n</span></span>
 <span id="cb27-5"><a href="#cb27-5"></a><span class="do">##   &lt;fct&gt;  &lt;int&gt;</span></span>
-<span id="cb27-6"><a href="#cb27-6"></a><span class="do">## 1 b         12</span></span>
-<span id="cb27-7"><a href="#cb27-7"></a><span class="do">## 2 d         13</span></span>
-<span id="cb27-8"><a href="#cb27-8"></a><span class="do">## 3 g         12</span></span>
-<span id="cb27-9"><a href="#cb27-9"></a><span class="do">## 4 h         15</span></span>
-<span id="cb27-10"><a href="#cb27-10"></a><span class="do">## 5 Outros    48</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="do">## 1 a         11</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="do">## 2 f         13</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="do">## 3 i         17</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a><span class="do">## 4 j         16</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="do">## 5 Outros    43</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="footer footer-default">
 <p><a href="https://github.com/aviniciusbb/icdr/">https://github.com/aviniciusbb/icdr/</a></p>

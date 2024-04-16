@@ -261,7 +261,7 @@ Algumas operações aritméticas disponíveis são:
 
 ```{r, echo = TRUE, collapse = TRUE}
 # Adição de datas
-today() + days(10)
+today() + days(5)
 today() + years(2)
 # Datas recorrentes
 aulas <- today() + weeks(1:2) 
