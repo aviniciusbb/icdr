@@ -431,6 +431,7 @@ RStudio é um conjunto eficiente de ferramentas integradas [https://posit.co/](h
 
 Além do RStudio, existem outras interfaces pra utilizar o `R`:
 
+- [Positron IDE](https://github.com/posit-dev/positronK)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Tinn-R](https://tinn-r.org/pt/)
 - [Sublime Text](https://www.sublimetext.com/)
