@@ -1,4 +1,5 @@
-# :rocket: Introdução à Ciência de Dados no `R` <img align="right" height="150" src="logo.png">
+# :rocket: Introdução à Ciência de Dados no `R`
+
 
 Bem-vindos ao curso de Introdução à Ciência de Dados no `R` da Universidade Federal da Paraíba (UFPB). Nesta página, os alunos terão acesso a todos os materiais utilizados durante o semestre, como notas de aula (*slides*), listas de exercícios, dados e demais materiais de apoio.
 
