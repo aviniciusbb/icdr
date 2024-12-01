@@ -59,7 +59,7 @@ editor: source
 
 > A **Ciência de Dados** é a área de estudo dos **dados** desde seu processo de 
 captura, transformação, análise e, posteriormente, da geração de *informações*  e
-*conhecimento* para empresas, para o setor público e para mundo dos negócios.
+*conhecimento* para empresas, para o setor público e para os negócios.
 
 
 ![](Images/Data-science.png){fig-align="center" width="400"}
