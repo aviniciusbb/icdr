@@ -59,7 +59,7 @@ editor: source
 
 > A **Ciência de Dados** é a área de estudo dos **dados** desde seu processo de 
 captura, transformação, análise e, posteriormente, da geração de *informações*  e
-*conhecimento* para empresas, para o setor público e para mundo dos negócios.
+*conhecimento* para empresas, para o setor público e para os negócios.
 
 
 ![](Images/Data-science.png){fig-align="center" width="400"}
@@ -431,6 +431,7 @@ RStudio é um conjunto eficiente de ferramentas integradas [https://posit.co/](h
 
 Além do RStudio, existem outras interfaces pra utilizar o `R`:
 
+- [Positron IDE](https://github.com/posit-dev/positronK)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Tinn-R](https://tinn-r.org/pt/)
 - [Sublime Text](https://www.sublimetext.com/)
